@@ -1,0 +1,6 @@
+
+pnpm-lock.yaml
+
+**/*.spec.js
+**/*.spec.ts
+**/dist

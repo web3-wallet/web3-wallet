@@ -1,0 +1,20 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "bignumber",
+    "changesets",
+    "defi",
+    "esbuild",
+    "ethersproject",
+    "monacohq",
+    "Networkish",
+    "nextjs",
+    "pnpm",
+    "vuejs",
+    "vvswallet"
+  ]
+}
