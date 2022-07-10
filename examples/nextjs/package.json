@@ -6,6 +6,7 @@
     "built": "next build",
     "lint": "eslint src"
   },
+  "version": "0.0.1",
   "dependencies": {
     "@ethersproject/bignumber": "^5.6.0",
     "@ethersproject/experimental": "^5.6.0",
