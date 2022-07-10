@@ -1,0 +1,32 @@
+{
+  "name": "@vvswallet/eip1193",
+  "keywords": [
+    "vvswallet",
+    "eip1193"
+  ],
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "GPL-3.0-or-later",
+  "repository": "github:monacohq/vvswallet",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "files": [
+    "dist/*"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@vvswallet/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@ethersproject/experimental": "^5.6.0",
+    "@ethersproject/providers": "^5.6.0",
+    "@vvswallet/store": "workspace:*"
+  }
+}

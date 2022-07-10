@@ -1,0 +1,1 @@
+# @vvswallet/eip1193
