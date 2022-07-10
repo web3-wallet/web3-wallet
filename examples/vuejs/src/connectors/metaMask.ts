@@ -1,5 +1,5 @@
-import { MetaMask } from '@vvswallet/metamask';
-import { createWallet } from '@vvswallet/vue';
+import { MetaMask } from '@web3-wallet/metamask';
+import { createWallet } from '@web3-wallet/vue';
 
 export const metaMask = createWallet<MetaMask>(
   (actions) => new MetaMask({ actions }),

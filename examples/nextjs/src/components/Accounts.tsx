@@ -1,6 +1,6 @@
 import type { BigNumber } from '@ethersproject/bignumber';
 import { formatEther } from '@ethersproject/units';
-import type { WalletApi } from '@vvswallet/react';
+import type { WalletApi } from '@web3-wallet/react';
 import { useEffect, useState } from 'react';
 
 type Hooks = WalletApi['hooks'];

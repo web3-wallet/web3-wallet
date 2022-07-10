@@ -1,4 +1,4 @@
-import type { State } from '@vvswallet/types';
+import type { State } from '@web3-wallet/types';
 import { type ComputedRef, computed } from 'vue';
 
 import type { StateHooks } from './stateHooks';

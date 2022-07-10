@@ -1,11 +1,11 @@
 {
-  "name": "@vvswallet/store",
+  "name": "@web3-wallet/store",
   "keywords": [
-    "vvswallet"
+    "web3-wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@ethersproject/address": "^5",
-    "@vvswallet/utils": "workspace:*",
-    "@vvswallet/types": "workspace:*",
+    "@web3-wallet/utils": "workspace:*",
+    "@web3-wallet/types": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   }
 }

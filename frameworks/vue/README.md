@@ -1,1 +1,1 @@
-# @vvswallet/core
+# @web3-wallet/core

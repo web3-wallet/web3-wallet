@@ -1,12 +1,12 @@
 {
-  "name": "@vvswallet/walletconnect",
+  "name": "@web3-wallet/walletconnect",
   "keywords": [
-    "vvswallet",
+    "web3-wallet",
     "walletconnect"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -22,7 +22,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@vvswallet/types": "workspace:*",
+    "@web3-wallet/types": "workspace:*",
     "eventemitter3": "^4.0.7"
   },
   "peerDependencies": {
@@ -32,6 +32,6 @@
     "@walletconnect/jsonrpc-provider": "^1.0.5"
   },
   "devDependencies": {
-    "@vvswallet/store": "workspace:*"
+    "@web3-wallet/store": "workspace:*"
   }
 }

@@ -1,4 +1,4 @@
-import type { AddEthereumChainParameter } from '@vvswallet/types';
+import type { AddEthereumChainParameter } from '@web3-wallet/types';
 
 const ETH: AddEthereumChainParameter['nativeCurrency'] = {
   name: 'Ether',

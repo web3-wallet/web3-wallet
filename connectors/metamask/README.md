@@ -1,1 +1,1 @@
-# @vvswallet/metamask
+# @web3-wallet/metamask

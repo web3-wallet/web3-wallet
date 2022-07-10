@@ -1,8 +1,8 @@
 {
-  "name": "vvswallet",
+  "name": "web3-wallet",
   "private": true,
   "version": "0.0.1",
-  "description": "very very simple web3 wallet ",
+  "description": "Web3 wallet",
   "author": "logan.luo",
   "license": "ISC",
   "keywords": [],

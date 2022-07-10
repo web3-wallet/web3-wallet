@@ -1,11 +1,11 @@
 {
-  "name": "@vvswallet/utils",
+  "name": "@web3-wallet/utils",
   "keywords": [
-    "vvswallet"
+    "web3-wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },

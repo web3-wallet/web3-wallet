@@ -1,1 +1,1 @@
-# @vvswallet/types
+# @web3-wallet/types

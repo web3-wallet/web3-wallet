@@ -1,5 +1,5 @@
-import { createStore } from '@vvswallet/store';
-import type { Actions, Connector, Store } from '@vvswallet/types';
+import { createStore } from '@web3-wallet/store';
+import type { Actions, Connector, Store } from '@web3-wallet/types';
 import create from 'zustand';
 
 import {

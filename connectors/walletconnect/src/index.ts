@@ -1,7 +1,7 @@
-import type { Actions, ProviderRpcError } from '@vvswallet/types';
-import { Connector } from '@vvswallet/types';
 import type WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
+import type { Actions, ProviderRpcError } from '@web3-wallet/types';
+import { Connector } from '@web3-wallet/types';
 import EventEmitter3 from 'eventemitter3';
 import type { EventEmitter } from 'node:events';
 

@@ -1,12 +1,12 @@
 {
-  "name": "@vvswallet/metamask",
+  "name": "@web3-wallet/metamask",
   "keywords": [
-    "vvswallet",
+    "web3-wallet",
     "metamask"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
-    "@vvswallet/types": "workspace:*"
+    "@web3-wallet/types": "workspace:*"
   },
   "devDependencies": {
-    "@vvswallet/store": "workspace:*"
+    "@web3-wallet/store": "workspace:*"
   }
 }

@@ -15,6 +15,6 @@
     "nextjs",
     "pnpm",
     "vuejs",
-    "vvswallet"
+    "web3-wallet"
   ]
 }

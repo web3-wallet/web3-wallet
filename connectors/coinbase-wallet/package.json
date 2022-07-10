@@ -1,12 +1,12 @@
 {
-  "name": "@vvswallet/coinbase-wallet",
+  "name": "@web3-wallet/coinbase-wallet",
   "keywords": [
-    "vvswallet",
+    "web3-wallet",
     "coinbase-wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -22,12 +22,12 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@vvswallet/types": "workspace:*"
+    "@web3-wallet/types": "workspace:*"
   },
   "peerDependencies": {
     "@coinbase/wallet-sdk": "^3.0.4"
   },
   "devDependencies": {
-    "@vvswallet/store": "workspace:*"
+    "@web3-wallet/store": "workspace:*"
   }
 }

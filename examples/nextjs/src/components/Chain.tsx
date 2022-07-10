@@ -1,4 +1,4 @@
-import type { WalletApi } from '@vvswallet/react';
+import type { WalletApi } from '@web3-wallet/react';
 
 import { CHAINS } from '../chains';
 

@@ -1,7 +1,7 @@
 import { Eip1193Bridge } from '@ethersproject/experimental'
 import { Web3Provider } from '@ethersproject/providers'
-import { createStore } from '@vvswallet/store'
-import type { Actions, ProviderRpcError, RequestArguments, Store } from '@vvswallet/types'
+import { createStore } from '@web3-wallet/store'
+import type { Actions, ProviderRpcError, RequestArguments, Store } from '@web3-wallet/types'
 import { EventEmitter } from 'node:events'
 
 import { EIP1193 } from '.'

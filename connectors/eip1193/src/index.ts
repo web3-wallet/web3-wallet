@@ -3,8 +3,8 @@ import type {
   Provider,
   ProviderConnectInfo,
   ProviderRpcError,
-} from '@vvswallet/types';
-import { Connector } from '@vvswallet/types';
+} from '@web3-wallet/types';
+import { Connector } from '@web3-wallet/types';
 
 function parseChainId(chainId: string | number) {
   return typeof chainId === 'string' ? Number.parseInt(chainId, 16) : chainId;

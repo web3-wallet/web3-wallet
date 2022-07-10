@@ -1,5 +1,5 @@
-import type { MetaMask } from '@vvswallet/metamask';
-import type { WalletApi } from '@vvswallet/react';
+import type { MetaMask } from '@web3-wallet/metamask';
+import type { WalletApi } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
 import { CHAINS, getAddChainParameters, URLS } from '../chains';

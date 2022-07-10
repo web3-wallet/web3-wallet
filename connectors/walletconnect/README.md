@@ -1,1 +1,1 @@
-# @vvswallet/walletconnect
+# @web3-wallet/walletconnect

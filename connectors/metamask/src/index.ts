@@ -6,8 +6,8 @@ import type {
   ProviderConnectInfo,
   ProviderRpcError,
   WatchAssetParameters,
-} from '@vvswallet/types';
-import { Connector } from '@vvswallet/types';
+} from '@web3-wallet/types';
+import { Connector } from '@web3-wallet/types';
 
 type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;

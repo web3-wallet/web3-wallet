@@ -1,6 +1,6 @@
 import { getAddress } from '@ethersproject/address';
-import type { Actions, State, StateUpdate, Store } from '@vvswallet/types';
-import { validateEvmChainId } from '@vvswallet/utils';
+import type { Actions, State, StateUpdate, Store } from '@web3-wallet/types';
+import { validateEvmChainId } from '@web3-wallet/utils';
 import create from 'zustand/vanilla';
 
 function validateAccount(account: string): string {

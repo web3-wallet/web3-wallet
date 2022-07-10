@@ -1,11 +1,11 @@
 {
-  "name": "@vvswallet/vue",
+  "name": "@web3-wallet/vue",
   "keywords": [
-    "vvswallet"
+    "web3-wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -21,8 +21,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@vvswallet/store": "workspace:*",
-    "@vvswallet/types": "workspace:*"
+    "@web3-wallet/store": "workspace:*",
+    "@web3-wallet/types": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.2.13"

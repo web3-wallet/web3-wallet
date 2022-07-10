@@ -1,1 +1,1 @@
-# @vvswallet/coinbase-wallet
+# @web3-wallet/coinbase-wallet

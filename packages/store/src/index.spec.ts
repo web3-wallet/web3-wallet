@@ -1,4 +1,4 @@
-import { MAX_SAFE_CHAIN_ID } from '@vvswallet/utils';
+import { MAX_SAFE_CHAIN_ID } from '@web3-wallet/utils';
 
 import { createStore } from '.';
 

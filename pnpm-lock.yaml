@@ -77,47 +77,47 @@ importers:
 
   connectors/coinbase-wallet:
     specifiers:
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
     dependencies:
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/types': link:../../packages/types
     devDependencies:
-      '@vvswallet/store': link:../../packages/store
+      '@web3-wallet/store': link:../../packages/store
 
   connectors/eip1193:
     specifiers:
       '@ethersproject/experimental': ^5.6.0
       '@ethersproject/providers': ^5.6.0
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
     dependencies:
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/types': link:../../packages/types
     devDependencies:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
-      '@vvswallet/store': link:../../packages/store
+      '@web3-wallet/store': link:../../packages/store
 
   connectors/metamask:
     specifiers:
       '@metamask/detect-provider': ^1.2.0
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/types': link:../../packages/types
     devDependencies:
-      '@vvswallet/store': link:../../packages/store
+      '@web3-wallet/store': link:../../packages/store
 
   connectors/walletconnect:
     specifiers:
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
       eventemitter3: ^4.0.7
     dependencies:
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/types': link:../../packages/types
       eventemitter3: 4.0.7
     devDependencies:
-      '@vvswallet/store': link:../../packages/store
+      '@web3-wallet/store': link:../../packages/store
 
   examples/nextjs:
     specifiers:
@@ -127,9 +127,9 @@ importers:
       '@ethersproject/units': ^5.6.0
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.6
-      '@vvswallet/metamask': workspace:*
-      '@vvswallet/react': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/react': workspace:*
+      '@web3-wallet/types': workspace:*
       eslint-config-next: 12.2.0
       next: 12.2.0
       react: 18.2.0
@@ -139,9 +139,9 @@ importers:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
-      '@vvswallet/metamask': link:../../connectors/metamask
-      '@vvswallet/react': link:../../frameworks/react
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/metamask': link:../../connectors/metamask
+      '@web3-wallet/react': link:../../frameworks/react
+      '@web3-wallet/types': link:../../packages/types
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -160,9 +160,9 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
-      '@vvswallet/metamask': workspace:*
-      '@vvswallet/types': workspace:*
-      '@vvswallet/vue': workspace:*
+      '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/types': workspace:*
+      '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
@@ -171,9 +171,9 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
-      '@vvswallet/metamask': link:../../connectors/metamask
-      '@vvswallet/types': link:../../packages/types
-      '@vvswallet/vue': link:../../frameworks/vue
+      '@web3-wallet/metamask': link:../../connectors/metamask
+      '@web3-wallet/types': link:../../packages/types
+      '@web3-wallet/vue': link:../../frameworks/vue
       vue: 3.2.37
     devDependencies:
       '@typescript-eslint/eslint-plugin': 5.30.5_rd6cw2bkmgckqjtetyu3p3ss5i
@@ -195,12 +195,12 @@ importers:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
-      '@vvswallet/store': link:../../packages/store
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/store': link:../../packages/store
+      '@web3-wallet/types': link:../../packages/types
       zustand: 4.0.0-rc.1
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
@@ -210,11 +210,11 @@ importers:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
-      '@vvswallet/store': workspace:*
-      '@vvswallet/types': workspace:*
+      '@web3-wallet/store': workspace:*
+      '@web3-wallet/types': workspace:*
     dependencies:
-      '@vvswallet/store': link:../../packages/store
-      '@vvswallet/types': link:../../packages/types
+      '@web3-wallet/store': link:../../packages/store
+      '@web3-wallet/types': link:../../packages/types
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
@@ -222,13 +222,13 @@ importers:
   packages/store:
     specifiers:
       '@ethersproject/address': ^5
-      '@vvswallet/types': workspace:*
-      '@vvswallet/utils': workspace:*
+      '@web3-wallet/types': workspace:*
+      '@web3-wallet/utils': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.6.1
-      '@vvswallet/types': link:../types
-      '@vvswallet/utils': link:../utils
+      '@web3-wallet/types': link:../types
+      '@web3-wallet/utils': link:../utils
       zustand: 4.0.0-rc.1
 
   packages/types:

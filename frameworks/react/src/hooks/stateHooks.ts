@@ -1,4 +1,4 @@
-import { State, Store } from '@vvswallet/types';
+import { State, Store } from '@web3-wallet/types';
 import { EqualityChecker, UseBoundStore } from 'zustand';
 
 export type StateHooks = {

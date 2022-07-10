@@ -1,1 +1,1 @@
-# @vvswallet/eip1193
+# @web3-wallet/eip1193

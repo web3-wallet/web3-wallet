@@ -1,4 +1,4 @@
-import { State } from '@vvswallet/types';
+import { State } from '@web3-wallet/types';
 
 import { StateHooks } from './stateHooks';
 

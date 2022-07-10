@@ -1,11 +1,11 @@
 {
-  "name": "@vvswallet/react",
+  "name": "@web3-wallet/react",
   "keywords": [
-    "vvswallet"
+    "web3-wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/vvswallet",
+  "repository": "github:monacohq/web3-wallet",
   "publishConfig": {
     "access": "public"
   },
@@ -21,8 +21,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@vvswallet/store": "workspace:*",
-    "@vvswallet/types": "workspace:*",
+    "@web3-wallet/store": "workspace:*",
+    "@web3-wallet/types": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {

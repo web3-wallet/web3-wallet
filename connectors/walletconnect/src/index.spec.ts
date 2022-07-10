@@ -1,5 +1,5 @@
-import { createStore } from '@vvswallet/store'
-import type { RequestArguments, Store } from '@vvswallet/types'
+import { createStore } from '@web3-wallet/store'
+import type { RequestArguments, Store } from '@web3-wallet/types'
 import EventEmitter from 'node:events'
 
 import { MockEIP1193Provider } from '../../eip1193/src/index.spec'

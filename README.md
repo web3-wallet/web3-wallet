@@ -1,4 +1,4 @@
-# Very very simple web3 wallet
+# Web3 Wallet
 
 ## Dependencies
 
