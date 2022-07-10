@@ -1,0 +1,37 @@
+{
+  "name": "@vvswallet/walletconnect",
+  "keywords": [
+    "vvswallet",
+    "walletconnect"
+  ],
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "GPL-3.0-or-later",
+  "repository": "github:monacohq/vvswallet",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "files": [
+    "dist/*"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@vvswallet/types": "workspace:*",
+    "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "@walletconnect/types": "^1.7.8",
+    "@walletconnect/ethereum-provider": "^1.7.5",
+    "@walletconnect/jsonrpc-http-connection": "^1.0.2",
+    "@walletconnect/jsonrpc-provider": "^1.0.5"
+  },
+  "devDependencies": {
+    "@vvswallet/store": "workspace:*"
+  }
+}
