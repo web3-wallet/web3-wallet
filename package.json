@@ -11,7 +11,7 @@
     "pre-commit": "lint-staged",
     "watch": "pnpm --parallel -r -c exec tsc --watch",
     "nextjs": "cd examples/nextjs && pnpm dev",
-    "vuejs": "cd examples/vuejs && pnpm serve",
+    "vuejs": "cd examples/vuejs && pnpm dev",
     "test": "jest",
     "lint": "pnpm --parallel -r -c exec eslint src",
     "fix": "pnpm --parallel -r -c exec eslint --fix src",
