@@ -2,5 +2,5 @@ packages:
   - 'packages/*'
   - 'connectors/*'
   - 'frameworks/*'
-  - 'examples/shared'
+  - 'examples/*'
   - '!**/test/**'

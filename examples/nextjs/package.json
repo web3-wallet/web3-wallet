@@ -12,7 +12,6 @@
     "@vvswallet/metamask": "workspace:*",
     "@vvswallet/react": "workspace:*",
     "@vvswallet/types": "workspace:*",
-    "@examples/shared": "workspace:*",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

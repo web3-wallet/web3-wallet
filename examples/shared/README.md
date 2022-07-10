@@ -1,1 +1,0 @@
-# @vvswallet/types

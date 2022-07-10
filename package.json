@@ -20,7 +20,7 @@
     "fix": "pnpm --parallel -r -c exec eslint --fix src",
     "check": "pnpm --parallel -r -c exec tsc --noEmit",
     "clean": "pnpm --parallel -r -c exec rm -rf dist",
-    "build": "run-s clean build:packages build:connectors build:frameworks build:examples",
+    "build": "run-s clean build:packages build:connectors build:frameworks",
     "build:packages": "run-s build:packages:**",
     "build:packages:utils": "pnpm -F utils build",
     "build:packages:types": "pnpm -F types build",
@@ -33,8 +33,6 @@
     "build:connectors:coinbase-wallet": "pnpm -F coinbase-wallet build",
     "build:connectors:eip1193": "pnpm -F eip1193 build",
     "build:connectors:walletconnect": "pnpm -F walletconnect build",
-    "build:examples": "run-p build:examples:**",
-    "build:examples:shared": "pnpm -F @examples/shared build",
     "prepare": "husky install"
   },
   "lint-staged": {
