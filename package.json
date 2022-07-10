@@ -5,10 +5,7 @@
   "description": "very very simple web3 wallet ",
   "author": "logan.luo",
   "license": "ISC",
-  "keywords": [
-    "DeFi Wallet",
-    "crypto.com"
-  ],
+  "keywords": [],
   "packageManager": "pnpm@7.2.1",
   "scripts": {
     "pre-commit": "lint-staged",
