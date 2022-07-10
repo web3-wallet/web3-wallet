@@ -24,9 +24,7 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
+    "@web3-wallet/store": "workspace:*",
     "@web3-wallet/types": "workspace:*"
-  },
-  "devDependencies": {
-    "@web3-wallet/store": "workspace:*"
   }
 }
