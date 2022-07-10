@@ -1,22 +1,21 @@
 {
   "name": "@examples/vuejs",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "start": "vue-cli-service serve --mode production",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@vvswallet/metamask": "workspace:*",
     "@vvswallet/types": "workspace:*",
     "@vvswallet/vue": "workspace:*",
-    "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.25"
   },
   "devDependencies": {
-    "@types/webpack-env": "^1.17.0",
+    "@vitejs/plugin-vue": "^2.3.3",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -24,8 +23,11 @@
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "vite": "^2.9.9",
+    "vue-tsc": "^0.34.7"
   }
 }
