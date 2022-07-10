@@ -17,6 +17,7 @@
     "fix": "pnpm --parallel -r -c exec eslint --fix src",
     "check": "pnpm --parallel -r -c exec tsc --noEmit",
     "clean": "pnpm --parallel -r -c exec rm -rf dist",
+    "purge": "pnpm --parallel -r -c exec rm -rf node_modules",
     "build": "run-s clean build:packages build:connectors build:frameworks",
     "build:packages": "run-s build:packages:**",
     "build:packages:utils": "pnpm -F utils build",

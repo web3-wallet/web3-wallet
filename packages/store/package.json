@@ -13,12 +13,13 @@
   "files": [
     "dist/*"
   ],
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "tsc"
+    "build": "run-s build:**",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
     "@ethersproject/address": "^5",
