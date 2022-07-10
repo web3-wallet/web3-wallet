@@ -1,0 +1,29 @@
+{
+  "name": "@vvswallet/store",
+  "keywords": [
+    "vvswallet"
+  ],
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "GPL-3.0-or-later",
+  "repository": "github:monacohq/vvswallet",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "files": [
+    "dist/*"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@ethersproject/address": "^5",
+    "@vvswallet/utils": "workspace:*",
+    "@vvswallet/types": "workspace:*",
+    "zustand": "^4.0.0-rc.0"
+  }
+}
