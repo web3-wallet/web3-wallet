@@ -1,12 +1,12 @@
 {
   "private": true,
-  "name": "@examples/nextjs",
+  "name": "@web3-wallet/nextjs",
   "scripts": {
     "dev": "next dev",
     "built": "next build",
     "lint": "eslint src"
   },
-  "version": "0.0.1",
+  "version": "0.0.5",
   "dependencies": {
     "@ethersproject/bignumber": "^5.6.0",
     "@ethersproject/experimental": "^5.6.0",
@@ -23,5 +23,9 @@
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.6",
     "eslint-config-next": "12.2.0"
-  }
+  },
+  "description": "This is an example app built with [Next.js](https://nextjs.org/) that showcases some basic web3-react usage patterns.",
+  "main": ".eslintrc.js",
+  "author": "",
+  "license": "ISC"
 }

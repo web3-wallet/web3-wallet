@@ -104,9 +104,8 @@ importers:
       '@web3-wallet/types': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
-      '@web3-wallet/types': link:../../packages/types
-    devDependencies:
       '@web3-wallet/store': link:../../packages/store
+      '@web3-wallet/types': link:../../packages/types
 
   connectors/walletconnect:
     specifiers:
@@ -199,12 +198,11 @@ importers:
       '@web3-wallet/types': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
+      '@ethersproject/networks': 5.6.4
+      '@ethersproject/providers': 5.6.8
       '@web3-wallet/store': link:../../packages/store
       '@web3-wallet/types': link:../../packages/types
       zustand: 4.0.0-rc.1
-    optionalDependencies:
-      '@ethersproject/networks': 5.6.4
-      '@ethersproject/providers': 5.6.8
 
   frameworks/vue:
     specifiers:

@@ -5,11 +5,14 @@
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
-  "repository": "github:monacohq/web3-wallet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoganAtCrypto/web3-wallet.git"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.2",
+  "version": "0.0.6",
   "files": [
     "dist/*"
   ],
@@ -23,5 +26,11 @@
   },
   "dependencies": {
     "zustand": "^4.0.0-rc.0"
-  }
+  },
+  "description": "web3-wallet core types",
+  "bugs": {
+    "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
+  },
+  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme",
+  "devDependencies": {}
 }

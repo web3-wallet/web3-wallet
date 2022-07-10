@@ -6,7 +6,7 @@
   "author": "logan.luo",
   "license": "ISC",
   "keywords": [],
-  "packageManager": "pnpm@7.2.1",
+  "packageManager": "pnpm@7.5.0",
   "scripts": {
     "pre-commit": "lint-staged",
     "watch": "pnpm --parallel -r -c exec tsc --watch",
@@ -76,6 +76,6 @@
   },
   "engines": {
     "node": ">= 16.14.0",
-    "pnpm": ">= 7.2.1"
+    "pnpm": ">= 7.5.0"
   }
 }
