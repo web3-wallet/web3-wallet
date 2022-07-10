@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "@examples/nextjs",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "@ethersproject/bignumber": "^5.6.0",
+    "@ethersproject/experimental": "^5.6.0",
+    "@ethersproject/providers": "^5.6.0",
+    "@ethersproject/units": "^5.6.0",
+    "@vvswallet/metamask": "workspace:*",
+    "@vvswallet/react": "workspace:*",
+    "@vvswallet/types": "workspace:*",
+    "@examples/shared": "workspace:*",
+    "next": "12.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.6",
+    "eslint-config-next": "12.2.0"
+  }
+}
