@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue';
 
-import { metaMask } from '../connectors/metaMask';
+import { metaMask } from '../../wallets';
 import WalletCard from './WalletCard.vue';
 
 const {

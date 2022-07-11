@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { metaMask } from '../../connectors/metaMask';
+import { metaMask } from '../../wallets';
 import { Card } from '../Card';
 
 const { hooks, connector } = metaMask;
@@ -13,7 +13,7 @@ const {
   useENSNames,
 } = hooks;
 
-export default function MetaMaskCard() {
+export const MetaMaskCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
   const isActivating = useIsActivating();
@@ -46,4 +46,4 @@ export default function MetaMaskCard() {
       ENSNames={ENSNames}
     />
   );
-}
+};

@@ -1,13 +1,9 @@
-import MetaMaskCard from '../components/connectorCards/MetaMaskCard';
+import { MetaMaskCard } from '../components/WalletCards';
 
 export default function Home() {
   return (
     <>
-      <div
-        style={{ display: 'flex', flexFlow: 'wrap', fontFamily: 'sans-serif' }}
-      >
-        <MetaMaskCard />
-      </div>
+      <MetaMaskCard />
     </>
   );
 }
