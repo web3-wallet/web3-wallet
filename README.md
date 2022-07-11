@@ -9,7 +9,7 @@
 pnpm install @web3-wallet/react @web3-wallet/metamask
 
 # Vue
-# pnpm install @web3-wallet/vue @web3-wallet/metamask
+pnpm install @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ## Packages
@@ -22,7 +22,6 @@ pnpm install @web3-wallet/react @web3-wallet/metamask
 | **Core**                                                     |                                                                                                                                        |
 | [`@web3-wallet/types`](packages/types)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)                     |
 | [`@web3-wallet/store`](packages/store)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fstore.svg)](https://badge.fury.io/js/@web3-wallet%2Fstore)                     |
-| [`@web3-wallet/utils`](packages/utils)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Futils.svg)](https://badge.fury.io/js/@web3-wallet%2Futils)                     |
 | **Connectors**                                               |                                                                                                                                        |
 | [`@web3-wallet/eip1193`](connectors/eip1193)                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Feip1193.svg)](https://badge.fury.io/js/@web3-wallet%2Feip1193)                 |
 | [`@web3-wallet/metamask`](connectors/metamask)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)               |
@@ -39,7 +38,7 @@ pnpm install @web3-wallet/react @web3-wallet/metamask
 pnpm install
 
 # nextjs example
-# pnpm nextjs
+pnpm nextjs
 
 # vuejs example
 pnpm vuejs
@@ -200,5 +199,8 @@ cd web3-wallet && pnpm install
 pnpm watch && pnpm nextjs
 
 # vue
-pnpm watch && pnpm vuejs # vue
+pnpm watch && pnpm vuejs
+
+# test
+pnpm test
 ```

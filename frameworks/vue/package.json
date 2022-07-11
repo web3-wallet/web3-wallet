@@ -1,7 +1,17 @@
 {
   "name": "@web3-wallet/vue",
   "keywords": [
-    "web3-wallet"
+    "web3-wallet",
+    "vue",
+    "vue3",
+    "web3",
+    "dApp",
+    "ethereum",
+    "metamask",
+    "wallet connect",
+    "crypto.com DeFi Wallet",
+    "connector",
+    "eip1193"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",

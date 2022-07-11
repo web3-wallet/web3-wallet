@@ -1,7 +1,19 @@
 {
   "name": "@web3-wallet/utils",
+  "description": "web3-wallet utils",
   "keywords": [
-    "web3-wallet"
+    "web3-wallet",
+    "react",
+    "vue",
+    "vue3",
+    "web3",
+    "dApp",
+    "ethereum",
+    "metamask",
+    "walletconnect",
+    "crypto.com DeFi Wallet",
+    "connector",
+    "eip1193"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
@@ -24,7 +36,6 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
-  "description": "web3-wallet utils",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },

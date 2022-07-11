@@ -1,8 +1,15 @@
 {
   "name": "@web3-wallet/coinbase-wallet",
+  "description": "web3-react coinbase wallet connector",
   "keywords": [
     "web3-wallet",
-    "coinbase-wallet"
+    "coinbase-wallet",
+    "react",
+    "vue",
+    "vue3",
+    "web3",
+    "dApp",
+    "ethereum"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
@@ -34,7 +41,6 @@
   "devDependencies": {
     "@web3-wallet/store": "workspace:*"
   },
-  "description": "web3-react coinbase wallet connector",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },

@@ -1,8 +1,15 @@
 {
   "name": "@web3-wallet/walletconnect",
+  "description": "web3-wallet walletconnect connector",
   "keywords": [
     "web3-wallet",
-    "walletconnect"
+    "walletconnect",
+    "react",
+    "vue",
+    "vue3",
+    "web3",
+    "dApp",
+    "ethereum"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
@@ -38,7 +45,6 @@
   "devDependencies": {
     "@web3-wallet/store": "workspace:*"
   },
-  "description": "web3-wallet walletconnect connector",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },

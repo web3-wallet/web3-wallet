@@ -1,8 +1,15 @@
 {
   "name": "@web3-wallet/metamask",
+  "description": "web3-wallet metamask connector",
   "keywords": [
     "web3-wallet",
-    "metamask"
+    "metamask",
+    "react",
+    "vue",
+    "vue3",
+    "web3",
+    "dApp",
+    "ethereum"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
@@ -30,7 +37,6 @@
     "@web3-wallet/store": "workspace:*",
     "@web3-wallet/types": "workspace:*"
   },
-  "description": "web3-wallet metamask connector",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },
