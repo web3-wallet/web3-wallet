@@ -1,15 +1,16 @@
 {
-  "name": "@web3-wallet/eip1193",
-  "description": "web3-wallet eip1193 connector",
+  "name": "@web3-wallet/react",
   "keywords": [
     "web3-wallet",
-    "eip1193",
     "react",
-    "vue",
-    "vue3",
     "web3",
     "dApp",
-    "ethereum"
+    "ethereum",
+    "metamask",
+    "wallet connect",
+    "crypto.com DeFi Wallet",
+    "connector",
+    "eip1193"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "GPL-3.0-or-later",
@@ -33,15 +34,20 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@web3-wallet/types": "workspace:*"
+    "@ethersproject/networks": "^5.6.4",
+    "@ethersproject/providers": "^5",
+    "@web3-wallet/store": "workspace:*",
+    "@web3-wallet/types": "workspace:*",
+    "zustand": "^4.0.0-rc.0"
   },
-  "devDependencies": {
-    "@ethersproject/experimental": "^5.6.0",
-    "@ethersproject/providers": "^5.6.0",
-    "@web3-wallet/store": "workspace:*"
+  "peerDependencies": {
+    "react": ">=16.8"
   },
+  "optionalDependencies": {},
+  "description": "web3-wallet react",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
+  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme",
+  "devDependencies": {}
 }
