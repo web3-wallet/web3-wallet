@@ -52,6 +52,14 @@ export interface ProviderRpcError extends Error {
   data?: unknown;
 }
 
+export class ProviderNoFoundError extends Error {
+  public constructor(message = 'Provider not found') {
+    super(message);
+    this.name = ProviderNoFoundError.name;
+    Object.setPrototypeOf(this, ProviderNoFoundError.prototype);
+  }
+}
+
 // per EIP-3085
 export interface AddEthereumChainParameter {
   chainId: number;
@@ -83,6 +91,14 @@ export abstract class Connector {
    * This property must be defined while the connector is active, unless a customProvider is provided.
    */
   public provider?: Provider;
+
+  /**
+   * Provider is usually loaded asynchronously. Connector consumers may want to known the provider load state.
+   * This property is used to expose the provider load state to the Connector consumers.
+   *
+   * Resolve with the Provider if loaded successfully, and reject if failed to load the provider for any reason
+   */
+  public detectProvider?: () => Promise<Provider>;
 
   /**
    * An optional property meant to allow ethers providers to be used directly rather than via the experimental
