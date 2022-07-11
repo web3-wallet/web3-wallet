@@ -17,8 +17,8 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 | Package                                                      | Version                                                                                                                                |
 | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Frameworks**                                               |                                                                                                                                        |
-| [`@web3-wallet/react`](frameworks/react)                     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                     |
-| [`@web3-wallet/vue`](frameworks/vue)                         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                         |
+| [`@web3-wallet/react`](packages/react)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                     |
+| [`@web3-wallet/vue`](packages/vue)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                         |
 | **Core**                                                     |                                                                                                                                        |
 | [`@web3-wallet/types`](packages/types)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)                     |
 | [`@web3-wallet/store`](packages/store)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fstore.svg)](https://badge.fury.io/js/@web3-wallet%2Fstore)                     |
