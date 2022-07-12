@@ -1,24 +1,20 @@
 import type detectEthereumProvider from '@metamask/detect-provider';
-import {
+import type {
   Actions,
   AddEthereumChainParameter,
-  Connector,
   Provider,
   ProviderConnectInfo,
-  ProviderNoFoundError,
   ProviderRpcError,
   WatchAssetParameters,
 } from '@web3-wallet/types';
+import { Connector, ProviderNoFoundError } from '@web3-wallet/types';
+import { parseEvmChainId } from '@web3-wallet/utils';
 
 type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
   isConnected?: () => boolean;
   providers?: MetaMaskProvider[];
 };
-
-function parseChainId(chainId: string) {
-  return Number.parseInt(chainId, 16);
-}
 
 /**
  * @param options - Options to pass to `@metamask/detect-provider`
@@ -30,7 +26,9 @@ export interface MetaMaskConstructorArgs {
   onError?: (error: Error) => void;
 }
 
-const providerNotFoundError = new ProviderNoFoundError('MetaMask Not Found');
+const providerNotFoundError = new ProviderNoFoundError(
+  'MetaMask provider not found',
+);
 
 export class MetaMask extends Connector {
   /** {@inheritdoc Connector.provider} */
@@ -42,6 +40,10 @@ export class MetaMask extends Connector {
   constructor({ actions, options, onError }: MetaMaskConstructorArgs) {
     super(actions, onError);
     this.options = options;
+  }
+
+  private get connected(): boolean {
+    return !!this.provider?.isConnected?.();
   }
 
   public detectProvider = async () => {
@@ -72,7 +74,7 @@ export class MetaMask extends Connector {
       const provider = await this.detectProvider();
 
       provider.on('connect', ({ chainId }: ProviderConnectInfo): void => {
-        this.actions.update({ chainId: parseChainId(chainId) });
+        this.actions.update({ chainId: parseEvmChainId(chainId) });
       });
 
       provider.on('disconnect', (error: ProviderRpcError): void => {
@@ -81,7 +83,7 @@ export class MetaMask extends Connector {
       });
 
       provider.on('chainChanged', (chainId: string): void => {
-        this.actions.update({ chainId: parseChainId(chainId) });
+        this.actions.update({ chainId: parseEvmChainId(chainId) });
       });
 
       provider.on('accountsChanged', (accounts: string[]): void => {
@@ -102,22 +104,20 @@ export class MetaMask extends Connector {
     const cancelActivation = this.actions.startActivation();
 
     await this.lazyInitialize();
-    if (!this.provider) return cancelActivation();
 
     try {
       const [chainId, accounts] = await Promise.all([
-        this.provider.request({ method: 'eth_chainId' }) as Promise<string>,
-        this.provider.request({ method: 'eth_accounts' }) as Promise<string[]>,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this.provider!.request<string>({ method: 'eth_chainId' }),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this.provider!.request<string[]>({ method: 'eth_accounts' }),
       ]);
 
-      if (accounts.length) {
-        this.actions.update({ chainId: parseChainId(chainId), accounts });
-      } else {
-        throw new Error('No accounts returned');
-      }
+      if (!accounts.length) throw new Error('No accounts returned');
+      this.actions.update({ chainId: parseEvmChainId(chainId), accounts });
     } catch (error) {
-      console.debug('Could not connect eagerly', error);
       cancelActivation();
+      throw error;
     }
   }
 
@@ -182,29 +182,27 @@ export class MetaMask extends Connector {
   public async activate(
     desiredChainIdOrChainParameters?: number | AddEthereumChainParameter,
   ): Promise<void> {
-    let cancelActivation: () => void = () => {};
-
-    if (!this.provider?.isConnected?.()) {
-      cancelActivation = this.actions.startActivation();
-    }
-
     try {
       await this.lazyInitialize();
     } catch (_) {
       throw providerNotFoundError;
     }
 
+    let cancelActivation: () => void = () => {};
+
+    if (this.connected) {
+      cancelActivation = this.actions.startActivation();
+    }
+
     try {
       const [chainId, accounts] = await Promise.all([
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request({ method: 'eth_chainId' }) as Promise<string>,
+        this.provider!.request<string>({ method: 'eth_chainId' }),
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request({ method: 'eth_requestAccounts' }) as Promise<
-          string[]
-        >,
+        this.provider!.request<string[]>({ method: 'eth_requestAccounts' }),
       ]);
 
-      const receivedChainId = parseChainId(chainId);
+      const receivedChainId = parseEvmChainId(chainId);
       const desiredChainId =
         typeof desiredChainIdOrChainParameters === 'number'
           ? desiredChainIdOrChainParameters
@@ -231,24 +229,22 @@ export class MetaMask extends Connector {
     decimals,
     image,
   }: WatchAssetParameters): Promise<true> {
-    if (!this.provider) throw new Error('No provider');
+    if (!this.provider) throw providerNotFoundError;
 
-    return this.provider
-      .request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20', // Initially only supports ERC20, but eventually more!
-          options: {
-            address, // The address that the token is at.
-            symbol, // A ticker symbol or shorthand, up to 5 chars.
-            decimals, // The number of decimals in the token
-            image, // A string url of the token logo
-          },
+    const success = await this.provider.request<boolean>({
+      method: 'wallet_watchAsset',
+      params: {
+        type: 'ERC20',
+        options: {
+          address, // The address that the token is at.
+          symbol, // A ticker symbol or shorthand, up to 5 chars.
+          decimals, // The number of decimals in the token
+          image, // A string url of the token logo
         },
-      })
-      .then((success) => {
-        if (!success) throw new Error('Rejected');
-        return true;
-      });
+      },
+    });
+
+    if (!success) throw new Error('Rejected');
+    return true;
   }
 }
