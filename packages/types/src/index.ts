@@ -37,7 +37,7 @@ export interface RequestArguments {
 
 // per EIP-1193
 export interface Provider extends EventEmitter {
-  request(args: RequestArguments): Promise<unknown>;
+  request<T>(args: RequestArguments): Promise<T>;
 }
 
 // per EIP-1193
@@ -90,7 +90,7 @@ export abstract class Connector {
    * May also comply with EIP-3085 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-3085.md}).
    * This property must be defined while the connector is active, unless a customProvider is provided.
    */
-  public provider?: Provider;
+  public readonly provider?: Provider;
 
   /**
    * Provider is usually loaded asynchronously. Connector consumers may want to known the provider load state.

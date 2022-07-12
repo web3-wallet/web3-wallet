@@ -22,3 +22,9 @@ export const isValidEvmChainId = (chainId: number): boolean => {
     return false;
   }
 };
+
+export const parseEvmChainId = (chainId: string | number) => {
+  return typeof chainId === 'number'
+    ? chainId
+    : Number.parseInt(chainId, chainId.startsWith('0x') ? 16 : 10);
+};
