@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.0.4",
-    "@web3-wallet/types": "workspace:*",
+    "@web3-wallet/connector": "workspace:*",
     "@web3-wallet/utils": "workspace:*"
   },
   "devDependencies": {

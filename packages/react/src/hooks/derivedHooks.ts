@@ -1,4 +1,4 @@
-import { State } from '@web3-wallet/types';
+import { State } from '@web3-wallet/connector';
 
 import { StateHooks } from './stateHooks';
 

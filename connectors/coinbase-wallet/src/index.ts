@@ -8,7 +8,7 @@ import {
   Connector,
   ProviderNoFoundError,
   WatchAssetParameters,
-} from '@web3-wallet/types';
+} from '@web3-wallet/connector';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK

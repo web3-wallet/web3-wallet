@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@web3-wallet/store": "workspace:*",
-    "@web3-wallet/types": "workspace:*"
+    "@web3-wallet/connector": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.2.13"

@@ -4,8 +4,8 @@ import type {
   AddEthereumChainParameter,
   Provider,
   WatchAssetParameters,
-} from '@web3-wallet/types';
-import { Connector, ProviderNoFoundError } from '@web3-wallet/types';
+} from '@web3-wallet/connector';
+import { Connector, ProviderNoFoundError } from '@web3-wallet/connector';
 
 type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;

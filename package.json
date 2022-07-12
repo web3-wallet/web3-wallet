@@ -34,7 +34,7 @@
     "build": "run-s clean build:packages build:connectors build:frameworks",
     "build:packages": "run-s build:packages:**",
     "build:packages:utils": "pnpm -F utils build",
-    "build:packages:types": "pnpm -F types build",
+    "build:packages:types": "pnpm -F connector build",
     "build:packages:store": "pnpm -F store build",
     "build:frameworks": "run-p build:frameworks:**",
     "build:frameworks:react": "pnpm -F react build",

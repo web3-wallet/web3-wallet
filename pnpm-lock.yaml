@@ -78,12 +78,12 @@ importers:
   connectors/coinbase-wallet:
     specifiers:
       '@coinbase/wallet-sdk': ^3.0.4
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/types': workspace:*
       '@web3-wallet/utils': workspace:*
     dependencies:
       '@coinbase/wallet-sdk': 3.3.0
-      '@web3-wallet/types': link:../../packages/types
+      '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/utils': link:../../packages/utils
     devDependencies:
       '@web3-wallet/store': link:../../packages/store
@@ -92,10 +92,10 @@ importers:
     specifiers:
       '@ethersproject/experimental': ^5.6.0
       '@ethersproject/providers': ^5.6.0
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/types': workspace:*
     dependencies:
-      '@web3-wallet/types': link:../../packages/types
+      '@web3-wallet/connector': link:../../packages/connector
     devDependencies:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
@@ -104,13 +104,13 @@ importers:
   connectors/metamask:
     specifiers:
       '@metamask/detect-provider': ^1.2.0
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/types': workspace:*
       '@web3-wallet/utils': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
+      '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/store': link:../../packages/store
-      '@web3-wallet/types': link:../../packages/types
       '@web3-wallet/utils': link:../../packages/utils
 
   examples/nextjs:
@@ -122,9 +122,9 @@ importers:
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.6
       '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/react': workspace:*
-      '@web3-wallet/types': workspace:*
       eslint-config-next: 12.2.0
       next: 12.2.0
       react: 18.2.0
@@ -135,9 +135,9 @@ importers:
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
       '@web3-wallet/coinbase-wallet': link:../../connectors/coinbase-wallet
+      '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/metamask': link:../../connectors/metamask
       '@web3-wallet/react': link:../../packages/react
-      '@web3-wallet/types': link:../../packages/types
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -156,8 +156,8 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/metamask': workspace:*
-      '@web3-wallet/types': workspace:*
       '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0
@@ -167,8 +167,8 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
+      '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/metamask': link:../../connectors/metamask
-      '@web3-wallet/types': link:../../packages/types
       '@web3-wallet/vue': link:../../packages/vue
       vue: 3.2.37
     devDependencies:
@@ -187,37 +187,37 @@ importers:
       vite: 2.9.14
       vue-tsc: 0.34.17
 
+  packages/connector:
+    specifiers:
+      '@web3-wallet/utils': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@web3-wallet/utils': link:../utils
+      zustand: 4.0.0-rc.1
+
   packages/react:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/types': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
+      '@web3-wallet/connector': link:../connector
       '@web3-wallet/store': link:../store
-      '@web3-wallet/types': link:../types
       zustand: 4.0.0-rc.1
 
   packages/store:
     specifiers:
       '@ethersproject/address': ^5
-      '@web3-wallet/types': workspace:*
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/utils': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.6.1
-      '@web3-wallet/types': link:../types
-      '@web3-wallet/utils': link:../utils
-      zustand: 4.0.0-rc.1
-
-  packages/types:
-    specifiers:
-      '@web3-wallet/utils': workspace:*
-      zustand: ^4.0.0-rc.0
-    dependencies:
+      '@web3-wallet/connector': link:../connector
       '@web3-wallet/utils': link:../utils
       zustand: 4.0.0-rc.1
 
@@ -228,11 +228,11 @@ importers:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
+      '@web3-wallet/connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/types': workspace:*
     dependencies:
+      '@web3-wallet/connector': link:../connector
       '@web3-wallet/store': link:../store
-      '@web3-wallet/types': link:../types
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8

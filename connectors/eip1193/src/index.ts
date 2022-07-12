@@ -1,5 +1,5 @@
-import type { Actions, Provider } from '@web3-wallet/types';
-import { Connector } from '@web3-wallet/types';
+import type { Actions, Provider } from '@web3-wallet/connector';
+import { Connector } from '@web3-wallet/connector';
 
 /**
  * @param provider - An EIP-1193 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md}) provider.

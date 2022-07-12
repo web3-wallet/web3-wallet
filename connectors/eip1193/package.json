@@ -33,7 +33,7 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@web3-wallet/types": "workspace:*"
+    "@web3-wallet/connector": "workspace:*"
   },
   "devDependencies": {
     "@ethersproject/experimental": "^5.6.0",

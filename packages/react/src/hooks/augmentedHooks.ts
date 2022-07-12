@@ -1,6 +1,6 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector } from '@web3-wallet/types';
+import type { Connector } from '@web3-wallet/connector';
 import { useEffect, useMemo, useState } from 'react';
 
 import { DerivedHooks } from './derivedHooks';

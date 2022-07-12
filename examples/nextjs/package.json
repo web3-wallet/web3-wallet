@@ -15,7 +15,7 @@
     "@web3-wallet/metamask": "workspace:*",
     "@web3-wallet/coinbase-wallet": "workspace:*",
     "@web3-wallet/react": "workspace:*",
-    "@web3-wallet/types": "workspace:*",
+    "@web3-wallet/connector": "workspace:*",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

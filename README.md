@@ -20,7 +20,7 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/react`](packages/react)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                     |
 | [`@web3-wallet/vue`](packages/vue)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                         |
 | **Core**                                                     |                                                                                                                                        |
-| [`@web3-wallet/types`](packages/types)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)                     |
+| [`@web3-wallet/connector`](packages/types)                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)                     |
 | [`@web3-wallet/store`](packages/store)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fstore.svg)](https://badge.fury.io/js/@web3-wallet%2Fstore)                     |
 | **Connectors**                                               |                                                                                                                                        |
 | [`@web3-wallet/eip1193`](connectors/eip1193)                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Feip1193.svg)](https://badge.fury.io/js/@web3-wallet%2Feip1193)                 |

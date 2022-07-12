@@ -1,6 +1,6 @@
 {
-  "name": "@web3-wallet/types",
-  "description": "web3-wallet core types",
+  "name": "@web3-wallet/connector",
+  "description": "web3-wallet abstract connector",
   "keywords": [
     "web3-wallet",
     "react",
