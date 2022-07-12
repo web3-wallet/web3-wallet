@@ -104,10 +104,7 @@ export const getAugmentedHooks = <T extends Connector>(
       // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
       void loaded && isActive && chainId;
       if (enabled) {
-        if (connector.customProvider)
-          return connector.customProvider as BaseProvider;
-        // see tsdoc note above for return type explanation.
-        else if (DynamicProvider && connector.provider)
+        if (DynamicProvider && connector.provider)
           return new DynamicProvider(
             connector.provider,
             network,

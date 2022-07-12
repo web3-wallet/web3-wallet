@@ -11,6 +11,7 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
+    "noImplicitOverride": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "types": ["node", "jest"],

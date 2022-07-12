@@ -31,7 +31,7 @@ export const createStore = (): {
   function startActivation(): () => void {
     const nullifierCached = ++nullifier;
 
-    store.setState({ ...DEFAULT_STATE, activating: true });
+    store.setState({ activating: true });
 
     // return a function that cancels the activation iff nothing else has happened
     return () => {

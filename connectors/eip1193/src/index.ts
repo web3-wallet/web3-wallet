@@ -1,14 +1,5 @@
-import type {
-  Actions,
-  Provider,
-  ProviderConnectInfo,
-  ProviderRpcError,
-} from '@web3-wallet/types';
+import type { Actions, Provider } from '@web3-wallet/types';
 import { Connector } from '@web3-wallet/types';
-
-function parseChainId(chainId: string | number) {
-  return typeof chainId === 'string' ? Number.parseInt(chainId, 16) : chainId;
-}
 
 /**
  * @param provider - An EIP-1193 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md}) provider.
@@ -22,66 +13,49 @@ export interface EIP1193ConstructorArgs {
 
 export class EIP1193 extends Connector {
   /** {@inheritdoc Connector.provider} */
-  provider: Provider;
+  public override provider: Provider;
+  /**
+   * add chain is not in the EIP1193 standard
+   */
+  public addChain = undefined;
+  /**
+   * switch chain is not in the EIP1193 standard
+   */
+  public switchChain = undefined;
+  /**
+   * watch asset is not in the EIP1193 standard
+   */
+  public watchAsset = undefined;
+
+  public detectProvider = async () => {
+    return this.provider;
+  };
 
   constructor({ actions, provider, onError }: EIP1193ConstructorArgs) {
     super(actions, onError);
 
     this.provider = provider;
-
-    this.provider.on('connect', ({ chainId }: ProviderConnectInfo): void => {
-      this.actions.update({ chainId: parseChainId(chainId) });
-    });
-
-    this.provider.on('disconnect', (error: ProviderRpcError): void => {
-      this.actions.resetState();
-      this.onError?.(error);
-    });
-
-    this.provider.on('chainChanged', (chainId: string): void => {
-      this.actions.update({ chainId: parseChainId(chainId) });
-    });
-
-    this.provider.on('accountsChanged', (accounts: string[]): void => {
-      this.actions.update({ accounts });
-    });
   }
 
-  /** {@inheritdoc Connector.connectEagerly} */
-  public async connectEagerly(): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
-
-    return Promise.all([
-      this.provider.request({ method: 'eth_chainId' }) as Promise<string>,
-      this.provider.request({ method: 'eth_accounts' }) as Promise<string[]>,
-    ])
-      .then(([chainId, accounts]) => {
-        this.actions.update({ chainId: parseChainId(chainId), accounts });
-      })
-      .catch((error) => {
-        cancelActivation();
-        throw error;
-      });
+  protected addEventListener(): void {
+    this.provider.on('connect', this.onConnect);
+    this.provider.on('disconnect', this.onDisconnect);
+    this.provider.on('chainChanged', this.onChainIdChanged);
+    this.provider.on('accountsChanged', this.onAccountsChanged);
   }
 
-  /** {@inheritdoc Connector.activate} */
-  public async activate(): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
-
-    return Promise.all([
-      this.provider.request({ method: 'eth_chainId' }) as Promise<string>,
-      this.provider
-        .request({ method: 'eth_requestAccounts' })
-        .catch(() =>
-          this.provider.request({ method: 'eth_accounts' }),
-        ) as Promise<string[]>,
-    ])
-      .then(([chainId, accounts]) => {
-        this.actions.update({ chainId: parseChainId(chainId), accounts });
-      })
-      .catch((error) => {
-        cancelActivation();
-        throw error;
-      });
+  protected removeEventListener(): void {
+    this.provider.off('connect', this.onConnect);
+    this.provider.off('disconnect', this.onDisconnect);
+    this.provider.off('chainChanged', this.onChainIdChanged);
+    this.provider.off('accountsChanged', this.onAccountsChanged);
   }
+
+  protected requestAccounts = async (): Promise<string[]> => {
+    return await this.provider.request<string[]>({ method: 'eth_accounts' });
+  };
+
+  protected requestChainId = async (): Promise<string> => {
+    return await this.provider.request<string>({ method: 'eth_accounts' });
+  };
 }

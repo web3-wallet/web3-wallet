@@ -43,7 +43,6 @@
     "build:connectors:metamask": "pnpm -F metamask build",
     "build:connectors:coinbase-wallet": "pnpm -F coinbase-wallet build",
     "build:connectors:eip1193": "pnpm -F eip1193 build",
-    "build:connectors:walletconnect": "pnpm -F walletconnect build",
     "prepare": "husky install"
   },
   "lint-staged": {

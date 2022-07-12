@@ -6,12 +6,9 @@ import {
   Actions,
   AddEthereumChainParameter,
   Connector,
-  ProviderConnectInfo,
   ProviderNoFoundError,
-  ProviderRpcError,
   WatchAssetParameters,
 } from '@web3-wallet/types';
-import { parseEvmChainId } from '@web3-wallet/utils';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
@@ -33,10 +30,9 @@ const providerNotFoundError = new ProviderNoFoundError(
 
 export class CoinbaseWallet extends Connector {
   /** {@inheritdoc Connector.provider} */
-  public provider?: CoinbaseWalletProvider;
+  public override provider?: CoinbaseWalletProvider;
 
   private readonly options: CoinbaseWalletSDKOptions;
-  private lazyInitialized = false;
 
   /**
    * A `CoinbaseWalletSDK` instance.
@@ -46,11 +42,6 @@ export class CoinbaseWallet extends Connector {
   constructor({ actions, options, onError }: CoinbaseWalletConstructorArgs) {
     super(actions, onError);
     this.options = options;
-  }
-
-  // the `connected` property, is bugged, but this works as a hack to check connection status
-  private get connected(): boolean {
-    return !!this.provider?.selectedAddress;
   }
 
   public detectProvider = async () => {
@@ -63,107 +54,55 @@ export class CoinbaseWallet extends Connector {
     return this.provider;
   };
 
-  private async lazyInitialize(): Promise<void> {
-    if (this.lazyInitialized) return;
-
-    try {
-      const provider = await this.detectProvider();
-      provider.on('connect', ({ chainId }: ProviderConnectInfo): void => {
-        this.actions.update({ chainId: parseEvmChainId(chainId) });
-      });
-
-      provider.on('disconnect', (error: ProviderRpcError): void => {
-        this.actions.resetState();
-        this.onError?.(error);
-      });
-
-      provider.on('chainChanged', (chainId: string): void => {
-        this.actions.update({ chainId: parseEvmChainId(chainId) });
-      });
-
-      provider.on('accountsChanged', (accounts: string[]): void => {
-        if (accounts.length === 0) {
-          // handle this edge case by disconnecting
-          this.actions.resetState();
-        } else {
-          this.actions.update({ accounts });
-        }
-      });
-    } finally {
-      this.lazyInitialized = true;
-    }
+  protected addEventListener(): void {
+    if (!this.provider) return;
+    this.provider.on('connect', this.onConnect);
+    this.provider.on('disconnect', this.onDisconnect);
+    this.provider.on('chainChanged', this.onChainIdChanged);
+    this.provider.on('accountsChanged', this.onAccountsChanged);
   }
 
-  /** {@inheritdoc Connector.connectEagerly} */
-  public async connectEagerly(): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
-
-    try {
-      await this.lazyInitialize();
-      if (!this.connected) throw new Error('No existing connection');
-
-      return Promise.all([
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request<string>({ method: 'eth_chainId' }),
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request<string[]>({ method: 'eth_accounts' }),
-      ]).then(([chainId, accounts]) => {
-        if (!accounts.length) throw new Error('No accounts returned');
-        this.actions.update({ chainId: parseEvmChainId(chainId), accounts });
-      });
-    } catch (error) {
-      cancelActivation();
-      throw error;
-    }
+  protected removeEventListener(): void {
+    if (!this.provider) return;
+    this.provider.off('connect', this.onConnect);
+    this.provider.off('disconnect', this.onDisconnect);
+    this.provider.off('chainChanged', this.onChainIdChanged);
+    this.provider.off('accountsChanged', this.onAccountsChanged);
   }
 
-  private switchChain = async (
-    desiredChainIdOrChainParameters: number | AddEthereumChainParameter,
+  protected requestAccounts = async (): Promise<string[]> => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return await this.provider!.request<string[]>({
+      method: 'eth_requestAccounts',
+    });
+  };
+
+  protected requestChainId = async (): Promise<string> => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return await this.provider!.request({ method: 'eth_chainId' });
+  };
+
+  protected switchChain = async (chainId: number): Promise<void> => {
+    if (!this.provider) throw providerNotFoundError;
+
+    const hexChainIdHex = `0x${chainId.toString(16)}`;
+
+    await this.provider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: hexChainIdHex }],
+    });
+  };
+
+  protected addChain = async (
+    addChainParameter: AddEthereumChainParameter,
   ): Promise<void> => {
-    try {
-      await this.lazyInitialize();
-    } catch (_) {
-      throw providerNotFoundError;
-    }
+    if (!this.provider) throw providerNotFoundError;
+    const hexChainIdHex = `0x${addChainParameter.chainId.toString(16)}`;
 
-    const desiredChainId =
-      typeof desiredChainIdOrChainParameters === 'number'
-        ? desiredChainIdOrChainParameters
-        : desiredChainIdOrChainParameters.chainId;
-
-    const desiredChainIdHex = `0x${desiredChainId.toString(16)}`;
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      await this.provider!.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: desiredChainIdHex }],
-      });
-    } catch (err: unknown) {
-      const error = err as ProviderRpcError;
-      const shouldTryToAddChain =
-        desiredChainIdOrChainParameters &&
-        typeof desiredChainIdOrChainParameters !== 'number' &&
-        (error.code === 4902 || error.code === -32603);
-
-      if (!shouldTryToAddChain) throw error;
-      // if we're here, we can try to add a new network
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      await this.provider!.request({
-        method: 'wallet_addEthereumChain',
-        params: [
-          {
-            ...desiredChainIdOrChainParameters,
-            chainId: desiredChainIdHex,
-          },
-        ],
-      });
-
-      /**
-       * chain added successfully, try activate again with the added chain
-       */
-      await this.activate(desiredChainId);
-    }
+    await this.provider.request({
+      method: 'wallet_addEthereumChain',
+      params: [{ ...addChainParameter, chainId: hexChainIdHex }],
+    });
   };
   /**
    * Initiates a connection.
@@ -174,53 +113,13 @@ export class CoinbaseWallet extends Connector {
    * AddEthereumChainParameter, in which case the user will be prompted to add the chain with the specified parameters
    * first, before being prompted to switch.
    */
-  public async activate(
-    desiredChainIdOrChainParameters?: number | AddEthereumChainParameter,
-  ): Promise<void> {
-    try {
-      await this.lazyInitialize();
-    } catch (_) {
-      throw providerNotFoundError;
-    }
-
-    const desiredChainId =
-      typeof desiredChainIdOrChainParameters === 'number'
-        ? desiredChainIdOrChainParameters
-        : desiredChainIdOrChainParameters?.chainId;
-
-    let cancelActivation: () => void = () => {};
-
-    if (!this.connected) {
-      cancelActivation = this.actions.startActivation();
-    }
-
-    try {
-      const [chainId, accounts] = await Promise.all([
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request<string>({ method: 'eth_chainId' }),
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.provider!.request<string[]>({ method: 'eth_requestAccounts' }),
-      ]);
-      const receivedChainId = parseEvmChainId(chainId);
-
-      if (!desiredChainId || desiredChainId === receivedChainId) {
-        return this.actions.update({ chainId: receivedChainId, accounts });
-      }
-
-      // if we're here, we can try to switch networks
-      await this.switchChain(
-        desiredChainIdOrChainParameters as number | AddEthereumChainParameter,
-      );
-    } catch (error) {
-      cancelActivation();
-      throw error;
-    }
-  }
 
   /** {@inheritdoc Connector.deactivate} */
-  public deactivate(): void {
+  public override deactivate = async (): Promise<void> => {
     this.coinbaseWallet?.disconnect();
-  }
+    this.coinbaseWallet = undefined;
+    super.deactivate();
+  };
 
   public async watchAsset({
     address,
