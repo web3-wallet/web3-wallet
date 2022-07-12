@@ -13,6 +13,7 @@
     "@ethersproject/providers": "^5.6.0",
     "@ethersproject/units": "^5.6.0",
     "@web3-wallet/metamask": "workspace:*",
+    "@web3-wallet/coinbase-wallet": "workspace:*",
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/types": "workspace:*",
     "next": "12.2.0",

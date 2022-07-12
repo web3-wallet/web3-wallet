@@ -1,4 +1,3 @@
-import type { MetaMask } from '@web3-wallet/metamask';
 import type { WalletApi } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
@@ -40,15 +39,11 @@ export function ConnectWithSelect({
   chainId,
   isActivating,
   isActive,
-  error,
-  setError,
 }: {
-  connector: MetaMask;
+  connector: WalletApi['connector'];
   chainId: ReturnType<Hooks['useChainId']>;
   isActivating: ReturnType<Hooks['useIsActivating']>;
   isActive: ReturnType<Hooks['useIsActive']>;
-  error: Error | undefined;
-  setError: (error: Error | undefined) => void;
 }) {
   const isNetwork = connector;
   const displayDefault = !isNetwork;
@@ -63,56 +58,17 @@ export function ConnectWithSelect({
   const switchChain = useCallback(
     (desiredChainId: number) => {
       setDesiredChainId(desiredChainId);
-      // if we're already connected to the desired chain, return
-      if (desiredChainId === chainId) {
-        setError(undefined);
-        return;
-      }
 
-      // if they want to connect to the default chain and we're already connected, return
-      if (desiredChainId === -1 && chainId !== undefined) {
-        setError(undefined);
-        return;
-      }
-
-      connector
-        .activate(
-          desiredChainId === -1
-            ? undefined
-            : getAddChainParameters(desiredChainId),
-        )
-        .then(() => setError(undefined))
-        .catch(setError);
-    },
-    [connector, chainId, setError],
-  );
-
-  const onClick = useCallback((): void => {
-    setError(undefined);
-    connector
-      .activate(
+      connector.activate(
         desiredChainId === -1
           ? undefined
           : getAddChainParameters(desiredChainId),
-      )
-      .then(() => setError(undefined))
-      .catch(setError);
-  }, [connector, desiredChainId, setError]);
+      );
+    },
+    [connector, chainId],
+  );
 
-  if (error) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <ChainSelect
-          chainId={desiredChainId}
-          switchChain={switchChain}
-          displayDefault={displayDefault}
-          chainIds={chainIds}
-        />
-        <div style={{ marginBottom: '1rem' }} />
-        <button onClick={onClick}>Try Again?</button>
-      </div>
-    );
-  } else if (isActive) {
+  if (isActive) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <ChainSelect
@@ -150,14 +106,11 @@ export function ConnectWithSelect({
             isActivating
               ? undefined
               : () =>
-                  connector
-                    .activate(
-                      desiredChainId === -1
-                        ? undefined
-                        : getAddChainParameters(desiredChainId),
-                    )
-                    .then(() => setError(undefined))
-                    .catch(setError)
+                  connector.activate(
+                    desiredChainId === -1
+                      ? undefined
+                      : getAddChainParameters(desiredChainId),
+                  )
           }
           disabled={isActivating}
         >

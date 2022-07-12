@@ -1,37 +1,43 @@
-import { MetaMask } from '@web3-wallet/metamask';
 import type { WalletApi } from '@web3-wallet/react';
+import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
 import { Chain } from './Chain';
 import { ConnectWithSelect } from './ConnectWithSelect';
 import { Status } from './Status';
 
-type Hooks = WalletApi['hooks'];
 interface Props {
   name: string;
-  connector: MetaMask;
-  chainId: ReturnType<Hooks['useChainId']>;
-  isActivating: ReturnType<Hooks['useIsActivating']>;
-  isActive: ReturnType<WalletApi['hooks']['useIsActive']>;
-  error: Error | undefined;
-  setError: (error: Error | undefined) => void;
-  ENSNames: ReturnType<Hooks['useENSNames']>;
-  provider?: ReturnType<Hooks['useProvider']>;
-  accounts?: string[];
+  wallet: WalletApi;
 }
 
-export function Card({
-  name,
-  connector,
-  chainId,
-  isActivating,
-  isActive,
-  error,
-  setError,
-  ENSNames,
-  accounts,
-  provider,
-}: Props) {
+export function WalletCard({ name, wallet }: Props) {
+  const { hooks, connector } = wallet;
+  const {
+    useChainId,
+    useAccounts,
+    useIsActivating,
+    useIsActive,
+    useProvider,
+    useENSNames,
+  } = hooks;
+
+  const chainId = useChainId();
+  const accounts = useAccounts();
+  const isActivating = useIsActivating();
+
+  const isActive = useIsActive();
+
+  const provider = useProvider();
+  const ENSNames = useENSNames(provider);
+
+  // attempt to connect eagerly on mount
+  useEffect(() => {
+    (connector.connectEagerly() as Promise<void>).catch((e) => {
+      console.debug('Failed to connect eagerly');
+    });
+  }, []);
+
   return (
     <div
       style={{
@@ -48,7 +54,7 @@ export function Card({
     >
       <b>{name}</b>
       <div style={{ marginBottom: '1rem' }}>
-        <Status isActivating={isActivating} isActive={isActive} error={error} />
+        <Status isActivating={isActivating} isActive={isActive} />
       </div>
       <Chain chainId={chainId} />
       <div style={{ marginBottom: '1rem' }}>
@@ -59,8 +65,6 @@ export function Card({
         chainId={chainId}
         isActivating={isActivating}
         isActive={isActive}
-        error={error}
-        setError={setError}
       />
     </div>
   );
