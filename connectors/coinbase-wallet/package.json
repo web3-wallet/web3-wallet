@@ -33,7 +33,8 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@web3-wallet/types": "workspace:*"
+    "@web3-wallet/types": "workspace:*",
+    "@web3-wallet/utils": "workspace:*"
   },
   "peerDependencies": {
     "@coinbase/wallet-sdk": "^3.0.4"

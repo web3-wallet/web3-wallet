@@ -79,8 +79,10 @@ importers:
     specifiers:
       '@web3-wallet/store': workspace:*
       '@web3-wallet/types': workspace:*
+      '@web3-wallet/utils': workspace:*
     dependencies:
       '@web3-wallet/types': link:../../packages/types
+      '@web3-wallet/utils': link:../../packages/utils
     devDependencies:
       '@web3-wallet/store': link:../../packages/store
 
@@ -102,10 +104,12 @@ importers:
       '@metamask/detect-provider': ^1.2.0
       '@web3-wallet/store': workspace:*
       '@web3-wallet/types': workspace:*
+      '@web3-wallet/utils': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
       '@web3-wallet/store': link:../../packages/store
       '@web3-wallet/types': link:../../packages/types
+      '@web3-wallet/utils': link:../../packages/utils
 
   connectors/walletconnect:
     specifiers:
@@ -126,6 +130,7 @@ importers:
       '@ethersproject/units': ^5.6.0
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.6
+      '@web3-wallet/coinbase-wallet': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/types': workspace:*
@@ -138,6 +143,7 @@ importers:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
+      '@web3-wallet/coinbase-wallet': link:../../connectors/coinbase-wallet
       '@web3-wallet/metamask': link:../../connectors/metamask
       '@web3-wallet/react': link:../../packages/react
       '@web3-wallet/types': link:../../packages/types
@@ -13008,7 +13014,7 @@ packages:
     dev: false
 
   github.com/ethereumjs/ethereumjs-abi/ee3994657fa7a427238e6ba92a84d0b529bbcde0:
-    resolution: {tarball: https://codeload.github.com/ethereumjs/ethereumjs-abi/tar.gz/ee3994657fa7a427238e6ba92a84d0b529bbcde0}
+    resolution: {commit: ee3994657fa7a427238e6ba92a84d0b529bbcde0, repo: git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git, type: git}
     name: ethereumjs-abi
     version: 0.6.8
     dependencies:
