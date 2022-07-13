@@ -1,5 +1,5 @@
 import type { Actions, Provider } from '@web3-wallet/connector';
-import { Connector } from '@web3-wallet/connector';
+import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
 /**
  * @param provider - An EIP-1193 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md}) provider.
@@ -11,21 +11,8 @@ export interface EIP1193ConstructorArgs {
   onError?: (error: Error) => void;
 }
 
-export class EIP1193 extends Connector {
-  /** {@inheritdoc Connector.provider} */
+export class EIP1193 extends EthereumConnector {
   public override provider: Provider;
-  /**
-   * add chain is not in the EIP1193 standard
-   */
-  public addChain = undefined;
-  /**
-   * switch chain is not in the EIP1193 standard
-   */
-  public switchChain = undefined;
-  /**
-   * watch asset is not in the EIP1193 standard
-   */
-  public watchAsset = undefined;
 
   public detectProvider = async () => {
     return this.provider;
@@ -33,29 +20,24 @@ export class EIP1193 extends Connector {
 
   constructor({ actions, provider, onError }: EIP1193ConstructorArgs) {
     super(actions, onError);
-
     this.provider = provider;
   }
 
-  protected addEventListener(): void {
-    this.provider.on('connect', this.onConnect);
-    this.provider.on('disconnect', this.onDisconnect);
-    this.provider.on('chainChanged', this.onChainIdChanged);
-    this.provider.on('accountsChanged', this.onAccountsChanged);
-  }
+  public override activate = async (): Promise<void> => {
+    const cancelActivation = this.actions.startActivation();
 
-  protected removeEventListener(): void {
-    this.provider.off('connect', this.onConnect);
-    this.provider.off('disconnect', this.onDisconnect);
-    this.provider.off('chainChanged', this.onChainIdChanged);
-    this.provider.off('accountsChanged', this.onAccountsChanged);
-  }
+    try {
+      await this.lazyInitialize();
 
-  protected requestAccounts = async (): Promise<string[]> => {
-    return await this.provider.request<string[]>({ method: 'eth_accounts' });
-  };
+      const [chainId, accounts] = await Promise.all([
+        this.requestChainId(),
+        this.requestAccounts(),
+      ]);
 
-  protected requestChainId = async (): Promise<string> => {
-    return await this.provider.request<string>({ method: 'eth_accounts' });
+      this.updateChainId(chainId);
+      this.updateAccounts(accounts);
+    } finally {
+      cancelActivation();
+    }
   };
 }

@@ -1,5 +1,3 @@
-import { MAX_SAFE_CHAIN_ID } from '@web3-wallet/utils';
-
 import { createStore } from '.';
 
 describe('#createWeb3ReactStoreAndActions', () => {
@@ -38,15 +36,6 @@ describe('#createWeb3ReactStoreAndActions', () => {
   });
 
   describe('#update', () => {
-    test('throws on bad chainIds', () => {
-      const { actions } = createStore();
-      for (const chainId of [1.1, 0, MAX_SAFE_CHAIN_ID + 1]) {
-        expect(() => actions.update({ chainId })).toThrow(
-          `Invalid chainId ${chainId}`,
-        );
-      }
-    });
-
     test('throws on bad accounts', () => {
       const { actions } = createStore();
       expect(() =>

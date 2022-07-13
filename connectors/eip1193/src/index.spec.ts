@@ -1,10 +1,11 @@
-import { Eip1193Bridge } from '@ethersproject/experimental'
-import { Web3Provider } from '@ethersproject/providers'
-import type { Actions, ProviderRpcError, RequestArguments, Store } from '@web3-wallet/connector'
-import { createStore } from '@web3-wallet/store'
-import { EventEmitter } from 'node:events'
+import { Eip1193Bridge } from '@ethersproject/experimental';
+import { Web3Provider } from '@ethersproject/providers';
+import type { Actions, ProviderRpcError, RequestArguments, Store } from '@web3-wallet/connector';
+import { EthereumConnector } from '@web3-wallet/ethereum-connector';
+import { createStore } from '@web3-wallet/store';
+import { EventEmitter } from 'node:events';
 
-import { EIP1193 } from '.'
+import { EIP1193 } from '.';
 
 class MockProviderRpcError extends Error {
   public code: number
@@ -59,7 +60,7 @@ const chainId = '0x1'
 const accounts: string[] = []
 
 describe('EIP1193', () => {
-  let mockProvider: MockEIP1193Provider
+  let mockProvider: EthereumConnector['provider'] & MockEIP1193Provider;
 
   let store: Store
   let actions: Actions
@@ -67,7 +68,7 @@ describe('EIP1193', () => {
   let connector: EIP1193
 
   beforeEach(() => {
-    mockProvider = new MockEIP1193Provider();
+    mockProvider = new MockEIP1193Provider() as (EthConnector['provider'] & MockEIP1193Provider);
     const s = createStore();
     store = s.store
     actions = s.actions

@@ -35,10 +35,7 @@
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.0.4",
     "@web3-wallet/connector": "workspace:*",
-    "@web3-wallet/utils": "workspace:*"
-  },
-  "devDependencies": {
-    "@web3-wallet/store": "workspace:*"
+    "@web3-wallet/ethereum-connector": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"

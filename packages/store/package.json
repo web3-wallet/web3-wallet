@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@ethersproject/address": "^5",
-    "@web3-wallet/utils": "workspace:*",
     "@web3-wallet/connector": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },

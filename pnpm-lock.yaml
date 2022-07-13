@@ -79,23 +79,22 @@ importers:
     specifiers:
       '@coinbase/wallet-sdk': ^3.0.4
       '@web3-wallet/connector': workspace:*
-      '@web3-wallet/store': workspace:*
-      '@web3-wallet/utils': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
     dependencies:
       '@coinbase/wallet-sdk': 3.3.0
       '@web3-wallet/connector': link:../../packages/connector
-      '@web3-wallet/utils': link:../../packages/utils
-    devDependencies:
-      '@web3-wallet/store': link:../../packages/store
+      '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
 
   connectors/eip1193:
     specifiers:
       '@ethersproject/experimental': ^5.6.0
       '@ethersproject/providers': ^5.6.0
       '@web3-wallet/connector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
       '@web3-wallet/store': workspace:*
     dependencies:
       '@web3-wallet/connector': link:../../packages/connector
+      '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
     devDependencies:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
@@ -105,13 +104,13 @@ importers:
     specifiers:
       '@metamask/detect-provider': ^1.2.0
       '@web3-wallet/connector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
       '@web3-wallet/store': workspace:*
-      '@web3-wallet/utils': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
       '@web3-wallet/connector': link:../../packages/connector
+      '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
       '@web3-wallet/store': link:../../packages/store
-      '@web3-wallet/utils': link:../../packages/utils
 
   examples/nextjs:
     specifiers:
@@ -189,10 +188,16 @@ importers:
 
   packages/connector:
     specifiers:
-      '@web3-wallet/utils': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
-      '@web3-wallet/utils': link:../utils
+      zustand: 4.0.0-rc.1
+
+  packages/ethereum-connector:
+    specifiers:
+      '@web3-wallet/connector': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@web3-wallet/connector': link:../connector
       zustand: 4.0.0-rc.1
 
   packages/react:
@@ -213,16 +218,11 @@ importers:
     specifiers:
       '@ethersproject/address': ^5
       '@web3-wallet/connector': workspace:*
-      '@web3-wallet/utils': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.6.1
       '@web3-wallet/connector': link:../connector
-      '@web3-wallet/utils': link:../utils
       zustand: 4.0.0-rc.1
-
-  packages/utils:
-    specifiers: {}
 
   packages/vue:
     specifiers:

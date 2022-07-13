@@ -1,4 +1,4 @@
-# @web3-wallet/utils
+# @web3-wallet/connector
 
 ## 0.0.6
 

@@ -1,3 +1,5 @@
+import { AddEthereumChainParameter } from '@web3-wallet/connector';
+
 /**
  * The largest possible chain ID we can handle.
  * Explanation: https://gist.github.com/rekmarks/a47bd5f2525936c4b8eee31a16345553
@@ -27,4 +29,16 @@ export const parseEvmChainId = (chainId: string | number) => {
   return typeof chainId === 'number'
     ? chainId
     : Number.parseInt(chainId, chainId.startsWith('0x') ? 16 : 10);
+};
+
+export const isChainId = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is number => {
+  return typeof chainIdOrChainParameter === 'number';
+};
+
+export const isAddChainParameter = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is AddEthereumChainParameter => {
+  return !isChainId(chainIdOrChainParameter);
 };

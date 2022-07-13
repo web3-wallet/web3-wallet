@@ -1,16 +1,10 @@
-import { getAddress } from '@ethersproject/address';
 import type {
   Actions,
   State,
   StateUpdate,
   Store,
 } from '@web3-wallet/connector';
-import { validateEvmChainId } from '@web3-wallet/utils';
 import create from 'zustand/vanilla';
-
-function validateAccount(account: string): string {
-  return getAddress(account);
-}
 
 const DEFAULT_STATE: State = {
   chainId: undefined,
@@ -51,18 +45,6 @@ export const createStore = (): {
    * @param stateUpdate - The state update to report.
    */
   function update(stateUpdate: StateUpdate): void {
-    // validate chainId statically, independent of existing state
-    if (stateUpdate.chainId !== undefined) {
-      validateEvmChainId(stateUpdate.chainId);
-    }
-
-    // validate accounts statically, independent of existing state
-    if (stateUpdate.accounts !== undefined) {
-      for (let i = 0; i < stateUpdate.accounts.length; i++) {
-        stateUpdate.accounts[i] = validateAccount(stateUpdate.accounts[i]);
-      }
-    }
-
     nullifier++;
 
     store.setState((existingState): State => {

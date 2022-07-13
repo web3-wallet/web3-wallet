@@ -36,7 +36,7 @@
     "@metamask/detect-provider": "^1.2.0",
     "@web3-wallet/store": "workspace:*",
     "@web3-wallet/connector": "workspace:*",
-    "@web3-wallet/utils": "workspace:*"
+    "@web3-wallet/ethereum-connector": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
