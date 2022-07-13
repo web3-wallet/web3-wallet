@@ -1,9 +1,9 @@
 import type detectEthereumProvider from '@metamask/detect-provider';
-import type { Actions, Provider } from '@web3-wallet/connector';
+import type { Actions, Provider, ProviderFilter } from '@web3-wallet/connector';
 import { ProviderNoFoundError } from '@web3-wallet/connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
-type MetaMaskCompatibleProvider = Provider & {
+export type MetaMaskCompatibleProvider = Provider & {
   isMetaMask?: boolean;
   isConnected?: () => boolean;
   providers?: MetaMaskCompatibleProvider[];
@@ -21,7 +21,9 @@ export interface MetaMaskCompatibleConstructorArgs {
 
 const providerNotFoundError = new ProviderNoFoundError('Provider not found');
 
-export class MetaMaskCompatible extends EthereumConnector {
+const defaultProviderFilter = (p: MetaMaskCompatibleProvider) =>
+  !!p?.isMetaMask;
+export abstract class MetaMaskCompatible extends EthereumConnector {
   public override provider?: MetaMaskCompatibleProvider;
   private options?: Parameters<typeof detectEthereumProvider>[0];
 
@@ -34,7 +36,7 @@ export class MetaMaskCompatible extends EthereumConnector {
     this.options = options;
   }
 
-  public detectProvider = async () => {
+  public detectProvider = async (providerFilter?: ProviderFilter) => {
     if (this.provider) this.provider;
 
     const m = await import('@metamask/detect-provider');
@@ -45,14 +47,20 @@ export class MetaMaskCompatible extends EthereumConnector {
 
     this.provider = provider as MetaMaskCompatibleProvider;
 
+    providerFilter = providerFilter || defaultProviderFilter;
+
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
      * */
     if (this.provider.providers?.length) {
-      this.provider = this.provider.providers.find((p) => p.isMetaMask);
+      this.provider = this.provider.providers.find(
+        providerFilter || defaultProviderFilter,
+      );
     }
 
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider || !providerFilter(this.provider)) {
+      throw providerNotFoundError;
+    }
 
     return this.provider;
   };

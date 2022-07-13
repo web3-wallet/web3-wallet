@@ -82,7 +82,9 @@ export interface WatchAssetParameters {
   image: string; // A string url of the token logo
 }
 
-abstract class ConnectorBase {
+export type ProviderFilter = (provider: Provider) => boolean;
+
+abstract class BaseConnector {
   /**
    * An
    * EIP-1193 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md}) and
@@ -98,7 +100,9 @@ abstract class ConnectorBase {
    *
    * Resolve with the Provider if loaded successfully, and reject if failed to load the provider for any reason
    */
-  public abstract detectProvider: () => Promise<Provider>;
+  public abstract detectProvider: (
+    providerFilter?: ProviderFilter,
+  ) => Promise<Provider>;
 
   /**
    * actions defined in store, which could be used to update the store state
@@ -139,7 +143,7 @@ abstract class ConnectorBase {
   public watchAsset?(params: WatchAssetParameters): Promise<true>;
 }
 
-export abstract class Connector extends ConnectorBase {
+export abstract class Connector extends BaseConnector {
   protected abstract updateChainId(chainId: number | string): void;
   protected abstract updateAccounts(accounts: string[]): void;
   protected abstract lazyInitialize(): Promise<void>;
