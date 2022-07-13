@@ -1,57 +1,87 @@
-import type detectEthereumProvider from '@metamask/detect-provider';
-import type { Actions, Provider } from '@web3-wallet/connector';
-import { ProviderNoFoundError } from '@web3-wallet/connector';
-import { EthereumConnector } from '@web3-wallet/ethereum-connector';
+declare global {
+  interface Window {
+    deficonnectProvider?: DeFiWalletEthereumProvider;
+    ethereum?: DeFiWalletEthereumProvider;
+  }
+}
 
-type MetaMaskProvider = Provider & {
+export interface DeFiWalletEthereumProvider {
+  isDeficonnectProvider: boolean;
   isMetaMask?: boolean;
-  isConnected?: () => boolean;
-  providers?: MetaMaskProvider[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  once(eventName: string | symbol, listener: (...args: any[]) => void): this;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  on(eventName: string | symbol, listener: (...args: any[]) => void): this;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  off(eventName: string | symbol, listener: (...args: any[]) => void): this;
+  addListener(
+    eventName: string | symbol,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    listener: (...args: any[]) => void,
+  ): this;
+  removeListener(
+    eventName: string | symbol,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    listener: (...args: any[]) => void,
+  ): this;
+  removeAllListeners(event?: string | symbol): this;
+  close?: () => Promise<void>;
+}
+
+const delay = (wait: number): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, wait);
+  });
 };
 
 /**
- * @param options - Options to pass to `@metamask/detect-provider`
- * @param onError - Handler to report errors thrown from eventListeners.
+ * crypto.com DeFi wallet takes about 1 seconds to inject it's provider to window.
+ *
+ * @param retries the max retry times
+ * @param interval the retry interval
+ * @returns the crypto.com DeFi wallet browser extension provider or undefined
  */
-export interface MetaMaskConstructorArgs {
-  actions: Actions;
-  options?: Parameters<typeof detectEthereumProvider>[0];
-  onError?: EthereumConnector['onError'];
-}
+const detectDeFiWalletProviderWithRetry = async (
+  retries = 40,
+  interval = 50,
+): Promise<DeFiWalletEthereumProvider | undefined> => {
+  const provider = getDeFiWalletProvider();
 
-const providerNotFoundError = new ProviderNoFoundError(
-  'MetaMask provider not found',
-);
+  if (provider || retries === 0) return provider;
 
-export class MetaMask extends EthereumConnector {
-  public override provider?: MetaMaskProvider;
-  private options?: Parameters<typeof detectEthereumProvider>[0];
+  await delay(interval);
 
-  constructor({ actions, options, onError }: MetaMaskConstructorArgs) {
-    super(actions, onError);
-    this.options = options;
+  return await detectDeFiWalletProviderWithRetry(retries - 1, interval);
+};
+
+const getDeFiWalletProvider = (): DeFiWalletEthereumProvider | undefined => {
+  if (typeof window === 'undefined') return undefined;
+
+  /**
+   * In native browsers
+   */
+  if (window.deficonnectProvider) {
+    return window.deficonnectProvider as DeFiWalletEthereumProvider;
   }
 
-  public detectProvider = async () => {
-    if (this.provider) this.provider;
+  /**
+   * In crypto.com DeFi wallet's dApp-browser
+   */
+  if (window.navigator?.userAgent?.includes('DeFiWallet') && window.ethereum) {
+    return window.ethereum as DeFiWalletEthereumProvider;
+  }
 
-    const m = await import('@metamask/detect-provider');
+  return undefined;
+};
 
-    const provider = await m.default(this.options);
+const detectEthereumProvider = async (): Promise<
+  DeFiWalletEthereumProvider | undefined
+> => {
+  const provider = await detectDeFiWalletProviderWithRetry();
 
-    if (!provider) throw providerNotFoundError;
+  return provider;
+};
 
-    this.provider = provider as MetaMaskProvider;
-
-    /**
-     * handle the case when e.g. metamask and coinbase wallet are both installed
-     * */
-    if (this.provider.providers?.length) {
-      this.provider = this.provider.providers.find((p) => p.isMetaMask);
-    }
-
-    if (!this.provider) throw providerNotFoundError;
-
-    return this.provider;
-  };
-}
+export default detectEthereumProvider;

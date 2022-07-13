@@ -85,6 +85,16 @@ importers:
       '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
 
+  connectors/defiwallet:
+    specifiers:
+      '@web3-wallet/connector': workspace:*
+      '@web3-wallet/defiwallet-detector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
+    dependencies:
+      '@web3-wallet/connector': link:../../packages/connector
+      '@web3-wallet/defiwallet-detector': link:../../detectors/defiwallet
+      '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
+
   connectors/eip1193:
     specifiers:
       '@ethersproject/experimental': ^5.6.0
@@ -105,12 +115,13 @@ importers:
       '@metamask/detect-provider': ^1.2.0
       '@web3-wallet/connector': workspace:*
       '@web3-wallet/ethereum-connector': workspace:*
-      '@web3-wallet/store': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
       '@web3-wallet/connector': link:../../packages/connector
       '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
-      '@web3-wallet/store': link:../../packages/store
+
+  detectors/defiwallet:
+    specifiers: {}
 
   examples/nextjs:
     specifiers:

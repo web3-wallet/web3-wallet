@@ -44,6 +44,7 @@
     "build:connectors": "run-p build:connectors:**",
     "build:connectors:metamask": "pnpm -F metamask build",
     "build:connectors:coinbase-wallet": "pnpm -F coinbase-wallet build",
+    "build:connectors:defiwallet": "pnpm -F defiwallet build",
     "build:connectors:eip1193": "pnpm -F eip1193 build",
     "prepare": "husky install"
   },

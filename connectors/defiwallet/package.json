@@ -1,9 +1,9 @@
 {
-  "name": "@web3-wallet/metamask",
-  "description": "MetaMask connector",
+  "name": "@web3-wallet/defiwallet",
+  "description": "crypto.com DeFi Wallet connector",
   "keywords": [
     "web3-wallet",
-    "metamask",
+    "crypto.com DeFi Wallet",
     "react",
     "vue",
     "vue3",
@@ -33,7 +33,7 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@metamask/detect-provider": "^1.2.0",
+    "@web3-wallet/defiwallet-detector": "workspace:*",
     "@web3-wallet/connector": "workspace:*",
     "@web3-wallet/ethereum-connector": "workspace:*"
   },
