@@ -7,7 +7,7 @@
 - package version
 - Updated dependencies
   - @web3-wallet/store@0.0.6
-  - @web3-wallet/connector@0.0.6
+  - @web3-wallet/abstract-connector@0.0.6
 
 ## 0.0.5
 
@@ -16,7 +16,7 @@
 - package version
 - Updated dependencies
   - @web3-wallet/store@0.0.5
-  - @web3-wallet/connector@0.0.5
+  - @web3-wallet/abstract-connector@0.0.5
 
 ## 0.0.4
 
@@ -25,7 +25,7 @@
 - Package versioning
 - Updated dependencies
   - @web3-wallet/store@0.0.4
-  - @web3-wallet/connector@0.0.4
+  - @web3-wallet/abstract-connector@0.0.4
 
 ## 0.0.3
 
@@ -34,7 +34,7 @@
 - Package versions
 - Updated dependencies
   - @web3-wallet/store@0.0.3
-  - @web3-wallet/connector@0.0.3
+  - @web3-wallet/abstract-connector@0.0.3
 
 ## 0.0.2
 
@@ -42,4 +42,4 @@
 
 - first release
 - Updated dependencies
-  - @web3-wallet/connector@0.0.2
+  - @web3-wallet/abstract-connector@0.0.2

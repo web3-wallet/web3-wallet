@@ -2,7 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { Actions } from '@web3-wallet/connector';
+import { Actions } from '@web3-wallet/abstract-connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
@@ -20,7 +20,7 @@ export interface CoinbaseWalletConstructorArgs {
 }
 
 export class CoinbaseWallet extends EthereumConnector {
-  /** {@inheritdoc Connector.provider} */
+  /** {@inheritdoc AbstractConnector.provider} */
   public override provider?: CoinbaseWalletProvider;
 
   private readonly options: CoinbaseWalletSDKOptions;
@@ -45,7 +45,7 @@ export class CoinbaseWallet extends EthereumConnector {
     return this.provider;
   };
 
-  /** {@inheritdoc Connector.deactivate} */
+  /** {@inheritdoc AbstractConnector.deactivate} */
   public override deactivate = async (): Promise<void> => {
     this.removeEventListeners();
     this.actions.resetState();

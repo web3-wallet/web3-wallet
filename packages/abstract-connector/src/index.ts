@@ -84,7 +84,7 @@ export interface WatchAssetParameters {
 
 export type ProviderFilter = (provider: Provider) => boolean;
 
-abstract class BaseConnector {
+abstract class BaseAbstractConnector {
   /**
    * An
    * EIP-1193 ({@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1193.md}) and
@@ -143,7 +143,7 @@ abstract class BaseConnector {
   public watchAsset?(params: WatchAssetParameters): Promise<true>;
 }
 
-export abstract class Connector extends BaseConnector {
+export abstract class AbstractConnector extends BaseAbstractConnector {
   protected abstract updateChainId(chainId: number | string): void;
   protected abstract updateAccounts(accounts: string[]): void;
   protected abstract lazyInitialize(): Promise<void>;

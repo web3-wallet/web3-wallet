@@ -37,7 +37,7 @@
     "@ethersproject/networks": "^5.6.4",
     "@ethersproject/providers": "^5",
     "@web3-wallet/store": "workspace:*",
-    "@web3-wallet/connector": "workspace:*",
+    "@web3-wallet/abstract-connector": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {

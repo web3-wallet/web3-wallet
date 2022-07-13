@@ -1,5 +1,5 @@
-import type { Actions, Provider } from '@web3-wallet/connector';
-import { ProviderNoFoundError } from '@web3-wallet/connector';
+import type { Actions, Provider } from '@web3-wallet/abstract-connector';
+import { ProviderNoFoundError } from '@web3-wallet/abstract-connector';
 import type {
   DeFiWalletChromeExtensionEthereumProvider,
   DeFiWalletChromeExtensionEthereumProviderOptions,

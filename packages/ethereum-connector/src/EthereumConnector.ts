@@ -1,17 +1,17 @@
 import {
+  AbstractConnector,
   AddEthereumChainParameter,
-  Connector,
   ProviderConnectInfo,
   ProviderNoFoundError,
   ProviderRpcError,
   WatchAssetParameters,
-} from '@web3-wallet/connector';
+} from '@web3-wallet/abstract-connector';
 
 import { isAddChainParameter, parseChainId } from './utils';
 
 const providerNotFoundError = new ProviderNoFoundError();
 
-export abstract class EthereumConnector extends Connector {
+export abstract class EthereumConnector extends AbstractConnector {
   protected initialized = false;
 
   protected updateChainId = (chainId: string | number): void => {
@@ -210,7 +210,7 @@ export abstract class EthereumConnector extends Connector {
     }
   }
 
-  /** {@inheritdoc Connector.deactivate} */
+  /** {@inheritdoc AbstractConnector.deactivate} */
   public override async watchAsset({
     address,
     symbol,

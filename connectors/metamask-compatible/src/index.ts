@@ -1,6 +1,10 @@
 import type detectEthereumProvider from '@metamask/detect-provider';
-import type { Actions, Provider, ProviderFilter } from '@web3-wallet/connector';
-import { ProviderNoFoundError } from '@web3-wallet/connector';
+import type {
+  Actions,
+  Provider,
+  ProviderFilter,
+} from '@web3-wallet/abstract-connector';
+import { ProviderNoFoundError } from '@web3-wallet/abstract-connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
 export type MetaMaskCompatibleProvider = Provider & {

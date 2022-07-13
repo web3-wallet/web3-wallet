@@ -1,6 +1,6 @@
 import { Eip1193Bridge } from '@ethersproject/experimental';
 import { Web3Provider } from '@ethersproject/providers';
-import type { Actions, ProviderRpcError, RequestArguments, Store } from '@web3-wallet/connector';
+import type { Actions, ProviderRpcError, RequestArguments, Store } from '@web3-wallet/abstract-connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 import { createStore } from '@web3-wallet/store';
 import { EventEmitter } from 'node:events';

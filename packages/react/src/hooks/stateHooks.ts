@@ -1,4 +1,4 @@
-import { State, Store } from '@web3-wallet/connector';
+import { State, Store } from '@web3-wallet/abstract-connector';
 import { EqualityChecker, UseBoundStore } from 'zustand';
 
 export type StateHooks = {

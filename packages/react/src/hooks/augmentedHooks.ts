@@ -1,6 +1,6 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector } from '@web3-wallet/connector';
+import type { AbstractConnector } from '@web3-wallet/abstract-connector';
 import { useEffect, useMemo, useState } from 'react';
 
 import { DerivedHooks } from './derivedHooks';
@@ -64,7 +64,7 @@ function useENS(
   return ENSNames ?? new Array<undefined>(accounts.length).fill(undefined);
 }
 
-export const getAugmentedHooks = <T extends Connector>(
+export const getAugmentedHooks = <T extends AbstractConnector>(
   connector: T,
   { useAccounts, useChainId }: StateHooks,
   { useAccount, useIsActive }: DerivedHooks,

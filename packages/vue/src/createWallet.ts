@@ -1,4 +1,9 @@
-import type { Actions, Connector, State, Store } from '@web3-wallet/connector';
+import type {
+  AbstractConnector,
+  Actions,
+  State,
+  Store,
+} from '@web3-wallet/abstract-connector';
 import { createStore } from '@web3-wallet/store';
 import { reactive } from 'vue';
 
@@ -11,7 +16,7 @@ import {
 
 type Hooks = StateHooks & DerivedHooks;
 
-export type WalletApi<T extends Connector = Connector> = {
+export type WalletApi<T extends AbstractConnector = AbstractConnector> = {
   connector: T;
   hooks: Hooks;
   store: Store;
@@ -22,7 +27,7 @@ export type WalletApi<T extends Connector = Connector> = {
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <T extends Connector>(
+export const createWallet = <T extends AbstractConnector>(
   f: (actions: Actions) => T,
 ): WalletApi<T> => {
   const { store, actions } = createStore();

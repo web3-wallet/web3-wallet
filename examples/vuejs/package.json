@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@web3-wallet/metamask": "workspace:*",
-    "@web3-wallet/connector": "workspace:*",
+    "@web3-wallet/abstract-connector": "workspace:*",
     "@web3-wallet/vue": "workspace:*",
     "vue": "^3.2.25"
   },

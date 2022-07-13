@@ -1,4 +1,4 @@
-import { AddEthereumChainParameter } from '@web3-wallet/connector';
+import { AddEthereumChainParameter } from '@web3-wallet/abstract-connector';
 
 /**
  * The largest possible chain ID we can handle.

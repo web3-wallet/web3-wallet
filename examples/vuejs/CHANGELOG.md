@@ -8,7 +8,7 @@
 - Updated dependencies
   - @web3-wallet/metamask@0.0.6
   - @web3-wallet/vue@0.0.6
-  - @web3-wallet/connector@0.0.6
+  - @web3-wallet/abstract-connector@0.0.6
 
 ## 0.0.4
 
@@ -18,7 +18,7 @@
 - Updated dependencies
   - @web3-wallet/metamask@0.0.5
   - @web3-wallet/vue@0.0.5
-  - @web3-wallet/connector@0.0.5
+  - @web3-wallet/abstract-connector@0.0.5
 
 ## 0.0.3
 
@@ -28,7 +28,7 @@
 - Updated dependencies
   - @web3-wallet/metamask@0.0.4
   - @web3-wallet/vue@0.0.4
-  - @web3-wallet/connector@0.0.4
+  - @web3-wallet/abstract-connector@0.0.4
 
 ## 0.0.2
 
@@ -38,7 +38,7 @@
 - Updated dependencies
   - @web3-wallet/metamask@0.0.3
   - @web3-wallet/vue@0.0.3
-  - @web3-wallet/connector@0.0.3
+  - @web3-wallet/abstract-connector@0.0.3
 
 ## 0.0.1
 
@@ -48,4 +48,4 @@
 - Updated dependencies
   - @web3-wallet/metamask@0.0.2
   - @web3-wallet/vue@0.0.2
-  - @web3-wallet/connector@0.0.2
+  - @web3-wallet/abstract-connector@0.0.2

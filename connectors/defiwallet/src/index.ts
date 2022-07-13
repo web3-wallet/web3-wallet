@@ -1,4 +1,4 @@
-import { Actions } from '@web3-wallet/connector';
+import { Actions } from '@web3-wallet/abstract-connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
 import {

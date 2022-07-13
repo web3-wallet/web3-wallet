@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/connector",
+  "name": "@web3-wallet/abstract-connector",
   "description": "web3-wallet abstract connector",
   "keywords": [
     "web3-wallet",

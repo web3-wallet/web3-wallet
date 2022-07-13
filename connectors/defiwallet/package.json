@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@web3-wallet/defiwallet-detector": "workspace:*",
-    "@web3-wallet/connector": "workspace:*",
+    "@web3-wallet/abstract-connector": "workspace:*",
     "@web3-wallet/ethereum-connector": "workspace:*"
   },
   "bugs": {

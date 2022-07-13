@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
-    "@web3-wallet/connector": "workspace:*",
+    "@web3-wallet/abstract-connector": "workspace:*",
     "@web3-wallet/ethereum-connector": "workspace:*"
   },
   "bugs": {

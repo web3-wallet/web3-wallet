@@ -3,7 +3,7 @@ import type {
   State,
   StateUpdate,
   Store,
-} from '@web3-wallet/connector';
+} from '@web3-wallet/abstract-connector';
 import create from 'zustand/vanilla';
 
 const DEFAULT_STATE: State = {

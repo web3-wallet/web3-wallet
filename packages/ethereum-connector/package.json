@@ -37,7 +37,7 @@
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@web3-wallet/connector": "workspace:*",
+    "@web3-wallet/abstract-connector": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "bugs": {
