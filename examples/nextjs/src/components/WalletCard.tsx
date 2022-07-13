@@ -12,7 +12,7 @@ interface Props {
   wallet: WalletApi;
 }
 
-export function WalletCard({ name, wallet }: Props) {
+export const WalletCard = ({ name, wallet }: Props) => {
   const { hooks, connector } = wallet;
   const {
     useChainId,
@@ -68,4 +68,4 @@ export function WalletCard({ name, wallet }: Props) {
       />
     </div>
   );
-}
+};

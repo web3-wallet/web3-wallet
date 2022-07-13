@@ -6,7 +6,7 @@ import { ChainSelect } from './ChainSelect';
 
 type Hooks = WalletApi['hooks'];
 
-export function ConnectWithSelect({
+export const ConnectWithSelect = ({
   connector,
   chainId,
   isActivating,
@@ -16,7 +16,7 @@ export function ConnectWithSelect({
   chainId: ReturnType<Hooks['useChainId']>;
   isActivating: ReturnType<Hooks['useIsActivating']>;
   isActive: ReturnType<Hooks['useIsActive']>;
-}) {
+}) => {
   const hashConnector = connector;
   const displayDefault = !hashConnector;
   const chainIds = (
@@ -99,4 +99,4 @@ export function ConnectWithSelect({
       </button>
     </div>
   );
-}
+};

@@ -3,7 +3,7 @@ import { formatEther } from '@ethersproject/units';
 import type { WalletApi } from '@web3-wallet/react';
 import React, { useEffect, useState } from 'react';
 
-import { Address } from './Address';
+import { Account } from './Account';
 
 type Hooks = WalletApi['hooks'];
 
@@ -62,19 +62,13 @@ export const Accounts = ({
           ENSNames?.[i] ? (
             ENSNames?.[i]
           ) : (
-            <React.Fragment key={account}>
-              <Address
-                address={account}
-                style={{
-                  margin: 0,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  display: 'inline',
-                }}
-              />
-              {!!balances?.[i] &&
-                ` (Ξ${Number(formatEther(balances[i])).toFixed(4)})`}
-            </React.Fragment>
+            <div style={{ display: 'flex' }} key={account}>
+              <Account account={account} />
+              <div>
+                {!!balances?.[i] &&
+                  ` (Ξ${Number(formatEther(balances[i])).toFixed(4)})`}
+              </div>
+            </div>
           ),
         )}
       </b>

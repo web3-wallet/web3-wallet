@@ -1,15 +1,11 @@
-import type { WalletApi } from '@web3-wallet/react';
-
-type Hooks = WalletApi['hooks'];
-
-export function Status({
+export const Status = ({
   isActivating,
   isActive,
 }: {
-  isActivating: ReturnType<Hooks['useIsActivating']>;
-  isActive: ReturnType<Hooks['useIsActive']>;
+  isActivating: boolean;
+  isActive: boolean;
   error?: Error;
-}) {
+}) => {
   return (
     <div>
       {isActivating ? (
@@ -21,4 +17,4 @@ export function Status({
       )}
     </div>
   );
-}
+};
