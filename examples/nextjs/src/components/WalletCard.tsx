@@ -1,3 +1,4 @@
+import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import type { WalletApi } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
@@ -33,7 +34,9 @@ export function WalletCard({ name, wallet }: Props) {
 
   // attempt to connect eagerly on mount
   useEffect(() => {
-    (connector.connectEagerly() as Promise<void>).catch((e) => {
+    if (connector instanceof CoinbaseWallet) return;
+
+    connector.connectEagerly()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
     });
   }, []);
@@ -43,23 +46,20 @@ export function WalletCard({ name, wallet }: Props) {
       style={{
         display: 'flex',
         flexDirection: 'column',
+        gap: '1rem',
         justifyContent: 'space-between',
-        width: '20rem',
+        maxWidth: '30rem',
+        minWidth: '15rem',
         padding: '1rem',
-        margin: '1rem',
         overflow: 'auto',
-        border: '1px solid',
-        borderRadius: '1rem',
+        border: '1px solid #999',
+        borderRadius: '0.5rem',
       }}
     >
       <b>{name}</b>
-      <div style={{ marginBottom: '1rem' }}>
-        <Status isActivating={isActivating} isActive={isActive} />
-      </div>
+      <Status isActivating={isActivating} isActive={isActive} />
       <Chain chainId={chainId} />
-      <div style={{ marginBottom: '1rem' }}>
-        <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
-      </div>
+      <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       <ConnectWithSelect
         connector={connector}
         chainId={chainId}

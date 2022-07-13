@@ -84,6 +84,14 @@ export const CHAINS: {
     ].filter((url) => url !== undefined),
     name: 'Görli',
   },
+  25: {
+    urls: [`https://evm-cronos.crypto.org`],
+    name: 'Cronos',
+  },
+  338: {
+    urls: [`https://evm-t3.cronos.org`],
+    name: 'Cronos Test',
+  },
   42: {
     urls: [
       process.env.infuraKey

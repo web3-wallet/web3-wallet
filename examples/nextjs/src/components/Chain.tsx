@@ -1,12 +1,6 @@
-import type { WalletApi } from '@web3-wallet/react';
-
 import { CHAINS } from '../chains';
 
-export function Chain({
-  chainId,
-}: {
-  chainId: ReturnType<WalletApi['hooks']['useChainId']>;
-}) {
+export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
 
   const name = chainId ? CHAINS[chainId]?.name : undefined;
@@ -27,4 +21,4 @@ export function Chain({
       Chain Id: <b>{chainId}</b>
     </div>
   );
-}
+};
