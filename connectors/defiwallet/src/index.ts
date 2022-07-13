@@ -1,42 +1,41 @@
-import type { Actions, Provider } from '@web3-wallet/connector';
-import { ProviderNoFoundError } from '@web3-wallet/connector';
-import type { DeFiWalletEthereumProvider } from '@web3-wallet/defiwallet-detector';
+import { Actions } from '@web3-wallet/connector';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
-/**
- * @param onError - Handler to report errors thrown from eventListeners.
- */
-export interface DeFiWalletConstructorArgs {
+import {
+  type DeFiWalletChromeExtensionConstructorArgs,
+  DeFiWalletChromeExtension,
+} from './DeFiWalletChromeExtension';
+import {
+  type DeFiWalletMobileConstructorArgs,
+  DeFiWalletMobile,
+} from './DeFiWalletMobile';
+import { isMobile } from './isMobile';
+
+export interface DeFiWalletContractorArgs {
   actions: Actions;
+  options: {
+    defiWalletMobileOptions: DeFiWalletMobileConstructorArgs['options'];
+    defiWalletChromeExtensionOptions: DeFiWalletChromeExtensionConstructorArgs['options'];
+  };
   onError?: EthereumConnector['onError'];
 }
 
-const providerNotFoundError = new ProviderNoFoundError(
-  'DeFi Wallet provider not found',
-);
-
-export class DeFiWallet extends EthereumConnector {
-  public override provider?: Provider & DeFiWalletEthereumProvider;
-
-  constructor({ actions, onError }: DeFiWalletConstructorArgs) {
-    super(actions, onError);
+export const getDeFiWallet = ({
+  actions,
+  options,
+  onError,
+}: DeFiWalletContractorArgs): DeFiWalletMobile | DeFiWalletChromeExtension => {
+  if (isMobile()) {
+    return new DeFiWalletMobile({
+      actions,
+      options: options.defiWalletMobileOptions,
+      onError,
+    });
+  } else {
+    return new DeFiWalletChromeExtension({
+      actions,
+      options: options.defiWalletChromeExtensionOptions,
+      onError,
+    });
   }
-
-  public detectProvider = async () => {
-    if (this.provider) this.provider;
-
-    const m = await import('@web3-wallet/defiwallet-detector');
-
-    const provider = await m.default();
-    if (!provider) throw providerNotFoundError;
-
-    this.provider = provider as Provider & DeFiWalletEthereumProvider;
-
-    return this.provider;
-  };
-
-  public override deactivate = async (): Promise<void> => {
-    this.resetState();
-    await this.provider?.close?.();
-  };
-}
+};

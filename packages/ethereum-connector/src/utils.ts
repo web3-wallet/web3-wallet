@@ -6,8 +6,9 @@ import { AddEthereumChainParameter } from '@web3-wallet/connector';
  */
 export const MAX_SAFE_CHAIN_ID = 4503599627370476;
 
-export const validateEvmChainId = (chainId: number): never | void => {
+export const validateChainId = (chainId: number | undefined): never | void => {
   if (
+    !chainId ||
     !Number.isInteger(chainId) ||
     chainId <= 0 ||
     chainId > MAX_SAFE_CHAIN_ID
@@ -16,19 +17,23 @@ export const validateEvmChainId = (chainId: number): never | void => {
   }
 };
 
-export const isValidEvmChainId = (chainId: number): boolean => {
+export const isValidChainId = (chainId: number | undefined): boolean => {
   try {
-    validateEvmChainId(chainId);
+    validateChainId(chainId);
     return true;
   } catch (_) {
     return false;
   }
 };
 
-export const parseEvmChainId = (chainId: string | number) => {
+export const parseChainId = (chainId: string | number): number => {
   return typeof chainId === 'number'
     ? chainId
     : Number.parseInt(chainId, chainId.startsWith('0x') ? 16 : 10);
+};
+
+export const toHexChainId = (chainId: number): string => {
+  return `0x${chainId.toString(16)}`;
 };
 
 export const isChainId = (

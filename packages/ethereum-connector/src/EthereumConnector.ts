@@ -7,7 +7,7 @@ import {
   WatchAssetParameters,
 } from '@web3-wallet/connector';
 
-import { isAddChainParameter, parseEvmChainId } from './utils';
+import { isAddChainParameter, parseChainId } from './utils';
 
 const providerNotFoundError = new ProviderNoFoundError();
 
@@ -16,7 +16,7 @@ export abstract class EthereumConnector extends Connector {
 
   protected updateChainId = (chainId: string | number): void => {
     this.actions.update({
-      chainId: parseEvmChainId(chainId),
+      chainId: parseChainId(chainId),
     });
   };
 
@@ -170,7 +170,7 @@ export abstract class EthereumConnector extends Connector {
         this.requestAccounts(),
       ]);
 
-      const receivedChainId = parseEvmChainId(chainId);
+      const receivedChainId = parseChainId(chainId);
       const desiredChainId =
         typeof chainIdOrChainParameter === 'number'
           ? chainIdOrChainParameter
