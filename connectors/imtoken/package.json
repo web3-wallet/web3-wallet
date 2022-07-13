@@ -1,9 +1,9 @@
 {
-  "name": "@web3-wallet/metamask",
-  "description": "MetaMask connector",
+  "name": "@web3-wallet/imtoken",
+  "description": "imToken connector",
   "keywords": [
     "web3-wallet",
-    "metamask",
+    "imToken",
     "react",
     "vue",
     "vue3",

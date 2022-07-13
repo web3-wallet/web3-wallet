@@ -12,6 +12,7 @@
     "defiwallet",
     "esbuild",
     "ethersproject",
+    "imtoken",
     "monacohq",
     "Networkish",
     "nextjs",
