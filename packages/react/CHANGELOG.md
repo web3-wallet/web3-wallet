@@ -1,5 +1,14 @@
 # @web3-wallet/react
 
+## 0.0.7
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/abstract-connector@0.0.7
+  - @web3-wallet/store@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes

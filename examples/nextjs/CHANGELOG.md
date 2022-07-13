@@ -1,5 +1,16 @@
 # @examples/nextjs
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/abstract-connector@0.0.7
+  - @web3-wallet/coinbase-wallet@0.0.7
+  - @web3-wallet/defiwallet@0.0.7
+  - @web3-wallet/metamask@0.0.7
+  - @web3-wallet/react@0.0.7
+
 ## 0.0.5
 
 ### Patch Changes

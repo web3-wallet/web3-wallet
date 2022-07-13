@@ -1,5 +1,11 @@
 # @web3-wallet/metamask
 
+## 0.0.7
+
+### Patch Changes
+
+- package version
+
 ## 0.0.6
 
 ### Patch Changes
