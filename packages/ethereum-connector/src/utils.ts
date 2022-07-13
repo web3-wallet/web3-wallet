@@ -29,7 +29,7 @@ export const isValidChainId = (chainId: number | undefined): boolean => {
 export const parseChainId = (chainId: string | number): number => {
   return typeof chainId === 'number'
     ? chainId
-    : Number.parseInt(chainId, chainId.startsWith('0x') ? 16 : 10);
+    : Number.parseInt(`${chainId}`, `${chainId}`.startsWith('0x') ? 16 : 10);
 };
 
 export const toHexChainId = (chainId: number): string => {

@@ -79,9 +79,13 @@ export function ConnectWithSelect({
         />
         <div style={{ marginBottom: '1rem' }} />
         <button
-          onClick={() => {
+          onClick={async () => {
             if (connector?.deactivate) {
-              void connector.deactivate();
+              try {
+                await connector.deactivate();
+              } catch (error) {
+                console.warn('activate error: ', error);
+              }
             } else {
               void connector.resetState();
             }

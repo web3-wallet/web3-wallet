@@ -34,7 +34,7 @@ export function WalletCard({ name, wallet }: Props) {
   // attempt to connect eagerly on mount
   useEffect(() => {
     (connector.connectEagerly() as Promise<void>).catch((e) => {
-      console.debug('Failed to connect eagerly');
+      console.debug('Failed to connect eagerly', e);
     });
   }, []);
 
