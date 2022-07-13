@@ -66,7 +66,7 @@ export const metaMask = createWallet<MetaMask>(
 // WalletCards/MetaMaskCard.tsx
 import { useEffect, useState } from 'react';
 import { metaMask } from 'wallets/metaMask';
-import { Card } from '../Card';
+import { WalletCard } from '../WalletCard';
 
 const {
   connector,

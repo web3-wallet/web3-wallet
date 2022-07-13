@@ -112,6 +112,13 @@ abstract class ConnectorBase {
   }
 
   /**
+   * Reset state
+   */
+  public resetState = (): void => {
+    this.actions.resetState();
+  };
+
+  /**
    * Initiate a connection.
    */
   public abstract activate(...args: unknown[]): Promise<void>;

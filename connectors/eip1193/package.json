@@ -1,6 +1,6 @@
 {
   "name": "@web3-wallet/eip1193",
-  "description": "web3-wallet eip1193 connector",
+  "description": "eip1193 connector",
   "keywords": [
     "web3-wallet",
     "eip1193",

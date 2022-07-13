@@ -1,6 +1,6 @@
 {
   "name": "@web3-wallet/metamask",
-  "description": "web3-wallet metamask connector",
+  "description": "MetaMask connector",
   "keywords": [
     "web3-wallet",
     "metamask",

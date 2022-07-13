@@ -1,6 +1,6 @@
 {
   "name": "@web3-wallet/ethereum-connector",
-  "description": "web3-wallet abstract ethereum compatible wallet connector",
+  "description": "Abstract ethereum compatible wallet connector",
   "keywords": [
     "web3-wallet",
     "react",

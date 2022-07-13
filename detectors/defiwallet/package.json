@@ -1,9 +1,9 @@
 {
-  "name": "@web3-wallet/coinbase-wallet",
-  "description": "Coinbase wallet connector",
+  "name": "@web3-wallet/defiwallet-detector",
+  "description": "crypto.com DeFi Wallet detector",
   "keywords": [
     "web3-wallet",
-    "coinbase-wallet",
+    "crypto.com DeFi Wallet",
     "react",
     "vue",
     "vue3",
@@ -32,13 +32,10 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs"
   },
-  "dependencies": {
-    "@coinbase/wallet-sdk": "^3.0.4",
-    "@web3-wallet/connector": "workspace:*",
-    "@web3-wallet/ethereum-connector": "workspace:*"
-  },
+  "dependencies": {},
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
+  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme",
+  "devDependencies": {}
 }

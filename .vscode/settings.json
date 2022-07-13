@@ -8,6 +8,8 @@
     "bignumber",
     "changesets",
     "defi",
+    "Deficonnect",
+    "defiwallet",
     "esbuild",
     "ethersproject",
     "monacohq",
