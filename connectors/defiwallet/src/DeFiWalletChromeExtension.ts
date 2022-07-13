@@ -122,6 +122,7 @@ export class DeFiWalletChromeExtension extends EthereumConnector {
   public override deactivate = async () => {
     if (!this.provider) throw providerNotFoundError;
 
+    this.resetState();
     await this.provider.close();
   };
 }
