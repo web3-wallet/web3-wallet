@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["../MetaMaskCompatible/src"],
+  "compilerOptions": {
+    "rootDir": "../MetaMaskCompatible/src",
+    "outDir": "../MetaMaskCompatible/dist/esm"
+  }
+}

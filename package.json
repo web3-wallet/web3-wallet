@@ -35,6 +35,7 @@
     "build:packages": "run-s build:packages:**",
     "build:packages:connector": "pnpm -F connector build",
     "build:ethereum-connector": "pnpm -F ethereum-connector build",
+    "build:metamask-compatible": "pnpm -F metamask-compatible build",
     "build:packages:store": "pnpm -F store build",
     "build:frameworks": "run-p build:frameworks:**",
     "build:frameworks:react": "pnpm -F react build",

@@ -1,8 +1,9 @@
 {
-  "name": "@web3-wallet/metamask",
-  "description": "MetaMask connector",
+  "name": "@web3-wallet/metamask-compatible",
+  "description": "Connector that could be extended by all MetaMask compatible connectors",
   "keywords": [
     "web3-wallet",
+    "metamask compatible",
     "metamask",
     "react",
     "vue",
@@ -35,7 +36,6 @@
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "@web3-wallet/connector": "workspace:*",
-    "@web3-wallet/metamask-compatible": "workspace:*",
     "@web3-wallet/ethereum-connector": "workspace:*"
   },
   "bugs": {

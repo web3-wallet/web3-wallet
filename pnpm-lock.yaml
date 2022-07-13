@@ -115,6 +115,18 @@ importers:
       '@metamask/detect-provider': ^1.2.0
       '@web3-wallet/connector': workspace:*
       '@web3-wallet/ethereum-connector': workspace:*
+      '@web3-wallet/metamask-compatible': workspace:*
+    dependencies:
+      '@metamask/detect-provider': 1.2.0
+      '@web3-wallet/connector': link:../../packages/connector
+      '@web3-wallet/ethereum-connector': link:../../packages/ethereum-connector
+      '@web3-wallet/metamask-compatible': link:../metamask-compatible
+
+  connectors/metamask-compatible:
+    specifiers:
+      '@metamask/detect-provider': ^1.2.0
+      '@web3-wallet/connector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
       '@web3-wallet/connector': link:../../packages/connector
