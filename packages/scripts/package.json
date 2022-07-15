@@ -10,7 +10,7 @@
     "watch"
   ],
   "author": "logan <logan.luo@crypto.com>",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LoganAtCrypto/web3-wallet.git"

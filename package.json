@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "Use web3 wallets in your react/vue web3 apps with easy.",
   "author": "logan.luo",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
     "wallet",
     "web3",
