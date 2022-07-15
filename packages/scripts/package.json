@@ -24,7 +24,7 @@
   "type": "module",
   "module": "./dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --module esnext --outDir dist"
   },
   "bin": "./entry.sh",
   "dependencies": {

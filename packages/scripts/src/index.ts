@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { build } from './tasks';
+import { build } from './tasks/index';
 
 export enum TaskName {
   Build = 'build',
@@ -30,7 +30,7 @@ const pkgJson = JSON.parse(
 const taskName = process.argv[2] as TaskName;
 const taskConfig = pkgJson['@web3-wallet/scripts'] as TaskConfig;
 
-const runTasks = async () => {
+export const runTasks = async () => {
   try {
     await tasks[taskName](taskConfig[taskName]);
     // eslint-disable-next-line no-empty

@@ -37,15 +37,14 @@
           "trust-wallet",
           "coinbase-wallet",
           "defiwallet",
-          "imtoken",
-          "eip1193"
+          "imtoken"
         ]
       ]
     }
   },
   "scripts": {
     "pre-commit": "lint-staged",
-    "build": "scripts build",
+    "build": "pnpm -F scripts build && scripts build",
     "build:scripts": "pnpm -F scripts build",
     "build:store": "pnpm -F abstract-connector build",
     "watch": "pnpm --parallel -r -c exec tsc --watch",
