@@ -36,15 +36,6 @@ describe('#createWeb3ReactStoreAndActions', () => {
   });
 
   describe('#update', () => {
-    test('throws on bad accounts', () => {
-      const { actions } = createStore();
-      expect(() =>
-        actions.update({
-          accounts: ['0x000000000000000000000000000000000000000'],
-        }),
-      ).toThrow();
-    });
-
     test('chainId', () => {
       const { store, actions } = createStore();
       const chainId = 1;

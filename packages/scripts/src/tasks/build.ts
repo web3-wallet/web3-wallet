@@ -7,36 +7,49 @@ type BuildConfig = {
 };
 
 export const build = async (config: BuildConfig) => {
+  console.log(chalk.blue(`[build]: 10 packages\n`));
+
   for (const pkg of config.packages) {
     if (typeof pkg == 'string') {
       await buildPkg(pkg);
     } else {
-      await Promise.all(pkg.map((v) => buildPkg(v)));
+      await Promise.all(pkg.map(buildPkg));
     }
   }
+  console.log(chalk.green(`[build]: all done!\n`));
 };
 
-const log = (pkg: string, status: 'info' | 'success') => {
-  const prefix = '[build]:';
-  if (status === 'info') {
-    console.log(chalk.blue(`${prefix} @web3-wallet/${pkg}...`));
-  } else {
-    console.log(chalk.green(`${prefix} @web3-wallet/${pkg} done!\n`));
-  }
-};
-
+/**
+ * "pnpm -F xxx -s -p -c exec tsc",
+ * "pnpm --filter xxx --silent --parallel -shell-mode exec tsc",
+ *
+ * @param pkg the package name
+ * @returns
+ */
 const buildPkg = (pkg: string) => {
   return new Promise((resolve, reject) => {
-    log(pkg, 'info');
+    console.log(chalk.blue(`[build]: @web3-wallet/${pkg}...`));
+
     const build = cp.spawn(
       'pnpm',
-      ['--silent', '--filter', `@web3-wallet/${pkg}`, 'build'],
+      [
+        '--silent',
+        '--filter',
+        `@web3-wallet/${pkg}`,
+        '--parallel',
+        '-shell-mode',
+        'exec',
+        'tsc;tsc --module commonjs --outDir dist/cjs',
+      ],
       {
         stdio: 'inherit',
       },
     );
+
     build.on('close', (code) => {
-      if (code === 0) log(pkg, 'success');
+      if (code === 0) {
+        console.log(chalk.green(`[build]: @web3-wallet/${pkg} done!`));
+      }
       code === 0 ? resolve(code) : reject(code);
     });
   });

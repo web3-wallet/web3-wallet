@@ -27,9 +27,6 @@
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "scripts": {
-    "build": "tsc && tsc --module commonjs --outDir dist/cjs"
-  },
   "dependencies": {
     "@web3-wallet/metamask-compatible": "workspace:*"
   },

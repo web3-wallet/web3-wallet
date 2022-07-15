@@ -8,7 +8,7 @@
 - Updated dependencies
   - @web3-wallet/abstract-connector@0.0.8
   - @web3-wallet/ethereum-connector@0.0.8
-  - @web3-wallet/defiwallet-detector@0.0.8
+  - @web3-wallet/detect-defiwallet@0.0.8
 
 ## 0.0.7
 
@@ -18,7 +18,7 @@
 - Updated dependencies
   - @web3-wallet/abstract-connector@0.0.7
   - @web3-wallet/ethereum-connector@0.0.7
-  - @web3-wallet/defiwallet-detector@0.0.7
+  - @web3-wallet/detect-defiwallet@0.0.7
 
 ## 0.0.6
 

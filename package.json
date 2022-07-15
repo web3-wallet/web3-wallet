@@ -29,7 +29,7 @@
           "react",
           "vue"
         ],
-        "defiwallet-detector",
+        "detect-defiwallet",
         "ethereum-connector",
         "metamask-compatible",
         [
@@ -37,18 +37,31 @@
           "trust-wallet",
           "coinbase-wallet",
           "defiwallet",
-          "imtoken",
-          "eip1193"
+          "imtoken"
         ]
+      ]
+    },
+    "watch": {
+      "packages": [
+        "scripts",
+        "detect-defiwallet",
+        "ethereum-connector",
+        "metamask-compatible",
+        "abstract-connector",
+        "store",
+        "metamask",
+        "trust-wallet",
+        "coinbase-wallet",
+        "defiwallet",
+        "imtoken"
       ]
     }
   },
   "scripts": {
     "pre-commit": "lint-staged",
-    "build": "scripts build",
-    "build:scripts": "pnpm -F scripts build",
+    "build": "pnpm -F scripts build && scripts build",
+    "watch": "scripts watch",
     "build:store": "pnpm -F abstract-connector build",
-    "watch": "pnpm --parallel -r -c exec tsc --watch",
     "nextjs": "cd examples/nextjs && pnpm dev",
     "vuejs": "cd examples/vuejs && pnpm dev",
     "test": "jest",

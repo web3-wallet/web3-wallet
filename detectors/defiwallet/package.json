@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/defiwallet-detector",
+  "name": "@web3-wallet/detect-defiwallet",
   "description": "crypto.com DeFi Wallet detector",
   "keywords": [
     "web3-wallet",

@@ -16,8 +16,4 @@ export class TrustWallet extends MetaMaskCompatible {
   public override detectProvider = async () => {
     return await super.detectProvider(providerFilter);
   };
-
-  constructor(arg: TrustWalletConstructorArgs) {
-    super(arg);
-  }
 }

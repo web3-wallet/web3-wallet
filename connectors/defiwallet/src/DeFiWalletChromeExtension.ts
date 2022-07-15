@@ -3,7 +3,7 @@ import { ProviderNoFoundError } from '@web3-wallet/abstract-connector';
 import type {
   DeFiWalletChromeExtensionEthereumProvider,
   DeFiWalletChromeExtensionEthereumProviderOptions,
-} from '@web3-wallet/defiwallet-detector';
+} from '@web3-wallet/detect-defiwallet';
 import { EthereumConnector, utils } from '@web3-wallet/ethereum-connector';
 
 /**
@@ -37,7 +37,7 @@ export class DeFiWalletChromeExtension extends EthereumConnector {
     if (this.provider) this.provider;
 
     const { detectDeFiWalletChromeExtensionEthereumProvider } = await import(
-      '@web3-wallet/defiwallet-detector'
+      '@web3-wallet/detect-defiwallet'
     );
 
     const provider = await detectDeFiWalletChromeExtensionEthereumProvider();

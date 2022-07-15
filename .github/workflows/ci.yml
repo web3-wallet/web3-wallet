@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
@@ -26,7 +27,6 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install
-      - run: pnpm build:scripts
       - run: pnpm build
       - run: pnpm lint
       - run: pnpm run test
