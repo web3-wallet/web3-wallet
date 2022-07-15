@@ -1,18 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
-import { build } from './tasks/index';
+import { build, watch } from './tasks/index';
 
 export enum TaskName {
   Build = 'build',
+  Watch = 'watch',
 }
 
-const tasks = {
-  [TaskName.Build]: build,
-};
-
 export type TaskConfig = {
-  [TaskName.Build]: Parameters<typeof tasks.build>[0];
+  [TaskName.Build]: Parameters<typeof build>[0];
+  [TaskName.Watch]: Parameters<typeof watch>[0];
 };
 
 export type PackageJson = {
@@ -32,9 +30,20 @@ const taskConfig = pkgJson['@web3-wallet/scripts'] as TaskConfig;
 
 export const runTasks = async () => {
   try {
-    await tasks[taskName](taskConfig[taskName]);
+    switch (taskName) {
+      case TaskName.Build:
+        await build(taskConfig[TaskName.Watch]);
+        break;
+      case TaskName.Watch:
+        await watch(taskConfig[TaskName.Watch]);
+        break;
+      default:
+        throw new Error(`unknown task task name ${taskName}`);
+    }
     // eslint-disable-next-line no-empty
-  } catch (_) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 runTasks();
