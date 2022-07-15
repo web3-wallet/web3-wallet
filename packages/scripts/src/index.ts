@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-import { build, watch } from './tasks/index';
+/**
+ * tasks
+ */
+import { build } from './build';
+import { watch } from './watch';
 
 export enum TaskName {
   Build = 'build',
@@ -28,7 +32,7 @@ const pkgJson = JSON.parse(
 const taskName = process.argv[2] as TaskName;
 const taskConfig = pkgJson['@web3-wallet/scripts'] as TaskConfig;
 
-export const runTasks = async () => {
+export const runTask = async () => {
   try {
     switch (taskName) {
       case TaskName.Build:
@@ -38,11 +42,11 @@ export const runTasks = async () => {
         await watch(taskConfig[TaskName.Watch]);
         break;
       default:
-        throw new Error(`unknown task task name ${taskName}`);
+        throw new Error(`unknown task "${taskName}"`);
     }
   } catch (error) {
     console.error(error);
   }
 };
 
-runTasks();
+runTask();
