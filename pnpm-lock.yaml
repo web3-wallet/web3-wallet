@@ -96,11 +96,11 @@ importers:
   connectors/defiwallet:
     specifiers:
       '@web3-wallet/abstract-connector': workspace:*
-      '@web3-wallet/defiwallet-detector': workspace:*
+      '@web3-wallet/detect-defiwallet': workspace:*
       '@web3-wallet/ethereum-connector': workspace:*
     dependencies:
       '@web3-wallet/abstract-connector': link:../abstract-connector
-      '@web3-wallet/defiwallet-detector': link:../../detectors/defiwallet
+      '@web3-wallet/detect-defiwallet': link:../../detectors/defiwallet
       '@web3-wallet/ethereum-connector': link:../ethereum-connector
 
   connectors/ethereum-connector:
