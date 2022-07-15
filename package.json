@@ -75,6 +75,10 @@
   "lint-staged": {
     "*.{ts,tsx,vue}": "eslint --fix"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "node scripts/verify-commit-msg.js"
+  },
   "dependencies": {
     "@ethersproject/abstract-provider": "^5.6.1",
     "@ethersproject/bignumber": "^5.6.2"
@@ -93,6 +97,7 @@
     "@walletconnect/jsonrpc-provider": "^1.0.5",
     "@walletconnect/types": "^1.7.8",
     "@web3-wallet/scripts": "workspace:*",
+    "chalk": "^5.0.1",
     "esbuild": "^0.14.48",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",

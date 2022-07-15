@@ -19,6 +19,7 @@ importers:
       '@walletconnect/jsonrpc-provider': ^1.0.5
       '@walletconnect/types': ^1.7.8
       '@web3-wallet/scripts': workspace:*
+      chalk: ^5.0.1
       esbuild: ^0.14.48
       eslint: ^8.19.0
       eslint-config-prettier: ^8.5.0
@@ -56,6 +57,7 @@ importers:
       '@walletconnect/jsonrpc-provider': 1.0.5
       '@walletconnect/types': 1.7.8
       '@web3-wallet/scripts': link:packages/scripts
+      chalk: 5.0.1
       esbuild: 0.14.48
       eslint: 8.19.0
       eslint-config-prettier: 8.5.0_eslint@8.19.0
@@ -4549,7 +4551,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
+      follow-redirects: 1.15.1
     transitivePeerDependencies:
       - debug
     dev: true
@@ -5017,7 +5019,6 @@ packages:
   /chalk/5.0.1:
     resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: false
 
   /char-regex/1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
@@ -7439,6 +7440,16 @@ packages:
 
   /flatted/3.2.6:
     resolution: {integrity: sha512-0sQoMh9s0BYsm+12Huy/rkKxVu4R1+r96YX5cG44rHV0pQ6iC3Q+mkoMFaGWObMFYQxCVT+ssG1ksneA2MI9KQ==}
+    dev: true
+
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: true
 
   /follow-redirects/1.15.1_debug@4.3.4:
