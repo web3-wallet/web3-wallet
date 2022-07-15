@@ -28,7 +28,6 @@ export interface Actions {
   update: (stateUpdate: StateUpdate) => void;
   resetState: () => void;
 }
-
 // per EIP-1193
 export interface RequestArguments {
   readonly method: string;
