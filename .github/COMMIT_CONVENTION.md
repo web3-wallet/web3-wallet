@@ -1,5 +1,6 @@
 ## Git Commit Message Convention
 
+<<<<<<< HEAD
 > This is adapted from [vue's commit convention](https://github.com/vuejs/vue/edit/main/.github/COMMIT_CONVENTION.md).
 
 #### TL;DR:
@@ -89,3 +90,9 @@ The footer should contain any information about **Breaking Changes** and is also
 reference GitHub issues that this commit **Closes**.
 
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
+=======
+#### TL;DR:
+
+- [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/README.md)
+>>>>>>> e05c65d (chore(commit convention): setup git commitconvention)
