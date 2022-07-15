@@ -3,7 +3,7 @@ import { ProviderNoFoundError } from '@web3-wallet/abstract-connector';
 import type {
   DefiWalletMobileEthereumProvider,
   DefiWalletMobileEthereumProviderOptions,
-} from '@web3-wallet/defiwallet-detector';
+} from '@web3-wallet/detect-defiwallet';
 import { EthereumConnector } from '@web3-wallet/ethereum-connector';
 
 /**
@@ -32,7 +32,7 @@ export class DeFiWalletMobile extends EthereumConnector {
     if (this.provider) this.provider;
 
     const { detectDeFiWalletMobileEthereumProvider } = await import(
-      '@web3-wallet/defiwallet-detector'
+      '@web3-wallet/detect-defiwallet'
     );
 
     const provider = await detectDeFiWalletMobileEthereumProvider();
