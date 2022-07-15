@@ -77,71 +77,6 @@ importers:
       typescript: 4.7.4
       vue: 3.2.37
 
-  connectors/abstract-connector:
-    specifiers:
-      zustand: ^4.0.0-rc.0
-    dependencies:
-      zustand: 4.0.0-rc.1
-
-  connectors/coinbase-wallet:
-    specifiers:
-      '@coinbase/wallet-sdk': ^3.0.4
-      '@web3-wallet/abstract-connector': workspace:*
-      '@web3-wallet/ethereum-connector': workspace:*
-    dependencies:
-      '@coinbase/wallet-sdk': 3.3.0
-      '@web3-wallet/abstract-connector': link:../abstract-connector
-      '@web3-wallet/ethereum-connector': link:../ethereum-connector
-
-  connectors/defiwallet:
-    specifiers:
-      '@web3-wallet/abstract-connector': workspace:*
-      '@web3-wallet/detect-defiwallet': workspace:*
-      '@web3-wallet/ethereum-connector': workspace:*
-    dependencies:
-      '@web3-wallet/abstract-connector': link:../abstract-connector
-      '@web3-wallet/detect-defiwallet': link:../../detectors/defiwallet
-      '@web3-wallet/ethereum-connector': link:../ethereum-connector
-
-  connectors/ethereum-connector:
-    specifiers:
-      '@web3-wallet/abstract-connector': workspace:*
-      zustand: ^4.0.0-rc.0
-    dependencies:
-      '@web3-wallet/abstract-connector': link:../abstract-connector
-      zustand: 4.0.0-rc.1
-
-  connectors/imtoken:
-    specifiers:
-      '@web3-wallet/metamask-compatible': workspace:*
-    dependencies:
-      '@web3-wallet/metamask-compatible': link:../metamask-compatible
-
-  connectors/metamask:
-    specifiers:
-      '@web3-wallet/metamask-compatible': workspace:*
-    dependencies:
-      '@web3-wallet/metamask-compatible': link:../metamask-compatible
-
-  connectors/metamask-compatible:
-    specifiers:
-      '@metamask/detect-provider': ^1.2.0
-      '@web3-wallet/abstract-connector': workspace:*
-      '@web3-wallet/ethereum-connector': workspace:*
-    dependencies:
-      '@metamask/detect-provider': 1.2.0
-      '@web3-wallet/abstract-connector': link:../abstract-connector
-      '@web3-wallet/ethereum-connector': link:../ethereum-connector
-
-  connectors/trust-wallet:
-    specifiers:
-      '@web3-wallet/metamask-compatible': workspace:*
-    dependencies:
-      '@web3-wallet/metamask-compatible': link:../metamask-compatible
-
-  detectors/defiwallet:
-    specifiers: {}
-
   examples/nextjs:
     specifiers:
       '@ethersproject/bignumber': ^5.6.0
@@ -164,10 +99,10 @@ importers:
       '@ethersproject/experimental': 5.6.3
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
-      '@web3-wallet/abstract-connector': link:../../connectors/abstract-connector
-      '@web3-wallet/coinbase-wallet': link:../../connectors/coinbase-wallet
-      '@web3-wallet/defiwallet': link:../../connectors/defiwallet
-      '@web3-wallet/metamask': link:../../connectors/metamask
+      '@web3-wallet/abstract-connector': link:../../packages/connectors/abstract-connector
+      '@web3-wallet/coinbase-wallet': link:../../packages/connectors/coinbase-wallet
+      '@web3-wallet/defiwallet': link:../../packages/connectors/defiwallet
+      '@web3-wallet/metamask': link:../../packages/connectors/metamask
       '@web3-wallet/react': link:../../packages/react
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -198,8 +133,8 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
-      '@web3-wallet/abstract-connector': link:../../connectors/abstract-connector
-      '@web3-wallet/metamask': link:../../connectors/metamask
+      '@web3-wallet/abstract-connector': link:../../packages/connectors/abstract-connector
+      '@web3-wallet/metamask': link:../../packages/connectors/metamask
       '@web3-wallet/vue': link:../../packages/vue
       vue: 3.2.37
     devDependencies:
@@ -218,6 +153,71 @@ importers:
       vite: 2.9.14
       vue-tsc: 0.34.17
 
+  packages/connectors/abstract-connector:
+    specifiers:
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      zustand: 4.0.0-rc.1
+
+  packages/connectors/coinbase-wallet:
+    specifiers:
+      '@coinbase/wallet-sdk': ^3.0.4
+      '@web3-wallet/abstract-connector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
+    dependencies:
+      '@coinbase/wallet-sdk': 3.3.0
+      '@web3-wallet/abstract-connector': link:../abstract-connector
+      '@web3-wallet/ethereum-connector': link:../ethereum-connector
+
+  packages/connectors/defiwallet:
+    specifiers:
+      '@web3-wallet/abstract-connector': workspace:*
+      '@web3-wallet/detect-defiwallet': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
+    dependencies:
+      '@web3-wallet/abstract-connector': link:../abstract-connector
+      '@web3-wallet/detect-defiwallet': link:../../detectors/defiwallet
+      '@web3-wallet/ethereum-connector': link:../ethereum-connector
+
+  packages/connectors/ethereum-connector:
+    specifiers:
+      '@web3-wallet/abstract-connector': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@web3-wallet/abstract-connector': link:../abstract-connector
+      zustand: 4.0.0-rc.1
+
+  packages/connectors/imtoken:
+    specifiers:
+      '@web3-wallet/metamask-compatible': workspace:*
+    dependencies:
+      '@web3-wallet/metamask-compatible': link:../metamask-compatible
+
+  packages/connectors/metamask:
+    specifiers:
+      '@web3-wallet/metamask-compatible': workspace:*
+    dependencies:
+      '@web3-wallet/metamask-compatible': link:../metamask-compatible
+
+  packages/connectors/metamask-compatible:
+    specifiers:
+      '@metamask/detect-provider': ^1.2.0
+      '@web3-wallet/abstract-connector': workspace:*
+      '@web3-wallet/ethereum-connector': workspace:*
+    dependencies:
+      '@metamask/detect-provider': 1.2.0
+      '@web3-wallet/abstract-connector': link:../abstract-connector
+      '@web3-wallet/ethereum-connector': link:../ethereum-connector
+
+  packages/connectors/trust-wallet:
+    specifiers:
+      '@web3-wallet/metamask-compatible': workspace:*
+    dependencies:
+      '@web3-wallet/metamask-compatible': link:../metamask-compatible
+
+  packages/detectors/defiwallet:
+    specifiers: {}
+
   packages/react:
     specifiers:
       '@ethersproject/networks': ^5.6.4
@@ -228,7 +228,7 @@ importers:
     dependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
-      '@web3-wallet/abstract-connector': link:../../connectors/abstract-connector
+      '@web3-wallet/abstract-connector': link:../connectors/abstract-connector
       '@web3-wallet/store': link:../store
       zustand: 4.0.0-rc.1
 
@@ -245,7 +245,7 @@ importers:
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.6.1
-      '@web3-wallet/abstract-connector': link:../../connectors/abstract-connector
+      '@web3-wallet/abstract-connector': link:../connectors/abstract-connector
       zustand: 4.0.0-rc.1
 
   packages/vue:
@@ -255,7 +255,7 @@ importers:
       '@web3-wallet/abstract-connector': workspace:*
       '@web3-wallet/store': workspace:*
     dependencies:
-      '@web3-wallet/abstract-connector': link:../../connectors/abstract-connector
+      '@web3-wallet/abstract-connector': link:../connectors/abstract-connector
       '@web3-wallet/store': link:../store
     optionalDependencies:
       '@ethersproject/networks': 5.6.4

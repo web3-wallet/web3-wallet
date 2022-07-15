@@ -1,6 +1,4 @@
 packages:
-  - 'packages/*'
-  - 'connectors/*'
-  - 'detectors/*'
+  - 'packages/**'
   - 'examples/*'
   - '!**/test/**'
