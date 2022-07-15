@@ -47,6 +47,7 @@
     "pre-commit": "lint-staged",
     "build": "scripts build",
     "build:scripts": "pnpm -F scripts build",
+    "build:store": "pnpm -F abstract-connector build",
     "watch": "pnpm --parallel -r -c exec tsc --watch",
     "nextjs": "cd examples/nextjs && pnpm dev",
     "vuejs": "cd examples/vuejs && pnpm dev",

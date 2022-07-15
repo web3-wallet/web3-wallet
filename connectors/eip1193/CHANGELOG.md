@@ -1,5 +1,14 @@
 # @web3-wallet/eip1193
 
+## 0.0.8
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/abstract-connector@0.0.8
+  - @web3-wallet/ethereum-connector@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes

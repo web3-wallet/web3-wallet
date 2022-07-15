@@ -3,5 +3,4 @@ packages:
   - 'connectors/*'
   - 'detectors/*'
   - 'examples/*'
-  - 'scripts'
   - '!**/test/**'

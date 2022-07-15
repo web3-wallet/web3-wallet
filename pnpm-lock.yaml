@@ -55,7 +55,7 @@ importers:
       '@walletconnect/jsonrpc-http-connection': 1.0.2
       '@walletconnect/jsonrpc-provider': 1.0.5
       '@walletconnect/types': 1.7.8
-      '@web3-wallet/scripts': link:scripts
+      '@web3-wallet/scripts': link:packages/scripts
       esbuild: 0.14.48
       eslint: 8.19.0
       eslint-config-prettier: 8.5.0_eslint@8.19.0
@@ -247,6 +247,12 @@ importers:
       '@web3-wallet/store': link:../store
       zustand: 4.0.0-rc.1
 
+  packages/scripts:
+    specifiers:
+      chalk: ^5.0.1
+    dependencies:
+      chalk: 5.0.1
+
   packages/store:
     specifiers:
       '@ethersproject/address': ^5
@@ -269,12 +275,6 @@ importers:
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
-
-  scripts:
-    specifiers:
-      chalk: ^5.0.1
-    dependencies:
-      chalk: 5.0.1
 
 packages:
 
