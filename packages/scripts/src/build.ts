@@ -7,7 +7,9 @@ type BuildConfig = {
 };
 
 export const build = async (config: BuildConfig) => {
-  console.log(chalk.blue(`[build]: ${config.packages.length} packages\n`));
+  console.log(
+    chalk.blue(`[build]: ${config.packages.flat().length} packages\n`),
+  );
 
   for (const pkg of config.packages) {
     if (typeof pkg == 'string') {
@@ -16,6 +18,7 @@ export const build = async (config: BuildConfig) => {
       await Promise.all(pkg.map(buildPkg));
     }
   }
+
   console.log(chalk.green(`[build]: all done!\n`));
 };
 
