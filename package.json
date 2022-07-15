@@ -65,15 +65,15 @@
     "nextjs": "cd examples/nextjs && pnpm dev",
     "vuejs": "cd examples/vuejs && pnpm dev",
     "test": "jest",
-    "lint": "pnpm --parallel -r -c exec eslint src",
-    "fix": "pnpm --parallel -r -c exec eslint --fix src",
-    "check": "pnpm --parallel -r -c exec tsc --noEmit",
-    "clean": "pnpm --parallel -r -c exec rm -rf dist",
-    "purge": "pnpm --parallel -r -c exec rm -rf node_modules",
+    "lint": "pnpm -p -r -c exec eslint src",
+    "fix": "pnpm -p -r -c exec eslint --fix src",
+    "ts-check": "pnpm -s -p -r -c exec tsc --noEmit",
+    "clean": "pnpm -p -r -c exec rm -rf dist",
+    "purge": "pnpm -p -r -c exec rm -rf node_modules",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,tsx,vue}": "eslint"
+    "*.{ts,tsx,vue}": "eslint --fix"
   },
   "dependencies": {
     "@ethersproject/abstract-provider": "^5.6.1",
