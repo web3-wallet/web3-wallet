@@ -7,15 +7,16 @@ type BuildConfig = {
 };
 
 export const build = async (config: BuildConfig) => {
-  console.log(chalk.blue(`[build]: 10 packages`));
+  console.log(chalk.blue(`[build]: 10 packages\n`));
 
   for (const pkg of config.packages) {
     if (typeof pkg == 'string') {
       await buildPkg(pkg);
     } else {
-      await Promise.all(pkg.map((v) => buildPkg(v)));
+      await Promise.all(pkg.map(buildPkg));
     }
   }
+  console.log(chalk.green(`[build]: all done!\n`));
 };
 
 /**
@@ -31,14 +32,23 @@ const buildPkg = (pkg: string) => {
 
     const build = cp.spawn(
       'pnpm',
-      ['--silent', '--filter', `@web3-wallet/${pkg}`, 'build'],
+      [
+        '--silent',
+        '--filter',
+        `@web3-wallet/${pkg}`,
+        '--parallel',
+        '-shell-mode',
+        'exec',
+        'tsc;tsc --module commonjs --outDir dist/cjs',
+      ],
       {
         stdio: 'inherit',
       },
     );
+
     build.on('close', (code) => {
       if (code === 0) {
-        console.log(chalk.green(`[build]: @web3-wallet/${pkg} done!\n`));
+        console.log(chalk.green(`[build]: @web3-wallet/${pkg} done!`));
       }
       code === 0 ? resolve(code) : reject(code);
     });

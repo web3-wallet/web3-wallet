@@ -32,7 +32,7 @@ export const runTasks = async () => {
   try {
     switch (taskName) {
       case TaskName.Build:
-        await build(taskConfig[TaskName.Watch]);
+        await build(taskConfig[TaskName.Build]);
         break;
       case TaskName.Watch:
         await watch(taskConfig[TaskName.Watch]);
@@ -40,7 +40,6 @@ export const runTasks = async () => {
       default:
         throw new Error(`unknown task task name ${taskName}`);
     }
-    // eslint-disable-next-line no-empty
   } catch (error) {
     console.error(error);
   }
