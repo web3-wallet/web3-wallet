@@ -5,8 +5,4 @@ import {
 
 export type MetaMaskConstructorArgs = MetaMaskCompatibleConstructorArgs;
 
-export class MetaMask extends MetaMaskCompatible {
-  constructor(arg: MetaMaskConstructorArgs) {
-    super(arg);
-  }
-}
+export class MetaMask extends MetaMaskCompatible {}

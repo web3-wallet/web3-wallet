@@ -16,8 +16,4 @@ export class ImToken extends MetaMaskCompatible {
   public override detectProvider = async () => {
     return await super.detectProvider(providerFilter);
   };
-
-  constructor(arg: ImTokenConstructorArgs) {
-    super(arg);
-  }
 }

@@ -92,20 +92,20 @@ export type DeFiWalletEthereumProviderMap =
  * @param interval the retry interval
  * @returns the crypto.com DeFi wallet browser extension provider or undefined
  */
-const detectDeFiWalletProviderWithRetry = async (
+const detectDeFiWalletProvider = async (
   retries = 40,
   interval = 50,
 ): Promise<DeFiWalletEthereumProviderMap | undefined> => {
-  const providerMap = getDeFiWalletProvider();
+  const providerMap = getProvider();
 
   if (providerMap || retries === 0) return providerMap;
 
   await delay(interval);
 
-  return await detectDeFiWalletProviderWithRetry(retries - 1, interval);
+  return await detectDeFiWalletProvider(retries - 1, interval);
 };
 
-const getDeFiWalletProvider = (): DeFiWalletEthereumProviderMap | undefined => {
+const getProvider = (): DeFiWalletEthereumProviderMap | undefined => {
   if (typeof window === 'undefined') return undefined;
   /**
    * `window.deficonnectProvider` is injected by crypto.com DeFi Wallet chrome extension.
@@ -132,17 +132,17 @@ const getDeFiWalletProvider = (): DeFiWalletEthereumProviderMap | undefined => {
   return undefined;
 };
 
-const detectEthereumProvider = async (): Promise<
+const detectProvider = async (): Promise<
   DeFiWalletEthereumProviderMap | undefined
 > => {
-  const provider = await detectDeFiWalletProviderWithRetry();
+  const provider = await detectDeFiWalletProvider();
 
   return provider;
 };
 
 export const detectDeFiWalletChromeExtensionEthereumProvider =
   async (): Promise<DeFiWalletChromeExtensionEthereumProvider | undefined> => {
-    const provider = await detectDeFiWalletProviderWithRetry();
+    const provider = await detectDeFiWalletProvider();
 
     return provider?.defiWalletChromeExtensionEthereumProvider;
   };
@@ -150,9 +150,9 @@ export const detectDeFiWalletChromeExtensionEthereumProvider =
 export const detectDeFiWalletMobileEthereumProvider = async (): Promise<
   DefiWalletMobileEthereumProvider | undefined
 > => {
-  const provider = await detectDeFiWalletProviderWithRetry();
+  const provider = await detectDeFiWalletProvider();
 
   return provider?.defiWalletMobileAppEthereumProvider;
 };
 
-export default detectEthereumProvider;
+export default detectProvider;

@@ -30,10 +30,9 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/trust-wallet`](connectors/trust-wallet)       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Ftrust-wallet) |
 | [`@web3-wallet/coinbase-wallet`](connectors/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) |
 | [`@web3-wallet/imtoken`](connectors/imtoken)                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fimtoken.svg)](https://badge.fury.io/js/@web3-wallet%2Fimtoken) |
-| [`@web3-wallet/eip1193`](connectors/eip1193)                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Feip1193.svg)](https://badge.fury.io/js/@web3-wallet%2Feip1193) |
 | [`@web3-wallet/walletconnect`](connectors/walletconnect)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect) |
 | **Detectors**                                                |                                                              |
-| [`@web3-wallet/defiwallet-detector`](detector/defiwallet-detector) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet-detector.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet-detector) |
+| [`@web3-wallet/detect-defiwallet`](detector/detect-defiwallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet-detector.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet-detector) |
 
 ## Examples
 

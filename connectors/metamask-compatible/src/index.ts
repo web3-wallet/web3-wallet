@@ -57,9 +57,7 @@ export abstract class MetaMaskCompatible extends EthereumConnector {
      * handle the case when e.g. metamask and coinbase wallet are both installed
      * */
     if (this.provider.providers?.length) {
-      this.provider = this.provider.providers.find(
-        providerFilter || defaultProviderFilter,
-      );
+      this.provider = this.provider.providers.find(providerFilter);
     }
 
     if (!this.provider || !providerFilter(this.provider)) {
