@@ -7,7 +7,7 @@ type BuildConfig = {
 };
 
 export const build = async (config: BuildConfig) => {
-  console.log(chalk.blue(`[build]: 10 packages\n`));
+  console.log(chalk.blue(`[build]: ${config.packages.length} packages\n`));
 
   for (const pkg of config.packages) {
     if (typeof pkg == 'string') {
