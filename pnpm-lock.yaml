@@ -18,6 +18,7 @@ importers:
       '@walletconnect/jsonrpc-http-connection': ^1.0.2
       '@walletconnect/jsonrpc-provider': ^1.0.5
       '@walletconnect/types': ^1.7.8
+      '@web3-wallet/scripts': workspace:*
       esbuild: ^0.14.48
       eslint: ^8.19.0
       eslint-config-prettier: ^8.5.0
@@ -54,6 +55,7 @@ importers:
       '@walletconnect/jsonrpc-http-connection': 1.0.2
       '@walletconnect/jsonrpc-provider': 1.0.5
       '@walletconnect/types': 1.7.8
+      '@web3-wallet/scripts': link:scripts
       esbuild: 0.14.48
       eslint: 8.19.0
       eslint-config-prettier: 8.5.0_eslint@8.19.0
@@ -267,6 +269,12 @@ importers:
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
+
+  scripts:
+    specifiers:
+      chalk: ^5.0.1
+    dependencies:
+      chalk: 5.0.1
 
 packages:
 
@@ -4987,6 +4995,11 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
 
   /char-regex/1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
