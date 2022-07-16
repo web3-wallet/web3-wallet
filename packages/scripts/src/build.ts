@@ -53,7 +53,9 @@ const buildPkg = (pkg: string) => {
       if (code === 0) {
         console.log(chalk.green(`[build]: @web3-wallet/${pkg} done!`));
       }
-      code === 0 ? resolve(code) : reject(code);
+      code === 0
+        ? resolve(code)
+        : reject(new Error(`Fail to build @web3-wallet/${pkg}`));
     });
   });
 };

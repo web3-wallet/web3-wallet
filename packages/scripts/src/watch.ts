@@ -39,7 +39,9 @@ const watchPkg = (pkg: string) => {
       },
     );
     build.on('close', (code) => {
-      code === 0 ? resolve(code) : reject(code);
+      code === 0
+        ? resolve(code)
+        : reject(new Error(`Fail to watch @web3-wallet/${pkg}`));
     });
   });
 };
