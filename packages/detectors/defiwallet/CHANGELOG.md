@@ -1,5 +1,11 @@
 # @web3-wallet/detect-defiwallet
 
+## 0.1.1-next.0
+
+### Patch Changes
+
+- pre release test
+
 ## 0.1.0
 
 ### Minor Changes

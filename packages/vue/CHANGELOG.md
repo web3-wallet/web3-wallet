@@ -1,5 +1,14 @@
 # @web3-wallet/vue
 
+## 0.1.1-next.0
+
+### Patch Changes
+
+- pre release test
+- Updated dependencies
+  - @web3-wallet/abstract-connector@0.1.1-next.0
+  - @web3-wallet/store@0.1.1-next.0
+
 ## 0.1.0
 
 ### Minor Changes

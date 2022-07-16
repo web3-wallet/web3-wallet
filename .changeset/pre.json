@@ -1,0 +1,24 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@web3-wallet/nextjs": "0.1.0",
+    "@web3-wallet/vuejs": "0.1.0",
+    "@web3-wallet/abstract-connector": "0.1.0",
+    "@web3-wallet/coinbase-wallet": "0.1.0",
+    "@web3-wallet/defiwallet": "0.1.0",
+    "@web3-wallet/ethereum-connector": "0.1.0",
+    "@web3-wallet/imtoken": "0.1.0",
+    "@web3-wallet/metamask": "0.1.0",
+    "@web3-wallet/metamask-compatible": "0.1.0",
+    "@web3-wallet/trust-wallet": "0.1.0",
+    "@web3-wallet/detect-defiwallet": "0.1.0",
+    "@web3-wallet/react": "0.1.0",
+    "@web3-wallet/scripts": "0.1.0",
+    "@web3-wallet/store": "0.1.0",
+    "@web3-wallet/vue": "0.1.0"
+  },
+  "changesets": [
+    "twenty-beans-appear"
+  ]
+}
