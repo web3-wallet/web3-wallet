@@ -10,7 +10,16 @@ on:
 jobs:
   build:
     name: Build, Lint and Test
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+        node_version:
+          - 14
+          - 16
+          - 18
     steps:
       - name: checkout code repository
         uses: actions/checkout@v2
@@ -20,10 +29,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
 
-      - name: Set node version to 16
+      - name: Setup node version
         uses: actions/setup-node@v2
         with:
-          node-version: 18.6.0
+          node-version: ${{ matrix.node_version }}
           cache: 'pnpm'
 
       - run: pnpm install
