@@ -1,14 +1,16 @@
 {
-  "name": "@web3-wallet/vue",
+  "name": "@web3-wallet/types",
+  "description": "web3-wallet types",
   "keywords": [
     "web3-wallet",
+    "react",
     "vue",
     "vue3",
     "web3",
     "dApp",
     "ethereum",
     "metamask",
-    "wallet connect",
+    "walletconnect",
     "crypto.com DeFi Wallet",
     "connector",
     "eip1193"
@@ -30,18 +32,11 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/ethereum": "workspace:*"
+    "zustand": "^4.0.0-rc.0"
   },
-  "peerDependencies": {
-    "vue": "^3.2.13"
-  },
-  "optionalDependencies": {
-    "@ethersproject/networks": "^5.6.4",
-    "@ethersproject/providers": "^5"
-  },
-  "description": "web3-wallet vue",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
+  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme",
+  "devDependencies": {}
 }

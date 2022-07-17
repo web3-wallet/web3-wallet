@@ -1,4 +1,4 @@
-import type { AddEthereumChainParameter } from '@web3-wallet/abstract-connector';
+import type { AddEthereumChainParameter } from '@web3-wallet/ethereum';
 
 const ETH: AddEthereumChainParameter['nativeCurrency'] = {
   name: 'Ether',

@@ -1,6 +1,5 @@
-import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { AbstractConnector } from '@web3-wallet/abstract-connector';
+import type { Connector, Hooks } from '@web3-wallet/ethereum';
 import { useEffect, useMemo, useState } from 'react';
 
 import { DerivedHooks } from './derivedHooks';
@@ -19,14 +18,10 @@ async function importProvider(): Promise<void> {
   }
 }
 
-export type AugmentedHooks = {
-  useProvider: (
-    network?: Networkish,
-    enabled?: boolean,
-  ) => BaseProvider | undefined;
-  useENSNames: (provider?: BaseProvider) => undefined[] | (string | null)[];
-  useENSName: (provider?: BaseProvider) => undefined | string | null;
-};
+export type AugmentedHooks = Pick<
+  Hooks,
+  'useProvider' | 'useENSNames' | 'useENSName'
+>;
 
 /**
  * @returns ENSNames - An array of length `accounts.length` which contains entries which are either all `undefined`,
@@ -64,7 +59,7 @@ function useENS(
   return ENSNames ?? new Array<undefined>(accounts.length).fill(undefined);
 }
 
-export const getAugmentedHooks = <T extends AbstractConnector>(
+export const getAugmentedHooks = <T extends Connector>(
   connector: T,
   { useAccounts, useChainId }: StateHooks,
   { useAccount, useIsActive }: DerivedHooks,

@@ -1,5 +1,4 @@
-import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
-import type { WalletApi } from '@web3-wallet/react';
+import { type Wallet, CoinbaseWalletConnector } from '@web3-wallet/ethereum';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -9,7 +8,7 @@ import { Status } from './Status';
 
 interface Props {
   name: string;
-  wallet: WalletApi;
+  wallet: Wallet;
 }
 
 export const WalletCard = ({ name, wallet }: Props) => {
@@ -34,7 +33,7 @@ export const WalletCard = ({ name, wallet }: Props) => {
 
   // attempt to connect eagerly on mount
   useEffect(() => {
-    if (connector instanceof CoinbaseWallet) return;
+    if (connector instanceof CoinbaseWalletConnector) return;
 
     connector.connectEagerly()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
