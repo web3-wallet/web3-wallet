@@ -22,37 +22,21 @@
   "@web3-wallet/scripts": {
     "build": {
       "packages": [
-        "abstract-connector",
-        "store",
+        "types",
+        "ethereum",
         [
           "react",
           "vue"
-        ],
-        "detect-defiwallet",
-        "ethereum-connector",
-        "metamask-compatible",
-        [
-          "metamask",
-          "trust-wallet",
-          "coinbase-wallet",
-          "defiwallet",
-          "imtoken"
         ]
       ]
     },
     "watch": {
       "packages": [
         "scripts",
-        "detect-defiwallet",
-        "ethereum-connector",
-        "metamask-compatible",
-        "abstract-connector",
-        "store",
-        "metamask",
-        "trust-wallet",
-        "coinbase-wallet",
-        "defiwallet",
-        "imtoken"
+        "types",
+        "ethereum",
+        "react",
+        "vue"
       ]
     }
   },
@@ -77,6 +61,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.23.1",
+    "@coinbase/wallet-sdk": "^3.0.4",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@testing-library/react-hooks": "^8.0.1",

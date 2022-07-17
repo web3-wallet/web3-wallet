@@ -1,21 +1,20 @@
-import type { State } from '@web3-wallet/abstract-connector';
-import { type ComputedRef, computed } from 'vue';
+import type { Hooks, State } from '@web3-wallet/ethereum';
+import { computed } from 'vue';
 
-export type StateHooks = {
-  useChainId: () => ComputedRef<number | undefined>;
-  useAccounts: () => ComputedRef<string[] | undefined>;
-  useIsActivating: () => ComputedRef<boolean>;
-};
+export type StateHooks = Pick<
+  Hooks,
+  'useChainId' | 'useAccounts' | 'useIsActivating'
+>;
 
 export const getStateHooks = (walletState: State): StateHooks => {
   const useChainId: StateHooks['useChainId'] = () =>
-    computed(() => walletState.chainId);
+    computed(() => walletState.chainId).value;
 
   const useAccounts: StateHooks['useAccounts'] = () =>
-    computed(() => walletState.accounts);
+    computed(() => walletState.accounts).value;
 
   const useIsActivating: StateHooks['useIsActivating'] = () =>
-    computed(() => walletState.activating);
+    computed(() => walletState.isActivating).value;
 
   return { useChainId, useAccounts, useIsActivating };
 };

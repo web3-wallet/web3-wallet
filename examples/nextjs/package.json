@@ -12,11 +12,8 @@
     "@ethersproject/experimental": "^5.6.0",
     "@ethersproject/providers": "^5.6.0",
     "@ethersproject/units": "^5.6.0",
-    "@web3-wallet/metamask": "workspace:*",
-    "@web3-wallet/defiwallet": "workspace:*",
-    "@web3-wallet/coinbase-wallet": "workspace:*",
+    "@web3-wallet/ethereum": "workspace:*",
     "@web3-wallet/react": "workspace:*",
-    "@web3-wallet/abstract-connector": "workspace:*",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

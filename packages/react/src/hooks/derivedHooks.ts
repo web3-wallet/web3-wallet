@@ -1,15 +1,12 @@
-import { State } from '@web3-wallet/abstract-connector';
+import type { Hooks, State } from '@web3-wallet/ethereum';
 
 import { StateHooks } from './stateHooks';
 
-const computeIsActive = ({ chainId, accounts, activating }: State) => {
-  return Boolean(chainId && accounts && !activating);
+const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
+  return Boolean(chainId && accounts && !isActivating);
 };
 
-export type DerivedHooks = {
-  useAccount: () => string | undefined;
-  useIsActive: () => boolean;
-};
+export type DerivedHooks = Pick<Hooks, 'useAccount' | 'useIsActive'>;
 
 export const getDerivedHooks = ({
   useChainId,
@@ -23,12 +20,12 @@ export const getDerivedHooks = ({
   const useIsActive: DerivedHooks['useIsActive'] = () => {
     const chainId = useChainId();
     const accounts = useAccounts();
-    const activating = useIsActivating();
+    const isActivating = useIsActivating();
 
     return computeIsActive({
       chainId,
       accounts,
-      activating,
+      isActivating,
     });
   };
 
