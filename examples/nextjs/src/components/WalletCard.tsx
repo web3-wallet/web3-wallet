@@ -1,4 +1,5 @@
-import { type Wallet, CoinbaseWalletConnector } from '@web3-wallet/ethereum';
+import { CoinbaseWalletConnector } from '@web3-wallet/ethereum';
+import type { Wallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -12,15 +13,15 @@ interface Props {
 }
 
 export const WalletCard = ({ name, wallet }: Props) => {
-  const { hooks, connector } = wallet;
   const {
+    connector,
     useChainId,
     useAccounts,
     useIsActivating,
     useIsActive,
     useProvider,
     useENSNames,
-  } = hooks;
+  } = wallet;
 
   const chainId = useChainId();
   const accounts = useAccounts();

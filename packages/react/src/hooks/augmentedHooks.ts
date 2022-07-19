@@ -1,7 +1,8 @@
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector, Hooks } from '@web3-wallet/ethereum';
+import type { Connector } from '@web3-wallet/ethereum';
 import { useEffect, useMemo, useState } from 'react';
 
+import type { Wallet } from '../types';
 import { DerivedHooks } from './derivedHooks';
 import { StateHooks } from './stateHooks';
 
@@ -19,7 +20,7 @@ async function importProvider(): Promise<void> {
 }
 
 export type AugmentedHooks = Pick<
-  Hooks,
+  Wallet,
   'useProvider' | 'useENSNames' | 'useENSName'
 >;
 
@@ -98,12 +99,11 @@ export const getAugmentedHooks = <T extends Connector>(
     return useMemo(() => {
       // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
       void loaded && isActive && chainId;
-      if (enabled) {
-        if (DynamicProvider && connector.provider)
-          return new DynamicProvider(
-            connector.provider,
-            network,
-          ) as unknown as BaseProvider;
+      if (enabled && DynamicProvider && connector.provider) {
+        return new DynamicProvider(
+          connector.provider,
+          network,
+        ) as unknown as BaseProvider;
       }
     }, [loaded, enabled, isActive, chainId, network]);
   };

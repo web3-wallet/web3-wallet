@@ -40,7 +40,6 @@ export abstract class EthereumConnector extends Connector {
   }
 
   protected onDisconnect(error?: ProviderRpcError): void {
-    this.actions.resetState();
     error && this.onError?.(error);
   }
 

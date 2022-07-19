@@ -1,8 +1,10 @@
-import type { Hooks, State, Wallet } from '@web3-wallet/ethereum';
+import type { State } from '@web3-wallet/ethereum';
 import { EqualityChecker, UseBoundStore } from 'zustand';
 
+import type { Wallet } from '../types';
+
 export type StateHooks = Pick<
-  Hooks,
+  Wallet,
   'useChainId' | 'useAccounts' | 'useIsActivating'
 >;
 
@@ -21,18 +23,18 @@ const ACCOUNTS_EQUALITY_CHECKER: EqualityChecker<State['accounts']> = (
 };
 
 export function getStateHooks(
-  useWalletStore: UseBoundStore<Wallet['store']>,
+  useStore: UseBoundStore<Wallet['store']>,
 ): StateHooks {
   const useChainId: StateHooks['useChainId'] = () => {
-    return useWalletStore((s) => s.chainId);
+    return useStore((s) => s.chainId);
   };
 
   const useAccounts: StateHooks['useAccounts'] = () => {
-    return useWalletStore((s) => s.accounts, ACCOUNTS_EQUALITY_CHECKER);
+    return useStore((s) => s.accounts, ACCOUNTS_EQUALITY_CHECKER);
   };
 
   const useIsActivating: StateHooks['useIsActivating'] = () => {
-    return useWalletStore((s) => s.isActivating);
+    return useStore((s) => s.isActivating);
   };
 
   return { useChainId, useAccounts, useIsActivating };

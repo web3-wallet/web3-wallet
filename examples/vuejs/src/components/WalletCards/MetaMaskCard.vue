@@ -7,30 +7,27 @@
       :is-activating="isActivating"
     />
     <div style="margin-top: 10px">
-      <button @click="connect">connect</button>
+      <button @click="connect(1)">connect(1)</button>
+      <button @click="connect(4)">connect(4)</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { metaMask } from '../../wallets';
 import WalletCard from './WalletCard.vue';
 
-const {
-  connector,
-  hooks: { useChainId, useAccount, useIsActive, useIsActivating },
-} = metaMask;
+const { connector, account, chainId, isActivating, isActive } = metaMask;
 
-const chainId = useChainId();
-const account = useAccount();
-const isActive = useIsActive();
-const isActivating = useIsActivating();
-
-const connect = () => {
-  connector.activate(1);
+const connect = (chainId: number) => {
+  connector.activate(chainId);
 };
+
+onMounted(() => {
+  connector.connectEagerly();
+});
 
 defineComponent({
   name: 'MetaMask',

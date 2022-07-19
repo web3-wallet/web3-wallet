@@ -1,12 +1,13 @@
-import type { Hooks, State } from '@web3-wallet/ethereum';
+import type { State } from '@web3-wallet/ethereum';
 
+import type { Wallet } from '../types';
 import { StateHooks } from './stateHooks';
 
 const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
   return Boolean(chainId && accounts && !isActivating);
 };
 
-export type DerivedHooks = Pick<Hooks, 'useAccount' | 'useIsActive'>;
+export type DerivedHooks = Pick<Wallet, 'useAccount' | 'useIsActive'>;
 
 export const getDerivedHooks = ({
   useChainId,

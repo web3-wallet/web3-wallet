@@ -63,14 +63,12 @@ import { WalletCard } from '../WalletCard';
 
 const {
   connector,
-  hooks: {
-    useChainId,
-    useAccount,
-    useIsActivating,
-    useIsActive,
-    useProvider,
-    useENSName,
-  },
+  useChainId,
+  useAccount,
+  useIsActivating,
+  useIsActive,
+  useProvider,
+  useEnsName,
 } = metaMask;
 
 export const MetaMaskCard = () => {
@@ -81,7 +79,7 @@ export const MetaMaskCard = () => {
   const isActive = useIsActive();
 
   const provider = useProvider();
-  const ENSNames = useENSNames(provider);
+  const ensNames = useEnsNames(provider);
 
   // attempt to connect eagerly on mount
   useEffect(() => {
@@ -99,7 +97,7 @@ export const MetaMaskCard = () => {
       isActive={isActive}
       account={account}
       provider={provider}
-      ENSName={ENSName}
+      ensName={ensName}
     />
   );
 };
@@ -132,7 +130,7 @@ export const metaMask = createWallet<MetaMask>(
     isActive="{isActive}"
     account="{account}"
     provider="{provider}"
-    ENSNames="{ENSNames}"
+    ensNames="{ensNames}"
   />
 </template>
 
@@ -143,22 +141,16 @@ import { WalletCard } from './WalletCard.vue';
 
 const {
   connector,
-  hooks: {
-    useChainId,
-    useAccount,
-    useIsActivating,
-    useIsActive,
-    useProvider,
-    useENSName,
-  },
+  chainId,
+  account,
+  isActivating,
+  isActive,
+  getProvider,
+  getEnsName,
 } = metaMask;
 
-const chainId = useChainId();
-const account = useAccount();
-const isActivating = useIsActivating();
-const isActive = useIsActive();
-const provider = useProvider();
-const ENSName = useENSName(provider);
+const provider = getProvider();
+const ensNName = getEnsName(provider);
 
 // attempt to connect eagerly on mount
 onMounted(() => {
@@ -176,10 +168,10 @@ defineComponent({
 </script>
 ```
 
-## Develop
+## Development
 
-- node@16.14.x
-- pnpm@7.5.x
+- node@18.x
+- pnpm@7.x
 
 ```bash
 # clone the repository
@@ -197,3 +189,7 @@ pnpm watch && pnpm vuejs
 # test
 pnpm test
 ```
+
+## License
+
+MIT

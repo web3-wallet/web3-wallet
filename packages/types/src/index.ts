@@ -10,12 +10,6 @@ export type State = {
 
 export type Store<T extends State> = StoreApi<T>;
 
-export type Hooks<S extends State> = {
-  useChainId: () => S['chainId'];
-  useAccounts: () => S['accounts'];
-  useIsActivating: () => S['isActivating'];
-};
-
 export interface Actions<S extends State> {
   startActivation: () => () => void;
   resetState: () => void;
@@ -53,14 +47,4 @@ export abstract class Connector<P extends Provider, S extends State> {
   protected abstract onDisconnect(...args: unknown[]): void;
   protected abstract onChainChanged(chainId: unknown): void;
   protected abstract onAccountsChanged(accounts: unknown[]): void;
-}
-
-export interface Wallet<
-  T extends Connector<Provider, S>,
-  S extends State,
-  H extends Hooks<S>,
-> {
-  connector: T;
-  store: Store<S>;
-  hooks: H;
 }

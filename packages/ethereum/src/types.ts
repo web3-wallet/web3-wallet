@@ -1,31 +1,14 @@
-import type { Networkish } from '@ethersproject/networks';
-import type { BaseProvider as EthersBaseProvider } from '@ethersproject/providers';
 import type {
   Actions as BaseActions,
-  Hooks as BaseHooks,
   Provider as BaseProvider,
   State as BaseState,
   Store as BaseStore,
-  Wallet as BaseWallet,
 } from '@web3-wallet/types';
 import { Connector as BaseConnector } from '@web3-wallet/types';
 import type { EventEmitter } from 'node:events';
 
 export interface State extends BaseState {
   chainId?: number;
-}
-
-export interface Hooks extends BaseHooks<State> {
-  useAccount: () => string | undefined;
-  useIsActive: () => boolean;
-  useProvider: (
-    network?: Networkish,
-    enabled?: boolean,
-  ) => EthersBaseProvider | undefined;
-  useENSNames: (
-    provider?: EthersBaseProvider,
-  ) => undefined[] | (string | null)[];
-  useENSName: (provider?: EthersBaseProvider) => undefined | string | null;
 }
 
 export type Store = BaseStore<State>;
@@ -86,8 +69,3 @@ export interface WatchAssetParameters {
 }
 
 export abstract class Connector extends BaseConnector<Provider, State> {}
-export type Wallet<T extends Connector = Connector> = BaseWallet<
-  T,
-  State,
-  Hooks
->;

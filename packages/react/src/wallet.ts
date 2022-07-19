@@ -1,12 +1,12 @@
 import {
   type Actions,
   type Connector,
-  type Wallet,
   createStore,
 } from '@web3-wallet/ethereum';
 import createReactStore from 'zustand';
 
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
+import type { Wallet } from './types';
 
 /**
  * @typeParam T - The type of the `connector` returned from `f`.
@@ -19,9 +19,9 @@ export const createWallet = <T extends Connector>(
   const { store, actions } = createStore();
 
   const connector = f(actions);
-  const useWalletStore = createReactStore(store);
+  const reactStore = createReactStore(store);
 
-  const stateHooks = getStateHooks(useWalletStore);
+  const stateHooks = getStateHooks(reactStore);
   const derivedHooks = getDerivedHooks(stateHooks);
   const augmentedHooks = getAugmentedHooks<T>(
     connector,
@@ -31,7 +31,9 @@ export const createWallet = <T extends Connector>(
 
   return {
     connector,
-    store,
-    hooks: { ...stateHooks, ...derivedHooks, ...augmentedHooks },
+    store: reactStore,
+    ...stateHooks,
+    ...derivedHooks,
+    ...augmentedHooks,
   };
 };

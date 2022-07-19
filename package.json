@@ -43,7 +43,7 @@
   },
   "scripts": {
     "dev": "run-p watch nextjs",
-    "build": "pnpm -F scripts build && scripts build",
+    "build": "pnpm clean && pnpm -F scripts build && scripts build",
     "dev:next": "run-p watch nextjs",
     "dev:vue": "run-p watch vuejs",
     "nextjs": "cd examples/nextjs && pnpm dev",
@@ -53,7 +53,7 @@
     "lint": "pnpm -p -r -c exec eslint src",
     "fix": "pnpm -p -r -c exec eslint --fix src",
     "ts-check": "pnpm -s -p -r -c exec tsc --noEmit",
-    "clean": "pnpm -p -r -c exec rm -rf dist",
+    "clean": "pnpm -p -r -c exec rm -rf dist tsconfig.tsbuildinfo",
     "purge": "pnpm -p -r -c exec rm -rf node_modules",
     "prepare": "husky install"
   },
