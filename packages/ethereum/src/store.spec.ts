@@ -1,5 +1,5 @@
-import { createStore } from './createStore';
 import mock from './mock';
+import { createStore } from './store';
 import { State } from './types';
 
 describe('store', () => {
