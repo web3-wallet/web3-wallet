@@ -1,3 +1,5 @@
+import { getAddress } from '@ethersproject/address';
+
 import { AddEthereumChainParameter } from './types';
 
 /**
@@ -6,18 +8,15 @@ import { AddEthereumChainParameter } from './types';
  */
 export const MAX_SAFE_CHAIN_ID = 4503599627370476;
 
-export const validateChainId = (chainId: number | undefined): never | void => {
-  if (
-    !chainId ||
-    !Number.isInteger(chainId) ||
-    chainId <= 0 ||
-    chainId > MAX_SAFE_CHAIN_ID
-  ) {
+export const validateChainId = (chainId: number | string): never | void => {
+  chainId = Number(chainId);
+
+  if (!chainId || chainId <= 0 || chainId > MAX_SAFE_CHAIN_ID) {
     throw new Error(`Invalid chainId ${chainId}`);
   }
 };
 
-export const isValidChainId = (chainId: number | undefined): boolean => {
+export const isValidChainId = (chainId: string | number): boolean => {
   try {
     validateChainId(chainId);
     return true;
@@ -25,6 +24,23 @@ export const isValidChainId = (chainId: number | undefined): boolean => {
     return false;
   }
 };
+
+export function validateAccount(account: string): never | string {
+  return getAddress(account);
+}
+
+export function isValidateAccount(account: string): boolean {
+  try {
+    getAddress(account);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+export function isValidateAccounts(accounts: string[]): boolean {
+  return !!accounts && accounts.every((v) => isValidateAccount(v));
+}
 
 export const parseChainId = (chainId: string | number): number => {
   return typeof chainId === 'number'

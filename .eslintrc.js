@@ -1,12 +1,19 @@
 module.exports = {
   root: true,
   env: {
+    'jest/globals': true,
     node: true,
   },
   parser: '@typescript-eslint/parser',
+  settings: {
+    jest: {
+      version: require('jest/package.json').version,
+    },
+  },
   plugins: [
     '@typescript-eslint',
     'node',
+    'jest',
     'simple-import-sort',
     'unused-imports',
   ],
@@ -15,6 +22,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
     'prettier',
   ],
   rules: {

@@ -1,6 +1,7 @@
 {
   "name": "web3-wallet",
   "private": true,
+  "version": "0.1",
   "description": "Use web3 wallets in your react/vue web3 apps with easy.",
   "author": "logan.luo",
   "license": "MIT",

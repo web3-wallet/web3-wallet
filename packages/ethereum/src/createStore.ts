@@ -1,6 +1,7 @@
 import create from 'zustand/vanilla';
 
 import type { Actions, State, Store } from './types';
+import { validateAccount, validateChainId } from './utils';
 
 const DEFAULT_STATE: State = {
   chainId: undefined,
@@ -42,6 +43,18 @@ export const createStore = (): {
    * @param stateUpdate - The state update to report.
    */
   function update(stateUpdate: Partial<State>): void {
+    // validate chainId statically, independent of existing state
+    if (stateUpdate.chainId !== undefined) {
+      validateChainId(stateUpdate.chainId);
+    }
+
+    // validate accounts statically, independent of existing state
+    if (stateUpdate.accounts !== undefined) {
+      for (let i = 0; i < stateUpdate.accounts.length; i++) {
+        stateUpdate.accounts[i] = validateAccount(stateUpdate.accounts[i]);
+      }
+    }
+
     nullifier++;
 
     store.setState((existingState): State => {
