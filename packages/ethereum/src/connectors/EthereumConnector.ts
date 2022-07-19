@@ -6,7 +6,19 @@ import {
   ProviderRpcError,
   WatchAssetParameters,
 } from '../types';
-import { isAddChainParameter, parseChainId } from '../utils';
+import { parseChainId } from '../utils';
+
+export const isChainId = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is number => {
+  return typeof chainIdOrChainParameter === 'number';
+};
+
+export const isAddChainParameter = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is AddEthereumChainParameter => {
+  return !isChainId(chainIdOrChainParameter);
+};
 
 const providerNotFoundError = new ProviderNoFoundError();
 

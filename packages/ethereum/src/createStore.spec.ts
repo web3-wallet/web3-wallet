@@ -1,6 +1,6 @@
 import { createStore } from './createStore';
+import mock from './mock';
 import { State } from './types';
-import { MAX_SAFE_CHAIN_ID } from './utils';
 
 describe('store', () => {
   test('store default state', () => {
@@ -41,52 +41,36 @@ describe('Activation', () => {
   });
 });
 
-describe('update chainId', () => {
-  test('update with valid chainId', () => {
-    const { store, actions } = createStore();
-    let chainId = 1;
-    actions.update({ chainId });
-    expect(store.getState()).toEqual<State>({
+describe('update/valid chainId', () => {
+  const { store, actions } = createStore();
+  const table = mock.chainIds.map((v) => [v]);
+  test.each(table)('chainId: %i', (chainId: number) => {
+    actions.update({
       chainId,
-      accounts: undefined,
-      isActivating: false,
     });
-
-    chainId = 100;
-    actions.update({ chainId });
     expect(store.getState()).toEqual<State>({
       chainId,
       accounts: undefined,
       isActivating: false,
     });
   });
-
-  test('update with invalid chainId', () => {
-    const { actions } = createStore();
-    let chainId = -1;
+});
+describe('update/invalid chainId', () => {
+  const { actions } = createStore();
+  const table = mock.invalidChainIds.map((v) => [v]);
+  test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
-      actions.update({ chainId });
-    }).toThrow();
-
-    chainId = 0;
-    expect(() => {
-      actions.update({ chainId });
-    }).toThrow();
-
-    chainId = MAX_SAFE_CHAIN_ID + 1;
-    expect(() => {
-      actions.update({ chainId });
+      actions.update({
+        chainId,
+      });
     }).toThrow();
   });
 });
 
-describe('update accounts', () => {
-  test('update with valid accounts', () => {
+describe('update/valid accounts', () => {
+  test('valid accounts', () => {
     const { store, actions } = createStore();
-    const accounts = [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000001',
-    ];
+    const accounts = [...mock.accounts];
     actions.update({ accounts });
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
@@ -94,30 +78,24 @@ describe('update accounts', () => {
       isActivating: false,
     });
   });
-
-  test('update with invalid accounts', () => {
-    const { actions } = createStore();
-    let accounts = ['invalid account 1', 'invalid account 2'];
+});
+describe('update/invalid accounts', () => {
+  const { actions } = createStore();
+  const table = mock.invalidChainIds.map((v) => [v]);
+  test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
-      actions.update({ accounts });
-    }).toThrow();
-
-    accounts = [
-      '0x0000000000000000000000000000000000000000',
-      'invalid account 1',
-    ];
-
-    expect(() => {
-      actions.update({ accounts });
+      actions.update({
+        chainId,
+      });
     }).toThrow();
   });
 });
 
-describe('update accounts & chainId', () => {
+describe('update/accounts & chainId', () => {
   test('valid accounts & valid chainId', () => {
     const { store, actions } = createStore();
-    const chainId = 1;
-    const accounts = ['0x0000000000000000000000000000000000000000'];
+    const chainId = mock.chainIds[0];
+    const accounts = [...mock.accounts];
     actions.update({
       chainId,
       accounts,
@@ -131,33 +109,8 @@ describe('update accounts & chainId', () => {
 
   test('valid chainId & invalid accounts', () => {
     const { actions } = createStore();
-    const chainId = 1;
-    const accounts = ['invalid account'];
-    expect(() => {
-      actions.update({
-        chainId,
-        accounts,
-      });
-    }).toThrow();
-  });
-  test('invalid chainId & valid accounts', () => {
-    const { actions } = createStore();
-    let chainId = -1;
-    const accounts = ['0x0000000000000000000000000000000000000000'];
-    expect(() => {
-      actions.update({
-        chainId,
-        accounts,
-      });
-    }).toThrow();
-    chainId = 0;
-    expect(() => {
-      actions.update({
-        chainId,
-        accounts,
-      });
-    }).toThrow();
-    chainId = MAX_SAFE_CHAIN_ID + 1;
+    const chainId = mock.chainIds[0];
+    const accounts = [...mock.invalidAccounts];
     expect(() => {
       actions.update({
         chainId,
@@ -167,22 +120,8 @@ describe('update accounts & chainId', () => {
   });
   test('invalid chainId & invalid accounts', () => {
     const { actions } = createStore();
-    let chainId = -1;
-    const accounts = ['invalid account 1'];
-    expect(() => {
-      actions.update({
-        chainId,
-        accounts,
-      });
-    }).toThrow();
-    chainId = 0;
-    expect(() => {
-      actions.update({
-        chainId,
-        accounts,
-      });
-    }).toThrow();
-    chainId = MAX_SAFE_CHAIN_ID + 1;
+    const chainId = mock.invalidChainIds[0];
+    const accounts = [...mock.invalidAccounts];
     expect(() => {
       actions.update({
         chainId,
@@ -196,8 +135,8 @@ describe('resetState', () => {
   test('resetState works', () => {
     const { store, actions } = createStore();
     const stateUpdate = {
-      chainId: 1,
-      accounts: ['0x0000000000000000000000000000000000000000'],
+      chainId: mock.chainIds[0],
+      accounts: [...mock.accounts],
     };
     actions.update(stateUpdate);
     const cancelActivation = actions.startActivation();
