@@ -1,6 +1,7 @@
 import type {
   Actions as BaseActions,
   Provider as BaseProvider,
+  ProviderFilter as BaseProviderFilter,
   State as BaseState,
   Store as BaseStore,
 } from '@web3-wallet/types';
@@ -37,6 +38,8 @@ export interface Provider extends EventEmitter, BaseProvider {
 export interface ProviderConnectInfo {
   readonly chainId: string;
 }
+
+export type ProviderFilter<T extends Provider> = BaseProviderFilter<T>;
 
 export class ProviderNoFoundError extends Error {
   public constructor(message = 'Provider not found') {

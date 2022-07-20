@@ -3,15 +3,7 @@
   "keywords": [
     "web3-wallet",
     "vue",
-    "vue3",
-    "web3",
-    "dApp",
-    "ethereum",
-    "metamask",
-    "wallet connect",
-    "crypto.com DeFi Wallet",
-    "connector",
-    "eip1193"
+    "vue3"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",

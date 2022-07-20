@@ -25,6 +25,11 @@
       "packages": [
         "types",
         "ethereum",
+        "injected",
+        [
+          "coinbase-wallet",
+          "defiwallet"
+        ],
         [
           "react",
           "vue"

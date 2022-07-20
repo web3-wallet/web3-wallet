@@ -3,17 +3,7 @@
   "description": "web3-wallet types",
   "keywords": [
     "web3-wallet",
-    "react",
-    "vue",
-    "vue3",
-    "web3",
-    "dApp",
-    "ethereum",
-    "metamask",
-    "walletconnect",
-    "crypto.com DeFi Wallet",
-    "connector",
-    "eip1193"
+    "types"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",

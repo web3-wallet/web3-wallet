@@ -3,17 +3,8 @@
   "description": "ethereum compatible wallets",
   "keywords": [
     "web3-wallet",
-    "react",
-    "vue",
-    "vue3",
     "web3",
-    "dApp",
-    "ethereum",
-    "metamask",
-    "walletconnect",
-    "crypto.com DeFi Wallet",
-    "connector",
-    "eip1193"
+    "ethereum"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -35,12 +26,8 @@
     "@ethersproject/address": "^5.6.1",
     "@ethersproject/networks": "^5.6.4",
     "@ethersproject/providers": "^5.6.8",
-    "@metamask/detect-provider": "^1.2.0",
     "@web3-wallet/types": "workspace:*",
     "zustand": "^4.0.0-rc.0"
-  },
-  "peerDependencies": {
-    "@coinbase/wallet-sdk": "^3.0.4"
   },
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"

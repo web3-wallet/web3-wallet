@@ -1,8 +1,9 @@
 {
-  "name": "@web3-wallet/react",
+  "name": "@web3-wallet/coinbase-wallet",
+  "description": "Coinbase wallet connector",
   "keywords": [
     "web3-wallet",
-    "react"
+    "Coinbase wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -21,15 +22,11 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@ethersproject/networks": "^5.6.4",
-    "@ethersproject/providers": "^5",
-    "@web3-wallet/ethereum": "workspace:*",
-    "zustand": "^4.0.0-rc.0"
+    "@web3-wallet/ethereum": "workspace:*"
   },
   "peerDependencies": {
-    "react": ">=16.8"
+    "@coinbase/wallet-sdk": "^3.0.4"
   },
-  "description": "web3-wallet react",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },

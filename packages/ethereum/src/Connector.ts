@@ -1,12 +1,12 @@
 import {
-  AddEthereumChainParameter,
+  type AddEthereumChainParameter,
+  type ProviderConnectInfo,
+  type ProviderRpcError,
+  type WatchAssetParameters,
   Connector,
-  ProviderConnectInfo,
   ProviderNoFoundError,
-  ProviderRpcError,
-  WatchAssetParameters,
-} from '../types';
-import { parseChainId } from '../utils';
+} from './types';
+import { parseChainId } from './utils';
 
 export const isChainId = (
   chainIdOrChainParameter?: number | AddEthereumChainParameter,

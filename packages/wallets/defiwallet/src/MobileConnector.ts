@@ -1,4 +1,7 @@
-import { type InjectedProvider, InjectedConnector } from '../InjectedConnector';
+import {
+  type InjectedProvider,
+  InjectedConnector,
+} from '@web3-wallet/injected';
 
 export type MobileProvider = InjectedProvider & {
   isTrust?: boolean;

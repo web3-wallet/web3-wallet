@@ -2,8 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-
-import { EthereumConnector } from './EthereumConnector';
+import { EthereumConnector } from '@web3-wallet/ethereum';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK

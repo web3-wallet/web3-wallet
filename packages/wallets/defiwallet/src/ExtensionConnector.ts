@@ -1,6 +1,11 @@
-import { type Actions, type Provider, ProviderNoFoundError } from '../../types';
-import * as utils from '../../utils';
-import { EthereumConnector } from '../EthereumConnector';
+import {
+  type Actions,
+  type Provider,
+  EthereumConnector,
+  ProviderNoFoundError,
+  utils,
+} from '@web3-wallet/ethereum';
+
 import {
   type DeFiWalletProvider,
   type DeFiWalletProviderOptions,

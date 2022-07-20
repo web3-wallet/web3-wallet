@@ -1,7 +1,6 @@
 type WindowWithOpera = Window &
   typeof globalThis & {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    opera: any;
+    opera?: string;
   };
 
 export const isMobile = (): boolean => {
@@ -10,7 +9,8 @@ export const isMobile = (): boolean => {
   const ua =
     navigator.userAgent ||
     navigator.vendor ||
-    (window as WindowWithOpera).opera;
+    (window as WindowWithOpera).opera ||
+    '';
 
   if (/android/i.test(ua)) {
     return true;
@@ -18,7 +18,6 @@ export const isMobile = (): boolean => {
 
   if (
     /iPhone|iPad|iPod/i.test(ua) ||
-    // iPad on iOS 13 detection
     (/Mac/i.test(ua) && 'ontouchend' in document)
   ) {
     return true;
