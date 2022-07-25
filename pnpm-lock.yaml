@@ -215,6 +215,17 @@ importers:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
 
+  packages/vue-solana:
+    specifiers:
+      '@ethersproject/networks': ^5.6.4
+      '@ethersproject/providers': ^5
+      '@web3-wallet/solana': workspace:*
+    dependencies:
+      '@web3-wallet/solana': link:../solana
+    optionalDependencies:
+      '@ethersproject/networks': 5.6.4
+      '@ethersproject/providers': 5.6.8
+
   packages/wallets/ethereum/coinbase-wallet:
     specifiers:
       '@web3-wallet/ethereum': workspace:*

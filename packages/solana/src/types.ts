@@ -3,6 +3,7 @@ import type {
   Provider as BaseProvider,
   State as BaseState,
   Store as BaseStore,
+  Wallet as BaseWallet,
 } from '@web3-wallet/types';
 import { Connector as BaseConnector } from '@web3-wallet/types';
 import type { EventEmitter } from 'node:events';
@@ -50,3 +51,4 @@ export class NoImplementedError extends Error {
   }
 }
 export abstract class Connector extends BaseConnector<Provider, State> {}
+export type Wallet<C extends Connector = Connector> = BaseWallet<C, State>;

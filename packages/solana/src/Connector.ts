@@ -74,6 +74,7 @@ export abstract class SolanaConnector<
   }
 
   public async deactivate(): Promise<void> {
+    this.resetState();
     this.provider?.disconnect();
   }
 

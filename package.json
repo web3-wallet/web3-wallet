@@ -33,7 +33,8 @@
         [
           "react",
           "react-solana",
-          "vue"
+          "vue",
+          "vue-solana"
         ]
       ]
     },
@@ -55,7 +56,8 @@
         [
           "react",
           "react-solana",
-          "vue"
+          "vue",
+          "vue-solana"
         ]
       ]
     }

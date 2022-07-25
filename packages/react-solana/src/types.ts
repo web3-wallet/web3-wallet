@@ -1,8 +1,14 @@
-import { type Connector, State, Store } from '@web3-wallet/solana';
+import {
+  type Connector,
+  State,
+  Store,
+  Wallet as SolanaWallet,
+} from '@web3-wallet/solana';
 import type { UseBoundStore } from 'zustand';
 
-export type Wallet<T extends Connector = Connector> = {
-  connector: T;
+export interface Wallet<C extends Connector = Connector>
+  extends SolanaWallet<C> {
+  connector: C;
   store: UseBoundStore<
     Store & {
       getServerState?: () => State;
@@ -11,4 +17,4 @@ export type Wallet<T extends Connector = Connector> = {
   useIsActivating: () => State['isActivating'];
   useAccount: () => string | undefined;
   useIsActive: () => boolean;
-};
+}
