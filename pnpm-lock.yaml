@@ -44,7 +44,7 @@ importers:
       '@types/react': 18.0.15
       '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
       '@typescript-eslint/parser': 5.30.7_he2ccbldppg44uulnyq4rwocfa
-      '@web3-wallet/scripts': link:packages/scripts
+      '@web3-wallet/scripts': link:scripts
       esbuild: 0.14.49
       eslint: 8.20.0
       eslint-config-prettier: 8.5.0_eslint@8.20.0
@@ -182,12 +182,6 @@ importers:
       '@web3-wallet/solana': link:../solana
       zustand: 4.0.0-rc.3
 
-  packages/scripts:
-    specifiers:
-      chalk: ^5.0.1
-    dependencies:
-      chalk: 5.0.1
-
   packages/solana:
     specifiers:
       '@solana/web3.js': ^1.50.0
@@ -265,6 +259,12 @@ importers:
       '@web3-wallet/solana': workspace:*
     dependencies:
       '@web3-wallet/solana': link:../../../solana
+
+  scripts:
+    specifiers:
+      chalk: ^5.0.1
+    dependencies:
+      chalk: 5.0.1
 
 packages:
 

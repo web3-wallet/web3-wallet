@@ -2,23 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 import { build } from './build';
+import { type PackageJson, Task } from './types';
+import { packagesFilter } from './utils';
 import { watch } from './watch';
-
-export enum Task {
-  Build = 'build',
-  Watch = 'watch',
-}
-
-export type TaskConfig = {
-  [Task.Build]: Parameters<typeof build>[0];
-  [Task.Watch]: Parameters<typeof watch>[0];
-};
-
-export type PackageJson = {
-  '@web3-wallet/scripts': {
-    [key in Task]: TaskConfig[key];
-  };
-};
 
 const pkgJsonPath = path.join(process.cwd(), 'package.json');
 
@@ -27,15 +13,26 @@ const pkgJson = JSON.parse(
 ) as PackageJson;
 
 const task = process.argv[2] as Task;
-const taskConfig = pkgJson['@web3-wallet/scripts'] as TaskConfig;
+
+const packages = pkgJson['@web3-wallet/scripts'].packages;
+
+const packagesToBuild = packagesFilter(
+  packages,
+  (pkg) => typeof pkg === 'string' || pkg.build !== false,
+);
+
+const packagesToWatch = packagesFilter(
+  packages,
+  (pkg) => typeof pkg === 'string' || pkg.watch !== false,
+);
 
 export const run = async (task: Task) => {
   switch (task) {
     case Task.Build:
-      await build(taskConfig[Task.Build]);
+      await build(packagesToBuild);
       break;
     case Task.Watch:
-      await watch(taskConfig[Task.Watch]);
+      await watch(packagesToWatch);
       break;
     default:
       throw new Error(`unknown task "${task}"`);

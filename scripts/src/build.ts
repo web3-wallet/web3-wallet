@@ -1,21 +1,16 @@
 import chalk from 'chalk';
 import cp from 'child_process';
 
-type PackageName = string;
-type BuildConfig = {
-  packages: (PackageName | PackageName[])[];
-};
+import type { Package, Packages } from './types';
 
-export const build = async (config: BuildConfig) => {
-  console.log(
-    chalk.blue(`[build]: ${config.packages.flat().length} packages\n`),
-  );
+export const build = async (packages: Packages) => {
+  console.log(chalk.blue(`[build]: ${packages.flat().length} packages\n`));
 
-  for (const pkg of config.packages) {
-    if (typeof pkg == 'string') {
-      await buildPkg(pkg);
-    } else {
+  for (const pkg of packages) {
+    if (Array.isArray(pkg)) {
       await Promise.all(pkg.map(buildPkg));
+    } else {
+      await buildPkg(pkg);
     }
   }
 
@@ -29,16 +24,18 @@ export const build = async (config: BuildConfig) => {
  * @param pkg the package name
  * @returns
  */
-const buildPkg = (pkg: string) => {
+const buildPkg = (pkg: Package) => {
+  const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
+
   return new Promise((resolve, reject) => {
-    console.log(chalk.blue(`[build]: @web3-wallet/${pkg}...`));
+    console.log(chalk.blue(`[build]: @web3-wallet/${pkgName}...`));
 
     const build = cp.spawn(
       'pnpm',
       [
         '--silent',
         '--filter',
-        `@web3-wallet/${pkg}`,
+        `@web3-wallet/${pkgName}`,
         '--parallel',
         '-shell-mode',
         'exec',

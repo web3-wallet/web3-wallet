@@ -15,52 +15,31 @@
   ],
   "packageManager": "pnpm@7.5.0",
   "@web3-wallet/scripts": {
-    "build": {
-      "packages": [
-        "types",
-        [
-          "ethereum",
-          "solana"
-        ],
-        "injected",
-        [
-          "coinbase-wallet",
-          "defiwallet",
-          "metamask",
-          "solana-phantom",
-          "solana-glow"
-        ],
-        [
-          "react",
-          "react-solana",
-          "vue",
-          "vue-solana"
-        ]
+    "packages": [
+      {
+        "name": "types",
+        "build": true,
+        "watch": true
+      },
+      [
+        "ethereum",
+        "solana"
+      ],
+      "injected",
+      [
+        "coinbase-wallet",
+        "defiwallet",
+        "metamask",
+        "solana-phantom",
+        "solana-glow"
+      ],
+      [
+        "react",
+        "react-solana",
+        "vue",
+        "vue-solana"
       ]
-    },
-    "watch": {
-      "packages": [
-        "types",
-        [
-          "ethereum",
-          "solana"
-        ],
-        "injected",
-        [
-          "coinbase-wallet",
-          "defiwallet",
-          "metamask",
-          "solana-phantom",
-          "solana-glow"
-        ],
-        [
-          "react",
-          "react-solana",
-          "vue",
-          "vue-solana"
-        ]
-      ]
-    }
+    ]
   },
   "scripts": {
     "dev": "run-p watch nextjs",

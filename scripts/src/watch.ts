@@ -1,14 +1,11 @@
 import chalk from 'chalk';
 import cp from 'child_process';
 
-type PackageName = string;
-type WatchConfig = {
-  packages: (PackageName | PackageName[])[];
-};
+import type { Package, Packages } from './types';
 
-export const watch = async (config: WatchConfig) => {
-  console.log(chalk.blue(`[watch]: ${config.packages.flat().length} packages`));
-  await Promise.all(config.packages.flat().map((v) => watchPkg(v)));
+export const watch = async (packages: Packages) => {
+  console.log(chalk.blue(`[watch]: ${packages.flat().length} packages`));
+  await Promise.all(packages.flat().map((v) => watchPkg(v)));
 };
 
 /**
@@ -18,15 +15,17 @@ export const watch = async (config: WatchConfig) => {
  * @param pkg the package name
  * @returns
  */
-const watchPkg = (pkg: string) => {
+const watchPkg = (pkg: Package) => {
+  const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
+
   return new Promise((resolve, reject) => {
-    console.log(chalk.blue(`[watch]: @web3-wallet/${pkg}`));
+    console.log(chalk.blue(`[watch]: @web3-wallet/${pkgName}`));
 
     const build = cp.spawn(
       'pnpm',
       [
         '--filter',
-        `@web3-wallet/${pkg}`,
+        `@web3-wallet/${pkgName}`,
         '--silent',
         '--parallel',
         '-shell-mode',
