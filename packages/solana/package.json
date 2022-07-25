@@ -1,6 +1,6 @@
 {
   "name": "@web3-wallet/solana",
-  "description": "solana compatible wallets",
+  "description": "abstract solana wallet connector",
   "keywords": [
     "web3",
     "wallet",

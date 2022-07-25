@@ -26,7 +26,6 @@ export interface SolanaProvider extends Provider {
   disconnect(): void;
 }
 
-console.log('solana connector');
 export abstract class SolanaConnector<
   T extends SolanaProvider = SolanaProvider,
 > extends Connector {
@@ -63,7 +62,7 @@ export abstract class SolanaConnector<
   }
 
   protected onDisconnect(): void {
-    this.actions.resetState();
+    this.resetState();
   }
 
   protected onConnect(publicKey?: PublicKey) {
@@ -75,7 +74,6 @@ export abstract class SolanaConnector<
   }
 
   public async deactivate(): Promise<void> {
-    this.actions.resetState();
     this.provider?.disconnect();
   }
 

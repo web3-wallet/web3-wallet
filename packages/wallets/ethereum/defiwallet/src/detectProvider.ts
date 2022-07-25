@@ -74,7 +74,7 @@ export const detectProvider = async (
   retries = 40,
   interval = 50,
 ): Promise<DeFiWalletProvider | undefined> => {
-  const providerMap = getProvider();
+  const providerMap = useProvider();
 
   if (providerMap || retries === 0) return providerMap;
 
@@ -83,7 +83,7 @@ export const detectProvider = async (
   return await detectProvider(retries - 1, interval);
 };
 
-const getProvider = (): DeFiWalletProvider | undefined => {
+const useProvider = (): DeFiWalletProvider | undefined => {
   if (typeof window === 'undefined') return undefined;
   /**
    * `window.deficonnectProvider` is injected by crypto.com DeFi Wallet chrome extension.

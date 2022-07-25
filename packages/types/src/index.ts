@@ -14,7 +14,10 @@ export interface Actions<S extends State> {
   update: (stateUpdate: Partial<Omit<S, 'isActivating'>>) => void;
 }
 
-export abstract class Connector<P extends Provider, S extends State> {
+export abstract class Connector<
+  P extends Provider = Provider,
+  S extends State = State,
+> {
   public abstract provider?: P;
   public actions: Actions<S>;
   public onError?(...args: unknown[]): Promise<void>;
@@ -25,6 +28,9 @@ export abstract class Connector<P extends Provider, S extends State> {
     this.actions = actions;
     this.onError = onError;
   }
+  public resetState(): void {
+    this.actions.resetState();
+  }
   public abstract detectProvider(...args: unknown[]): Promise<P | undefined>;
   protected abstract lazyInitialize(): Promise<void>;
   public abstract activate(...args: unknown[]): Promise<void>;
@@ -32,10 +38,7 @@ export abstract class Connector<P extends Provider, S extends State> {
   public abstract deactivate(...args: unknown[]): Promise<void>;
 }
 
-export interface Wallet<
-  P extends Provider = Provider,
-  S extends State = State,
-> {
+export interface Wallet<C extends Connector, S extends State = State> {
   store: Store<S>;
-  connector: Connector<P, S>;
+  connector: C;
 }

@@ -7,8 +7,8 @@ import { Wallet } from './types';
  * indicated that names cannot be fetched because there's no provider, or they're in the process of being fetched,
  * or `string | null`, depending on whether an ENS name has been set for the account in question or not.
  */
-function getEns(
-  provider: ReturnType<Wallet['getProvider']>,
+function useEns(
+  provider: ReturnType<Wallet['useProvider']>,
   accounts: Wallet['accounts'],
 ): ComputedRef<undefined[] | (string | null)[]> {
   const ensNames = ref<(string | null)[] | undefined>(undefined);
@@ -44,16 +44,16 @@ function getEns(
   });
 }
 
-export const createGetEnsNames =
-  (accounts: Wallet['accounts']): Wallet['getEnsNames'] =>
+export const getUseEnsNames =
+  (accounts: Wallet['accounts']): Wallet['useEnsNames'] =>
   (provider) =>
-    getEns(provider, accounts);
+    useEns(provider, accounts);
 
-export const createGetEnsName =
-  (account: Wallet['account']): Wallet['getEnsName'] =>
+export const getUseEnsName =
+  (account: Wallet['account']): Wallet['useEnsName'] =>
   (provider) => {
     const accounts = computed(() =>
       account.value === undefined ? undefined : [account.value],
     );
-    return computed(() => getEns(provider, accounts).value?.[0]);
+    return computed(() => useEns(provider, accounts).value?.[0]);
   };

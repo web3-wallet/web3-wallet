@@ -1,24 +1,30 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider } from '@ethersproject/providers';
-import { Connector, State, Store } from '@web3-wallet/ethereum';
+import {
+  Connector,
+  State,
+  Store,
+  Wallet as EthereumWallet,
+} from '@web3-wallet/ethereum';
 import { ComputedRef } from 'vue';
 
-export type Wallet<T extends Connector = Connector> = {
+export interface Wallet<C extends Connector = Connector>
+  extends EthereumWallet<C> {
   store: Store;
-  connector: T;
+  connector: C;
   chainId: ComputedRef<State['chainId']>;
   accounts: ComputedRef<State['accounts']>;
   isActivating: ComputedRef<State['isActivating']>;
   account: ComputedRef<string | undefined>;
   isActive: ComputedRef<boolean>;
-  getProvider: (
+  useProvider: (
     network?: Networkish,
     enabled?: boolean,
   ) => ComputedRef<BaseProvider | undefined>;
-  getEnsNames: (
+  useEnsNames: (
     provider: ComputedRef<BaseProvider | undefined>,
   ) => ComputedRef<undefined[] | (string | null)[]>;
-  getEnsName: (
+  useEnsName: (
     provider: ComputedRef<BaseProvider | undefined>,
   ) => ComputedRef<undefined | string | null>;
-};
+}

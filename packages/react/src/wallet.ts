@@ -13,9 +13,9 @@ import type { Wallet } from './types';
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <T extends Connector>(
-  f: (actions: Actions) => T,
-): Wallet<T> => {
+export const createWallet = <C extends Connector>(
+  f: (actions: Actions) => C,
+): Wallet<C> => {
   const { store, actions } = createStore();
 
   const connector = f(actions);
@@ -23,7 +23,7 @@ export const createWallet = <T extends Connector>(
 
   const stateHooks = getStateHooks(reactStore);
   const derivedHooks = getDerivedHooks(stateHooks);
-  const augmentedHooks = getAugmentedHooks<T>(
+  const augmentedHooks = getAugmentedHooks<C>(
     connector,
     stateHooks,
     derivedHooks,

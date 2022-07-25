@@ -4,7 +4,7 @@ import type { Wallet } from '../types';
 import { StateHooks } from './stateHooks';
 
 const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
-  return Boolean(chainId && accounts && !isActivating);
+  return Boolean(chainId && accounts?.length && !isActivating);
 };
 
 export type DerivedHooks = Pick<Wallet, 'useAccount' | 'useIsActive'>;

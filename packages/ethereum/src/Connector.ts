@@ -40,6 +40,7 @@ export abstract class EthereumConnector extends Connector {
   }
 
   protected onDisconnect(error?: ProviderRpcError): void {
+    this.resetState();
     error && this.onError?.(error);
   }
 
@@ -216,10 +217,8 @@ export abstract class EthereumConnector extends Connector {
     }
   }
 
-  public async deactivate(..._: unknown[]): Promise<void> {
-    /**
-     * not implemented, override it in subclass when necessary
-     */
+  public async deactivate(): Promise<void> {
+    this.resetState();
   }
 
   public async watchAsset({

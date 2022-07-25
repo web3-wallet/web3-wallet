@@ -42,7 +42,7 @@ export const createGetProvider = <T extends Connector>({
   connector: T;
   isActive: Wallet['isActive'];
   chainId: Wallet['chainId'];
-}): Wallet['getProvider'] => {
+}): Wallet['useProvider'] => {
   return (network?: Networkish, enabled = true) => {
     watchEffect(() => {
       if (dynamicProvider.value === undefined) {

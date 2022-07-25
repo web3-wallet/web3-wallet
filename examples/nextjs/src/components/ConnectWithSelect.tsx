@@ -1,10 +1,8 @@
-import type { WalletApi } from '@web3-wallet/react';
+import type { Wallet } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
 import { CHAINS, getAddChainParameters, URLS } from '../chains';
 import { ChainSelect } from './ChainSelect';
-
-type Hooks = WalletApi['hooks'];
 
 export const ConnectWithSelect = ({
   connector,
@@ -12,10 +10,10 @@ export const ConnectWithSelect = ({
   isActivating,
   isActive,
 }: {
-  connector: WalletApi['connector'];
-  chainId: ReturnType<Hooks['useChainId']>;
-  isActivating: ReturnType<Hooks['useIsActivating']>;
-  isActive: ReturnType<Hooks['useIsActive']>;
+  connector: Wallet['connector'];
+  chainId: ReturnType<Wallet['useChainId']>;
+  isActivating: ReturnType<Wallet['useIsActivating']>;
+  isActive: ReturnType<Wallet['useIsActive']>;
 }) => {
   const hashConnector = connector;
   const displayDefault = !hashConnector;
@@ -62,7 +60,7 @@ export const ConnectWithSelect = ({
                 console.warn('activate error: ', error);
               }
             } else {
-              void connector.resetState();
+              connector.resetState();
             }
           }}
         >

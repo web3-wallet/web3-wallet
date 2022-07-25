@@ -41,7 +41,6 @@ export class CoinbaseWalletConnector extends EthereumConnector {
   }
 
   public override async deactivate(): Promise<void> {
-    this.actions.resetState();
     this.coinbaseWallet?.disconnect();
   }
 }

@@ -112,8 +112,7 @@ export class ExtensionConnector extends EthereumConnector {
 
   public override async deactivate() {
     if (!this.provider) throw providerNotFoundError;
-
-    this.actions.resetState();
+    super.deactivate();
     await this.provider.close();
   }
 }

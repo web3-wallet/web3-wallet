@@ -20,7 +20,7 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/react-solana`](packages/react-solana) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact-solana.svg)](https://badge.fury.io/js/@web3-wallet%2Freact-solana) | React binding for Solana wallets |
 | [`@web3-wallet/vue`](packages/vue)                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                   | Vue binding for EVM wallets      |
 | [`@web3-wallet/vue-solana`](packages/vue-solana)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue-solana.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue-solana)     | Vue binding for Solana wallets   |
-| [`@web3-wallet/ethereum`](packages/ethereum)         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fethereum.svg)](https://badge.fury.io/js/@web3-wallet%2Fethereum)         | Abstract EMV wallet connector    |
+| [`@web3-wallet/ethereum`](@web3-wallet/ethereum)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fethereum.svg)](https://badge.fury.io/js/@web3-wallet%2Fethereum)         | Abstract EMV wallet connector    |
 | [`@web3-wallet/solana`](packages/solana)             | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana)             | Abstract solana wallet connector |
 | [`@web3-wallet/types`](packages/types)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)               | Base types                       |
 
@@ -161,12 +161,12 @@ const {
   account,
   isActivating,
   isActive,
-  getProvider,
-  getEnsName,
+  useProvider,
+  useEnsName,
 } = metaMask;
 
-const provider = getProvider();
-const ensNName = getEnsName(provider);
+const provider = useProvider();
+const ensNName = useEnsName(provider);
 
 // attempt to connect eagerly on mount
 onMounted(() => {

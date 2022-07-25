@@ -1,6 +1,6 @@
 {
   "name": "@web3-wallet/ethereum",
-  "description": "ethereum compatible wallets",
+  "description": "abstract ethereum wallet connector",
   "keywords": [
     "web3-wallet",
     "web3",

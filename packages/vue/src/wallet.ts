@@ -2,7 +2,7 @@ import type { Actions, Connector, State } from '@web3-wallet/ethereum';
 import { createStore } from '@web3-wallet/ethereum';
 import { computed, reactive } from 'vue';
 
-import { createGetEnsName, createGetEnsNames } from './ensNames';
+import { getUseEnsName, getUseEnsNames } from './ensNames';
 import { createGetProvider } from './provider';
 import type { Wallet } from './types';
 
@@ -19,9 +19,9 @@ const computeIsActive = ({
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <T extends Connector = Connector>(
-  f: (actions: Actions) => T,
-): Wallet<T> => {
+export const createWallet = <C extends Connector = Connector>(
+  f: (actions: Actions) => C,
+): Wallet<C> => {
   const { store, actions } = createStore();
 
   const state = reactive<State>({
@@ -45,13 +45,13 @@ export const createWallet = <T extends Connector = Connector>(
       isActivating: isActivating.value,
     }),
   );
-  const getProvider = createGetProvider<T>({
+  const useProvider = createGetProvider<C>({
     connector,
     chainId,
     isActive,
   });
-  const getEnsNames = createGetEnsNames(accounts);
-  const getEnsName = createGetEnsName(account);
+  const useEnsNames = getUseEnsNames(accounts);
+  const useEnsName = getUseEnsName(account);
 
   return {
     connector,
@@ -61,8 +61,8 @@ export const createWallet = <T extends Connector = Connector>(
     isActivating,
     account,
     isActive,
-    getProvider,
-    getEnsName,
-    getEnsNames,
+    useProvider,
+    useEnsName,
+    useEnsNames,
   };
 };
