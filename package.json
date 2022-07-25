@@ -39,15 +39,24 @@
     },
     "watch": {
       "packages": [
-        "scripts",
         "types",
-        "ethereum",
-        "solana",
-        "phantom",
-        "react",
-        "react-solana",
-        "solana-glow",
-        "vue"
+        [
+          "ethereum",
+          "solana"
+        ],
+        "injected",
+        [
+          "coinbase-wallet",
+          "defiwallet",
+          "metamask",
+          "solana-phantom",
+          "solana-glow"
+        ],
+        [
+          "react",
+          "react-solana",
+          "vue"
+        ]
       ]
     }
   },

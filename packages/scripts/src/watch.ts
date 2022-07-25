@@ -3,12 +3,12 @@ import cp from 'child_process';
 
 type PackageName = string;
 type WatchConfig = {
-  packages: PackageName[];
+  packages: (PackageName | PackageName[])[];
 };
 
 export const watch = async (config: WatchConfig) => {
-  console.log(chalk.blue(`[watch]: ${config.packages.length} packages`));
-  await Promise.all(config.packages.map((v) => watchPkg(v)));
+  console.log(chalk.blue(`[watch]: ${config.packages.flat().length} packages`));
+  await Promise.all(config.packages.flat().map((v) => watchPkg(v)));
 };
 
 /**
