@@ -15,7 +15,8 @@
   },
   "version": "0.1.2",
   "files": [
-    "dist/*"
+    "dist",
+    "src"
   ],
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",

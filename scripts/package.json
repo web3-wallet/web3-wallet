@@ -17,7 +17,8 @@
     "access": "public"
   },
   "files": [
-    "dist/*"
+    "dist",
+    "src"
   ],
   "type": "module",
   "module": "./dist/index.js",
