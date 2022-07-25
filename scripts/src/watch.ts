@@ -5,7 +5,7 @@ import type { Package, Packages } from './types';
 
 export const watch = async (packages: Packages) => {
   console.log(chalk.blue(`[watch]: ${packages.flat().length} packages`));
-  await Promise.all(packages.flat().map((v) => watchPkg(v)));
+  await Promise.all(packages.flat().map(watchPkg));
 };
 
 /**
