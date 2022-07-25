@@ -6,6 +6,7 @@ import { Accounts } from './Accounts';
 import { Chain } from './Chain';
 import { ConnectWithSelect } from './ConnectWithSelect';
 import { Status } from './Status';
+import { WalletCardContainer } from './WalletCardContainer';
 
 interface Props {
   name: string;
@@ -42,21 +43,9 @@ export const WalletCard = ({ name, wallet }: Props) => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        justifyContent: 'space-between',
-        maxWidth: '30rem',
-        minWidth: '15rem',
-        padding: '1rem',
-        overflow: 'auto',
-        border: '1px solid #999',
-        borderRadius: '0.5rem',
-      }}
-    >
+    <WalletCardContainer>
       <b>{name}</b>
+      <div>Category: Ethereum</div>
       <Status isActivating={isActivating} isActive={isActive} />
       <Chain chainId={chainId} />
       <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
@@ -66,6 +55,6 @@ export const WalletCard = ({ name, wallet }: Props) => {
         isActivating={isActivating}
         isActive={isActive}
       />
-    </div>
+    </WalletCardContainer>
   );
 };

@@ -6,14 +6,14 @@ type AccountProps = {
 
 export const Account = ({
   account: address,
-  leadingChars = 2,
+  leadingChars = 4,
   tailingChars = 4,
 }: AccountProps) => {
   if (!address) return null;
 
   return (
-    <div>
+    <span>
       {address.slice(0, leadingChars)}...{address.slice(-tailingChars)}
-    </div>
+    </span>
   );
 };

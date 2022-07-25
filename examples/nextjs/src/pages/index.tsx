@@ -1,5 +1,10 @@
+import { Layout } from '../components/Layout';
 import { WalletCardList } from '../components/WalletCardList';
 
 export default function Home() {
-  return <WalletCardList />;
+  return (
+    <Layout>
+      <WalletCardList />
+    </Layout>
+  );
 }

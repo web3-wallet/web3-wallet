@@ -115,7 +115,7 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/metamask': workspace:*
       '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0
@@ -125,7 +125,7 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
-      '@web3-wallet/ethereum': link:../../packages/ethereum
+      '@web3-wallet/metamask': link:../../packages/wallets/ethereum/metamask
       '@web3-wallet/vue': link:../../packages/vue
       vue: 3.2.37
     devDependencies:

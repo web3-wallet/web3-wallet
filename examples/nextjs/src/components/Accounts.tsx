@@ -1,14 +1,12 @@
 import type { BigNumber } from '@ethersproject/bignumber';
 import { formatEther } from '@ethersproject/units';
-import type { WalletApi } from '@web3-wallet/react';
+import type { Wallet } from '@web3-wallet/react';
 import React, { useEffect, useState } from 'react';
 
 import { Account } from './Account';
 
-type Hooks = WalletApi['hooks'];
-
 const useBalances = (
-  provider?: ReturnType<Hooks['useProvider']>,
+  provider?: ReturnType<Wallet['useProvider']>,
   accounts?: string[],
 ): BigNumber[] | undefined => {
   const [balances, setBalances] = useState<BigNumber[] | undefined>();
@@ -39,9 +37,9 @@ export const Accounts = ({
   provider,
   ENSNames,
 }: {
-  accounts: ReturnType<Hooks['useAccounts']>;
-  provider: ReturnType<Hooks['useProvider']>;
-  ENSNames: ReturnType<Hooks['useENSNames']>;
+  accounts: ReturnType<Wallet['useAccounts']>;
+  provider: ReturnType<Wallet['useProvider']>;
+  ENSNames: ReturnType<Wallet['useENSNames']>;
 }) => {
   const balances = useBalances(provider, accounts);
 
