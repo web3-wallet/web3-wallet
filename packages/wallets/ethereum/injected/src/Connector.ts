@@ -1,6 +1,5 @@
 import {
   type Provider,
-  type ProviderFilter,
   EthereumConnector,
   ProviderNoFoundError,
 } from '@web3-wallet/ethereum';
@@ -10,6 +9,8 @@ export type InjectedProvider = Provider & {
 };
 
 const providerNotFoundError = new ProviderNoFoundError('Provider not found');
+
+export type ProviderFilter<P> = (provider: P) => boolean;
 
 export abstract class InjectedConnector extends EthereumConnector {
   public provider?: InjectedProvider;

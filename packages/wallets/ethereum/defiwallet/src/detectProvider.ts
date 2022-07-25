@@ -50,11 +50,10 @@ export interface DeFiWalletProvider extends Provider {
   connect: (options: DeFiWalletProviderOptions) => Promise<void>;
 }
 
-declare global {
-  interface Window {
-    deficonnectProvider?: DeFiWalletProvider;
-  }
+interface DeFiWalletWindow extends Window {
+  deficonnectProvider?: DeFiWalletProvider;
 }
+declare const window: DeFiWalletWindow;
 
 const delay = (wait: number): Promise<void> => {
   return new Promise((resolve) => {

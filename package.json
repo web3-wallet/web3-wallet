@@ -18,14 +18,21 @@
     "build": {
       "packages": [
         "types",
-        "ethereum",
+        [
+          "ethereum",
+          "solana"
+        ],
         "injected",
         [
           "coinbase-wallet",
-          "defiwallet"
+          "defiwallet",
+          "metamask",
+          "solana-phantom",
+          "solana-glow"
         ],
         [
           "react",
+          "react-solana",
           "vue"
         ]
       ]
@@ -35,14 +42,18 @@
         "scripts",
         "types",
         "ethereum",
+        "solana",
+        "phantom",
         "react",
+        "react-solana",
+        "solana-glow",
         "vue"
       ]
     }
   },
   "scripts": {
     "dev": "run-p watch nextjs",
-    "build": "pnpm clean && pnpm -F scripts build && scripts build",
+    "build": "pnpm -F scripts build && scripts build",
     "dev:next": "run-p watch nextjs",
     "dev:vue": "run-p watch vuejs",
     "nextjs": "cd examples/nextjs && pnpm dev",

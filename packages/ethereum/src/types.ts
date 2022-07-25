@@ -1,7 +1,6 @@
 import type {
   Actions as BaseActions,
   Provider as BaseProvider,
-  ProviderFilter as BaseProviderFilter,
   State as BaseState,
   Store as BaseStore,
 } from '@web3-wallet/types';
@@ -10,6 +9,7 @@ import type { EventEmitter } from 'node:events';
 
 export interface State extends BaseState {
   chainId?: number;
+  accounts?: string[];
 }
 
 export type Store = BaseStore<State>;
@@ -36,10 +36,10 @@ export interface Provider extends EventEmitter, BaseProvider {
 
 // per EIP-1193
 export interface ProviderConnectInfo {
-  readonly chainId: string;
+  isActivating: boolean;
+  chainId: string;
+  accounts?: string[];
 }
-
-export type ProviderFilter<T extends Provider> = BaseProviderFilter<T>;
 
 export class ProviderNoFoundError extends Error {
   public constructor(message = 'Provider not found') {
@@ -71,4 +71,18 @@ export interface WatchAssetParameters {
   image: string; // A string url of the token logo
 }
 
-export abstract class Connector extends BaseConnector<Provider, State> {}
+export abstract class Connector<
+  T extends Provider = Provider,
+> extends BaseConnector<T, State> {
+  public abstract watchAsset(param: WatchAssetParameters): void;
+  protected abstract updateChainId(chainId: number): void;
+  protected abstract updateAccounts(accounts: string[]): void;
+  protected abstract switchChain(chainId: number): Promise<void>;
+  protected abstract addChain(param: AddEthereumChainParameter): Promise<void>;
+  protected abstract requestChainId(): Promise<string>;
+  protected abstract requestAccounts(): Promise<string[]>;
+  protected abstract onConnect(info: ProviderConnectInfo): void;
+  protected abstract onDisconnect(error?: ProviderRpcError): void;
+  protected abstract onChainChanged(chainId: number | string): void;
+  protected abstract onAccountsChanged(accounts: string[]): void;
+}
