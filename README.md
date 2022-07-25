@@ -113,7 +113,7 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 ```typescript
 // wallets/metaMask.ts
 import { MetaMaskConnector } from '@web3-wallet/ethereum';
-import { createWallet } from '@web3-wallet/react';
+import { createWallet } from '@web3-wallet/vue';
 
 export const metaMask = createWallet<MetaMask>(
   (actions) => new MetaMask(actions),

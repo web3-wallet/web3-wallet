@@ -1,4 +1,4 @@
-import { CoinbaseWalletConnector } from '@web3-wallet/ethereum';
+import { CoinbaseWalletConnector } from '@web3-wallet/coinbase-wallet';
 import type { Wallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
