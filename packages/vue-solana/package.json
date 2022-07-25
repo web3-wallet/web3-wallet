@@ -27,10 +27,6 @@
   "peerDependencies": {
     "vue": "^3.2.13"
   },
-  "optionalDependencies": {
-    "@ethersproject/networks": "^5.6.4",
-    "@ethersproject/providers": "^5"
-  },
   "description": "web3-wallet vue",
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
