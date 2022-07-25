@@ -103,7 +103,7 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
-      '@web3-wallet/ethereum': workspace:^0.1.0
+      '@web3-wallet/ethereum': workspace:*
       '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0

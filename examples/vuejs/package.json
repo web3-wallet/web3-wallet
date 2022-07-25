@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/vuejs",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -9,7 +9,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@web3-wallet/ethereum": "workspace:^0.1.0",
+    "@web3-wallet/ethereum": "workspace:*",
     "@web3-wallet/vue": "workspace:*",
     "vue": "^3.2.25"
   },

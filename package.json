@@ -6,18 +6,12 @@
   "author": "logan.luo",
   "license": "MIT",
   "keywords": [
-    "wallet",
     "web3",
+    "wallet",
     "react",
     "vue",
-    "vue3",
     "dApp",
-    "ethereum",
-    "metamask",
-    "wallet connect",
-    "crypto.com DeFi Wallet",
-    "connector",
-    "eip1193"
+    "ethereum"
   ],
   "packageManager": "pnpm@7.5.0",
   "@web3-wallet/scripts": {
@@ -55,6 +49,7 @@
     "vuejs": "cd examples/vuejs && pnpm dev",
     "watch": "scripts watch",
     "test": "jest",
+    "release": "changeset publish && git push --follow-tags",
     "lint": "pnpm -p -r -c exec eslint src",
     "fix": "pnpm -p -r -c exec eslint --fix src",
     "ts-check": "pnpm -s -p -r -c exec tsc --noEmit",
@@ -97,7 +92,7 @@
     "vue": "^3.2.37"
   },
   "engines": {
-    "node": ">= 18.0.0",
+    "node": ">= 16.14.0",
     "pnpm": ">= 7.5.0"
   }
 }
