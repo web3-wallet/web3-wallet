@@ -8,8 +8,6 @@ export const WalletCardContainer = ({ style, ...rest }: BoxProps) => {
         flexDirection: 'column',
         gap: '1rem',
         justifyContent: 'space-between',
-        maxWidth: '30rem',
-        minWidth: '15rem',
         padding: '1rem',
         overflow: 'auto',
         border: '1px solid #999',

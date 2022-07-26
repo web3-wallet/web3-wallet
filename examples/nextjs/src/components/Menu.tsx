@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import { Tag } from './Tag';
 
 const routes = [
-  { path: '/', name: 'Ethereum' },
+  { path: '/', name: 'All' },
+  { path: '/ethereum', name: 'Ethereum' },
   { path: '/solana', name: 'Solana' },
 ];
 
