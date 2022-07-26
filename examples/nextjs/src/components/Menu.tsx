@@ -20,7 +20,7 @@ export const Menu = () => {
       }}
     >
       {routes.map(({ path, name }) => (
-        <Link href={path} passHref>
+        <Link key={name} href={path} passHref>
           <a>
             <Tag style={{ minWidth: '50px' }} isActive={path === pathName}>
               {name}

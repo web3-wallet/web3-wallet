@@ -53,7 +53,10 @@ export const createStore = (): {
       const account = stateUpdate.account ?? existingState.account;
 
       // ensure that the activating flag is cleared when appropriate
-      const isActivating = existingState.isActivating;
+      let isActivating = existingState.isActivating;
+      if (isActivating && account) {
+        isActivating = false;
+      }
 
       return { account, isActivating };
     });
