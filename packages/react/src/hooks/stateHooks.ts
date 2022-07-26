@@ -1,5 +1,5 @@
 import type { State } from '@web3-wallet/ethereum';
-import { EqualityChecker, UseBoundStore } from 'zustand';
+import { UseBoundStore } from 'zustand';
 
 import type { Wallet } from '../types';
 
@@ -8,10 +8,10 @@ export type StateHooks = Pick<
   'useChainId' | 'useAccounts' | 'useIsActivating'
 >;
 
-const ACCOUNTS_EQUALITY_CHECKER: EqualityChecker<State['accounts']> = (
-  oldAccounts,
-  newAccounts,
-) => {
+const ACCOUNTS_EQUALITY_CHECKER: (
+  a: State['accounts'],
+  b: State['accounts'],
+) => boolean = (oldAccounts, newAccounts) => {
   if (oldAccounts === undefined && newAccounts === undefined) return true;
   if (oldAccounts === undefined && newAccounts !== undefined) return false;
   if (oldAccounts !== undefined && newAccounts === undefined) return false;

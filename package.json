@@ -42,13 +42,10 @@
     ]
   },
   "scripts": {
-    "dev": "run-p watch nextjs",
     "build": "pnpm -F scripts build && scripts build",
-    "dev:next": "run-p watch nextjs",
-    "dev:vue": "run-p watch vuejs",
+    "watch": "scripts watch",
     "nextjs": "cd examples/nextjs && pnpm dev",
     "vuejs": "cd examples/vuejs && pnpm dev",
-    "watch": "scripts watch",
     "test": "jest",
     "release": "changeset publish && git push --follow-tags",
     "lint": "pnpm -p -r -c exec eslint src",

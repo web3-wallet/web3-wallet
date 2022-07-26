@@ -266,10 +266,12 @@ git clone git@github.com:LoganAtCrypto/web3-wallet.git
 cd web3-wallet && pnpm install
 
 # react
-pnpm watch && pnpm nextjs
+pnpm watch # watch for packages change
+pnpm nextjs # start examples/nextjs
 
 # vue
-pnpm watch && pnpm vuejs
+pnpm watch # watch for packages change
+pnpm vuejs # start examples/vuejs
 
 # test
 pnpm test

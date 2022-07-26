@@ -91,7 +91,7 @@ export abstract class SolanaConnector<
     this.resetState();
   }
 
-  protected onConnect(publicKey?: PublicKey) {
+  protected onConnect(publicKey?: PublicKey): void {
     publicKey = publicKey || this.provider?.publicKey;
 
     this.actions.update({
