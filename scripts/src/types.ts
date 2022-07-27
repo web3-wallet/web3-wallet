@@ -15,8 +15,10 @@ export type Package =
 
 export type Packages = (Package | Package[])[];
 
+export interface Config {
+  packages: Packages;
+}
+
 export type PackageJson = {
-  '@web3-wallet/scripts': {
-    packages: Packages;
-  };
+  '@web3-wallet/scripts': Config;
 };

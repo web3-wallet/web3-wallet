@@ -67,3 +67,6 @@ jspm_packages/
 
 # nextjs
 .next
+
+# scrips env file
+.evn.scripts.json

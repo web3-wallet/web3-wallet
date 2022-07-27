@@ -4,6 +4,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "files.associations": {
+    // allow comments in .evn.scripts.json
+    ".evn.scripts.json": "jsonc"
+  },
   "cSpell.words": [
     "bignumber",
     "changesets",

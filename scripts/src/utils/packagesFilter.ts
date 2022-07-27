@@ -1,4 +1,4 @@
-import type { Package, Packages } from './types';
+import type { Package, Packages } from '../types';
 
 export const packagesFilter = (
   packages: Packages,
