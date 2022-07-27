@@ -2,6 +2,13 @@
 
 [![CI](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml)
 
+## Status
+
+- react + ethereum `beta`
+- vue + ethereum `beta`
+- react + solana `wip`
+- vue + solana `wip`
+
 ## Install
 
 ```
@@ -32,10 +39,11 @@ pnpm install @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/injected`](packages/wallets/ethereum/injected)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected)               | Injected connector               |
 | [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)               | Metamask connector               |
 | [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)           | Crypto.com DeFi Wallet connector |
-| [`@web3-wallet/coinbase-wallet`](packages/wallets/ethereum/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet conector         |
+| [`@web3-wallet/coinbase-wallet`](packages/wallets/ethereum/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet connector        |
 | **Solana Wallets**                                                          |                                                                                                                                        |                                  |
 | [`@web3-wallet/solana-phantom`](packages/wallets/solana/phantom)            | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-phantom.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-phantom)   | Phantom connector                |
 | [`@web3-wallet/solana-glow`](packages/wallets/solana/glow)                  | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-glow.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-glow)         | Glow connector                   |
+| [`@web3-wallet/solana-slop`](packages/wallets/solana/slop)                  | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-slop.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-slop)         | Slop connector                   |
 
 ## Examples
 

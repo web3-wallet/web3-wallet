@@ -80,6 +80,7 @@ importers:
       '@web3-wallet/react-solana': workspace:*
       '@web3-wallet/solana-glow': workspace:*
       '@web3-wallet/solana-phantom': workspace:*
+      '@web3-wallet/solana-slop': workspace:*
       eslint-config-next: 12.2.0
       next: 12.2.0
       react: 18.2.0
@@ -97,6 +98,7 @@ importers:
       '@web3-wallet/react-solana': link:../../packages/react-solana
       '@web3-wallet/solana-glow': link:../../packages/wallets/solana/glow
       '@web3-wallet/solana-phantom': link:../../packages/wallets/solana/phantom
+      '@web3-wallet/solana-slop': link:../../packages/wallets/solana/slop
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -253,6 +255,14 @@ importers:
     specifiers:
       '@web3-wallet/solana': workspace:*
     dependencies:
+      '@web3-wallet/solana': link:../../../solana
+
+  packages/wallets/solana/slop:
+    specifiers:
+      '@solana/web3.js': ^1.50.0
+      '@web3-wallet/solana': workspace:*
+    dependencies:
+      '@solana/web3.js': 1.50.0
       '@web3-wallet/solana': link:../../../solana
 
   scripts:

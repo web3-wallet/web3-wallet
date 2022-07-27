@@ -12,10 +12,10 @@ declare const window: GlowWindow;
 
 export class GlowConnector extends SolanaConnector<GlowProvider> {
   public override async detectProvider(): Promise<GlowProvider> {
-    return (await super.detectProvider(() => {
+    return await super.detectProvider(() => {
       if (window.glowSolana?.isGlow) {
         return window.glowSolana;
       }
-    })) as GlowProvider;
+    });
   }
 }

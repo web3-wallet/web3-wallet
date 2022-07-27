@@ -31,7 +31,8 @@
         "defiwallet",
         "metamask",
         "solana-phantom",
-        "solana-glow"
+        "solana-glow",
+        "solana-slop"
       ],
       [
         "react",

@@ -19,6 +19,7 @@
     "@web3-wallet/coinbase-wallet": "workspace:*",
     "@web3-wallet/solana-phantom": "workspace:*",
     "@web3-wallet/solana-glow": "workspace:*",
+    "@web3-wallet/solana-slop": "workspace:*",
     "@web3-wallet/react-solana": "workspace:*",
     "next": "12.2.0",
     "react": "18.2.0",

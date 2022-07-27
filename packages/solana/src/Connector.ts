@@ -8,10 +8,6 @@ import {
 import { detectProvider } from './detectProvider';
 import { Connector, Provider, ProviderNoFoundError } from './types';
 
-type connectOptions = {
-  onlyIfTrusted: boolean;
-};
-
 const providerNotFoundError = new ProviderNoFoundError();
 export interface SolanaProvider extends Provider {
   publicKey?: PublicKey;
@@ -23,8 +19,8 @@ export interface SolanaProvider extends Provider {
     options?: SendOptions,
   ): Promise<{ signature: TransactionSignature }>;
   signMessage(message: Uint8Array): Promise<{ signature: Uint8Array }>;
-  connect(options?: connectOptions): Promise<void>;
-  disconnect(): void;
+  connect(...args: unknown[]): Promise<unknown>;
+  disconnect(...args: unknown[]): Promise<unknown>;
 }
 
 export abstract class SolanaConnector<
@@ -56,10 +52,12 @@ export abstract class SolanaConnector<
       this.provider.on('connect', onConnect);
       this.provider.on('disconnect', onDisconnect);
       this.provider.on('accountsChanged', onAccountChanged);
-    } else {
+    } else if (typeof this.provider.addListener === 'function') {
       this.provider.addListener('connect', onConnect);
       this.provider.addListener('disconnect', onDisconnect);
       this.provider.addListener('accountsChanged', onAccountChanged);
+    } else {
+      // Does not support add event listeners
     }
   }
 
@@ -74,6 +72,10 @@ export abstract class SolanaConnector<
     }
   }
 
+  protected async connect(): Promise<void> {
+    this.provider?.connect();
+  }
+
   public async activate(): Promise<void> {
     const cancelActivation = this.actions.startActivation();
     try {
@@ -81,7 +83,7 @@ export abstract class SolanaConnector<
 
       if (!this.provider) return;
 
-      await this.provider.connect();
+      await this.connect();
     } finally {
       cancelActivation();
     }
@@ -99,19 +101,21 @@ export abstract class SolanaConnector<
     });
   }
 
-  public async deactivate(): Promise<void> {
-    this.resetState();
+  protected async disconnect(): Promise<void> {
     this.provider?.disconnect();
   }
 
-  public override async connectEagerly(): Promise<void> {
+  public async deactivate(): Promise<void> {
+    this.resetState();
+    this.disconnect();
+  }
+
+  public async connectEagerly(): Promise<void> {
     const cancelActivation = this.actions.startActivation();
 
     try {
       await this.lazyInitialize();
-      await this.provider?.connect({
-        onlyIfTrusted: true,
-      });
+      await this.connect();
     } finally {
       cancelActivation();
     }

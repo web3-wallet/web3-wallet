@@ -14,10 +14,10 @@ declare const window: PhantomWindow;
 
 export class PhantomConnector extends SolanaConnector<PhantomProvider> {
   public override async detectProvider(): Promise<PhantomProvider> {
-    return (await super.detectProvider(() => {
+    return await super.detectProvider(() => {
       if (window.phantom?.solana?.isPhantom) {
         return window.phantom?.solana;
       }
-    })) as PhantomProvider;
+    });
   }
 }

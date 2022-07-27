@@ -31,7 +31,7 @@ export abstract class Connector<
   public resetState(): void {
     this.actions.resetState();
   }
-  public abstract detectProvider(...args: unknown[]): Promise<P | undefined>;
+  public abstract detectProvider(...args: unknown[]): Promise<P>;
   protected abstract lazyInitialize(): Promise<void>;
   public abstract activate(...args: unknown[]): Promise<void>;
   public abstract connectEagerly(...args: unknown[]): Promise<void>;
