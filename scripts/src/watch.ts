@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import cp from 'child_process';
 
+import { PACKAGE_SCOPE } from './constants';
 import type { Package, Packages } from './types';
 
 export const watch = async (packages: Packages) => {
@@ -19,9 +20,9 @@ const watchPkg = (pkg: Package) => {
   const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
 
   return new Promise((resolve, reject) => {
-    console.log(chalk.blue(`[watch]: @web3-wallet/${pkgName}`));
+    console.log(chalk.blue(`[watch]: ${PACKAGE_SCOPE}/${pkgName}`));
 
-    const build = cp.spawn(
+    const watch = cp.spawn(
       'pnpm',
       [
         '--filter',
@@ -37,10 +38,11 @@ const watchPkg = (pkg: Package) => {
         stdio: 'inherit',
       },
     );
-    build.on('close', (code) => {
+
+    watch.on('close', (code) => {
       code === 0
         ? resolve(code)
-        : reject(new Error(`Fail to watch @web3-wallet/${pkg}`));
+        : reject(new Error(`Fail to watch ${PACKAGE_SCOPE}/${pkg}`));
     });
   });
 };

@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import cp from 'child_process';
 
+import { PACKAGE_SCOPE } from './constants';
 import type { Package, Packages } from './types';
 
 export const build = async (packages: Packages) => {
@@ -28,7 +29,7 @@ const buildPkg = (pkg: Package) => {
   const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
 
   return new Promise((resolve, reject) => {
-    console.log(chalk.blue(`[build]: @web3-wallet/${pkgName}...`));
+    console.log(chalk.blue(`[build]: ${PACKAGE_SCOPE}/${pkgName}...`));
 
     const build = cp.spawn(
       'pnpm',
@@ -48,11 +49,11 @@ const buildPkg = (pkg: Package) => {
 
     build.on('close', (code) => {
       if (code === 0) {
-        console.log(chalk.green(`[build]: @web3-wallet/${pkg} done!`));
+        console.log(chalk.green(`[build]: ${PACKAGE_SCOPE}/${pkgName} done!`));
       }
       code === 0
         ? resolve(code)
-        : reject(new Error(`Fail to build @web3-wallet/${pkg}`));
+        : reject(new Error(`Fail to build ${PACKAGE_SCOPE}/${pkgName}`));
     });
   });
 };

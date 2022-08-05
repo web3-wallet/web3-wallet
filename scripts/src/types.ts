@@ -1,3 +1,5 @@
+import { PACKAGE_SCOPE } from './constants';
+
 export enum Task {
   Build = 'build',
   Watch = 'watch',
@@ -19,6 +21,8 @@ export interface Config {
   packages: Packages;
 }
 
+const SCRIPTS_PACKAGE = `${PACKAGE_SCOPE}/scripts` as const;
+
 export type PackageJson = {
-  '@web3-wallet/scripts': Config;
+  [SCRIPTS_PACKAGE]: Config;
 };

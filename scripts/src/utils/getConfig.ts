@@ -2,9 +2,10 @@ import chalk from 'chalk';
 import fs from 'fs/promises';
 import path from 'path';
 
+import { ENV_FILE_NAME, PACKAGE_SCOPE } from '../constants';
 import { Config, PackageJson } from '../types';
 
-const envFilePath = path.join(process.cwd(), '.evn.scripts.json');
+const envFilePath = path.join(process.cwd(), ENV_FILE_NAME);
 const pkgJsonPath = path.join(process.cwd(), 'package.json');
 
 const readConfigFromEvnFile = async (): Promise<Config> => {
@@ -30,7 +31,9 @@ const readConfigFromEvnFile = async (): Promise<Config> => {
 
 const readConfigFromPackageJson = async (): Promise<Config> => {
   const content = await fs.readFile(pkgJsonPath, 'utf-8');
-  const config = (JSON.parse(content) as PackageJson)['@web3-wallet/scripts'];
+  const config = (JSON.parse(content) as PackageJson)[
+    `${PACKAGE_SCOPE}/scripts`
+  ];
   console.log(
     chalk.green(
       `[info]: reading configuration from ${path.basename(pkgJsonPath)}`,
