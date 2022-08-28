@@ -35,14 +35,14 @@ export const ConnectWithSelect = ({
           : getAddChainParameters(desiredChainId),
       );
     },
-    [connector, chainId],
+    [connector],
   );
 
   if (isActive) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <ChainSelect
-          chainId={desiredChainId === -1 ? -1 : chainId}
+          chainId={desiredChainId === -1 ? -1 : chainId || 1}
           switchChain={switchChain}
           displayDefault={displayDefault}
           chainIds={chainIds}

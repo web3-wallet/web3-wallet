@@ -7,7 +7,7 @@ export const ChainSelect = ({
   chainIds,
 }: {
   chainId: number;
-  switchChain: (chainId: number) => void | undefined;
+  switchChain: ((chainId: number) => void) | undefined;
   displayDefault: boolean;
   chainIds: number[];
 }) => {
