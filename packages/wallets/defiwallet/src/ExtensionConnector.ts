@@ -1,8 +1,8 @@
 import {
   type Actions,
   type Provider,
+  type WalletName,
   Connector,
-  ProviderNoFoundError,
   utils,
 } from '@web3-wallet/core';
 
@@ -12,9 +12,7 @@ import {
   detectProvider,
 } from './detectProvider';
 
-const providerNotFoundError = new ProviderNoFoundError(
-  'DeFi Wallet provider not found',
-);
+const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
 export class ExtensionConnector extends Connector {
   public override provider?: Provider & DeFiWalletProvider;
@@ -25,7 +23,7 @@ export class ExtensionConnector extends Connector {
     options: DeFiWalletProviderOptions,
     onError?: Connector['onError'],
   ) {
-    super(actions, onError);
+    super(walletName, actions, onError);
     this.options = options;
   }
 
@@ -34,7 +32,7 @@ export class ExtensionConnector extends Connector {
 
     const provider = await detectProvider();
 
-    if (!provider) throw providerNotFoundError;
+    if (!provider) throw this.providerNotFoundError;
 
     this.provider = provider as Provider & DeFiWalletProvider;
 
@@ -46,7 +44,7 @@ export class ExtensionConnector extends Connector {
 
     try {
       await this.lazyInitialize();
-      if (!this.provider) throw providerNotFoundError;
+      if (!this.provider) throw this.providerNotFoundError;
 
       /**
        * so many bug in this.provider?.connect
@@ -111,7 +109,7 @@ export class ExtensionConnector extends Connector {
   }
 
   public override async deactivate() {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
     super.deactivate();
     await this.provider.close();
   }

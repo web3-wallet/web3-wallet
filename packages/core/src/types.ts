@@ -76,17 +76,28 @@ export interface WatchAssetParameters {
   image: string;
 }
 
+export type WalletName<T extends string = string> = T & {
+  __brand__: 'WalletName';
+};
+
 export abstract class AbstractConnector<P extends Provider = Provider> {
   public abstract provider?: P;
+  public name: WalletName;
   public actions: Actions;
   public onError?(...args: unknown[]): Promise<void>;
+  protected providerNotFoundError: ProviderNoFoundError;
 
   constructor(
+    name: WalletName,
     actions: Actions,
     onError?: (...args: unknown[]) => Promise<void>,
   ) {
+    this.name = name;
     this.actions = actions;
     this.onError = onError;
+    this.providerNotFoundError = new ProviderNoFoundError(
+      `${name} provider not found`,
+    );
   }
 
   public resetState(): void {

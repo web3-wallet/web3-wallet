@@ -2,11 +2,13 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { Connector } from '@web3-wallet/core';
+import { Connector, WalletName } from '@web3-wallet/core';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
 >[0];
+
+const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
 /**
  * @param options - Options to pass to `@coinbase/wallet-sdk`.
@@ -26,7 +28,7 @@ export class CoinbaseWalletConnector extends Connector {
     options: CoinbaseWalletSDKOptions,
     onError?: Connector['onError'],
   ) {
-    super(actions, onError);
+    super(walletName, actions, onError);
     this.options = options;
   }
 

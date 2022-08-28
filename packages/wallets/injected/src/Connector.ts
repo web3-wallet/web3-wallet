@@ -1,14 +1,8 @@
-import {
-  type Provider,
-  Connector,
-  ProviderNoFoundError,
-} from '@web3-wallet/core';
+import { type Provider, Connector } from '@web3-wallet/core';
 
 export type InjectedProvider = Provider & {
   providers?: InjectedProvider[];
 };
-
-const providerNotFoundError = new ProviderNoFoundError('Provider not found');
 
 export type ProviderFilter<P> = (provider: P) => boolean;
 
@@ -24,7 +18,7 @@ export abstract class InjectedConnector extends Connector {
 
     const provider = await m.default();
 
-    if (!provider) throw providerNotFoundError;
+    if (!provider) throw this.providerNotFoundError;
 
     this.provider = provider as InjectedProvider;
 
@@ -36,7 +30,7 @@ export abstract class InjectedConnector extends Connector {
     }
 
     if (!this.provider || !providerFilter(this.provider)) {
-      throw providerNotFoundError;
+      throw this.providerNotFoundError;
     }
 
     return this.provider;

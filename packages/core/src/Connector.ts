@@ -4,7 +4,6 @@ import {
   type ProviderRpcError,
   type WatchAssetParameters,
   AbstractConnector,
-  ProviderNoFoundError,
 } from './types';
 import { parseChainId, toHexChainId } from './utils';
 
@@ -19,8 +18,6 @@ export const isAddChainParameter = (
 ): chainIdOrChainParameter is AddEthereumChainParameter => {
   return !isChainId(chainIdOrChainParameter);
 };
-
-const providerNotFoundError = new ProviderNoFoundError();
 
 export abstract class Connector extends AbstractConnector {
   protected initialized = false;
@@ -53,7 +50,7 @@ export abstract class Connector extends AbstractConnector {
   }
 
   private addEventListeners(): void {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     const onConnect = this.onConnect.bind(this);
     const onDisconnect = this.onDisconnect.bind(this);
@@ -84,7 +81,7 @@ export abstract class Connector extends AbstractConnector {
   }
 
   protected async switchChain(chainId: number): Promise<void> {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     await this.provider.request({
       method: 'wallet_switchEthereumChain',
@@ -95,7 +92,7 @@ export abstract class Connector extends AbstractConnector {
   protected async addChain(
     addChainParameter: AddEthereumChainParameter,
   ): Promise<void> {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     await this.provider.request({
       method: 'wallet_addEthereumChain',
@@ -109,7 +106,7 @@ export abstract class Connector extends AbstractConnector {
   }
 
   protected async requestAccounts(): Promise<string[]> {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     try {
       const accounts = await this.provider.request<string[]>({
@@ -131,7 +128,7 @@ export abstract class Connector extends AbstractConnector {
   }
 
   protected async requestChainId(): Promise<string> {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     return await this.provider.request({ method: 'eth_chainId' });
   }
@@ -171,7 +168,7 @@ export abstract class Connector extends AbstractConnector {
     try {
       await this.lazyInitialize();
 
-      if (!this.provider) throw providerNotFoundError;
+      if (!this.provider) throw this.providerNotFoundError;
 
       const [chainId, accounts] = await Promise.all([
         this.requestChainId(),
@@ -228,7 +225,7 @@ export abstract class Connector extends AbstractConnector {
     decimals,
     image,
   }: WatchAssetParameters): Promise<true> {
-    if (!this.provider) throw providerNotFoundError;
+    if (!this.provider) throw this.providerNotFoundError;
 
     const success = await this.provider.request<boolean>({
       method: 'wallet_watchAsset',
