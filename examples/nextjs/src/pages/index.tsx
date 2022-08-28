@@ -1,14 +1,12 @@
-import { Layout } from '../components/Layout';
-import { SolanaWalletCardList } from '../components/SolanaWalletCardList';
-import { WalletCardList } from '../components/WalletCardList';
-import { WalletCardListContainer } from '../components/WalletCardListContainer';
+import { Layout } from '@nextjs/components/Layout';
+import { WalletCardList } from '@nextjs/components/WalletCardList';
+import { WalletCardListContainer } from '@nextjs/components/WalletCardListContainer';
 
 export default function Home() {
   return (
     <Layout>
       <WalletCardListContainer>
         <WalletCardList />
-        <SolanaWalletCardList />
       </WalletCardListContainer>
     </Layout>
   );

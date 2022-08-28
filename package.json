@@ -16,29 +16,17 @@
   "packageManager": "pnpm@7.5.0",
   "@web3-wallet/scripts": {
     "packages": [
-      {
-        "name": "types",
-        "build": true,
-        "watch": true
-      },
-      [
-        "ethereum",
-        "solana"
-      ],
+      "types",
+      "ethereum",
       "injected",
       [
         "coinbase-wallet",
         "defiwallet",
-        "metamask",
-        "solana-phantom",
-        "solana-glow",
-        "solana-slop"
+        "metamask"
       ],
       [
         "react",
-        "react-solana",
-        "vue",
-        "vue-solana"
+        "vue"
       ]
     ]
   },

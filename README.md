@@ -6,8 +6,8 @@
 
 - react + ethereum `beta`
 - vue + ethereum `beta`
-- react + solana `wip`
-- vue + solana `wip`
+
+
 
 ## Install
 
@@ -19,31 +19,26 @@ pnpm install @web3-wallet/react @web3-wallet/metamask
 pnpm install @web3-wallet/vue @web3-wallet/metamask
 ```
 
+
+
 ## Packages
 
-| Package                                              | Version                                                                                                                          | Description                      |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| [`@web3-wallet/react`](packages/react)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)               | React binding for EVM wallets    |
-| [`@web3-wallet/react-solana`](packages/react-solana) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact-solana.svg)](https://badge.fury.io/js/@web3-wallet%2Freact-solana) | React binding for Solana wallets |
-| [`@web3-wallet/vue`](packages/vue)                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                   | Vue binding for EVM wallets      |
-| [`@web3-wallet/vue-solana`](packages/vue-solana)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue-solana.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue-solana)     | Vue binding for Solana wallets   |
-| [`@web3-wallet/ethereum`](@web3-wallet/ethereum)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fethereum.svg)](https://badge.fury.io/js/@web3-wallet%2Fethereum)         | Abstract EMV wallet connector    |
-| [`@web3-wallet/solana`](packages/solana)             | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana)             | Abstract solana wallet connector |
-| [`@web3-wallet/types`](packages/types)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes)               | Base types                       |
+| Package                                          | Version                                                      | Description                   |
+| ------------------------------------------------ | ------------------------------------------------------------ | ----------------------------- |
+| [`@web3-wallet/react`](packages/react)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for EVM wallets |
+| [`@web3-wallet/vue`](packages/vue)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue) | Vue binding for EVM wallets   |
+| [`@web3-wallet/ethereum`](@web3-wallet/ethereum) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fethereum.svg)](https://badge.fury.io/js/@web3-wallet%2Fethereum) | Abstract EMV wallet connector |
+| [`@web3-wallet/types`](packages/types)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftypes.svg)](https://badge.fury.io/js/@web3-wallet%2Ftypes) | Base types                    |
 
 ## Wallets
 
-| Package                                                                     | Version                                                                                                                                | Description                      |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **EVM Wallets**                                                             |                                                                                                                                        |                                  |
-| [`@web3-wallet/injected`](packages/wallets/ethereum/injected)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected)               | Injected connector               |
-| [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)               | Metamask connector               |
-| [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)           | Crypto.com DeFi Wallet connector |
+| Package                                                      | Version                                                      | Description                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------- |
+| **EVM Wallets**                                              |                                                              |                                  |
+| [`@web3-wallet/injected`](packages/wallets/ethereum/injected) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected) | Injected connector               |
+| [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask) | Metamask connector               |
+| [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet) | Crypto.com DeFi Wallet connector |
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/ethereum/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet connector        |
-| **Solana Wallets**                                                          |                                                                                                                                        |                                  |
-| [`@web3-wallet/solana-phantom`](packages/wallets/solana/phantom)            | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-phantom.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-phantom)   | Phantom connector                |
-| [`@web3-wallet/solana-glow`](packages/wallets/solana/glow)                  | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-glow.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-glow)         | Glow connector                   |
-| [`@web3-wallet/solana-slop`](packages/wallets/solana/slop)                  | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fsolana-slop.svg)](https://badge.fury.io/js/@web3-wallet%2Fsolana-slop)         | Slop connector                   |
 
 ## Examples
 
@@ -60,6 +55,8 @@ pnpm nextjs
 # vuejs example
 pnpm vuejs
 ```
+
+
 
 ## Basic usage
 

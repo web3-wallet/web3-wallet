@@ -1,5 +1,6 @@
+import { coinbaseWallet, defiWallet, metaMask } from '@nextjs/wallets';
+
 import { WalletCard } from '../components/WalletCard';
-import { coinbaseWallet, defiWallet, metaMask } from '../wallets/ethereum';
 
 export const WalletCardList = () => {
   return (
