@@ -19,14 +19,8 @@
     "dist",
     "src"
   ],
-  "type": "module",
-  "module": "./dist/index.js",
-  "scripts": {
-    "build": "rm ./tsconfig.tsbuildinfo & tsc"
-  },
-  "bin": "./entry.sh",
   "dependencies": {
-    "chalk": "^5.0.1"
+    "chalk": "^4.1.2"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"

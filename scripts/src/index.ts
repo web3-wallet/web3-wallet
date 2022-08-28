@@ -3,19 +3,17 @@ import { Task } from './types';
 import { getConfig, packagesFilter } from './utils';
 import { watch } from './watch';
 
-const task = process.argv[2] as Task;
-
 export const run = async (task: Task) => {
   const config = await getConfig();
 
   const packagesToBuild = packagesFilter(
     config.packages,
-    (pkg) => typeof pkg === 'string' || pkg.build !== false
+    (pkg) => typeof pkg === 'string' || pkg.build !== false,
   );
 
   const packagesToWatch = packagesFilter(
     config.packages,
-    (pkg) => typeof pkg === 'string' || pkg.watch !== false
+    (pkg) => typeof pkg === 'string' || pkg.watch !== false,
   );
 
   switch (task) {
@@ -30,4 +28,4 @@ export const run = async (task: Task) => {
   }
 };
 
-run(task);
+run(process.argv[2] as Task);

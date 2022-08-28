@@ -30,8 +30,8 @@
     ]
   },
   "scripts": {
-    "build": "pnpm -F scripts build && scripts build",
-    "watch": "scripts watch",
+    "build": "ts-node scripts/src/index.ts build",
+    "watch": "ts-node scripts/src/index.ts watch",
     "nextjs": "cd examples/nextjs && pnpm dev",
     "vuejs": "cd examples/vuejs && pnpm dev",
     "test": "jest",
@@ -57,7 +57,6 @@
     "@types/react": "18.0.15",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
-    "@web3-wallet/scripts": "workspace:*",
     "esbuild": "^0.14.48",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
@@ -74,6 +73,7 @@
     "prettier": "^2.7.1",
     "react": "18.2.0",
     "ts-jest": "^28.0.5",
+    "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
     "vue": "^3.2.37"
   },

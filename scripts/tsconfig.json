@@ -2,6 +2,7 @@
   "extends": "../tsconfig.json",
   "include": ["./src/**/*.ts"],
   "compilerOptions": {
+    "module": "CommonJS",
     "rootDir": "src",
     "outDir": "./dist",
     "esModuleInterop": true
