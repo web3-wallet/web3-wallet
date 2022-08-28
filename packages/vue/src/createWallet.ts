@@ -54,6 +54,7 @@ export const createWallet = <C extends Connector = Connector>(
   const useEnsName = getUseEnsName(account);
 
   return {
+    name: connector['name'],
     connector,
     store,
     chainId,

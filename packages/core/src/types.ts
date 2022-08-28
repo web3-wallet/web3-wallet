@@ -122,8 +122,3 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   protected abstract onChainChanged(chainId: number | string): void;
   protected abstract onAccountsChanged(accounts: string[]): void;
 }
-
-export interface Wallet<C extends AbstractConnector> {
-  store: Store;
-  connector: C;
-}

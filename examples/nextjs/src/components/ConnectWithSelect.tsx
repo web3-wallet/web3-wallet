@@ -11,9 +11,9 @@ export const ConnectWithSelect = ({
   isActive,
 }: {
   connector: Wallet['connector'];
-  chainId: ReturnType<Wallet['useChainId']>;
-  isActivating: ReturnType<Wallet['useIsActivating']>;
-  isActive: ReturnType<Wallet['useIsActive']>;
+  chainId: ReturnType<Wallet['hooks']['useChainId']>;
+  isActivating: ReturnType<Wallet['hooks']['useIsActivating']>;
+  isActive: ReturnType<Wallet['hooks']['useIsActive']>;
 }) => {
   const hashConnector = connector;
   const displayDefault = !hashConnector;

@@ -4,7 +4,7 @@ import { UseBoundStore } from 'zustand';
 import type { Wallet } from '../types';
 
 export type StateHooks = Pick<
-  Wallet,
+  Wallet['hooks'],
   'useChainId' | 'useAccounts' | 'useIsActivating'
 >;
 

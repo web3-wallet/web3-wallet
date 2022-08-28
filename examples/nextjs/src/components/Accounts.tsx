@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Account } from './Account';
 
 const useBalances = (
-  provider?: ReturnType<Wallet['useProvider']>,
+  provider?: ReturnType<Wallet['hooks']['useProvider']>,
   accounts?: string[],
 ): BigNumber[] | undefined => {
   const [balances, setBalances] = useState<BigNumber[] | undefined>();
@@ -37,9 +37,9 @@ export const Accounts = ({
   provider,
   ENSNames,
 }: {
-  accounts: ReturnType<Wallet['useAccounts']>;
-  provider: ReturnType<Wallet['useProvider']>;
-  ENSNames: ReturnType<Wallet['useENSNames']>;
+  accounts: ReturnType<Wallet['hooks']['useAccounts']>;
+  provider: ReturnType<Wallet['hooks']['useProvider']>;
+  ENSNames: ReturnType<Wallet['hooks']['useENSNames']>;
 }) => {
   const balances = useBalances(provider, accounts);
 

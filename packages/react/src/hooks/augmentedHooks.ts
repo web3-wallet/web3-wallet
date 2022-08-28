@@ -20,7 +20,7 @@ async function importProvider(): Promise<void> {
 }
 
 export type AugmentedHooks = Pick<
-  Wallet,
+  Wallet['hooks'],
   'useProvider' | 'useENSNames' | 'useENSName'
 >;
 

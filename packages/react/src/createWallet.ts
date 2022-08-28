@@ -26,10 +26,13 @@ export const createWallet = <C extends Connector>(
   );
 
   return {
+    name: connector.name,
     connector,
     store: reactStore,
-    ...stateHooks,
-    ...derivedHooks,
-    ...augmentedHooks,
+    hooks: {
+      ...stateHooks,
+      ...derivedHooks,
+      ...augmentedHooks,
+    },
   };
 };

@@ -7,7 +7,7 @@ const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
   return Boolean(chainId && accounts?.length && !isActivating);
 };
 
-export type DerivedHooks = Pick<Wallet, 'useAccount' | 'useIsActive'>;
+export type DerivedHooks = Pick<Wallet['hooks'], 'useAccount' | 'useIsActive'>;
 
 export const getDerivedHooks = ({
   useChainId,

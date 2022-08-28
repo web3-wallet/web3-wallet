@@ -16,12 +16,14 @@ interface Props {
 export const WalletCard = ({ name, wallet }: Props) => {
   const {
     connector,
-    useChainId,
-    useAccounts,
-    useIsActivating,
-    useIsActive,
-    useProvider,
-    useENSNames,
+    hooks: {
+      useChainId,
+      useAccounts,
+      useIsActivating,
+      useIsActive,
+      useProvider,
+      useENSNames,
+    },
   } = wallet;
 
   const chainId = useChainId();
