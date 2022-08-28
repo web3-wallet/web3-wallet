@@ -1,5 +1,9 @@
-import type { Actions, Connector, State } from '@web3-wallet/core';
-import { createStore } from '@web3-wallet/core';
+import {
+  type Actions,
+  type Connector,
+  type State,
+  createStore,
+} from '@web3-wallet/core';
 import { computed, reactive } from 'vue';
 
 import { getUseEnsName, getUseEnsNames } from './ensNames';

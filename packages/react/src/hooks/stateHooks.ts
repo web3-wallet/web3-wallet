@@ -1,5 +1,5 @@
 import type { State } from '@web3-wallet/core';
-import { UseBoundStore } from 'zustand';
+import type { UseBoundStore } from 'zustand';
 
 import type { Wallet } from '../types';
 

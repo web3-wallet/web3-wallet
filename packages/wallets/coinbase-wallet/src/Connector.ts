@@ -2,7 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { Connector, WalletName } from '@web3-wallet/core';
+import { type WalletName, Connector } from '@web3-wallet/core';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK

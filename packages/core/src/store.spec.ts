@@ -1,6 +1,6 @@
 import mock from './mock';
 import { createStore } from './store';
-import { State } from './types';
+import type { State } from './types';
 
 describe('store', () => {
   test('store default state', () => {

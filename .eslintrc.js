@@ -30,12 +30,15 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'import/no-unresolved': [1, { ignore: ['swiper/css'] }],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-explicit-any': 'warn',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/consistent-type-imports': 'error',
+    'no-duplicate-imports': 'error',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
@@ -47,5 +50,6 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    'max-lines': ['error', { max: 400, skipBlankLines: true }],
   },
 };

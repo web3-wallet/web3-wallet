@@ -1,4 +1,4 @@
-import { type Actions, type WalletName, Connector } from '@web3-wallet/core';
+import type { Actions, Connector, WalletName } from '@web3-wallet/core';
 import {
   type InjectedProvider,
   InjectedConnector,

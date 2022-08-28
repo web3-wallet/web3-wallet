@@ -1,7 +1,7 @@
-import { WalletName } from '@web3-wallet/core';
+import type { WalletName } from '@web3-wallet/core';
 import { useMemo, useRef } from 'react';
 
-import { Wallet } from './types';
+import type { Wallet } from './types';
 
 /**
  *

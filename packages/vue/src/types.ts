@@ -1,7 +1,7 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider } from '@ethersproject/providers';
-import { Connector, State, Store } from '@web3-wallet/core';
-import { ComputedRef } from 'vue';
+import type { Connector, State, Store } from '@web3-wallet/core';
+import type { ComputedRef } from 'vue';
 
 export interface Wallet<C extends Connector = Connector> {
   store: Store;

@@ -1,4 +1,4 @@
-import { Box, BoxProps } from './Box';
+import { type BoxProps, Box } from './Box';
 
 export const WalletCardListContainer = ({ style, ...rest }: BoxProps) => {
   return (

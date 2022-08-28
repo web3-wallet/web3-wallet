@@ -1,6 +1,6 @@
-import { computed, ComputedRef, ref, watchEffect } from 'vue';
+import { type ComputedRef, computed, ref, watchEffect } from 'vue';
 
-import { Wallet } from './types';
+import type { Wallet } from './types';
 
 /**
  * @returns ENSNames - An array of length `accounts.length` which contains entries which are either all `undefined`,

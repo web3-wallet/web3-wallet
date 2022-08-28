@@ -42,7 +42,7 @@ export const WalletCard = ({ name, wallet }: Props) => {
     connector.connectEagerly()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
     });
-  }, []);
+  }, [connector]);
 
   return (
     <WalletCardContainer>

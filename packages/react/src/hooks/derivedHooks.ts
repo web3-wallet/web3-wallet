@@ -1,7 +1,7 @@
 import type { State } from '@web3-wallet/core';
 
 import type { Wallet } from '../types';
-import { StateHooks } from './stateHooks';
+import type { StateHooks } from './stateHooks';
 
 const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
   return Boolean(chainId && accounts?.length && !isActivating);

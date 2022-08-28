@@ -3,8 +3,8 @@ import type { Connector } from '@web3-wallet/core';
 import { useEffect, useMemo, useState } from 'react';
 
 import type { Wallet } from '../types';
-import { DerivedHooks } from './derivedHooks';
-import { StateHooks } from './stateHooks';
+import type { DerivedHooks } from './derivedHooks';
+import type { StateHooks } from './stateHooks';
 
 let DynamicProvider: typeof Web3Provider | null | undefined;
 async function importProvider(): Promise<void> {
