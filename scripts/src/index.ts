@@ -10,12 +10,12 @@ export const run = async (task: Task) => {
 
   const packagesToBuild = packagesFilter(
     config.packages,
-    (pkg) => typeof pkg === 'string' || pkg.build !== false,
+    (pkg) => typeof pkg === 'string' || pkg.build !== false
   );
 
   const packagesToWatch = packagesFilter(
     config.packages,
-    (pkg) => typeof pkg === 'string' || pkg.watch !== false,
+    (pkg) => typeof pkg === 'string' || pkg.watch !== false
   );
 
   switch (task) {

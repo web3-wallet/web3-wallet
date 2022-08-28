@@ -1,59 +1,89 @@
 import chalk from 'chalk';
 import cp from 'child_process';
 
-import { PACKAGE_SCOPE } from './constants';
-import type { Package, Packages } from './types';
+import type { BuildTarge, Package, PackageName, Packages } from './types';
+
+type BuildProgress = Record<PackageName, Record<BuildTarge, boolean>>;
+
+const buildProgress: BuildProgress = {};
 
 export const build = async (packages: Packages) => {
-  console.log(chalk.blue(`[build]: ${packages.flat().length} packages\n`));
+  console.log(
+    chalk.blueBright(`[build]: ${packages.flat().length} packages...`)
+  );
 
-  for (const pkg of packages) {
-    if (Array.isArray(pkg)) {
-      await Promise.all(pkg.map(buildPkg));
-    } else {
-      await buildPkg(pkg);
-    }
+  for (const pkg of packages.flat()) {
+    const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
+    console.log(chalk.blueBright(`[build]: ${pkgName}...`));
   }
 
-  console.log(chalk.green(`[build]: all done!\n`));
+  await Promise.all([
+    buildTarget(packages, 'esm'),
+    buildTarget(packages, 'cjs'),
+  ]);
+
+  console.log(chalk.green(`[build]: success!\n`));
+};
+
+const buildTarget = async (packages: Packages, target: BuildTarge) => {
+  for (const pkg of packages) {
+    if (Array.isArray(pkg)) {
+      await Promise.all(pkg.map((v) => buildPkg(v, target)));
+    } else {
+      await buildPkg(pkg, target);
+    }
+  }
 };
 
 /**
- * "pnpm -F xxx -s -p -c exec tsc",
- * "pnpm --filter xxx --silent --parallel -shell-mode exec tsc",
+ * "pnpm -F [pkgName] -s -c exec tsc",
+ * "pnpm --filter [pkgName] --silent -shell-mode exec tsc",
  *
  * @param pkg the package name
  * @returns
  */
-const buildPkg = (pkg: Package) => {
+const buildPkg = (pkg: Package, target: BuildTarge) => {
   const pkgName = typeof pkg === 'string' ? pkg : pkg.name;
 
-  return new Promise((resolve, reject) => {
-    console.log(chalk.blue(`[build]: ${PACKAGE_SCOPE}/${pkgName}...`));
+  if (!buildProgress[pkgName]) {
+    buildProgress[pkgName] = {
+      esm: false,
+      cjs: false,
+    };
+  } else {
+    buildProgress[pkgName][target] = false;
+  }
 
+  return new Promise((resolve, reject) => {
     const build = cp.spawn(
       'pnpm',
       [
         '--silent',
         '--filter',
-        `@web3-wallet/${pkgName}`,
-        '--parallel',
+        pkgName,
         '-shell-mode',
         'exec',
-        'tsc;tsc --module commonjs --outDir dist/cjs',
+        target === 'esm' ? 'tsc' : 'tsc --module commonjs --outDir dist/cjs',
       ],
       {
         stdio: 'inherit',
-      },
+      }
     );
 
     build.on('close', (code) => {
-      if (code === 0) {
-        console.log(chalk.green(`[build]: ${PACKAGE_SCOPE}/${pkgName} done!`));
+      if (code === 0) buildProgress[pkgName][target] = true;
+
+      if (
+        code === 0 &&
+        buildProgress[pkgName].esm &&
+        buildProgress[pkgName].cjs
+      ) {
+        console.log(chalk.green(`[build]: ${pkgName} success!`));
       }
+
       code === 0
         ? resolve(code)
-        : reject(new Error(`Fail to build ${PACKAGE_SCOPE}/${pkgName}`));
+        : reject(new Error(`Fail to build ${pkgName}`));
     });
   });
 };

@@ -1,9 +1,8 @@
 {
   "name": "@web3-wallet/scripts",
   "description": "web3-wallet scripts",
-  "version": "0.1.4",
+  "version": "0.0.1",
   "keywords": [
-    "web3-wallet",
     "scripts",
     "pnpm"
   ],
@@ -11,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LoganAtCrypto/web3-wallet.git"
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
   },
   "publishConfig": {
     "access": "public"
@@ -23,14 +22,14 @@
   "type": "module",
   "module": "./dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "rm ./tsconfig.tsbuildinfo & tsc"
   },
   "bin": "./entry.sh",
   "dependencies": {
     "chalk": "^5.0.1"
   },
   "bugs": {
-    "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
+    "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
+  "homepage": "https://github.com/web3-wallet/web3-wallet#readme"
 }
