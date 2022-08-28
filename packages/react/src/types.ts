@@ -4,12 +4,11 @@ import {
   type Connector,
   State,
   Store,
-  Wallet as EthereumWallet,
-} from '@web3-wallet/ethereum';
+  Wallet as BaseWallet,
+} from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
-export interface Wallet<C extends Connector = Connector>
-  extends EthereumWallet<C> {
+export interface Wallet<C extends Connector = Connector> extends BaseWallet<C> {
   connector: C;
   store: UseBoundStore<
     Store & {

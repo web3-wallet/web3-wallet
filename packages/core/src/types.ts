@@ -1,37 +1,35 @@
-import type {
-  Actions as BaseActions,
-  Provider as BaseProvider,
-  State as BaseState,
-  Store as BaseStore,
-  Wallet as BaseWallet,
-} from '@web3-wallet/types';
-import { Connector as BaseConnector } from '@web3-wallet/types';
 import type { EventEmitter } from 'node:events';
+import type { StoreApi } from 'zustand/vanilla';
 
-export interface State extends BaseState {
+export interface State {
+  isActivating: boolean;
   chainId?: number;
   accounts?: string[];
 }
 
-export type Store = BaseStore<State>;
+export type Store = StoreApi<State>;
 
-export type Actions = BaseActions<State>;
+export interface Actions {
+  startActivation: () => () => void;
+  resetState: () => void;
+  update: (stateUpdate: Partial<Omit<State, 'isActivating'>>) => void;
+}
 
-// per EIP-1193
+// EIP-1193
 export interface RequestArguments {
   readonly method: string;
   readonly params?: readonly unknown[] | object;
 }
 
-// per EIP-1193
+// EIP-1193
 export interface ProviderRpcError extends Error {
   message: string;
   code: number;
   data?: unknown;
 }
 
-// per EIP-1193
-export interface Provider extends EventEmitter, BaseProvider {
+// EIP-1193
+export interface Provider extends EventEmitter {
   request<T>(args: RequestArguments): Promise<T>;
 }
 
@@ -50,32 +48,58 @@ export class ProviderNoFoundError extends Error {
   }
 }
 
-// per EIP-3085
+// EIP-3085
 export interface AddEthereumChainParameter {
   chainId: number;
   chainName: string;
   nativeCurrency: {
     name: string;
-    symbol: string; // 2-6 characters long
+    // 2-6 characters
+    symbol: string;
     decimals: 18;
   };
   rpcUrls: string[];
   blockExplorerUrls?: string[];
-  iconUrls?: string[]; // Currently ignored.
+  // Currently ignored.
+  iconUrls?: string[];
 }
 
-// per EIP-747
+// EIP-747
 export interface WatchAssetParameters {
-  address: string; // The address that the token is at.
-  symbol: string; // A ticker symbol or shorthand, up to 5 chars.
-  decimals: number; // The number of decimals in the token
-  image: string; // A string url of the token logo
+  // The address that the token is at.
+  address: string;
+  // A ticker symbol or shorthand, up to 5 chars.
+  symbol: string;
+  // The number of decimals in the token
+  decimals: number;
+  // A string url of the token logo
+  image: string;
 }
 
-export abstract class Connector<
-  T extends Provider = Provider,
-> extends BaseConnector<T, State> {
+export abstract class AbstractConnector<P extends Provider = Provider> {
+  public abstract provider?: P;
+  public actions: Actions;
+  public onError?(...args: unknown[]): Promise<void>;
+
+  constructor(
+    actions: Actions,
+    onError?: (...args: unknown[]) => Promise<void>,
+  ) {
+    this.actions = actions;
+    this.onError = onError;
+  }
+
+  public resetState(): void {
+    this.actions.resetState();
+  }
+
+  public abstract detectProvider(...args: unknown[]): Promise<P>;
+  public abstract activate(...args: unknown[]): Promise<void>;
+  public abstract connectEagerly(...args: unknown[]): Promise<void>;
+  public abstract deactivate(...args: unknown[]): Promise<void>;
   public abstract watchAsset(param: WatchAssetParameters): void;
+
+  protected abstract lazyInitialize(): Promise<void>;
   protected abstract updateChainId(chainId: number): void;
   protected abstract updateAccounts(accounts: string[]): void;
   protected abstract switchChain(chainId: number): Promise<void>;
@@ -88,4 +112,7 @@ export abstract class Connector<
   protected abstract onAccountsChanged(accounts: string[]): void;
 }
 
-export type Wallet<C extends Connector = Connector> = BaseWallet<C, State>;
+export interface Wallet<C extends AbstractConnector> {
+  store: Store;
+  connector: C;
+}

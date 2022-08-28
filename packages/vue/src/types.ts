@@ -4,12 +4,11 @@ import {
   Connector,
   State,
   Store,
-  Wallet as EthereumWallet,
-} from '@web3-wallet/ethereum';
+  Wallet as BaseWallet,
+} from '@web3-wallet/core';
 import { ComputedRef } from 'vue';
 
-export interface Wallet<C extends Connector = Connector>
-  extends EthereumWallet<C> {
+export interface Wallet<C extends Connector = Connector> extends BaseWallet<C> {
   store: Store;
   connector: C;
   chainId: ComputedRef<State['chainId']>;

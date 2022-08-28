@@ -2,7 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { EthereumConnector } from '@web3-wallet/ethereum';
+import { Connector } from '@web3-wallet/core';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
@@ -12,7 +12,7 @@ type CoinbaseWalletSDKOptions = ConstructorParameters<
  * @param options - Options to pass to `@coinbase/wallet-sdk`.
  * @param onError - Handler to report errors thrown from eventListeners.
  */
-export class CoinbaseWalletConnector extends EthereumConnector {
+export class CoinbaseWalletConnector extends Connector {
   public override provider?: CoinbaseWalletProvider;
   private readonly options: CoinbaseWalletSDKOptions;
 
@@ -22,9 +22,9 @@ export class CoinbaseWalletConnector extends EthereumConnector {
   public coinbaseWallet?: CoinbaseWalletSDK;
 
   constructor(
-    actions: EthereumConnector['actions'],
+    actions: Connector['actions'],
     options: CoinbaseWalletSDKOptions,
-    onError?: EthereumConnector['onError'],
+    onError?: Connector['onError'],
   ) {
     super(actions, onError);
     this.options = options;

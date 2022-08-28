@@ -3,7 +3,7 @@ import type {
   Networkish,
   Web3Provider,
 } from '@ethersproject/providers';
-import { Connector } from '@web3-wallet/ethereum';
+import { Connector } from '@web3-wallet/core';
 import { computed, Ref, ref, watchEffect } from 'vue';
 
 import type { Wallet } from './types';

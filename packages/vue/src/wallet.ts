@@ -1,5 +1,5 @@
-import type { Actions, Connector, State } from '@web3-wallet/ethereum';
-import { createStore } from '@web3-wallet/ethereum';
+import type { Actions, Connector, State } from '@web3-wallet/core';
+import { createStore } from '@web3-wallet/core';
 import { computed, reactive } from 'vue';
 
 import { getUseEnsName, getUseEnsNames } from './ensNames';

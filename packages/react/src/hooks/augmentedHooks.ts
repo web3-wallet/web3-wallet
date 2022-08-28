@@ -1,5 +1,5 @@
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector } from '@web3-wallet/ethereum';
+import type { Connector } from '@web3-wallet/core';
 import { useEffect, useMemo, useState } from 'react';
 
 import type { Wallet } from '../types';

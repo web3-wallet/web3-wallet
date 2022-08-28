@@ -1,9 +1,10 @@
 {
-  "name": "@web3-wallet/types",
-  "description": "web3-wallet types",
+  "name": "@web3-wallet/core",
+  "description": "web3-wallet core",
   "keywords": [
     "web3-wallet",
-    "types"
+    "web3",
+    "ethereum"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -23,11 +24,13 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
+    "@ethersproject/address": "^5.6.1",
+    "@ethersproject/networks": "^5.6.4",
+    "@ethersproject/providers": "^5.6.8",
     "zustand": "^4.0.0-rc.0"
   },
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
 }

@@ -3,10 +3,10 @@ import {
   type ProviderConnectInfo,
   type ProviderRpcError,
   type WatchAssetParameters,
-  Connector,
+  AbstractConnector,
   ProviderNoFoundError,
 } from './types';
-import { parseChainId } from './utils';
+import { parseChainId, toHexChainId } from './utils';
 
 export const isChainId = (
   chainIdOrChainParameter?: number | AddEthereumChainParameter,
@@ -22,7 +22,7 @@ export const isAddChainParameter = (
 
 const providerNotFoundError = new ProviderNoFoundError();
 
-export abstract class EthereumConnector extends Connector {
+export abstract class Connector extends AbstractConnector {
   protected initialized = false;
 
   protected updateChainId(chainId: string | number): void {
@@ -86,11 +86,9 @@ export abstract class EthereumConnector extends Connector {
   protected async switchChain(chainId: number): Promise<void> {
     if (!this.provider) throw providerNotFoundError;
 
-    const hexChainIdHex = `0x${chainId.toString(16)}`;
-
     await this.provider.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: hexChainIdHex }],
+      params: [{ chainId: toHexChainId(chainId) }],
     });
   }
 
@@ -99,11 +97,14 @@ export abstract class EthereumConnector extends Connector {
   ): Promise<void> {
     if (!this.provider) throw providerNotFoundError;
 
-    const hexChainIdHex = `0x${addChainParameter.chainId.toString(16)}`;
-
     await this.provider.request({
       method: 'wallet_addEthereumChain',
-      params: [{ ...addChainParameter, chainId: hexChainIdHex }],
+      params: [
+        {
+          ...addChainParameter,
+          chainId: toHexChainId(addChainParameter.chainId),
+        },
+      ],
     });
   }
 
@@ -234,10 +235,10 @@ export abstract class EthereumConnector extends Connector {
       params: {
         type: 'ERC20',
         options: {
-          address, // The address that the token is at.
-          symbol, // A ticker symbol or shorthand, up to 5 chars.
-          decimals, // The number of decimals in the token
-          image, // A string url of the token logo
+          address,
+          symbol,
+          decimals,
+          image,
         },
       },
     });

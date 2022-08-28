@@ -24,7 +24,7 @@
   "dependencies": {
     "@ethersproject/networks": "^5.6.4",
     "@ethersproject/providers": "^5",
-    "@web3-wallet/ethereum": "workspace:*",
+    "@web3-wallet/core": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {

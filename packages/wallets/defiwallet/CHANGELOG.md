@@ -6,7 +6,7 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.3
+  - @web3-wallet/core@0.1.3
   - @web3-wallet/injected@0.1.3
 
 ## 0.1.2
@@ -15,7 +15,7 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.2
+  - @web3-wallet/core@0.1.2
   - @web3-wallet/injected@0.1.2
 
 ## 0.1.1
@@ -24,5 +24,5 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.1
+  - @web3-wallet/core@0.1.1
   - @web3-wallet/injected@0.1.1

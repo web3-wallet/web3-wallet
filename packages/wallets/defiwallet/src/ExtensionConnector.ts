@@ -1,10 +1,10 @@
 import {
   type Actions,
   type Provider,
-  EthereumConnector,
+  Connector,
   ProviderNoFoundError,
   utils,
-} from '@web3-wallet/ethereum';
+} from '@web3-wallet/core';
 
 import {
   type DeFiWalletProvider,
@@ -16,14 +16,14 @@ const providerNotFoundError = new ProviderNoFoundError(
   'DeFi Wallet provider not found',
 );
 
-export class ExtensionConnector extends EthereumConnector {
+export class ExtensionConnector extends Connector {
   public override provider?: Provider & DeFiWalletProvider;
   private options: DeFiWalletProviderOptions;
 
   constructor(
     actions: Actions,
     options: DeFiWalletProviderOptions,
-    onError?: EthereumConnector['onError'],
+    onError?: Connector['onError'],
   ) {
     super(actions, onError);
     this.options = options;

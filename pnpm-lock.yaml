@@ -73,8 +73,8 @@ importers:
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.6
       '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/defiwallet': workspace:*
-      '@web3-wallet/ethereum': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/react': workspace:*
       eslint-config-next: 12.2.0
@@ -87,8 +87,8 @@ importers:
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
       '@web3-wallet/coinbase-wallet': link:../../packages/wallets/coinbase-wallet
+      '@web3-wallet/core': link:../../packages/core
       '@web3-wallet/defiwallet': link:../../packages/wallets/defiwallet
-      '@web3-wallet/ethereum': link:../../packages/ethereum
       '@web3-wallet/metamask': link:../../packages/wallets/metamask
       '@web3-wallet/react': link:../../packages/react
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
@@ -138,70 +138,62 @@ importers:
       vite: 2.9.14
       vue-tsc: 0.34.17
 
-  packages/ethereum:
+  packages/core:
     specifiers:
       '@ethersproject/address': ^5.6.1
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5.6.8
-      '@web3-wallet/types': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.6.1
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
-      '@web3-wallet/types': link:../types
       zustand: 4.0.0-rc.3
 
   packages/react:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/core': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
-      '@web3-wallet/ethereum': link:../ethereum
-      zustand: 4.0.0-rc.3
-
-  packages/types:
-    specifiers:
-      zustand: ^4.0.0-rc.0
-    dependencies:
+      '@web3-wallet/core': link:../core
       zustand: 4.0.0-rc.3
 
   packages/vue:
     specifiers:
       '@ethersproject/networks': ^5.6.4
       '@ethersproject/providers': ^5
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/core': workspace:*
     dependencies:
-      '@web3-wallet/ethereum': link:../ethereum
+      '@web3-wallet/core': link:../core
     optionalDependencies:
       '@ethersproject/networks': 5.6.4
       '@ethersproject/providers': 5.6.8
 
   packages/wallets/coinbase-wallet:
     specifiers:
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/core': workspace:*
     dependencies:
-      '@web3-wallet/ethereum': link:../../ethereum
+      '@web3-wallet/core': link:../../core
 
   packages/wallets/defiwallet:
     specifiers:
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/injected': workspace:*
     dependencies:
-      '@web3-wallet/ethereum': link:../../ethereum
+      '@web3-wallet/core': link:../../core
       '@web3-wallet/injected': link:../injected
 
   packages/wallets/injected:
     specifiers:
       '@metamask/detect-provider': ^1.2.0
-      '@web3-wallet/ethereum': workspace:*
+      '@web3-wallet/core': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
-      '@web3-wallet/ethereum': link:../../ethereum
+      '@web3-wallet/core': link:../../core
 
   packages/wallets/metamask:
     specifiers:

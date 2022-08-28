@@ -1,8 +1,4 @@
-import {
-  type Actions,
-  type Connector,
-  createStore,
-} from '@web3-wallet/ethereum';
+import { type Actions, type Connector, createStore } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';

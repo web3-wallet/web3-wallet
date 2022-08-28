@@ -6,7 +6,7 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.3
+  - @web3-wallet/core@0.1.3
   - @web3-wallet/react@0.1.3
   - @web3-wallet/coinbase-wallet@0.1.3
   - @web3-wallet/defiwallet@0.1.3
@@ -18,7 +18,7 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.2
+  - @web3-wallet/core@0.1.2
   - @web3-wallet/react@0.1.2
   - @web3-wallet/coinbase-wallet@0.1.2
   - @web3-wallet/defiwallet@0.1.2
@@ -30,5 +30,5 @@
 
 - package version
 - Updated dependencies
-  - @web3-wallet/ethereum@0.1.1
+  - @web3-wallet/core@0.1.1
   - @web3-wallet/react@0.1.1

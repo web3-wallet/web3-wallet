@@ -16,8 +16,7 @@
   "packageManager": "pnpm@7.5.0",
   "@web3-wallet/scripts": {
     "packages": [
-      "types",
-      "ethereum",
+      "core",
       "injected",
       [
         "coinbase-wallet",

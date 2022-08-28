@@ -1,4 +1,4 @@
-import type { Actions, EthereumConnector } from '@web3-wallet/ethereum';
+import type { Actions, Connector } from '@web3-wallet/core';
 
 import type { DeFiWalletProviderOptions } from './detectProvider';
 import { ExtensionConnector } from './ExtensionConnector';
@@ -10,7 +10,7 @@ export const getDeFiWallet = (
   options: {
     extension: DeFiWalletProviderOptions;
   },
-  onError?: EthereumConnector['onError'],
+  onError?: Connector['onError'],
 ): MobileConnector | ExtensionConnector => {
   if (isMobile()) {
     return new MobileConnector(actions, onError);

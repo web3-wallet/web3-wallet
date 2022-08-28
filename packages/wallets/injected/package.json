@@ -25,7 +25,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/ethereum": "workspace:*",
+    "@web3-wallet/core": "workspace:*",
     "@metamask/detect-provider": "^1.2.0"
   },
   "bugs": {

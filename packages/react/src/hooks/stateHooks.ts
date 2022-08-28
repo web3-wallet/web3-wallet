@@ -1,4 +1,4 @@
-import type { State } from '@web3-wallet/ethereum';
+import type { State } from '@web3-wallet/core';
 import { UseBoundStore } from 'zustand';
 
 import type { Wallet } from '../types';
