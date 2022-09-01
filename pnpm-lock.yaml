@@ -73,7 +73,6 @@ importers:
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.6
       '@web3-wallet/coinbase-wallet': workspace:*
-      '@web3-wallet/core': workspace:*
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/react': workspace:*
@@ -87,7 +86,6 @@ importers:
       '@ethersproject/providers': 5.6.8
       '@ethersproject/units': 5.6.1
       '@web3-wallet/coinbase-wallet': link:../../packages/wallets/coinbase-wallet
-      '@web3-wallet/core': link:../../packages/core
       '@web3-wallet/defiwallet': link:../../packages/wallets/defiwallet
       '@web3-wallet/metamask': link:../../packages/wallets/metamask
       '@web3-wallet/react': link:../../packages/react
@@ -5417,8 +5415,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2

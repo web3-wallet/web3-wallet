@@ -1,5 +1,21 @@
 # @web3-wallet/coinbase-wallet
 
+## 0.2.2
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@0.2.2
+
+## 0.2.1
+
+### Patch Changes
+
+- package versions
+- Updated dependencies
+  - @web3-wallet/core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
