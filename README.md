@@ -6,19 +6,18 @@
 
 ```
 # React
-pnpm install @web3-wallet/react @web3-wallet/metamask
+pnpm add @web3-wallet/react @web3-wallet/metamask
 
 # Vue
-pnpm install @web3-wallet/vue @web3-wallet/metamask
+pnpm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ## Packages
 
-| Package                                  | Version                                                                                                            | Description                   |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| [`@web3-wallet/react`](packages/react)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for EVM wallets |
-| [`@web3-wallet/vue`](packages/vue)       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)     | Vue binding for EVM wallets   |
-| [`@web3-wallet/core`](@web3-wallet/core) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)   | @web3-wallet core             |
+| Package                                | Version                                                      | Description                   |
+| -------------------------------------- | ------------------------------------------------------------ | ----------------------------- |
+| [`@web3-wallet/react`](packages/react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for EVM wallets |
+| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue) | Vue binding for EVM wallets   |
 
 ## Wallets
 
@@ -51,7 +50,7 @@ pnpm vuejs
 ### React
 
 ```bash
-pnpm install @web3-wallet/react @web3-wallet/metamask
+pnpm add @web3-wallet/react @web3-wallet/metamask
 ```
 
 ```typescript
@@ -117,7 +116,7 @@ export const MetaMaskCard = () => {
 ### vue
 
 ```bash
-pnpm install @web3-wallet/vue @web3-wallet/metamask
+pnpm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ```typescript

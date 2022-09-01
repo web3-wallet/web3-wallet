@@ -8,8 +8,7 @@ export type MetaMaskProvider = InjectedProvider & {
   isMetaMask?: boolean;
 };
 
-const walletName = 'MetaMask' as WalletName<'MetaMask'>;
-
+export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
 export class MetaMaskConnector extends InjectedConnector {

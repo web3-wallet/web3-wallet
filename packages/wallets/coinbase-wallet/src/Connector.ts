@@ -8,7 +8,7 @@ type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
 >[0];
 
-const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
+export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
 /**
  * @param options - Options to pass to `@coinbase/wallet-sdk`.

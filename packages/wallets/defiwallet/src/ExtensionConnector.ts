@@ -12,7 +12,7 @@ import {
   detectProvider,
 } from './detectProvider';
 
-const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
+export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
 export class ExtensionConnector extends Connector {
   public override provider?: Provider & DeFiWalletProvider;

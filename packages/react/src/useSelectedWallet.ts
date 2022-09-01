@@ -39,13 +39,12 @@ export const useSelectedWallet = (
      *
      * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
      */
-    const combineHooks: Record<string, unknown> = {};
+    const combinedHooks: Record<string, unknown> = {};
 
     for (const hookName of Object.keys(hooks)) {
-      combineHooks[hookName] = (...args: unknown[]) => {
+      combinedHooks[hookName] = (...args: unknown[]) => {
+        let currentRetValue: unknown;
         for (const wallet of walletsRef.current) {
-          let currentRetValue: unknown;
-
           const hookFn = wallet.hooks[hookName as keyof Wallet['hooks']] as (
             ...args: unknown[]
           ) => unknown;
@@ -55,12 +54,11 @@ export const useSelectedWallet = (
           if (wallet.name === currentWalletName) {
             currentRetValue = retValue;
           }
-
-          return currentRetValue;
         }
+        return currentRetValue;
       };
     }
 
-    return { ...currentWallet, hooks: combineHooks } as Wallet;
+    return { ...currentWallet, hooks: combinedHooks } as Wallet;
   }, [selectedWalletName]);
 };

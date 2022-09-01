@@ -8,7 +8,7 @@ export type MobileProvider = InjectedProvider & {
   isTrust?: boolean;
 };
 
-const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
+export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
 const providerFilter = (p: MobileProvider) =>
   !!p.isTrust && window.navigator?.userAgent?.includes('DeFiWallet');

@@ -3,6 +3,8 @@ import type { BaseProvider } from '@ethersproject/providers';
 import type { Connector, State, Store, WalletName } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
+export * from '@web3-wallet/core';
+
 export interface Wallet<C extends Connector = Connector> {
   name: WalletName;
   connector: C;
