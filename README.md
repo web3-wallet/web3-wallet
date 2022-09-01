@@ -21,12 +21,11 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 
 ## Wallets
 
-| Package                                                                     | Version                                                                                                                                | Description                      |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **EVM Wallets**                                                             |                                                                                                                                        |                                  |
-| [`@web3-wallet/injected`](packages/wallets/ethereum/injected)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected)               | Injected connector               |
-| [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)               | Metamask connector               |
-| [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)           | Crypto.com DeFi Wallet connector |
+| Package                                                      | Version                                                      | Description                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------- |
+| [`@web3-wallet/injected`](packages/wallets/ethereum/injected) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected) | Injected connector               |
+| [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask) | Metamask connector               |
+| [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet) | Crypto.com DeFi Wallet connector |
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/ethereum/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet connector        |
 
 ## Examples
@@ -59,7 +58,7 @@ import { MetaMaskConnector } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
 
 export const metaMask = createWallet<MetaMaskConnector>(
-  (actions) => new MetaMask(actions),
+  (actions) => new MetaMaskConnector(actions),
 );
 ```
 
@@ -91,7 +90,6 @@ export const MetaMaskCard = () => {
   const provider = useProvider();
   const ensNames = useEnsNames(provider);
 
-  // attempt to connect eagerly on mount
   useEffect(() => {
     connector.connectEagerly().catch(() => {
       console.debug('Failed to connect eagerly to metamask');
@@ -125,7 +123,7 @@ import { MetaMaskConnector } from '@web3-wallet/core';
 import { createWallet } from '@web3-wallet/vue';
 
 export const metaMask = createWallet<MetaMask>(
-  (actions) => new MetaMask(actions),
+  (actions) => new MetaMaskConnector(actions),
 );
 ```
 
@@ -180,18 +178,20 @@ defineComponent({
 
 ## More wallets
 
-If the wallet you want integrate is not included in the @web3-wallet package set, you can create an wallet connector with few lines of code by extending the `InjectedConnector`.
+If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet connector with few lines of code by extending the `InjectedConnector`.
 
 ```typescript
 // Trust Wallet connector
-import { createWallet } from '@web3-wallet/react';
+import type { type Connector, type WalletName, createWallet } from '@web3-wallet/react';
 // Or if you are using vue
-// import { createWallet } from '@web3-wallet/vue';
+// import type { type Connector, type WalletName, createWallet } from '@web3-wallet/vue';
 
 import {
   type InjectedProvider,
   InjectedConnector,
 } from '@web3-wallet/injected';
+
+export const walletName = 'Trust' as WalletName<'Trust'>;
 
 export type TrustWalletProvider = InjectedProvider & {
   isTrust?: boolean;
@@ -200,7 +200,11 @@ export type TrustWalletProvider = InjectedProvider & {
 const providerFilter = (p: TrustWalletProvider) => p.isTrust;
 
 export class TrustWalletConnector extends InjectedConnector {
-  public override async detectProvider() {
+  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
+    super(walletName, actions, onError);
+  }
+  
+  public override async detectProvider(): Promise<TrustWalletProvider> {
     return await super.detectProvider(providerFilter);
   }
 }
@@ -208,35 +212,23 @@ export class TrustWalletConnector extends InjectedConnector {
 const trustWallet = createWallet(
   (actions) => new TrustWalletConnector(actions),
 );
-
-/**
- * imToken
- */
-export type ImTokenProvider = InjectedProvider & {
-  isImToken?: boolean;
-};
-
-const providerFilter = (p: ImTokenProvider) => p.isImToken;
-
-export class ImTokenConnector extends InjectedConnector {
-  public override async detectProvider(): Promise<ImTokenProvider> {
-    return await super.detectProvider(providerFilter);
-  }
-}
-
-const inToken = createWallet((actions) => new ImTokenConnector(actions));
 ```
 
-If the wallet you want to integrate is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method or override few of the connector methods.
+If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method and override few of the connector methods.
 
 ```typescript
-import { Connector, type Provider } from '@web3-wallet/core';
+import type { type Connector, type WalletName, createWallet } from '@web3-wallet/react';
 
 type MyWalletProvider = Provider & {
   // wallet provider props
 };
+export const walletName = 'MyWallet' as WalletName<'MyWallet'>;
 
 export class MyWalletConnector extends Connector {
+  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
+    super(walletName, actions, onError);
+  }
+  
   public async detectProvider(): Promise<MyWalletProvider> {
     // ...
   }
