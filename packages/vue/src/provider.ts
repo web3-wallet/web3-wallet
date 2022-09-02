@@ -10,8 +10,11 @@ import type { Wallet } from './types';
 
 /**
  * Only try to import @ethersproject/providers once
+ *
+ * flag for tracking wether we have already imported @ethersproject/providers once
  */
 let flag = false;
+
 const dynamicProvider: Ref<typeof Web3Provider | undefined> = ref(undefined);
 
 async function importProvider(): Promise<typeof dynamicProvider> {

@@ -78,7 +78,8 @@ export class ExtensionConnector extends Connector {
       const receivedChainId = utils.parseChainId(this.provider.chainId!);
 
       /**
-       * can't request `wallet_switchEthereumChain` before wallet got connected chain
+       * can't request `wallet_switchEthereumChain` before wallet got connected
+       *
        * switch chain
        */
       if (chainId !== receivedChainId) {

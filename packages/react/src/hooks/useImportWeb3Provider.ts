@@ -3,10 +3,13 @@ import { useEffect, useMemo, useState } from 'react';
 
 /**
  * Only try to import @ethersproject/providers once
+ *
+ * flag for tracking wether we have already imported @ethersproject/providers once
  */
 let flag = false;
 
 let DynamicProvider: typeof Web3Provider | undefined;
+
 async function importProvider(): Promise<typeof Web3Provider | undefined> {
   if (flag) return DynamicProvider;
 
