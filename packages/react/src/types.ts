@@ -1,5 +1,5 @@
 import type { Networkish } from '@ethersproject/networks';
-import type { BaseProvider } from '@ethersproject/providers';
+import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
 import type { Connector, State, Store, WalletName } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
@@ -19,10 +19,10 @@ export interface Wallet<C extends Connector = Connector> {
     useIsActivating: () => State['isActivating'];
     useAccount: () => string | undefined;
     useIsActive: () => boolean;
-    useProvider: (
+    useProvider: <T extends BaseProvider = Web3Provider>(
       network?: Networkish,
       enabled?: boolean,
-    ) => BaseProvider | undefined;
+    ) => T | undefined;
     useENSNames: (provider?: BaseProvider) => undefined[] | (string | null)[];
     useENSName: (provider?: BaseProvider) => undefined | string | null;
   };

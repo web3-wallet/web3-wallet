@@ -43,7 +43,10 @@ export const createGetProvider = <T extends Connector>({
   isActive: Wallet['isActive'];
   chainId: Wallet['chainId'];
 }): Wallet['useProvider'] => {
-  return (network?: Networkish, enabled = true) => {
+  const useProvider = <T extends BaseProvider = Web3Provider>(
+    network?: Networkish,
+    enabled = true,
+  ) => {
     watchEffect(() => {
       if (dynamicProvider.value === undefined) {
         importProvider();
@@ -57,8 +60,10 @@ export const createGetProvider = <T extends Connector>({
         return new dynamicProvider.value(
           connector.provider,
           network,
-        ) as unknown as BaseProvider;
+        ) as unknown as T;
       }
     });
   };
+
+  return useProvider;
 };

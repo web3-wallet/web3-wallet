@@ -1,4 +1,8 @@
-import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
+import type {
+  BaseProvider,
+  Networkish,
+  Web3Provider,
+} from '@ethersproject/providers';
 import type { Connector } from '@web3-wallet/core';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -75,8 +79,8 @@ export const getAugmentedHooks = <T extends Connector>(
    * @typeParam T - A type argument must only be provided if using `connector.customProvider`, in which case it
    * must match the type of this property.
    */
-  const useProvider: AugmentedHooks['useProvider'] = (
-    network,
+  const useProvider = <T extends BaseProvider = Web3Provider>(
+    network?: Networkish,
     enabled = true,
   ) => {
     const isActive = useIsActive();
@@ -100,11 +104,9 @@ export const getAugmentedHooks = <T extends Connector>(
       // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
       void loaded && isActive && chainId;
       if (enabled && DynamicProvider && connector.provider) {
-        return new DynamicProvider(
-          connector.provider,
-          network,
-        ) as unknown as BaseProvider;
+        return new DynamicProvider(connector.provider, network) as unknown as T;
       }
+      return undefined;
     }, [loaded, enabled, isActive, chainId, network]);
   };
 
