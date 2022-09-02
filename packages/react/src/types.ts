@@ -23,7 +23,7 @@ export interface Wallet<C extends Connector = Connector> {
       network?: Networkish,
       enabled?: boolean,
     ) => T | undefined;
-    useENSNames: (provider?: BaseProvider) => undefined[] | (string | null)[];
-    useENSName: (provider?: BaseProvider) => undefined | string | null;
+    useENSNames: (provider?: BaseProvider) => (string | undefined)[];
+    useENSName: (provider?: BaseProvider) => undefined | string;
   };
 }

@@ -9,35 +9,20 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Wallet } from '../types';
 import type { DerivedHooks } from './derivedHooks';
 import type { StateHooks } from './stateHooks';
-
-let DynamicProvider: typeof Web3Provider | null | undefined;
-async function importProvider(): Promise<void> {
-  if (DynamicProvider === undefined) {
-    try {
-      const { Web3Provider } = await import('@ethersproject/providers');
-      DynamicProvider = Web3Provider;
-    } catch {
-      console.debug('@ethersproject/providers not available');
-      DynamicProvider = null;
-    }
-  }
-}
+import { useImportWeb3Provider } from './useImportWeb3Provider';
 
 export type AugmentedHooks = Pick<
   Wallet['hooks'],
   'useProvider' | 'useENSNames' | 'useENSName'
 >;
 
-/**
- * @returns ENSNames - An array of length `accounts.length` which contains entries which are either all `undefined`,
- * indicated that names cannot be fetched because there's no provider, or they're in the process of being fetched,
- * or `string | null`, depending on whether an ENS name has been set for the account in question or not.
- */
 function useENS(
   provider?: BaseProvider,
   accounts: string[] = [],
-): undefined[] | (string | null)[] {
-  const [ENSNames, setENSNames] = useState<(string | null)[] | undefined>();
+): (string | undefined)[] {
+  const [ENSNames, setENSNames] = useState<
+    (string | undefined)[] | undefined
+  >();
 
   useEffect(() => {
     if (provider && accounts.length) {
@@ -46,12 +31,12 @@ function useENS(
       Promise.all(accounts.map((account) => provider.lookupAddress(account)))
         .then((ENSNames) => {
           if (stale) return;
-          setENSNames(ENSNames);
+          setENSNames(ENSNames.map((v) => (v ? v : undefined)));
         })
         .catch((error) => {
           if (stale) return;
           console.debug('Could not fetch ENS names', error);
-          setENSNames(new Array<null>(accounts.length).fill(null));
+          setENSNames(new Array<undefined>(accounts.length).fill(undefined));
         });
 
       return () => {
@@ -69,45 +54,24 @@ export const getAugmentedHooks = <T extends Connector>(
   { useAccounts, useChainId }: StateHooks,
   { useAccount, useIsActive }: DerivedHooks,
 ): AugmentedHooks => {
-  /**
-   * Avoid type erasure by returning the most qualified type if not otherwise set.
-   * Note that this function's return type is `T | undefined`, but there is a code path
-   * that returns a Web3Provider, which could conflict with a user-provided T. So,
-   * it's important that users only provide an override for T if they know that
-   * `connector.customProvider` is going to be defined and of type T.
-   *
-   * @typeParam T - A type argument must only be provided if using `connector.customProvider`, in which case it
-   * must match the type of this property.
-   */
   const useProvider = <T extends BaseProvider = Web3Provider>(
     network?: Networkish,
-    enabled = true,
   ) => {
     const isActive = useIsActive();
     const chainId = useChainId();
-
-    // ensure that Provider is going to be available when loaded if @ethersproject/providers is installed
-    const [loaded, setLoaded] = useState(DynamicProvider !== undefined);
-    useEffect(() => {
-      if (loaded) return;
-      let stale = false;
-      void importProvider().then(() => {
-        if (stale) return;
-        setLoaded(true);
-      });
-      return () => {
-        stale = true;
-      };
-    }, [loaded]);
+    const ImportedWeb3Provider = useImportWeb3Provider();
 
     return useMemo(() => {
       // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
-      void loaded && isActive && chainId;
-      if (enabled && DynamicProvider && connector.provider) {
-        return new DynamicProvider(connector.provider, network) as unknown as T;
+      void isActive && chainId;
+      if (ImportedWeb3Provider && connector.provider) {
+        return new ImportedWeb3Provider(
+          connector.provider,
+          network,
+        ) as unknown as T;
       }
       return undefined;
-    }, [loaded, enabled, isActive, chainId, network]);
+    }, [ImportedWeb3Provider, isActive, chainId, network]);
   };
 
   const useENSNames: AugmentedHooks['useENSNames'] = (provider) => {
@@ -118,7 +82,7 @@ export const getAugmentedHooks = <T extends Connector>(
   const useENSName: AugmentedHooks['useENSName'] = (provider) => {
     const account = useAccount();
     const accounts = useMemo(
-      () => (account === undefined ? undefined : [account]),
+      () => (account === undefined ? [] : [account]),
       [account],
     );
     return useENS(provider, accounts)?.[0];
