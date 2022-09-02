@@ -16,12 +16,11 @@ export interface Wallet<C extends Connector = Connector> {
   isActive: ComputedRef<boolean>;
   useProvider: <T extends BaseProvider = Web3Provider>(
     network?: Networkish,
-    enabled?: boolean,
   ) => ComputedRef<T | undefined>;
   useEnsNames: (
     provider: ComputedRef<BaseProvider | undefined>,
-  ) => ComputedRef<undefined[] | (string | null)[]>;
+  ) => ComputedRef<(string | undefined)[]>;
   useEnsName: (
     provider: ComputedRef<BaseProvider | undefined>,
-  ) => ComputedRef<undefined | string | null>;
+  ) => ComputedRef<undefined | string>;
 }
