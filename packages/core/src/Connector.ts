@@ -36,9 +36,8 @@ export abstract class Connector extends AbstractConnector {
     this.updateChainId(chainId);
   }
 
-  protected onDisconnect(error?: ProviderRpcError): void {
-    this.resetState();
-    error && this.onError?.(error);
+  protected onDisconnect(error: ProviderRpcError): void {
+    this.onError?.(error);
   }
 
   protected onChainChanged(chainId: number | string): void {
