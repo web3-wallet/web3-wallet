@@ -1,4 +1,4 @@
-import { useCurrentWallet } from '@nextjs/hooks/useCurrentWallet';
+import { useCurrentWallet } from '@site/hooks/useCurrentWallet';
 
 import { Card } from './Card';
 import { WalletCard } from './WalletCard';

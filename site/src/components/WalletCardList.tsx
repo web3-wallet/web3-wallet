@@ -3,9 +3,9 @@ import {
   defiWallet,
   metaMask,
   walletConnect,
-} from '@nextjs/wallets';
+} from '@site/wallets';
 
-import { WalletCard } from '../components/WalletCard';
+import { WalletCard } from './WalletCard';
 import { WalletSelectCard } from './WalletSelectCard';
 
 export const WalletCardList = () => {

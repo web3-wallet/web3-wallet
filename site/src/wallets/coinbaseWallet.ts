@@ -1,4 +1,4 @@
-import { rpcMap } from '@nextjs/chains';
+import { rpcMap } from '@site/chains';
 import { CoinbaseWalletConnector } from '@web3-wallet/coinbase-wallet';
 import { createWallet } from '@web3-wallet/react';
 

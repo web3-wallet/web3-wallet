@@ -32,7 +32,8 @@
   "scripts": {
     "build": "ts-node scripts/src/index.ts build",
     "watch": "ts-node scripts/src/index.ts watch",
-    "nextjs": "cd examples/nextjs && pnpm dev",
+    "site": "pnpm -F site dev",
+    "export": "pnpm -F site export",
     "vuejs": "cd examples/vuejs && pnpm dev",
     "test": "jest",
     "release": "changeset publish && git push --follow-tags",

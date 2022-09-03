@@ -1,4 +1,4 @@
-import { CurrentWalletProvider } from '@nextjs/context';
+import { CurrentWalletProvider } from '@site/context';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {

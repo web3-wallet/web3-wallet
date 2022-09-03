@@ -15,7 +15,7 @@
     "pretty": true,
     "baseUrl": ".",
     "paths": {
-      "@nextjs/*": ["examples/nextjs/src/*"],
+      "@site/*": ["examples/nextjs/src/*"],
       "@vuejs/*": ["vuejs/nextjs/src/*"]
     }
   },

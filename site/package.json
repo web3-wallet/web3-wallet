@@ -1,6 +1,8 @@
 {
   "private": true,
-  "name": "@web3-wallet/nextjs",
+  "name": "@web3-wallet/site",
+  "description": "web3-wallet website",
+  "author": "logan <logan.luo@crypto.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -25,9 +27,5 @@
   "devDependencies": {
     "@types/react-dom": "18.0.6",
     "eslint-config-next": "12.2.5"
-  },
-  "description": "This is an example app built with [Next.js](https://nextjs.org/) that showcases some basic web3-react usage patterns.",
-  "main": ".eslintrc.js",
-  "author": "",
-  "license": "MIT"
+  }
 }

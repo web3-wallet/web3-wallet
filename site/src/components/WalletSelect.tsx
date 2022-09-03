@@ -1,5 +1,5 @@
-import { useCurrentWalletContext } from '@nextjs/context';
-import * as walletMap from '@nextjs/wallets';
+import { useCurrentWalletContext } from '@site/context';
+import * as walletMap from '@site/wallets';
 import type { Wallet, WalletName } from '@web3-wallet/react';
 
 const wallets: Wallet[] = Object.values(walletMap);

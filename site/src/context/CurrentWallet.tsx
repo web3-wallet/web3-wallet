@@ -1,4 +1,4 @@
-import { metaMask } from '@nextjs/wallets';
+import { metaMask } from '@site/wallets';
 import { type WalletName } from '@web3-wallet/react';
 import { createContext, useContext, useState } from 'react';
 
