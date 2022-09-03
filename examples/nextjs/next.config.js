@@ -13,7 +13,6 @@ const nextConfig = {
       ...config.resolve.fallback,
       'utf-8-validate': false,
       bufferutil: false,
-      encoding: false,
     };
     return config;
   },

@@ -14,7 +14,6 @@
     "@ethersproject/experimental": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
     "@ethersproject/units": "^5.7.0",
-    "@walletconnect/ethereum-provider": "^1.8.0",
     "@web3-wallet/coinbase-wallet": "workspace:*",
     "@web3-wallet/defiwallet": "workspace:*",
     "@web3-wallet/metamask": "workspace:*",
