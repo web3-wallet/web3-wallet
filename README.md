@@ -4,7 +4,7 @@
 
 ## Examples
 
-[https://web3-wallet.github.io/web3-wallet](https://web3-wallet.github.io/web3-wallet)
+<a href="https://web3-wallet.github.io/web3-wallet" target="_blank">https://web3-wallet.github.io/web3-wallet</a>
 
 ## Install
 
@@ -243,18 +243,20 @@ export class MyWalletConnector extends Connector {
 
 ```bash
 # clone the repository
-git clone git@github.com:LoganAtCrypto/web3-wallet.git
+git clone git@github.com:web3-wallet/web3-wallet.git
 
 # install dependencies
 cd web3-wallet && pnpm install
 
 # react
-pnpm watch # watch for packages change
-pnpm nextjs # start examples/nextjs
+pnpm site # the web3-wallet site is built with react
+# optional
+# pnpm watch # watch for packages change
 
 # vue
 pnpm watch # watch for packages change
-pnpm vuejs # start examples/vuejs
+# optional
+# pnpm example-vue # start packages/examples/vue
 
 # test
 pnpm test
