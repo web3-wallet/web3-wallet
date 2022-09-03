@@ -24,10 +24,12 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@walletconnect/ethereum-provider": "^1.8.0",
     "@walletconnect/types": "^1.8.0",
     "@web3-wallet/core": "workspace:*",
     "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "@walletconnect/ethereum-provider": "^1.8.0"
   },
   "bugs": {
     "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
