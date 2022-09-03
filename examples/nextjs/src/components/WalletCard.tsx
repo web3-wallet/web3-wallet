@@ -1,19 +1,17 @@
-import { CoinbaseWalletConnector } from '@web3-wallet/coinbase-wallet';
 import type { Wallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
+import { Card } from './Card';
 import { Chain } from './Chain';
 import { ConnectWithSelect } from './ConnectWithSelect';
 import { Status } from './Status';
-import { WalletCardContainer } from './WalletCardContainer';
 
 interface Props {
-  name: string;
   wallet: Wallet;
 }
 
-export const WalletCard = ({ name, wallet }: Props) => {
+export const WalletCard = ({ wallet }: Props) => {
   const {
     connector,
     hooks: {
@@ -37,16 +35,14 @@ export const WalletCard = ({ name, wallet }: Props) => {
 
   // attempt to connect eagerly on mount
   useEffect(() => {
-    if (connector instanceof CoinbaseWalletConnector) return;
-
     connector.connectEagerly()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
     });
   }, [connector]);
 
   return (
-    <WalletCardContainer>
-      <b>{name}</b>
+    <Card>
+      <b>{wallet.name}</b>
       <div>Category: Ethereum</div>
       <Status isActivating={isActivating} isActive={isActive} />
       <Chain chainId={chainId} />
@@ -57,6 +53,6 @@ export const WalletCard = ({ name, wallet }: Props) => {
         isActivating={isActivating}
         isActive={isActive}
       />
-    </WalletCardContainer>
+    </Card>
   );
 };

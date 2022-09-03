@@ -6,14 +6,16 @@ import {
 } from '@nextjs/wallets';
 
 import { WalletCard } from '../components/WalletCard';
+import { WalletSelectCard } from './WalletSelectCard';
 
 export const WalletCardList = () => {
   return (
     <>
-      <WalletCard wallet={metaMask} name="MetaMask" />
-      <WalletCard wallet={defiWallet} name="crypto.com DeFi Wallet" />
-      <WalletCard wallet={walletConnect} name="WalletConnect" />
-      <WalletCard wallet={coinbaseWallet} name="Coinbase Wallet" />
+      <WalletSelectCard />
+      <WalletCard wallet={metaMask} />
+      <WalletCard wallet={defiWallet} />
+      <WalletCard wallet={walletConnect} />
+      <WalletCard wallet={coinbaseWallet} />
     </>
   );
 };
