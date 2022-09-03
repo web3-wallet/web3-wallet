@@ -70,5 +70,12 @@ jspm_packages/
 out/
 docs/
 
-# scrips env file
-.evn.scripts.json
+# scripts local config file
+**/.scripts.config.json
+
+# nextjs env files
+**/.env.local
+**/.env.development
+**/.env.staging
+**/.env.uat
+**/.env.production
