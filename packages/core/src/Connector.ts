@@ -7,13 +7,13 @@ import {
 } from './types';
 import { parseChainId, toHexChainId } from './utils';
 
-export const isChainId = (
+const isChainId = (
   chainIdOrChainParameter?: number | AddEthereumChainParameter,
 ): chainIdOrChainParameter is number => {
   return typeof chainIdOrChainParameter === 'number';
 };
 
-export const isAddChainParameter = (
+const isAddChainParameter = (
   chainIdOrChainParameter?: number | AddEthereumChainParameter,
 ): chainIdOrChainParameter is AddEthereumChainParameter => {
   return !isChainId(chainIdOrChainParameter);
@@ -48,7 +48,7 @@ export abstract class Connector extends AbstractConnector {
     this.updateAccounts(accounts);
   }
 
-  private addEventListeners(): void {
+  protected addEventListeners(): () => void {
     if (!this.provider) throw this.providerNotFoundError;
 
     const onConnect = this.onConnect.bind(this);
@@ -67,13 +67,29 @@ export abstract class Connector extends AbstractConnector {
       this.provider.addListener('chainChanged', onChainChanged);
       this.provider.addListener('accountsChanged', onAccountsChanged);
     }
+
+    return () => {
+      if (!this.provider) return;
+
+      if (typeof this.provider.off === 'function') {
+        this.provider.off('connect', onConnect);
+        this.provider.off('disconnect', onDisconnect);
+        this.provider.off('chainChanged', onChainChanged);
+        this.provider.off('accountsChanged', onAccountsChanged);
+      } else if (typeof this.provider.removeListener === 'function') {
+        this.provider.removeListener('connect', onConnect);
+        this.provider.removeListener('disconnect', onDisconnect);
+        this.provider.removeListener('chainChanged', onChainChanged);
+        this.provider.removeListener('accountsChanged', onAccountsChanged);
+      }
+    };
   }
 
   protected async lazyInitialize(): Promise<void> {
     if (this.initialized) return;
     try {
       await this.detectProvider();
-      this.addEventListeners();
+      this.removeEventListeners = this.addEventListeners();
     } finally {
       this.initialized = true;
     }

@@ -15,20 +15,20 @@ export interface Actions {
   update: (stateUpdate: Partial<Omit<State, 'isActivating'>>) => void;
 }
 
-// EIP-1193
+// https://eips.ethereum.org/EIPS/eip-1193
 export interface RequestArguments {
   readonly method: string;
   readonly params?: readonly unknown[] | object;
 }
 
-// EIP-1193
+// https://eips.ethereum.org/EIPS/eip-1193
 export interface ProviderRpcError extends Error {
   message: string;
   code: number;
   data?: unknown;
 }
 
-// EIP-1193
+// https://eips.ethereum.org/EIPS/eip-1193
 export interface Provider extends EventEmitter {
   request<T>(args: RequestArguments): Promise<T>;
 }
@@ -48,7 +48,7 @@ export class ProviderNoFoundError extends Error {
   }
 }
 
-// EIP-3085
+// https://eips.ethereum.org/EIPS/eip-3085
 export interface AddEthereumChainParameter {
   chainId: number;
   chainName: string;
@@ -64,7 +64,7 @@ export interface AddEthereumChainParameter {
   iconUrls?: string[];
 }
 
-// EIP-747
+// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md
 export interface WatchAssetParameters {
   // The address that the token is at.
   address: string;
@@ -81,11 +81,12 @@ export type WalletName<T extends string = string> = T & {
 };
 
 export abstract class AbstractConnector<P extends Provider = Provider> {
-  public abstract provider?: P;
   public name: WalletName;
+  public abstract provider?: P;
   public actions: Actions;
   public onError?(...args: unknown[]): Promise<void>;
   protected providerNotFoundError: ProviderNoFoundError;
+  protected removeEventListeners?: () => void;
 
   constructor(
     name: WalletName,
@@ -111,6 +112,7 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   public abstract watchAsset(param: WatchAssetParameters): void;
 
   protected abstract lazyInitialize(): Promise<void>;
+  protected abstract addEventListeners(): () => void;
   protected abstract updateChainId(chainId: number): void;
   protected abstract updateAccounts(accounts: string[]): void;
   protected abstract switchChain(chainId: number): Promise<void>;

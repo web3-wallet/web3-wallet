@@ -20,7 +20,8 @@
       [
         "coinbase-wallet",
         "defiwallet",
-        "metamask"
+        "metamask",
+        "walletconnect"
       ],
       [
         "react",

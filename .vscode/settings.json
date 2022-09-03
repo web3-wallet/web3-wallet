@@ -24,6 +24,7 @@
     "pnpm",
     "tsbuildinfo",
     "vuejs",
+    "walletconnect",
     "web3-wallet",
     "zustand"
   ]
