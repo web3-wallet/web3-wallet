@@ -2,6 +2,10 @@
 
 [![CI](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml)
 
+## Examples
+
+[https://web3-wallet.github.io/web3-wallet](https://web3-wallet.github.io/web3-wallet)
+
 ## Install
 
 ```
@@ -28,22 +32,6 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/defiwallet`](packages/wallets/defiwallet)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)           | Crypto.com DeFi Wallet connector |
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet connector        |
 | [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)     | Walletconnect connector          |
-
-## Examples
-
-- [examples/nextjs](examples/nextjs)
-- [examples/vuejs](examples/vuejs)
-
-```base
-# install dependencies
-pnpm install
-
-# nextjs example
-pnpm nextjs
-
-# vuejs example
-pnpm vuejs
-```
 
 ## Getting started
 
