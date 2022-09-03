@@ -3,7 +3,8 @@
   "name": "@web3-wallet/nextjs",
   "scripts": {
     "dev": "next dev",
-    "built": "next build",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint src"
   },
   "version": "0.2.4",
