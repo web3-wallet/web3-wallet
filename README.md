@@ -2,6 +2,10 @@
 
 [![CI](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml)
 
+<p align="center">
+  <img width="200" src="site/public/logo.svg" alt="web3 wallet logo" />
+</p>
+
 ## Examples
 
 <a href="https://web3-wallet.github.io/web3-wallet" target="_blank">https://web3-wallet.github.io/web3-wallet</a>
