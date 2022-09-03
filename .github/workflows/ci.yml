@@ -41,5 +41,4 @@ jobs:
       - run: pnpm lint
       - run: pnpm run test
       # build examples, make sure the we don't break the examples
-      - run: pnpm -F nextjs build
-      - run: pnpm -F vuejs build
+      - run: pnpm -F example-vue build
