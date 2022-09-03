@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "eslint src"
   },
-  "version": "0.2.4",
+  "version": "0.2.5",
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.0.4",
     "@ethersproject/bignumber": "^5.7.0",

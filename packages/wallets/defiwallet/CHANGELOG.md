@@ -1,5 +1,14 @@
 # @web3-wallet/defiwallet
 
+## 0.2.5
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@0.2.5
+  - @web3-wallet/injected@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
