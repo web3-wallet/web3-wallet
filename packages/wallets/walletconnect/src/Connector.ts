@@ -71,6 +71,14 @@ export class WalletConnectConnector extends Connector {
     };
   }
 
+  public override async connectEagerly(): Promise<void> {
+    await this.lazyInitialize();
+    if (!this.provider?.connected) {
+      throw Error('No existing connection');
+    }
+    await super.connectEagerly();
+  }
+
   public override async activate(desiredChainId?: number): Promise<void> {
     super.activate(desiredChainId);
   }
