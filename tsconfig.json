@@ -15,8 +15,7 @@
     "pretty": true,
     "baseUrl": ".",
     "paths": {
-      "@site/*": ["examples/nextjs/src/*"],
-      "@vuejs/*": ["vuejs/nextjs/src/*"]
+      "@site/*": ["site/src/*"]
     }
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx"],

@@ -66,7 +66,19 @@ importers:
       typescript: 4.7.4
       vue: 3.2.37
 
-  examples/vuejs:
+  packages/core:
+    specifiers:
+      '@ethersproject/address': ^5.6.1
+      '@ethersproject/networks': ^5.6.4
+      '@ethersproject/providers': ^5.6.8
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@ethersproject/address': 5.6.1
+      '@ethersproject/networks': 5.6.4
+      '@ethersproject/providers': 5.6.8
+      zustand: 4.0.0-rc.3
+
+  packages/examples/vue:
     specifiers:
       '@typescript-eslint/eslint-plugin': ^5.4.0
       '@typescript-eslint/parser': ^5.4.0
@@ -86,8 +98,8 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
-      '@web3-wallet/metamask': link:../../packages/wallets/metamask
-      '@web3-wallet/vue': link:../../packages/vue
+      '@web3-wallet/metamask': link:../../wallets/metamask
+      '@web3-wallet/vue': link:../../vue
       vue: 3.2.37
     devDependencies:
       '@typescript-eslint/eslint-plugin': 5.30.7_vno27pkubrggxsw2ewpx2kr3zm
@@ -104,18 +116,6 @@ importers:
       eslint-plugin-vue: 8.7.1_eslint@7.32.0
       vite: 2.9.14
       vue-tsc: 0.34.17
-
-  packages/core:
-    specifiers:
-      '@ethersproject/address': ^5.6.1
-      '@ethersproject/networks': ^5.6.4
-      '@ethersproject/providers': ^5.6.8
-      zustand: ^4.0.0-rc.0
-    dependencies:
-      '@ethersproject/address': 5.6.1
-      '@ethersproject/networks': 5.6.4
-      '@ethersproject/providers': 5.6.8
-      zustand: 4.0.0-rc.3
 
   packages/react:
     specifiers:
@@ -3152,7 +3152,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.5
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint/8.4.5:
@@ -5117,7 +5117,7 @@ packages:
     dev: true
 
   /batch/0.6.1:
-    resolution: {integrity: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=}
+    resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
     dev: true
 
   /bech32/1.1.4:
@@ -5897,7 +5897,7 @@ packages:
     dev: true
 
   /cookie-signature/1.0.6:
-    resolution: {integrity: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=}
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
     dev: true
 
   /cookie/0.5.0:
@@ -6518,7 +6518,7 @@ packages:
     dev: true
 
   /ee-first/1.1.1:
-    resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
+    resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: true
 
   /eip1193-provider/1.0.1:
@@ -7989,7 +7989,7 @@ packages:
     dev: true
 
   /fresh/0.5.2:
-    resolution: {integrity: sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=}
+    resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
     dev: true
 
@@ -9872,7 +9872,7 @@ packages:
     dev: true
 
   /media-typer/0.3.0:
-    resolution: {integrity: sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=}
+    resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
     dev: true
 
@@ -9923,7 +9923,7 @@ packages:
     dev: true
 
   /merge-descriptors/1.0.1:
-    resolution: {integrity: sha1-sAqqVW3YtEVoFQ7J0blT8/kMu2E=}
+    resolution: {integrity: sha512-cCi6g3/Zr1iqQi6ySbseM1Xvooa98N0w31jzUYrXPX2xqObmFGHJ0tQ5u74H3mVh7wLouTseZyYIq39g8cNp1w==}
     dev: true
 
   /merge-source-map/1.1.0:
@@ -10623,7 +10623,7 @@ packages:
     dev: true
 
   /path-to-regexp/0.1.7:
-    resolution: {integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=}
+    resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
     dev: true
 
   /path-type/3.0.0:
@@ -12793,7 +12793,7 @@ packages:
     dev: true
 
   /utils-merge/1.0.1:
-    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
+    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
     dev: true
 

@@ -3,6 +3,7 @@
   "name": "@web3-wallet/site",
   "description": "web3-wallet website",
   "author": "logan <logan.luo@crypto.com>",
+  "version": "0.3.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +11,6 @@
     "start": "next start",
     "lint": "eslint src"
   },
-  "version": "0.3.1",
   "dependencies": {
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/experimental": "^5.7.0",

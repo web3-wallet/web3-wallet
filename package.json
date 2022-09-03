@@ -34,7 +34,7 @@
     "watch": "ts-node scripts/src/index.ts watch",
     "site": "pnpm -F site dev",
     "export": "pnpm -F site export",
-    "vuejs": "cd examples/vuejs && pnpm dev",
+    "example-vue": "pnpm -F example-vue dev",
     "test": "jest",
     "release": "changeset publish && git push --follow-tags",
     "lint": "pnpm -p -r -c exec eslint src",
