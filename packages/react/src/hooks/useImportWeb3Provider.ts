@@ -1,5 +1,5 @@
 import type { Web3Provider } from '@ethersproject/providers';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Only try to import @ethersproject/providers once
@@ -37,7 +37,5 @@ export const useImportWeb3Provider = (): typeof Web3Provider | undefined => {
     };
   }, [loaded]);
 
-  return useMemo(() => {
-    return DynamicProvider;
-  }, [loaded]);
+  return DynamicProvider;
 };

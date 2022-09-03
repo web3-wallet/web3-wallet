@@ -6,6 +6,9 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   settings: {
+    react: {
+      version: 'detect',
+    },
     jest: {
       version: require('jest/package.json').version,
     },
