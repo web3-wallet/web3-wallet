@@ -52,8 +52,8 @@ export class WalletConnectConnector extends Connector {
     return provider;
   }
 
-  protected override addEventListeners(): () => void {
-    if (!this.provider) throw this.providerNotFoundError;
+  protected override addEventListeners(): Connector['removeEventListeners'] {
+    if (!this.provider) return;
 
     const removeEventListeners = super.addEventListeners();
     const onDisplayUri = this.onDisplayUri.bind(this);
@@ -61,7 +61,7 @@ export class WalletConnectConnector extends Connector {
 
     return () => {
       if (!this.provider) return;
-      removeEventListeners();
+      removeEventListeners?.();
 
       if (typeof this.provider.off === 'function') {
         this.provider.off('display_uri', onDisplayUri);

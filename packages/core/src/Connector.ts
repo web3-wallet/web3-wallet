@@ -48,8 +48,8 @@ export abstract class Connector extends AbstractConnector {
     this.updateAccounts(accounts);
   }
 
-  protected addEventListeners(): () => void {
-    if (!this.provider) throw this.providerNotFoundError;
+  protected addEventListeners(): Connector['removeEventListeners'] {
+    if (!this.provider) return;
 
     const onConnect = this.onConnect.bind(this);
     const onDisconnect = this.onDisconnect.bind(this);

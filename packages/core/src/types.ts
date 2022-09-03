@@ -80,13 +80,15 @@ export type WalletName<T extends string = string> = T & {
   __brand__: 'WalletName';
 };
 
+type RemoveEventListeners = () => void;
+
 export abstract class AbstractConnector<P extends Provider = Provider> {
   public name: WalletName;
   public abstract provider?: P;
   public actions: Actions;
   public onError?(...args: unknown[]): Promise<void>;
   protected providerNotFoundError: ProviderNoFoundError;
-  protected removeEventListeners?: () => void;
+  protected removeEventListeners?: RemoveEventListeners;
 
   constructor(
     name: WalletName,
@@ -112,7 +114,7 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   public abstract watchAsset(param: WatchAssetParameters): void;
 
   protected abstract lazyInitialize(): Promise<void>;
-  protected abstract addEventListeners(): () => void;
+  protected abstract addEventListeners(): RemoveEventListeners | undefined;
   protected abstract updateChainId(chainId: number): void;
   protected abstract updateAccounts(accounts: string[]): void;
   protected abstract switchChain(chainId: number): Promise<void>;
