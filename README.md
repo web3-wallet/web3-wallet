@@ -27,6 +27,7 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/metamask`](packages/wallets/ethereum/metamask) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask) | Metamask connector               |
 | [`@web3-wallet/defiwallet`](packages/wallets/ethereum/defiwallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet) | Crypto.com DeFi Wallet connector |
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/ethereum/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase wallet connector        |
+| [`@web3-wallet/walletconnect`](packages/wallets/ethereum/walletconnect) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect) | Walletconnect connector          |
 
 ## Examples
 
