@@ -206,15 +206,11 @@ importers:
   packages/wallets/walletconnect:
     specifiers:
       '@walletconnect/ethereum-provider': ^1.8.0
-      '@walletconnect/jsonrpc-http-connection': ^1.0.3
-      '@walletconnect/jsonrpc-provider': ^1.0.5
       '@walletconnect/types': ^1.8.0
       '@web3-wallet/core': workspace:*
       eventemitter3: ^4.0.7
     dependencies:
       '@walletconnect/ethereum-provider': 1.8.0
-      '@walletconnect/jsonrpc-http-connection': 1.0.3
-      '@walletconnect/jsonrpc-provider': 1.0.5
       '@walletconnect/types': 1.8.0
       '@web3-wallet/core': link:../../core
       eventemitter3: 4.0.7
