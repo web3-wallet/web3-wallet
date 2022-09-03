@@ -16,6 +16,11 @@ const nextConfig = {
     };
     return config;
   },
+  /**
+   * Tell Next.js where the `public` folder is.
+   * Replace `nextjs-github-pages` with your Github repo project name.
+   */
+  assetPrefix: process.env.IS_LOCAL ? '' : '/web3-wallet/',
 };
 
 module.exports = nextConfig;
