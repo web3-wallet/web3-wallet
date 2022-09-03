@@ -1,5 +1,17 @@
 # @web3-wallet/nextjs
 
+## 0.3.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/react@0.3.1
+  - @web3-wallet/coinbase-wallet@0.3.1
+  - @web3-wallet/defiwallet@0.3.1
+  - @web3-wallet/metamask@0.3.1
+  - @web3-wallet/walletconnect@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes

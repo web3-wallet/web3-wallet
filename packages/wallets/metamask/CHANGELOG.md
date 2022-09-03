@@ -1,5 +1,14 @@
 # @web3-wallet/metamask
 
+## 0.3.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@0.3.1
+  - @web3-wallet/injected@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
