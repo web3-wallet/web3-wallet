@@ -9,8 +9,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@web3-wallet/metamask": "workspace:*",
-    "@web3-wallet/vue": "workspace:*",
+    "@web3-wallet/metamask": "workspace:^",
+    "@web3-wallet/vue": "workspace:^",
     "vue": "^3.2.25"
   },
   "devDependencies": {
