@@ -78,6 +78,37 @@ importers:
       '@ethersproject/providers': 5.6.8
       zustand: 4.0.0-rc.3
 
+  packages/examples/react:
+    specifiers:
+      '@ethersproject/bignumber': ^5.7.0
+      '@ethersproject/experimental': ^5.7.0
+      '@ethersproject/providers': ^5.7.0
+      '@ethersproject/units': ^5.7.0
+      '@types/react-dom': 18.0.6
+      '@web3-wallet/coinbase-wallet': workspace:^
+      '@web3-wallet/defiwallet': workspace:^
+      '@web3-wallet/metamask': workspace:^
+      '@web3-wallet/react': workspace:^
+      '@web3-wallet/walletconnect': workspace:^
+      eslint-config-next: 12.2.5
+      next: 12.2.5
+      react-dom: 18.2.0
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/experimental': 5.7.0
+      '@ethersproject/providers': 5.7.0
+      '@ethersproject/units': 5.7.0
+      '@web3-wallet/coinbase-wallet': link:../../wallets/coinbase-wallet
+      '@web3-wallet/defiwallet': link:../../wallets/defiwallet
+      '@web3-wallet/metamask': link:../../wallets/metamask
+      '@web3-wallet/react': link:../../react
+      '@web3-wallet/walletconnect': link:../../wallets/walletconnect
+      next: 12.2.5_react-dom@18.2.0
+      react-dom: 18.2.0
+    devDependencies:
+      '@types/react-dom': 18.0.6
+      eslint-config-next: 12.2.5
+
   packages/examples/vue:
     specifiers:
       '@typescript-eslint/eslint-plugin': ^5.4.0

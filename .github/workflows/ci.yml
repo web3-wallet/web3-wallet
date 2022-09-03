@@ -41,4 +41,5 @@ jobs:
       - run: pnpm lint
       - run: pnpm run test
       # build examples, make sure the we don't break the examples
+      - run: pnpm -F example-react build
       - run: pnpm -F example-vue build

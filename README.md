@@ -249,14 +249,15 @@ git clone git@github.com:web3-wallet/web3-wallet.git
 cd web3-wallet && pnpm install
 
 # react
-pnpm site # the web3-wallet site is built with react
+# the web3-wallet site is built with react
+pnpm example-react
 # optional
-# pnpm watch # watch for packages change
+pnpm watch # watch for packages change
 
 # vue
-pnpm watch # watch for packages change
+pnpm example-vue # start packages/examples/vue
 # optional
-# pnpm example-vue # start packages/examples/vue
+pnpm watch # watch for packages change
 
 # test
 pnpm test

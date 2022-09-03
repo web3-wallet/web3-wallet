@@ -6,19 +6,17 @@
   },
   "files.associations": {
     // allow comments in .evn.scripts.json
-    ".evn.scripts.json": "jsonc"
+    ".scripts.config.json": "jsonc"
   },
   "cSpell.words": [
     "bignumber",
     "changesets",
     "Cronos",
     "defi",
-    "Deficonnect",
     "defiwallet",
     "esbuild",
     "ethersproject",
     "imtoken",
-    "monacohq",
     "Networkish",
     "nextjs",
     "pnpm",
