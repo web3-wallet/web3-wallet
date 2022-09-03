@@ -9,6 +9,7 @@ on:
 
 jobs:
   deployment:
+    name: Deploy site
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +31,7 @@ jobs:
       # build all the packages
       - run: pnpm build
       # build the nextjs example
-      - run: pnpm -F nextjs build
+      - run: pnpm -F nextjs export
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
