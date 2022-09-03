@@ -12,8 +12,8 @@ export const WalletCardList = () => {
     <>
       <WalletCard wallet={metaMask} name="MetaMask" />
       <WalletCard wallet={defiWallet} name="crypto.com DeFi Wallet" />
-      <WalletCard wallet={coinbaseWallet} name="Coinbase Wallet" />
       <WalletCard wallet={walletConnect} name="WalletConnect" />
+      <WalletCard wallet={coinbaseWallet} name="Coinbase Wallet" />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import type { Wallet } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
-import { CHAINS, getAddChainParameters, URLS } from '../chains';
+import { CHAINS, getAddChainParameters, rpcMap } from '../chains';
 import { ChainSelect } from './ChainSelect';
 
 export const ConnectWithSelect = ({
@@ -18,7 +18,7 @@ export const ConnectWithSelect = ({
   const hashConnector = connector;
   const displayDefault = !hashConnector;
   const chainIds = (
-    hashConnector ? Object.keys(URLS) : Object.keys(CHAINS)
+    hashConnector ? Object.keys(rpcMap) : Object.keys(CHAINS)
   ).map((chainId) => Number(chainId));
 
   const [desiredChainId, setDesiredChainId] = useState<number>(

@@ -1,4 +1,4 @@
-import { URLS } from '@nextjs/chains';
+import { rpcMap } from '@nextjs/chains';
 import { createWallet } from '@web3-wallet/react';
 import { WalletConnectConnector } from '@web3-wallet/walletconnect';
 
@@ -7,7 +7,7 @@ export const walletConnect = createWallet<WalletConnectConnector>(
     new WalletConnectConnector({
       actions,
       options: {
-        rpc: URLS,
+        rpc: rpcMap,
       },
     }),
 );

@@ -170,14 +170,13 @@ export const CHAINS: {
   },
 };
 
-export const URLS: { [chainId: number]: string[] } = Object.keys(
+export const rpcMap: { [chainId: number]: string } = Object.keys(
   CHAINS,
-).reduce<{ [chainId: number]: string[] }>((accumulator, chainId) => {
-  const validURLs: string[] = CHAINS[Number(chainId)].urls;
-
-  if (validURLs.length) {
-    accumulator[Number(chainId)] = validURLs;
-  }
+).reduce<{
+  [chainId: number]: string;
+}>((accumulator, chainId) => {
+  const validURL: string = CHAINS[Number(chainId)].urls[0];
+  accumulator[Number(chainId)] = validURL;
 
   return accumulator;
 }, {});
