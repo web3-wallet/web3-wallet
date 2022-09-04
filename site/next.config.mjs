@@ -6,7 +6,17 @@ const nextConfig = {
     infuraKey: process.env.INFURA_KEY,
     alchemyKey: process.env.ALCHEMY_KEY,
   },
-  webpack(config) {
+  webpack(
+    config,
+    {
+      buildId: _build,
+      dev: _dev,
+      isServer,
+      defaultLoaders: _defaultLoaders,
+      nextRuntime: _nextRuntime,
+      webpack,
+    },
+  ) {
     // walletconnect
     // https://webpack.js.org/configuration/resolve/#resolvefallback
     config.resolve.fallback = {
@@ -14,6 +24,16 @@ const nextConfig = {
       'utf-8-validate': false,
       bufferutil: false,
     };
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __SERVER__: isServer,
+        __CLIENT__: !isServer,
+        __DEV__: process.env.NODE_ENV !== 'production',
+        __SITE_PREFIX__: JSON.stringify(
+          process.env.IS_LOCAL ? '' : '/web3-wallet',
+        ),
+      }),
+    );
     return config;
   },
   /**
@@ -23,4 +43,4 @@ const nextConfig = {
   assetPrefix: process.env.IS_LOCAL ? '' : '/web3-wallet/',
 };
 
-module.exports = nextConfig;
+export default nextConfig;
