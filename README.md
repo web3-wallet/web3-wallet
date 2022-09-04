@@ -1,6 +1,6 @@
 # Web3 Wallet
 
-[![CI](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml)
+[![CI](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml)
 
 <p align="center">
   <img width="200" src="site/public/logos/logo.svg?v=2" alt="web3 wallet logo" />

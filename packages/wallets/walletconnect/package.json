@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LoganAtCrypto/web3-wallet.git"
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
   },
   "publishConfig": {
     "access": "public"
@@ -32,7 +32,7 @@
     "@walletconnect/ethereum-provider": "^1.8.0"
   },
   "bugs": {
-    "url": "https://github.com/LoganAtCrypto/web3-wallet/issues"
+    "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },
-  "homepage": "https://github.com/LoganAtCrypto/web3-wallet#readme"
+  "homepage": "https://github.com/web3-wallet/web3-wallet#readme"
 }
