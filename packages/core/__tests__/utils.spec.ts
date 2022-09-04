@@ -1,12 +1,14 @@
-import mockData from './mockData';
-import {
+import { utils } from '../src';
+import mockData from './mockData.spec';
+
+const {
   isValidAccount,
   isValidChainId,
   parseChainId,
   toHexChainId,
   validateAccount,
   validateChainId,
-} from './utils';
+} = utils;
 
 describe('utils', () => {
   describe('validateChainId', () => {

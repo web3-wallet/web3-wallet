@@ -1,14 +1,20 @@
-import { MockEIP1193Provider } from './MockEIP1193Provider.spec';
+/* eslint-disable jest/no-export */
 import type {
   AddEthereumChainParameter,
   ProviderRpcError,
   RequestArguments,
   SwitchEthereumChainParameter,
-} from './types';
+} from '../src';
+import { MockEIP1193Provider } from './MockEIP1193Provider.spec';
+
+// Get around: "Your test suite must contain at least one test" error.
+// eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
+test.skip('skip', () => {});
 
 type SwitchChainParam = Omit<SwitchEthereumChainParameter, 'chainId'> & {
   chainId: string;
 };
+
 type AddChainParam = Omit<AddEthereumChainParameter, 'chainId'> & {
   chainId: string;
 };

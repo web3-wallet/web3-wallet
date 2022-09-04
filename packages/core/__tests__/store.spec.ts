@@ -1,6 +1,5 @@
-import mockData from './mockData';
-import { createStore } from './store';
-import type { State } from './types';
+import { type State, createStore } from '../src';
+import mockData from './mockData.spec';
 
 describe('store', () => {
   test('store default state', () => {

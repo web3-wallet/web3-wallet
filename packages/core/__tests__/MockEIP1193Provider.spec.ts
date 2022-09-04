@@ -1,6 +1,11 @@
+/* eslint-disable jest/no-export */
 import { EventEmitter } from 'node:events';
 
-import type { Provider, ProviderRpcError, RequestArguments } from './types';
+import type { Provider, ProviderRpcError, RequestArguments } from '../src';
+
+// Get around: "Your test suite must contain at least one test" error.
+// eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
+test.skip('skip', () => {});
 
 export class MockEIP1193ProviderRpcError extends Error {
   public code: number;

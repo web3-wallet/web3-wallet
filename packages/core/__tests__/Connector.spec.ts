@@ -1,8 +1,7 @@
-import { AbstractConnector } from './Connector';
-import mockData from './mockData';
+import type { WalletName } from '../src';
+import { AbstractConnector, createStore } from '../src';
+import mockData from './mockData.spec';
 import { MockProvider } from './MockProvider.spec';
-import { createStore } from './store';
-import type { WalletName } from './types';
 
 class MockConnector extends AbstractConnector<MockProvider> {
   public provider?: MockProvider;
@@ -18,4 +17,9 @@ class MockConnector extends AbstractConnector<MockProvider> {
 const store = createStore();
 const walletName = 'MockConnector' as WalletName<'MockConnector'>;
 
-const mockConnector = new MockConnector(walletName, store.actions);
+test('it works', async () => {
+  const mockConnector = new MockConnector(walletName, store.actions);
+  const provider = await mockConnector.detectProvider();
+
+  expect(!!provider).toBe(true);
+});

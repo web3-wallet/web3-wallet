@@ -1,4 +1,9 @@
-import { MAX_SAFE_CHAIN_ID } from './utils';
+/* eslint-disable jest/no-export */
+import { utils } from '../src';
+
+// Get around: "Your test suite must contain at least one test" error.
+// eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
+test.skip('skip', () => {});
 
 const chainIds = [1, 4, 25, 338, 205, 100, 8888];
 const hexChainIds = chainIds.map((v) => `0x${v.toString(16)}`);
@@ -10,8 +15,8 @@ const invalidChainIds = [
   1.5,
   10.5,
   -3.5,
-  MAX_SAFE_CHAIN_ID + 1,
-  MAX_SAFE_CHAIN_ID + 10,
+  utils.MAX_SAFE_CHAIN_ID + 1,
+  utils.MAX_SAFE_CHAIN_ID + 10,
 ];
 
 const accounts = [
