@@ -3,7 +3,7 @@
 [![CI](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/LoganAtCrypto/web3-wallet/actions/workflows/ci.yml)
 
 <p align="center">
-  <img width="200" src="site/public/logo.svg?v=2" alt="web3 wallet logo" />
+  <img width="200" src="site/public/logos/logo.svg?v=2" alt="web3 wallet logo" />
 </p>
 
 ## Examples
