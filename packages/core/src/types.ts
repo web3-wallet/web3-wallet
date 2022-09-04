@@ -83,13 +83,12 @@ export interface WatchAssetParameters {
   image: string;
 }
 
-export type WalletName<T extends string = string> = T & {
-  __brand__: 'WalletName';
-};
+export type Brand<K, T> = K & { __brand__: T };
+export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
 
 type RemoveEventListeners = () => void;
 
-export abstract class AbstractConnector<P extends Provider = Provider> {
+export abstract class BaseAbstractConnector<P extends Provider> {
   public name: WalletName;
   public abstract provider?: P;
   public actions: Actions;

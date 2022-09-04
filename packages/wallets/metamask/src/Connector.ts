@@ -1,18 +1,22 @@
-import type { Connector, WalletName } from '@web3-wallet/core';
-import {
-  type InjectedProvider,
-  InjectedConnector,
-} from '@web3-wallet/injected';
+import type {
+  AbstractConnector,
+  Provider,
+  WalletName,
+} from '@web3-wallet/core';
+import { InjectedConnector } from '@web3-wallet/injected';
 
-export type MetaMaskProvider = InjectedProvider & {
+export type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
 };
 
 export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
-export class MetaMaskConnector extends InjectedConnector {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
+export class MetaMaskConnector extends InjectedConnector<MetaMaskProvider> {
+  constructor(
+    actions: AbstractConnector['actions'],
+    onError?: AbstractConnector['onError'],
+  ) {
     super(walletName, actions, onError);
   }
 

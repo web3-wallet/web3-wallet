@@ -1,38 +1,45 @@
-import { type Provider, Connector } from '@web3-wallet/core';
+import { type Provider, AbstractConnector } from '@web3-wallet/core';
 
-export type InjectedProvider = Provider & {
-  providers?: InjectedProvider[];
+type InjectedProviders<P> = {
+  providers?: P[];
 };
+type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
 
 export type ProviderFilter<P> = (provider: P) => boolean;
 
-export abstract class InjectedConnector extends Connector {
-  public provider?: InjectedProvider;
+export abstract class InjectedConnector<
+  P extends Provider,
+> extends AbstractConnector<P> {
+  public provider?: P;
 
   public async detectProvider(
-    providerFilter: ProviderFilter<InjectedProvider> = () => true,
-  ): Promise<InjectedProvider> {
+    providerFilter: ProviderFilter<P> = () => true,
+  ): Promise<P> {
     if (this.provider) this.provider;
 
     const m = await import('@metamask/detect-provider');
 
-    const provider = await m.default();
+    const injectedProvider = (await m.default()) as InjectedProvider<P>;
 
-    if (!provider) throw this.providerNotFoundError;
+    if (!injectedProvider) throw this.providerNotFoundError;
 
-    this.provider = provider as InjectedProvider;
+    let provider: P | undefined;
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
      * */
-    if (this.provider.providers?.length) {
-      this.provider = this.provider.providers.find(providerFilter);
+    if ((injectedProvider as InjectedProviders<P>).providers?.length) {
+      provider = (injectedProvider as InjectedProviders<P>).providers?.find(
+        providerFilter,
+      );
     }
 
-    if (!this.provider || !providerFilter(this.provider)) {
+    if (!provider) {
       throw this.providerNotFoundError;
     }
 
-    return this.provider;
+    this.provider = provider;
+
+    return provider;
   }
 }

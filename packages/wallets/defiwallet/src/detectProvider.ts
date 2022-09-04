@@ -1,22 +1,4 @@
-interface Provider {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  once(eventName: string | symbol, listener: (...args: any[]) => void): this;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  on(eventName: string | symbol, listener: (...args: any[]) => void): this;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  off(eventName: string | symbol, listener: (...args: any[]) => void): this;
-  addListener(
-    eventName: string | symbol,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    listener: (...args: any[]) => void,
-  ): this;
-  removeListener(
-    eventName: string | symbol,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    listener: (...args: any[]) => void,
-  ): this;
-  removeAllListeners(event?: string | symbol): this;
-}
+import type { Provider } from '@web3-wallet/core';
 
 export interface DeFiWalletProviderOptions {
   chainType: 'eth';

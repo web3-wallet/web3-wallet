@@ -3,8 +3,8 @@ import { computed, reactive } from 'vue';
 import { getUseEnsName, getUseEnsNames } from './ensNames';
 import { createGetProvider } from './provider';
 import {
+  type AbstractConnector,
   type Actions,
-  type Connector,
   type State,
   type Wallet,
   createStore,
@@ -23,9 +23,11 @@ const computeIsActive = ({
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <C extends Connector = Connector>(
-  f: (actions: Actions) => C,
-): Wallet<C> => {
+export const createWallet = <
+  Connector extends AbstractConnector = AbstractConnector,
+>(
+  f: (actions: Actions) => Connector,
+): Wallet<Connector> => {
   const { store, actions } = createStore();
 
   const state = reactive<State>({
@@ -49,7 +51,7 @@ export const createWallet = <C extends Connector = Connector>(
       isActivating: isActivating.value,
     }),
   );
-  const useProvider = createGetProvider<C>({
+  const useProvider = createGetProvider<Connector>({
     connector,
     chainId,
     isActive,

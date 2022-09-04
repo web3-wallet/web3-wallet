@@ -3,7 +3,7 @@ import type {
   Networkish,
   Web3Provider,
 } from '@ethersproject/providers';
-import type { Connector } from '@web3-wallet/core';
+import type { AbstractConnector } from '@web3-wallet/core';
 import { type Ref, computed, ref, watchEffect } from 'vue';
 
 import type { Wallet } from './types';
@@ -32,7 +32,7 @@ async function importProvider(): Promise<typeof dynamicProvider> {
   return dynamicProvider;
 }
 
-export const createGetProvider = <T extends Connector>({
+export const createGetProvider = <T extends AbstractConnector>({
   connector,
   isActive,
   chainId,

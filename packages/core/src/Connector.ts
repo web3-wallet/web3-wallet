@@ -1,9 +1,10 @@
+import type { Provider } from './types';
 import {
   type AddEthereumChainParameter,
   type ProviderConnectInfo,
   type ProviderRpcError,
   type WatchAssetParameters,
-  AbstractConnector,
+  BaseAbstractConnector,
 } from './types';
 import { parseChainId, toHexChainId } from './utils';
 
@@ -19,7 +20,9 @@ const isAddChainParameter = (
   return !isChainId(chainIdOrChainParameter);
 };
 
-export abstract class Connector extends AbstractConnector {
+export abstract class AbstractConnector<
+  P extends Provider = Provider,
+> extends BaseAbstractConnector<P> {
   protected initialized = false;
 
   protected updateChainId(chainId: string | number): void {
@@ -48,7 +51,7 @@ export abstract class Connector extends AbstractConnector {
     this.updateAccounts(accounts);
   }
 
-  protected addEventListeners(): Connector['removeEventListeners'] {
+  protected addEventListeners(): AbstractConnector<P>['removeEventListeners'] {
     if (!this.provider) return;
 
     const onConnect = this.onConnect.bind(this);

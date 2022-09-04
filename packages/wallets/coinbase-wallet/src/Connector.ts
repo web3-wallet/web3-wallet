@@ -2,7 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { type WalletName, Connector } from '@web3-wallet/core';
+import { type WalletName, AbstractConnector } from '@web3-wallet/core';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
@@ -10,7 +10,7 @@ type CoinbaseWalletSDKOptions = ConstructorParameters<
 
 export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
-export class CoinbaseWalletConnector extends Connector {
+export class CoinbaseWalletConnector extends AbstractConnector<CoinbaseWalletProvider> {
   public override provider?: CoinbaseWalletProvider;
   private readonly options: CoinbaseWalletSDKOptions;
   /**
@@ -25,9 +25,9 @@ export class CoinbaseWalletConnector extends Connector {
    * @param onError - Handler to report errors thrown from eventListeners.
    */
   constructor(
-    actions: Connector['actions'],
+    actions: AbstractConnector['actions'],
     options: CoinbaseWalletSDKOptions,
-    onError?: Connector['onError'],
+    onError?: AbstractConnector['onError'],
   ) {
     super(walletName, actions, onError);
     this.options = options;

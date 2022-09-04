@@ -1,10 +1,11 @@
-import { Connector } from './Connector';
+import { AbstractConnector } from './Connector';
 import mockData from './mockData';
 import { MockProvider } from './MockProvider.spec';
 import { createStore } from './store';
 import type { WalletName } from './types';
 
-class MockConnector extends Connector {
+class MockConnector extends AbstractConnector<MockProvider> {
+  public provider?: MockProvider;
   public async detectProvider(): Promise<MockProvider> {
     const mockProvider = new MockProvider();
     mockProvider.chainId = mockData.hexChainIds[0];
