@@ -1,4 +1,4 @@
-import mock from './mock';
+import mockData from './mockData';
 import {
   isValidAccount,
   isValidChainId,
@@ -10,12 +10,12 @@ import {
 
 describe('utils', () => {
   describe('validateChainId', () => {
-    let table = mock.chainIds.map((v) => [v]);
+    let table = mockData.chainIds.map((v) => [v]);
     test.each(table)('chainId: %i', (chainId: number) => {
       expect(validateChainId(chainId)).toBe(void 0);
     });
 
-    table = mock.invalidChainIds.map((v) => [v]);
+    table = mockData.invalidChainIds.map((v) => [v]);
     test.each(table)('chainId: %i', (chainId: number) => {
       expect(() => {
         validateChainId(chainId);
@@ -23,24 +23,24 @@ describe('utils', () => {
     });
   });
   describe('isValidChainId', () => {
-    let table = mock.chainIds.map((v) => [v]);
+    let table = mockData.chainIds.map((v) => [v]);
     test.each(table)('chainId: %i', (chainId: number) => {
       expect(isValidChainId(chainId)).toBe(true);
     });
 
-    table = mock.invalidChainIds.map((v) => [v]);
+    table = mockData.invalidChainIds.map((v) => [v]);
     test.each(table)('chainId: %i', (chainId: number) => {
       expect(isValidChainId(chainId)).toBe(false);
     });
   });
 
   describe('validateAccount', () => {
-    let table = mock.accounts.map((v) => [v]);
+    let table = mockData.accounts.map((v) => [v]);
     test.each(table)('account: %i', (account: string) => {
       expect(validateAccount(account)).toBe(account);
     });
 
-    table = mock.invalidAccounts.map((v) => [v]);
+    table = mockData.invalidAccounts.map((v) => [v]);
     test.each(table)('account: %i', (account: string) => {
       expect(() => {
         validateAccount(account);
@@ -48,13 +48,13 @@ describe('utils', () => {
     });
   });
   describe('isValidAccount', () => {
-    let table = mock.accounts.map((v) => [v]);
+    let table = mockData.accounts.map((v) => [v]);
 
     test.each(table)('account: %i', (account: string) => {
       expect(isValidAccount(account)).toBe(true);
     });
 
-    table = mock.invalidAccounts.map((v) => [v]);
+    table = mockData.invalidAccounts.map((v) => [v]);
     test.each(table)('account: %i', (account: string) => {
       expect(isValidAccount(account)).toBe(false);
     });

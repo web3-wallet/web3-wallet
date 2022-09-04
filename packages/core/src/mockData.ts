@@ -1,6 +1,8 @@
 import { MAX_SAFE_CHAIN_ID } from './utils';
 
 const chainIds = [1, 4, 25, 338, 205, 100, 8888];
+const hexChainIds = chainIds.map((v) => `0x${v.toString(16)}`);
+
 const invalidChainIds = [
   0,
   -1,
@@ -29,8 +31,9 @@ const invalidAccounts = [
 ];
 
 export default {
+  chainIds,
+  hexChainIds,
   accounts,
   invalidChainIds,
-  chainIds,
   invalidAccounts,
 };

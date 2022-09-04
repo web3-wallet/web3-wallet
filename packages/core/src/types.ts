@@ -48,6 +48,12 @@ export class ProviderNoFoundError extends Error {
   }
 }
 
+// https://docs.metamask.io/guide/rpc-api.html#unrestricted-methods
+// https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain/5471
+export interface SwitchEthereumChainParameter {
+  chainId: number;
+}
+
 // https://eips.ethereum.org/EIPS/eip-3085
 export interface AddEthereumChainParameter {
   chainId: number;
@@ -65,6 +71,7 @@ export interface AddEthereumChainParameter {
 }
 
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md
+// https://docs.metamask.io/guide/rpc-api.html#wallet-watchasset
 export interface WatchAssetParameters {
   // The address that the token is at.
   address: string;

@@ -1,4 +1,4 @@
-import mock from './mock';
+import mockData from './mockData';
 import { createStore } from './store';
 import type { State } from './types';
 
@@ -43,7 +43,7 @@ describe('Activation', () => {
 
 describe('update/valid chainId', () => {
   const { store, actions } = createStore();
-  const table = mock.chainIds.map((v) => [v]);
+  const table = mockData.chainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     actions.update({
       chainId,
@@ -57,7 +57,7 @@ describe('update/valid chainId', () => {
 });
 describe('update/invalid chainId', () => {
   const { actions } = createStore();
-  const table = mock.invalidChainIds.map((v) => [v]);
+  const table = mockData.invalidChainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
       actions.update({
@@ -70,7 +70,7 @@ describe('update/invalid chainId', () => {
 describe('update/valid accounts', () => {
   test('valid accounts', () => {
     const { store, actions } = createStore();
-    const accounts = [...mock.accounts];
+    const accounts = [...mockData.accounts];
     actions.update({ accounts });
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
@@ -81,7 +81,7 @@ describe('update/valid accounts', () => {
 });
 describe('update/invalid accounts', () => {
   const { actions } = createStore();
-  const table = mock.invalidChainIds.map((v) => [v]);
+  const table = mockData.invalidChainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
       actions.update({
@@ -94,8 +94,8 @@ describe('update/invalid accounts', () => {
 describe('update/accounts & chainId', () => {
   test('valid accounts & valid chainId', () => {
     const { store, actions } = createStore();
-    const chainId = mock.chainIds[0];
-    const accounts = [...mock.accounts];
+    const chainId = mockData.chainIds[0];
+    const accounts = [...mockData.accounts];
     actions.update({
       chainId,
       accounts,
@@ -109,8 +109,8 @@ describe('update/accounts & chainId', () => {
 
   test('valid chainId & invalid accounts', () => {
     const { actions } = createStore();
-    const chainId = mock.chainIds[0];
-    const accounts = [...mock.invalidAccounts];
+    const chainId = mockData.chainIds[0];
+    const accounts = [...mockData.invalidAccounts];
     expect(() => {
       actions.update({
         chainId,
@@ -120,8 +120,8 @@ describe('update/accounts & chainId', () => {
   });
   test('invalid chainId & invalid accounts', () => {
     const { actions } = createStore();
-    const chainId = mock.invalidChainIds[0];
-    const accounts = [...mock.invalidAccounts];
+    const chainId = mockData.invalidChainIds[0];
+    const accounts = [...mockData.invalidAccounts];
     expect(() => {
       actions.update({
         chainId,
@@ -135,8 +135,8 @@ describe('resetState', () => {
   test('resetState works', () => {
     const { store, actions } = createStore();
     const stateUpdate = {
-      chainId: mock.chainIds[0],
-      accounts: [...mock.accounts],
+      chainId: mockData.chainIds[0],
+      accounts: [...mockData.accounts],
     };
     actions.update(stateUpdate);
     const cancelActivation = actions.startActivation();

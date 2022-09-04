@@ -24,9 +24,9 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@ethersproject/address": "^5.6.1",
-    "@ethersproject/networks": "^5.6.4",
-    "@ethersproject/providers": "^5.6.8",
+    "@ethersproject/address": "^5.7.0",
+    "@ethersproject/networks": "^5.7.0",
+    "@ethersproject/providers": "^5.7.0",
     "zustand": "^4.0.0-rc.0"
   },
   "bugs": {
