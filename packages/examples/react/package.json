@@ -3,7 +3,7 @@
   "description": "web3-wallet react example",
   "author": "logan <logan.luo@crypto.com>",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "scripts": {
     "dev": "next dev -p 3333",
     "start": "next start -p 3333",

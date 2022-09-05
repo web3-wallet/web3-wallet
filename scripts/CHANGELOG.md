@@ -1,5 +1,11 @@
 # @web3-wallet/scripts
 
+## 0.3.1
+
+### Patch Changes
+
+- package version
+
 ## 0.3.0
 
 ### Minor Changes
