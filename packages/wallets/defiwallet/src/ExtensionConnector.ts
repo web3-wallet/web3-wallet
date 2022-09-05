@@ -107,10 +107,4 @@ export class ExtensionConnector extends AbstractConnector<DeFiWalletProvider> {
       }
     }
   }
-
-  public override async deactivate() {
-    if (!this.provider) throw this.providerNotFoundError;
-    super.deactivate();
-    await this.provider.close();
-  }
 }
