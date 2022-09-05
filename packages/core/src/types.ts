@@ -114,10 +114,10 @@ export abstract class BaseAbstractConnector<P extends Provider> {
   }
 
   public abstract detectProvider(...args: unknown[]): Promise<P>;
-  public abstract activate(...args: unknown[]): Promise<void>;
   public abstract connectEagerly(...args: unknown[]): Promise<void>;
-  public abstract deactivate(...args: unknown[]): Promise<void>;
+  public abstract activate(...args: unknown[]): Promise<void>;
   public abstract watchAsset(param: WatchAssetParameters): void;
+  public abstract deactivate(...args: unknown[]): Promise<void>;
 
   protected abstract lazyInitialize(): Promise<void>;
   protected abstract addEventListeners(): RemoveEventListeners | undefined;

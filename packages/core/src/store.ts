@@ -3,7 +3,7 @@ import create from 'zustand/vanilla';
 import type { Actions, State, Store } from './types';
 import { validateAccount, validateChainId } from './utils';
 
-const DEFAULT_STATE: State = {
+export const DEFAULT_STATE: State = {
   chainId: undefined,
   accounts: undefined,
   isActivating: false,
