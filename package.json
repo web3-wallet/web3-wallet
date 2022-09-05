@@ -21,7 +21,8 @@
         "coinbase-wallet",
         "defiwallet",
         "metamask",
-        "walletconnect"
+        "walletconnect",
+        "cryptocom-desktop-wallet"
       ],
       [
         "react",

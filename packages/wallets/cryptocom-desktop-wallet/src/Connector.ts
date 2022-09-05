@@ -1,9 +1,9 @@
-import { InjectedConnector } from '@web3-wallet/injected';
 import type {
   AbstractConnector,
   Provider,
   WalletName,
-} from '@web3-wallet/react';
+} from '@web3-wallet/core';
+import { InjectedConnector } from '@web3-wallet/injected';
 
 export type CryptocomDesktopWalletProvider = Provider & {
   isDesktopWallet?: boolean;

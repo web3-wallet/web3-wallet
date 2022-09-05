@@ -1,4 +1,4 @@
-import { CryptocomDesktopWalletConnector } from '@example-react/connectors';
+import { CryptocomDesktopWalletConnector } from '@web3-wallet/cryptocom-desktop-wallet';
 import { createWallet } from '@web3-wallet/react';
 
 export const cryptocomDesktopWallet =
