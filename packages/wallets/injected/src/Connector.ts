@@ -23,7 +23,7 @@ export abstract class InjectedConnector<
 
     if (!injectedProvider) throw this.providerNotFoundError;
 
-    let provider: P | undefined;
+    let provider = injectedProvider as P | undefined;
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
@@ -32,6 +32,8 @@ export abstract class InjectedConnector<
       provider = (injectedProvider as InjectedProviders<P>).providers?.find(
         providerFilter,
       );
+    } else {
+      provider = provider && providerFilter(provider) ? provider : undefined;
     }
 
     if (!provider) {
