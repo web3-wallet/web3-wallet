@@ -5,9 +5,9 @@
   "private": true,
   "version": "0.4.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "next dev -p 3333",
+    "build": "next build -p 3333",
+    "start": "next start -p 3333",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "@ethersproject/units": "^5.7.0",
     "@web3-wallet/coinbase-wallet": "workspace:^",
     "@web3-wallet/defiwallet": "workspace:^",
+    "@web3-wallet/injected": "workspace:^",
     "@web3-wallet/metamask": "workspace:^",
     "@web3-wallet/react": "workspace:^",
     "@web3-wallet/walletconnect": "workspace:^",

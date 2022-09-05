@@ -1,10 +1,8 @@
 import { useCurrentWalletContext } from '@site/context';
-import * as walletMap from '@site/wallets';
-import { type Wallet, useSelectedWallet } from '@web3-wallet/react';
-
-const wallets: Wallet[] = Object.values(walletMap);
+import { allWallets } from '@site/wallets';
+import { useSelectedWallet } from '@web3-wallet/react';
 
 export const useCurrentWallet = () => {
   const selectedWalletName = useCurrentWalletContext().currentWallet;
-  return useSelectedWallet(selectedWalletName, wallets);
+  return useSelectedWallet(selectedWalletName, allWallets);
 };

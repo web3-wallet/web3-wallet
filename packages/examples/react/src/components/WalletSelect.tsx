@@ -1,8 +1,6 @@
 import { useCurrentWalletContext } from '@example-react/context';
-import * as walletMap from '@example-react/wallets';
-import type { Wallet, WalletName } from '@web3-wallet/react';
-
-const wallets: Wallet[] = Object.values(walletMap);
+import { allWallets } from '@example-react/wallets';
+import type { WalletName } from '@web3-wallet/react';
 
 export const WalletSelect = () => {
   const { currentWallet, switchCurrentWallet } = useCurrentWalletContext();
@@ -18,7 +16,7 @@ export const WalletSelect = () => {
         cursor: 'pointer',
       }}
     >
-      {wallets.map((wallet) => (
+      {allWallets.map((wallet) => (
         <option key={wallet.name} value={wallet.name}>
           {wallet.name}
         </option>
