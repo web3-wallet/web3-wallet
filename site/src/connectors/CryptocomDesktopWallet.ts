@@ -5,21 +5,18 @@ import type {
   WalletName,
 } from '@web3-wallet/react';
 
-export type MetaMaskProvider = Provider & {
-  isMetaMask?: boolean;
+export type CryptocomDesktopWalletProvider = Provider & {
+  isDesktopWallet?: boolean;
 };
 
 export const walletName =
   'Crypto.com Desktop Wallet' as WalletName<'Crypto.com Desktop Wallet'>;
 
-const providerFilter = () => {
-  if (typeof window !== 'undefined') {
-    return window.navigator?.userAgent?.includes('Desktop Wallet');
-  }
-  return false;
+const providerFilter = (p: CryptocomDesktopWalletProvider) => {
+  return !!p.isDesktopWallet;
 };
 
-export class CryptocomDesktopWalletConnector extends InjectedConnector<MetaMaskProvider> {
+export class CryptocomDesktopWalletConnector extends InjectedConnector<CryptocomDesktopWalletProvider> {
   constructor(
     actions: AbstractConnector['actions'],
     onError?: AbstractConnector['onError'],
@@ -27,7 +24,7 @@ export class CryptocomDesktopWalletConnector extends InjectedConnector<MetaMaskP
     super(walletName, actions, onError);
   }
 
-  public override async detectProvider(): Promise<MetaMaskProvider> {
+  public override async detectProvider(): Promise<CryptocomDesktopWalletProvider> {
     return await super.detectProvider(providerFilter);
   }
 }
