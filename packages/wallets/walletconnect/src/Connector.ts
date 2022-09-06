@@ -79,10 +79,6 @@ export class WalletConnectConnector extends AbstractConnector<WalletConnectProvi
     await super.connectEagerly();
   }
 
-  public override async activate(desiredChainId?: number): Promise<void> {
-    super.activate(desiredChainId);
-  }
-
   public override async deactivate(): Promise<void> {
     this.removeEventListeners?.();
     await this.provider?.disconnect();
