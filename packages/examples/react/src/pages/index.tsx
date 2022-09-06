@@ -7,10 +7,9 @@ export default function Home() {
     <Layout>
       <Box
         style={{
-          height: '100vh',
+          marginTop: 50,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <WalletSelectCard />

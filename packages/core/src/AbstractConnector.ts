@@ -132,12 +132,7 @@ export abstract class AbstractConnector<
       });
       return accounts;
     } catch (error: unknown) {
-      if (__DEV__) {
-        console.warn(
-          `Failed to request accounts with 'eth_requestAccounts', try to fail back to 'eth_accounts'`,
-          error,
-        );
-      }
+      console.warn(`Failed to request accounts with 'eth_requestAccounts'`);
 
       const accounts = await this.provider.request<string[]>({
         method: 'eth_accounts',
