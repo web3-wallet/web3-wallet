@@ -25,7 +25,7 @@
   "module": "./dist/esm/index.js",
   "dependencies": {
     "@walletconnect/types": "^1.8.0",
-    "@web3-wallet/core": "workspace:^",
+    "@web3-wallet/core": "workspace:*",
     "eventemitter3": "^4.0.7"
   },
   "peerDependencies": {

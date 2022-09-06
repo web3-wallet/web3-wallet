@@ -89,13 +89,13 @@ importers:
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
-      '@web3-wallet/coinbase-wallet': workspace:^
-      '@web3-wallet/cryptocom-desktop-wallet': workspace:^
-      '@web3-wallet/defiwallet': workspace:^
-      '@web3-wallet/injected': workspace:^
-      '@web3-wallet/metamask': workspace:^
-      '@web3-wallet/react': workspace:^
-      '@web3-wallet/walletconnect': workspace:^
+      '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/cryptocom-desktop-wallet': workspace:*
+      '@web3-wallet/defiwallet': workspace:*
+      '@web3-wallet/injected': workspace:*
+      '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/react': workspace:*
+      '@web3-wallet/walletconnect': workspace:*
       eslint-config-next: 12.2.5
       next: 12.2.5
       react-dom: 18.2.0
@@ -127,8 +127,8 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
-      '@web3-wallet/metamask': workspace:^
-      '@web3-wallet/vue': workspace:^
+      '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
@@ -160,7 +160,7 @@ importers:
     specifiers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
-      '@web3-wallet/core': workspace:^
+      '@web3-wallet/core': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.7.0
@@ -172,7 +172,7 @@ importers:
     specifiers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
-      '@web3-wallet/core': workspace:^
+      '@web3-wallet/core': workspace:*
     dependencies:
       '@web3-wallet/core': link:../core
     optionalDependencies:
@@ -181,22 +181,22 @@ importers:
 
   packages/wallets/coinbase-wallet:
     specifiers:
-      '@web3-wallet/core': workspace:^
+      '@web3-wallet/core': workspace:*
     dependencies:
       '@web3-wallet/core': link:../../core
 
   packages/wallets/cryptocom-desktop-wallet:
     specifiers:
-      '@web3-wallet/core': workspace:^
-      '@web3-wallet/injected': workspace:^
+      '@web3-wallet/core': workspace:*
+      '@web3-wallet/injected': workspace:*
     dependencies:
       '@web3-wallet/core': link:../../core
       '@web3-wallet/injected': link:../injected
 
   packages/wallets/defiwallet:
     specifiers:
-      '@web3-wallet/core': workspace:^
-      '@web3-wallet/injected': workspace:^
+      '@web3-wallet/core': workspace:*
+      '@web3-wallet/injected': workspace:*
     dependencies:
       '@web3-wallet/core': link:../../core
       '@web3-wallet/injected': link:../injected
@@ -204,15 +204,15 @@ importers:
   packages/wallets/injected:
     specifiers:
       '@metamask/detect-provider': ^1.2.0
-      '@web3-wallet/core': workspace:^
+      '@web3-wallet/core': workspace:*
     dependencies:
       '@metamask/detect-provider': 1.2.0
       '@web3-wallet/core': link:../../core
 
   packages/wallets/metamask:
     specifiers:
-      '@web3-wallet/core': workspace:^
-      '@web3-wallet/injected': workspace:^
+      '@web3-wallet/core': workspace:*
+      '@web3-wallet/injected': workspace:*
     dependencies:
       '@web3-wallet/core': link:../../core
       '@web3-wallet/injected': link:../injected
@@ -220,7 +220,7 @@ importers:
   packages/wallets/walletconnect:
     specifiers:
       '@walletconnect/types': ^1.8.0
-      '@web3-wallet/core': workspace:^
+      '@web3-wallet/core': workspace:*
       eventemitter3: ^4.0.7
     dependencies:
       '@walletconnect/types': 1.8.0
@@ -240,13 +240,13 @@ importers:
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
-      '@web3-wallet/coinbase-wallet': workspace:^
-      '@web3-wallet/cryptocom-desktop-wallet': workspace:^
-      '@web3-wallet/defiwallet': workspace:^
-      '@web3-wallet/injected': workspace:^
-      '@web3-wallet/metamask': workspace:^
-      '@web3-wallet/react': workspace:^
-      '@web3-wallet/walletconnect': workspace:^
+      '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/cryptocom-desktop-wallet': workspace:*
+      '@web3-wallet/defiwallet': workspace:*
+      '@web3-wallet/injected': workspace:*
+      '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/react': workspace:*
+      '@web3-wallet/walletconnect': workspace:*
       eslint-config-next: 12.2.5
       next: 12.2.5
       react-dom: 18.2.0

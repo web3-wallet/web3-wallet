@@ -23,7 +23,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/core": "workspace:^"
+    "@web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.2.13"

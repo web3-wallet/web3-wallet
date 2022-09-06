@@ -24,8 +24,8 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/core": "workspace:^",
-    "@web3-wallet/injected": "workspace:^"
+    "@web3-wallet/core": "workspace:*",
+    "@web3-wallet/injected": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
