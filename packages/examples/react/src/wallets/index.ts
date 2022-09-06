@@ -22,5 +22,4 @@ export const allWallets = [
   cryptocomDesktopWallet,
 ];
 
-export const { setSelectedWallet, useSelectedWallet, useIsDisconnected } =
-  createSelectedWallet(allWallets);
+export const selectedWallet = createSelectedWallet(allWallets);

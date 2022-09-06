@@ -3,12 +3,10 @@ import { CHAINS } from '../chains';
 export const ChainSelect = ({
   chainId,
   switchChain,
-  displayDefault,
   chainIds,
 }: {
   chainId: number;
   switchChain: ((chainId: number) => void) | undefined;
-  displayDefault: boolean;
   chainIds: number[];
 }) => {
   return (
@@ -24,7 +22,6 @@ export const ChainSelect = ({
       }}
       disabled={switchChain === undefined}
     >
-      {displayDefault ? <option value={-1}>Default Chain</option> : null}
       {chainIds.map((chainId) => (
         <option key={chainId} value={chainId}>
           {CHAINS[chainId]?.name ?? chainId}

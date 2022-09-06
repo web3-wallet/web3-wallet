@@ -7,23 +7,27 @@ import { Chain } from './Chain';
 import { ConnectWithSelect } from './ConnectWithSelect';
 import { Status } from './Status';
 
-interface Props {
-  wallet: Wallet;
-}
+type Props = {
+  name: Wallet['name'];
+  activate: Wallet['connector']['activate'];
+  deactivate: Wallet['connector']['deactivate'];
+  connectEagerlyOnce: Wallet['connector']['connectEagerlyOnce'];
+} & Wallet['hooks'];
 
-export const WalletCard = ({ wallet }: Props) => {
-  const {
-    connector,
-    hooks: {
-      useChainId,
-      useAccounts,
-      useIsActivating,
-      useIsActive,
-      useProvider,
-      useENSNames,
-    },
-  } = wallet;
+export const WalletCard = ({
+  name,
 
+  activate,
+  deactivate,
+  connectEagerlyOnce,
+
+  useChainId,
+  useAccounts,
+  useIsActivating,
+  useIsActive,
+  useProvider,
+  useENSNames,
+}: Props) => {
   const chainId = useChainId();
   const accounts = useAccounts();
   const isActivating = useIsActivating();
@@ -35,20 +39,21 @@ export const WalletCard = ({ wallet }: Props) => {
 
   // attempt to connect eagerly on mount
   useEffect(() => {
-    connector.connectEagerly()?.catch((e) => {
+    connectEagerlyOnce()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
     });
-  }, [connector]);
+  }, [connectEagerlyOnce]);
 
   return (
     <Card>
-      <b>{wallet.name}</b>
+      <b>{name}</b>
       <div>Category: Ethereum</div>
       <Status isActivating={isActivating} isActive={isActive} />
       <Chain chainId={chainId} />
       <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       <ConnectWithSelect
-        connector={connector}
+        activate={activate}
+        deactivate={deactivate}
         chainId={chainId}
         isActivating={isActivating}
         isActive={isActive}

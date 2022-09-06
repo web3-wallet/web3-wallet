@@ -3,21 +3,11 @@ import { useMemo } from 'react';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { Wallet } from './types';
+import type { SelectedWallet, Wallet } from './types';
 
 type SelectedWalletState = {
   selectedWallet?: WalletName;
   isDisconnected: boolean;
-};
-
-export type SelectedWalletApi = Wallet['hooks'] & {
-  setSelectedWallet: (walletName: WalletName) => void;
-  useSelectedWallet: () => Wallet;
-  useIsDisconnected: () => boolean;
-  useActivate: () => Wallet['connector']['activate'];
-  useConnectEagerly: () => Wallet['connector']['connectEagerly'];
-  useConnectEagerlyOnce: () => Wallet['connector']['connectEagerlyOnce'];
-  useDeactivate: () => Wallet['connector']['deactivate'];
 };
 
 export const createSelectedWallet = (
@@ -25,7 +15,7 @@ export const createSelectedWallet = (
   options: {
     defaultSelectedWallet?: WalletName;
   } = {},
-): SelectedWalletApi => {
+): SelectedWallet => {
   const { defaultSelectedWallet } = options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
@@ -44,7 +34,15 @@ export const createSelectedWallet = (
     ),
   );
 
-  const setSelectedWallet: SelectedWalletApi['setSelectedWallet'] = (
+  const useSelectedWallet: SelectedWallet['useSelectedWallet'] = () => {
+    const selectedWalletName = useStore((s) => s.selectedWallet);
+    return useMemo(
+      () => wallets.find((w) => w.name === selectedWalletName) as Wallet,
+      [selectedWalletName],
+    );
+  };
+
+  const setSelectedWallet: SelectedWallet['setSelectedWallet'] = (
     selectedWallet: WalletName,
   ): void => {
     useStore.setState({
@@ -52,18 +50,10 @@ export const createSelectedWallet = (
     });
   };
 
-  const useIsDisconnected: SelectedWalletApi['useIsDisconnected'] =
+  const useIsDisconnected: SelectedWallet['useIsDisconnected'] =
     (): boolean => {
       return useStore((s) => s.isDisconnected);
     };
-
-  const useSelectedWallet: SelectedWalletApi['useSelectedWallet'] = () => {
-    const selectedWalletName = useStore((s) => s.selectedWallet);
-    return useMemo(
-      () => wallets.find((w) => w.name === selectedWalletName) as Wallet,
-      [selectedWalletName],
-    );
-  };
 
   const getCombineHooks = (): Wallet['hooks'] => {
     /**
@@ -103,7 +93,7 @@ export const createSelectedWallet = (
     return combinedHooks as Wallet['hooks'];
   };
 
-  const useActivate: SelectedWalletApi['useActivate'] = () => {
+  const useActivate: SelectedWallet['useActivate'] = () => {
     const wallet = useSelectedWallet();
 
     const activate: Wallet['connector']['activate'] = async (...args) => {
@@ -114,7 +104,7 @@ export const createSelectedWallet = (
     return activate;
   };
 
-  const useConnectEagerly: SelectedWalletApi['useConnectEagerly'] = () => {
+  const useConnectEagerly: SelectedWallet['useConnectEagerly'] = () => {
     const wallet = useSelectedWallet();
     const connectEagerly: Wallet['connector']['connectEagerly'] = async (
       ...args
@@ -126,21 +116,21 @@ export const createSelectedWallet = (
     return connectEagerly;
   };
 
-  const useConnectEagerlyOnce: SelectedWalletApi['useConnectEagerlyOnce'] =
-    () => {
-      const wallet = useSelectedWallet();
-      const connectEagerly: Wallet['connector']['connectEagerlyOnce'] = async (
-        ...args
-      ) => {
-        const result = await wallet.connector.connectEagerlyOnce(...args);
-        useStore.setState({ isDisconnected: false });
-        return result;
-      };
-      return connectEagerly;
-    };
-
-  const useDeactivate: SelectedWalletApi['useDeactivate'] = () => {
+  const useConnectEagerlyOnce: SelectedWallet['useConnectEagerlyOnce'] = () => {
     const wallet = useSelectedWallet();
+    const connectEagerly: Wallet['connector']['connectEagerlyOnce'] = async (
+      ...args
+    ) => {
+      const result = await wallet.connector.connectEagerlyOnce(...args);
+      useStore.setState({ isDisconnected: false });
+      return result;
+    };
+    return connectEagerly;
+  };
+
+  const useDeactivate: SelectedWallet['useDeactivate'] = () => {
+    const wallet = useSelectedWallet();
+
     const deactivate: Wallet['connector']['deactivate'] = async (...args) => {
       const result = await wallet.connector.deactivate(...args);
       useStore.setState({ isDisconnected: true });
@@ -151,9 +141,9 @@ export const createSelectedWallet = (
   };
 
   return {
-    setSelectedWallet,
     ...getCombineHooks(),
-    useSelectedWallet,
+    useSelectedWallet: useSelectedWallet,
+    setSelectedWallet,
     useIsDisconnected,
     useActivate,
     useConnectEagerly,

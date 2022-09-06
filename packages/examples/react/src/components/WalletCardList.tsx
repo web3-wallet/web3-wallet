@@ -9,7 +9,20 @@ export const WalletCardList = () => {
     <NoSSR>
       <WalletSelectCard />
       {allWallets.map((wallet) => (
-        <WalletCard key={wallet.name} wallet={wallet} />
+        <WalletCard
+          key={wallet.name}
+          {...{
+            name: wallet.name,
+
+            activate: wallet.connector.activate.bind(wallet.connector),
+            deactivate: wallet.connector.deactivate.bind(wallet.connector),
+            connectEagerlyOnce: wallet.connector.connectEagerlyOnce.bind(
+              wallet.connector,
+            ),
+
+            ...wallet.hooks,
+          }}
+        />
       ))}
     </NoSSR>
   );

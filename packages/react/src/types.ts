@@ -34,3 +34,13 @@ export interface Wallet<
     useENSName: (provider?: BaseProvider) => undefined | string;
   };
 }
+
+export type SelectedWallet = Wallet['hooks'] & {
+  setSelectedWallet: (walletName: WalletName) => void;
+  useSelectedWallet: () => Wallet;
+  useIsDisconnected: () => boolean;
+  useActivate: () => Wallet['connector']['activate'];
+  useConnectEagerly: () => Wallet['connector']['connectEagerly'];
+  useConnectEagerlyOnce: () => Wallet['connector']['connectEagerlyOnce'];
+  useDeactivate: () => Wallet['connector']['deactivate'];
+};
