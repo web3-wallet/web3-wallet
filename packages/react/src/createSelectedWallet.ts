@@ -7,16 +7,17 @@ import type { SelectedWallet, Wallet } from './types';
 
 type SelectedWalletState = {
   selectedWallet?: WalletName;
-  isDisconnected: boolean;
+  connectionId?: number;
 };
 
 export const createSelectedWallet = (
   wallets: Wallet[],
   options: {
     defaultSelectedWallet?: WalletName;
+    key?: string;
   } = {},
 ): SelectedWallet => {
-  const { defaultSelectedWallet } = options;
+  const { defaultSelectedWallet, key = '@web3-wallet' } = options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 
@@ -24,11 +25,11 @@ export const createSelectedWallet = (
     persist(
       () =>
         ({
-          isDisconnected: false,
+          connectionId: undefined,
           selectedWallet: defaultSelectedWallet || wallets[0].name,
         } as SelectedWalletState),
       {
-        name: '@web3-wallet',
+        name: key,
         version: 0,
       },
     ),
@@ -50,10 +51,9 @@ export const createSelectedWallet = (
     });
   };
 
-  const useIsDisconnected: SelectedWallet['useIsDisconnected'] =
-    (): boolean => {
-      return useStore((s) => s.isDisconnected);
-    };
+  const useConnectionId: SelectedWallet['useConnectionId'] = () => {
+    return useStore((s) => s.connectionId);
+  };
 
   const getCombineHooks = (): Wallet['hooks'] => {
     /**
@@ -98,7 +98,7 @@ export const createSelectedWallet = (
 
     const activate: Wallet['connector']['activate'] = async (...args) => {
       await wallet.connector.activate(...args);
-      useStore.setState({ isDisconnected: false });
+      useStore.setState({ connectionId: Date.now() });
     };
 
     return activate;
@@ -110,7 +110,7 @@ export const createSelectedWallet = (
       ...args
     ) => {
       const result = await wallet.connector.connectEagerly(...args);
-      useStore.setState({ isDisconnected: false });
+      useStore.setState({ connectionId: Date.now() });
       return result;
     };
     return connectEagerly;
@@ -122,7 +122,7 @@ export const createSelectedWallet = (
       ...args
     ) => {
       const result = await wallet.connector.connectEagerlyOnce(...args);
-      useStore.setState({ isDisconnected: false });
+      useStore.setState({ connectionId: Date.now() });
       return result;
     };
     return connectEagerly;
@@ -133,7 +133,7 @@ export const createSelectedWallet = (
 
     const deactivate: Wallet['connector']['deactivate'] = async (...args) => {
       const result = await wallet.connector.deactivate(...args);
-      useStore.setState({ isDisconnected: true });
+      useStore.setState({ connectionId: undefined });
       return result;
     };
 
@@ -144,7 +144,7 @@ export const createSelectedWallet = (
     ...getCombineHooks(),
     useSelectedWallet: useSelectedWallet,
     setSelectedWallet,
-    useIsDisconnected,
+    useConnectionId: useConnectionId,
     useActivate,
     useConnectEagerly,
     useConnectEagerlyOnce,

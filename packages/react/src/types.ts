@@ -38,7 +38,7 @@ export interface Wallet<
 export type SelectedWallet = Wallet['hooks'] & {
   setSelectedWallet: (walletName: WalletName) => void;
   useSelectedWallet: () => Wallet;
-  useIsDisconnected: () => boolean;
+  useConnectionId: () => number | undefined;
   useActivate: () => Wallet['connector']['activate'];
   useConnectEagerly: () => Wallet['connector']['connectEagerly'];
   useConnectEagerlyOnce: () => Wallet['connector']['connectEagerlyOnce'];
