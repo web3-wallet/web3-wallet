@@ -172,6 +172,14 @@ export abstract class AbstractConnector<
     }
   }
 
+  private resultOfConnectEagerlyOnce?: Promise<void>;
+  public override async connectEagerlyOnce(): Promise<void> {
+    if (!this.resultOfConnectEagerlyOnce) {
+      this.resultOfConnectEagerlyOnce = this.connectEagerly();
+    }
+    return await this.resultOfConnectEagerlyOnce;
+  }
+
   /**
    * Initiates a connection.
    *
