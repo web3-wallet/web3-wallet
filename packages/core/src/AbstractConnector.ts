@@ -1,10 +1,10 @@
+import { BaseAbstractConnector } from './BaseAbstractConnector';
 import type { Provider } from './types';
 import {
   type AddEthereumChainParameter,
   type ProviderConnectInfo,
   type ProviderRpcError,
   type WatchAssetParameters,
-  BaseAbstractConnector,
 } from './types';
 import { parseChainId, toHexChainId } from './utils';
 

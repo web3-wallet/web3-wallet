@@ -140,11 +140,11 @@ export const createSelectedWallet = (
 
   return {
     ...getCombineHooks(),
-    useSelectedWallet: useSelectedWallet,
+    useSelectedWallet,
     setSelectedWallet,
-    useConnectionId: useConnectionId,
+    useConnectionId,
     useConnect,
-    useAutoConnect: useAutoConnect,
+    useAutoConnect,
     useAutoConnectOnce,
     useDisconnect,
   };
