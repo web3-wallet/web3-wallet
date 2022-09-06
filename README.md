@@ -66,8 +66,8 @@ const {
   hooks: {
     useChainId,
     useAccount,
-    useIsActivating,
-    useIsActive,
+    useIsConnecting,
+    useIsConnected,
     useProvider,
     useEnsName,
   },
@@ -76,9 +76,9 @@ const {
 export const MetaMaskCard = () => {
   const chainId = useChainId();
   const account = useAccount();
-  const isActivating = useIsActivating();
+  const isConnecting = useIsConnecting();
 
-  const isActive = useIsActive();
+  const isConnected = useIsConnected();
 
   const provider = useProvider();
   const ensNames = useEnsNames(provider);
@@ -94,8 +94,8 @@ export const MetaMaskCard = () => {
       name="MetaMask"
       connector={connector}
       chainId={chainId}
-      isActivating={isActivating}
-      isActive={isActive}
+      isConnecting={isConnecting}
+      isConnected={isConnected}
       account={account}
       provider={provider}
       ensName={ensName}
@@ -127,8 +127,8 @@ export const metaMask = createWallet<MetaMaskConnector>(
     name="MetaMask"
     connector="{connector}"
     chainId="{chainId}"
-    isActivating="{isActivating}"
-    isActive="{isActive}"
+    isConnecting="{isConnecting}"
+    isConnected="{isConnected}"
     account="{account}"
     provider="{provider}"
     ensNames="{ensNames}"
@@ -144,8 +144,8 @@ const {
   connector,
   chainId,
   account,
-  isActivating,
-  isActive,
+  isConnecting,
+  isConnected,
   useProvider,
   useEnsName,
 } = metaMask;

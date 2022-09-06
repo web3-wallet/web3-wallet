@@ -17,8 +17,8 @@ export const WalletSelectCard = () => {
     useENSName,
     useENSNames,
     useProvider,
-    useIsActivating,
-    useIsActive,
+    useIsConnecting,
+    useIsConnected,
   } = selectedWallet;
 
   return (
@@ -38,8 +38,8 @@ export const WalletSelectCard = () => {
           useENSName,
           useENSNames,
           useProvider,
-          useIsActivating,
-          useIsActive,
+          useIsConnecting,
+          useIsConnected,
         }}
       />
     </Card>

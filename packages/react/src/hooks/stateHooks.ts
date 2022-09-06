@@ -5,7 +5,7 @@ import type { Wallet } from '../types';
 
 export type StateHooks = Pick<
   Wallet['hooks'],
-  'useChainId' | 'useAccounts' | 'useIsActivating'
+  'useChainId' | 'useAccounts' | 'useIsConnecting'
 >;
 
 const ACCOUNTS_EQUALITY_CHECKER: (
@@ -33,9 +33,9 @@ export function getStateHooks(
     return useStore((s) => s.accounts, ACCOUNTS_EQUALITY_CHECKER);
   };
 
-  const useIsActivating: StateHooks['useIsActivating'] = () => {
-    return useStore((s) => s.isActivating);
+  const useIsConnecting: StateHooks['useIsConnecting'] = () => {
+    return useStore((s) => s.isConnecting);
   };
 
-  return { useChainId, useAccounts, useIsActivating };
+  return { useChainId, useAccounts, useIsConnecting };
 }

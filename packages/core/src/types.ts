@@ -2,7 +2,7 @@ import type { EventEmitter } from 'node:events';
 import type { StoreApi } from 'zustand/vanilla';
 
 export interface State {
-  isActivating: boolean;
+  isConnecting: boolean;
   chainId?: number;
   accounts?: string[];
 }
@@ -10,9 +10,9 @@ export interface State {
 export type Store = StoreApi<State>;
 
 export interface Actions {
-  startActivation: () => () => void;
+  startConnection: () => () => void;
   resetState: () => void;
-  update: (stateUpdate: Partial<Omit<State, 'isActivating'>>) => void;
+  update: (stateUpdate: Partial<Omit<State, 'isConnecting'>>) => void;
 }
 
 // https://eips.ethereum.org/EIPS/eip-1193
@@ -35,7 +35,7 @@ export interface Provider extends EventEmitter {
 
 // per EIP-1193
 export interface ProviderConnectInfo {
-  isActivating: boolean;
+  isConnecting: boolean;
   chainId: string;
   accounts?: string[];
 }

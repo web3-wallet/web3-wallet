@@ -6,7 +6,7 @@ import { validateAccount, validateChainId } from './utils';
 export const DEFAULT_STATE: State = {
   chainId: undefined,
   accounts: undefined,
-  isActivating: false,
+  isConnecting: false,
 };
 
 export const createStore = (): {
@@ -24,15 +24,15 @@ export const createStore = (): {
    * @returns cancelActivation - A function that cancels the activation by setting activating to false,
    * as long as there haven't been any intervening updates.
    */
-  function startActivation(): () => void {
+  function startConnection(): () => void {
     const nullifierCached = ++nullifier;
 
-    store.setState({ isActivating: true });
+    store.setState({ isConnecting: true });
 
     // return a function that cancels the activation iff nothing else has happened
     return () => {
       if (nullifier === nullifierCached)
-        store.setState({ isActivating: false });
+        store.setState({ isConnecting: false });
     };
   }
 
@@ -63,12 +63,12 @@ export const createStore = (): {
       const accounts = stateUpdate.accounts ?? existingState.accounts;
 
       // ensure that the activating flag is cleared when appropriate
-      let isActivating = existingState.isActivating;
-      if (isActivating && chainId && accounts) {
-        isActivating = false;
+      let isConnecting = existingState.isConnecting;
+      if (isConnecting && chainId && accounts) {
+        isConnecting = false;
       }
 
-      return { chainId, accounts, isActivating };
+      return { chainId, accounts, isConnecting: isConnecting };
     });
   }
 
@@ -80,5 +80,5 @@ export const createStore = (): {
     store.setState(DEFAULT_STATE);
   }
 
-  return { store, actions: { startActivation, update, resetState } };
+  return { store, actions: { startConnection, update, resetState } };
 };

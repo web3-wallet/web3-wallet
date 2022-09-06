@@ -83,7 +83,7 @@ describe('autoConnect', () => {
     expect(store.getState()).toEqual<State>({
       chainId: Number(chainId),
       accounts,
-      isActivating: false,
+      isConnecting: false,
     });
   });
   test('fail silently: case 1, unable to connect', async () => {

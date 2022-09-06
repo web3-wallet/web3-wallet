@@ -10,12 +10,12 @@ import {
   createStore,
 } from './types';
 
-const computeIsActive = ({
+const computeIsConnected = ({
   chainId,
   accounts,
-  isActivating,
+  isConnecting: isConnecting,
 }: State): boolean => {
-  return Boolean(chainId && accounts && accounts.length && !isActivating);
+  return Boolean(chainId && accounts && accounts.length && !isConnecting);
 };
 
 /**
@@ -42,19 +42,19 @@ export const createWallet = <
 
   const chainId = computed(() => state.chainId);
   const accounts = computed(() => state.accounts);
-  const isActivating = computed(() => state.isActivating);
+  const isConnecting = computed(() => state.isConnecting);
   const account = computed(() => state.accounts?.[0]);
-  const isActive = computed(() =>
-    computeIsActive({
+  const isConnected = computed(() =>
+    computeIsConnected({
       chainId: chainId.value,
       accounts: accounts.value,
-      isActivating: isActivating.value,
+      isConnecting: isConnecting.value,
     }),
   );
   const useProvider = createGetProvider<Connector>({
     connector,
     chainId,
-    isActive,
+    isConnected,
   });
   const useEnsNames = getUseEnsNames(accounts);
   const useEnsName = getUseEnsName(account);
@@ -65,9 +65,9 @@ export const createWallet = <
     store,
     chainId,
     accounts,
-    isActivating,
+    isConnecting,
     account,
-    isActive,
+    isConnected,
     useProvider,
     useEnsName,
     useEnsNames,

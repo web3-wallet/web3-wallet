@@ -23,9 +23,9 @@ export interface Wallet<
   hooks: {
     useChainId: () => State['chainId'];
     useAccounts: () => State['accounts'];
-    useIsActivating: () => State['isActivating'];
+    useIsConnecting: () => State['isConnecting'];
     useAccount: () => string | undefined;
-    useIsActive: () => boolean;
+    useIsConnected: () => boolean;
     useProvider: <T extends BaseProvider = Web3Provider>(
       network?: Networkish,
       enabled?: boolean,

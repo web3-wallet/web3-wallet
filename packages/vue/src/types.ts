@@ -13,9 +13,9 @@ export interface Wallet<
   name: Connector['name'];
   chainId: ComputedRef<State['chainId']>;
   accounts: ComputedRef<State['accounts']>;
-  isActivating: ComputedRef<State['isActivating']>;
+  isConnecting: ComputedRef<State['isConnecting']>;
   account: ComputedRef<string | undefined>;
-  isActive: ComputedRef<boolean>;
+  isConnected: ComputedRef<boolean>;
   useProvider: <T extends BaseProvider = Web3Provider>(
     network?: Networkish,
   ) => ComputedRef<T | undefined>;

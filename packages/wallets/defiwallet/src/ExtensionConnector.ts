@@ -39,7 +39,7 @@ export class ExtensionConnector extends AbstractConnector<DeFiWalletProvider> {
   }
 
   public override async connect(chainId: number): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
+    const cancelActivation = this.actions.startConnection();
 
     try {
       await this.lazyInitialize();

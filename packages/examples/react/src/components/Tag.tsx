@@ -1,10 +1,10 @@
 import { type BoxProps, Box } from './Box';
 
 export type TagProps = {
-  isActive: boolean;
+  isConnected: boolean;
 } & BoxProps;
 
-export const Tag = ({ isActive, style, ...rest }: TagProps) => {
+export const Tag = ({ isConnected, style, ...rest }: TagProps) => {
   return (
     <Box
       style={{
@@ -13,7 +13,7 @@ export const Tag = ({ isActive, style, ...rest }: TagProps) => {
         padding: '2px 8px',
         borderRadius: '4px',
         textAlign: 'center',
-        ...(isActive
+        ...(isConnected
           ? {
               border: '1px solid blue',
               color: 'blue',

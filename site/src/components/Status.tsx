@@ -1,16 +1,16 @@
 export const Status = ({
-  isActivating,
-  isActive,
+  isConnecting,
+  isConnected,
 }: {
-  isActivating: boolean;
-  isActive: boolean;
+  isConnecting: boolean;
+  isConnected: boolean;
   error?: Error;
 }) => {
   return (
     <div>
-      {isActivating ? (
+      {isConnecting ? (
         <>🟡 Connecting</>
-      ) : isActive ? (
+      ) : isConnected ? (
         <>🟢 Connected</>
       ) : (
         <>⚪️ Disconnected</>

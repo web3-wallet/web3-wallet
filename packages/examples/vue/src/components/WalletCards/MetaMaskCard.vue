@@ -3,8 +3,8 @@
     <WalletCard
       :account="account"
       :chain-id="chainId"
-      :is-active="isActive"
-      :is-activating="isActivating"
+      :is-active="isConnected"
+      :is-activating="isConnecting"
     />
     <div style="margin-top: 10px">
       <button @click="connect(1)">connect(1)</button>
@@ -19,7 +19,7 @@ import { defineComponent, onMounted } from 'vue';
 import { metaMask } from '../../wallets';
 import WalletCard from './WalletCard.vue';
 
-const { connector, account, chainId, isActivating, isActive } = metaMask;
+const { connector, account, chainId, isConnecting, isConnected } = metaMask;
 
 const connect = (chainId: number) => {
   connector.connect(chainId);

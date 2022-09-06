@@ -154,7 +154,7 @@ export abstract class AbstractConnector<
   }
 
   public override async autoConnect(): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
+    const cancelActivation = this.actions.startConnection();
 
     try {
       await this.lazyInitialize();
@@ -192,7 +192,7 @@ export abstract class AbstractConnector<
   public async connect(
     chainIdOrChainParameter?: number | AddEthereumChainParameter,
   ): Promise<void> {
-    const cancelActivation = this.actions.startActivation();
+    const cancelActivation = this.actions.startConnection();
 
     try {
       await this.lazyInitialize();

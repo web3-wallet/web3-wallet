@@ -34,11 +34,11 @@ async function importProvider(): Promise<typeof dynamicProvider> {
 
 export const createGetProvider = <T extends AbstractConnector>({
   connector,
-  isActive,
+  isConnected,
   chainId,
 }: {
   connector: T;
-  isActive: Wallet['isActive'];
+  isConnected: Wallet['isConnected'];
   chainId: Wallet['chainId'];
 }): Wallet['useProvider'] => {
   const useProvider = <T extends BaseProvider = Web3Provider>(
@@ -51,8 +51,8 @@ export const createGetProvider = <T extends AbstractConnector>({
     });
 
     return computed(() => {
-      // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
-      void isActive.value && chainId.value;
+      // to ensure connectors remain fresh, we condition re-renders on loaded, isConnected and chainId
+      void isConnected.value && chainId.value;
       if (dynamicProvider.value && connector.provider) {
         return new dynamicProvider.value(
           connector.provider,

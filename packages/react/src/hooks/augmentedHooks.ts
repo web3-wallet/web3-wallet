@@ -52,18 +52,18 @@ function useENS(
 export const getAugmentedHooks = <T extends AbstractConnector>(
   connector: T,
   { useAccounts, useChainId }: StateHooks,
-  { useAccount, useIsActive }: DerivedHooks,
+  { useAccount, useIsConnected }: DerivedHooks,
 ): AugmentedHooks => {
   const useProvider = <T extends BaseProvider = Web3Provider>(
     network?: Networkish,
   ) => {
-    const isActive = useIsActive();
+    const isConnected = useIsConnected();
     const chainId = useChainId();
     const ImportedWeb3Provider = useImportWeb3Provider();
 
     return useMemo(() => {
-      // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
-      void isActive && chainId;
+      // to ensure connectors remain fresh, we condition re-renders on loaded, isConnected and chainId
+      void isConnected && chainId;
       if (ImportedWeb3Provider && connector.provider) {
         return new ImportedWeb3Provider(
           connector.provider,
@@ -71,7 +71,7 @@ export const getAugmentedHooks = <T extends AbstractConnector>(
         ) as unknown as T;
       }
       return undefined;
-    }, [ImportedWeb3Provider, isActive, chainId, network]);
+    }, [ImportedWeb3Provider, isConnected, chainId, network]);
   };
 
   const useENSNames: AugmentedHooks['useENSNames'] = (provider) => {

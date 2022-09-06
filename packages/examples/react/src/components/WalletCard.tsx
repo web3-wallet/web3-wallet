@@ -23,16 +23,16 @@ export const WalletCard = ({
 
   useChainId,
   useAccounts,
-  useIsActivating,
-  useIsActive,
+  useIsConnecting,
+  useIsConnected,
   useProvider,
   useENSNames,
 }: Props) => {
   const chainId = useChainId();
   const accounts = useAccounts();
-  const isActivating = useIsActivating();
+  const isConnecting = useIsConnecting();
 
-  const isActive = useIsActive();
+  const isConnected = useIsConnected();
 
   const provider = useProvider();
   const ENSNames = useENSNames(provider);
@@ -48,15 +48,15 @@ export const WalletCard = ({
     <Card>
       <b>{name}</b>
       <div>Category: Ethereum</div>
-      <Status isActivating={isActivating} isActive={isActive} />
+      <Status isConnecting={isConnecting} isConnected={isConnected} />
       <Chain chainId={chainId} />
       <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       <ConnectWithSelect
         connect={connect}
         disconnect={disconnect}
         chainId={chainId}
-        isActivating={isActivating}
-        isActive={isActive}
+        isConnecting={isConnecting}
+        isConnected={isConnected}
       />
     </Card>
   );

@@ -7,35 +7,35 @@ describe('store', () => {
     expect(store.getState()).toEqual({
       chainId: undefined,
       accounts: undefined,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 });
 
 describe('Activation', () => {
-  test('startActivation', () => {
+  test('startConnection', () => {
     const { store, actions } = createStore();
-    actions.startActivation();
+    actions.startConnection();
     expect(store.getState()).toEqual({
       chainId: undefined,
       accounts: undefined,
-      isActivating: true,
+      isConnecting: true,
     });
   });
 
   test('cancelActivation', () => {
     const { store, actions } = createStore();
-    const cancelActivation = actions.startActivation();
+    const cancelActivation = actions.startConnection();
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
       accounts: undefined,
-      isActivating: true,
+      isConnecting: true,
     });
     cancelActivation();
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
       accounts: undefined,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 });
@@ -50,7 +50,7 @@ describe('update/valid chainId', () => {
     expect(store.getState()).toEqual<State>({
       chainId,
       accounts: undefined,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 });
@@ -74,7 +74,7 @@ describe('update/valid accounts', () => {
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
       accounts,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 });
@@ -102,7 +102,7 @@ describe('update/accounts & chainId', () => {
     expect(store.getState()).toEqual<State>({
       chainId,
       accounts,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 
@@ -138,21 +138,21 @@ describe('resetState', () => {
       accounts: [...mockData.accounts],
     };
     actions.update(stateUpdate);
-    const cancelActivation = actions.startActivation();
+    const cancelActivation = actions.startConnection();
     expect(store.getState()).toEqual<State>({
       ...stateUpdate,
-      isActivating: true,
+      isConnecting: true,
     });
     cancelActivation();
     expect(store.getState()).toEqual<State>({
       ...stateUpdate,
-      isActivating: false,
+      isConnecting: false,
     });
     actions.resetState();
     expect(store.getState()).toEqual<State>({
       chainId: undefined,
       accounts: undefined,
-      isActivating: false,
+      isConnecting: false,
     });
   });
 });

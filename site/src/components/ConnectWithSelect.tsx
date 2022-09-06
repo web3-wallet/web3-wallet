@@ -8,14 +8,14 @@ export const ConnectWithSelect = ({
   connect,
   disconnect,
   chainId,
-  isActivating,
-  isActive,
+  isConnecting,
+  isConnected,
 }: {
   disconnect: Wallet['connector']['disconnect'];
   connect: Wallet['connector']['connect'];
   chainId?: number;
-  isActivating: boolean;
-  isActive: boolean;
+  isConnecting: boolean;
+  isConnected: boolean;
 }) => {
   const chainIds = Object.keys(rpcMap).map((chainId) => Number(chainId));
   const [desiredChainId, setDesiredChainId] = useState<number>(1);
@@ -28,7 +28,7 @@ export const ConnectWithSelect = ({
     [connect],
   );
 
-  if (isActive) {
+  if (isConnected) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <ChainSelect
@@ -59,7 +59,7 @@ export const ConnectWithSelect = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <ChainSelect
         chainId={desiredChainId}
-        switchChain={isActivating ? undefined : switchChain}
+        switchChain={isConnecting ? undefined : switchChain}
         chainIds={chainIds}
       />
       <button
@@ -67,9 +67,9 @@ export const ConnectWithSelect = ({
           height: '32px',
           cursor: 'pointer',
         }}
-        disabled={isActivating}
+        disabled={isConnecting}
         onClick={() => {
-          if (isActivating) return;
+          if (isConnecting) return;
           connect(
             desiredChainId === -1
               ? undefined

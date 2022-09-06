@@ -3,32 +3,35 @@ import type { State } from '@web3-wallet/core';
 import type { Wallet } from '../types';
 import type { StateHooks } from './stateHooks';
 
-const computeIsActive = ({ chainId, accounts, isActivating }: State) => {
-  return Boolean(chainId && accounts?.length && !isActivating);
+const computeIsConnected = ({ chainId, accounts, isConnecting }: State) => {
+  return Boolean(chainId && accounts?.length && !isConnecting);
 };
 
-export type DerivedHooks = Pick<Wallet['hooks'], 'useAccount' | 'useIsActive'>;
+export type DerivedHooks = Pick<
+  Wallet['hooks'],
+  'useAccount' | 'useIsConnected'
+>;
 
 export const getDerivedHooks = ({
   useChainId,
   useAccounts,
-  useIsActivating,
+  useIsConnecting,
 }: StateHooks): DerivedHooks => {
   const useAccount: DerivedHooks['useAccount'] = () => {
     return useAccounts()?.[0];
   };
 
-  const useIsActive: DerivedHooks['useIsActive'] = () => {
+  const useIsConnected: DerivedHooks['useIsConnected'] = () => {
     const chainId = useChainId();
     const accounts = useAccounts();
-    const isActivating = useIsActivating();
+    const isConnecting = useIsConnecting();
 
-    return computeIsActive({
+    return computeIsConnected({
       chainId,
       accounts,
-      isActivating,
+      isConnecting,
     });
   };
 
-  return { useAccount, useIsActive };
+  return { useAccount, useIsConnected };
 };
