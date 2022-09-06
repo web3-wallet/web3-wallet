@@ -47,7 +47,6 @@ export const WalletCard = ({
   return (
     <Card>
       <b>{name}</b>
-      <div>Category: Ethereum</div>
       <Status isConnecting={isConnecting} isConnected={isConnected} />
       <Chain chainId={chainId} />
       <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />

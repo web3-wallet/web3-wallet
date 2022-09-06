@@ -1,13 +1,20 @@
+import { Box } from '@example-react/components/Box';
 import { Layout } from '@example-react/components/Layout';
-import { WalletCardList } from '@example-react/components/WalletCardList';
-import { WalletCardListContainer } from '@example-react/components/WalletCardListContainer';
+import { WalletSelectCard } from '@example-react/components/WalletSelectCard';
 
 export default function Home() {
   return (
     <Layout>
-      <WalletCardListContainer>
-        <WalletCardList />
-      </WalletCardListContainer>
+      <Box
+        style={{
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <WalletSelectCard />
+      </Box>
     </Layout>
   );
 }
