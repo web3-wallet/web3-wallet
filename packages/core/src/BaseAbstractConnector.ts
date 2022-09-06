@@ -38,8 +38,8 @@ export abstract class BaseAbstractConnector<P extends Provider> {
   public abstract detectProvider(
     providerFilter?: (provider: P) => boolean,
   ): Promise<P>;
-  public abstract autoConnect(): Promise<void>;
-  public abstract autoConnectOnce(): Promise<void>;
+  public abstract autoConnect(): Promise<boolean>;
+  public abstract autoConnectOnce(): Promise<boolean>;
   public abstract connect(
     chainIdOrAddEthereumChainParameter?: number | AddEthereumChainParameter,
   ): Promise<void>;

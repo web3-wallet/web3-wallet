@@ -42,9 +42,7 @@ export const WalletSelectCard = () => {
 
   // try to auto connect on mount
   useEffect(() => {
-    autoConnectOnce()?.catch((e) => {
-      console.debug('auto connect failed', e);
-    });
+    autoConnectOnce();
   }, [autoConnectOnce]);
 
   return (

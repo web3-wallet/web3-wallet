@@ -35,10 +35,15 @@ export interface Wallet<
   };
 }
 
+export type SelectedWalletState = {
+  selectedWallet?: WalletName;
+  connectionId?: number;
+};
+
 export type SelectedWallet = Wallet['hooks'] & {
   setSelectedWallet: (walletName: WalletName) => void;
   useSelectedWallet: () => Wallet;
-  useConnectionId: () => number | undefined;
+  useConnectionId: () => SelectedWalletState['connectionId'];
   useConnect: () => Wallet['connector']['connect'];
   useAutoConnect: () => Wallet['connector']['autoConnect'];
   useAutoConnectOnce: () => Wallet['connector']['autoConnectOnce'];

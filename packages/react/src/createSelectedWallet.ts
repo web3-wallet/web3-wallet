@@ -3,12 +3,7 @@ import { useMemo } from 'react';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { SelectedWallet, Wallet } from './types';
-
-type SelectedWalletState = {
-  selectedWallet?: WalletName;
-  connectionId?: number;
-};
+import type { SelectedWallet, SelectedWalletState, Wallet } from './types';
 
 export const createSelectedWallet = (
   wallets: Wallet[],
@@ -116,14 +111,19 @@ export const createSelectedWallet = (
 
   const useAutoConnectOnce: SelectedWallet['useAutoConnectOnce'] = () => {
     const wallet = useSelectedWallet();
-    const autoConnect: Wallet['connector']['autoConnectOnce'] = async (
+    const autoConnectOnce: Wallet['connector']['autoConnectOnce'] = async (
       ...args
     ) => {
-      const result = await wallet.connector.autoConnectOnce(...args);
-      useStore.setState({ connectionId: Date.now() });
-      return result;
+      const connectionId = useStore.getState().connectionId;
+
+      if (!connectionId) {
+        console.debug(`connectionId don't exists, auto connect is suppressed`);
+        return false;
+      }
+
+      return await wallet.connector.autoConnectOnce(...args);
     };
-    return autoConnect;
+    return autoConnectOnce;
   };
 
   const useDisconnect: SelectedWallet['useDisconnect'] = () => {

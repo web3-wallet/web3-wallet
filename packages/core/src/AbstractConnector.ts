@@ -132,7 +132,9 @@ export abstract class AbstractConnector<
       });
       return accounts;
     } catch (error: unknown) {
-      console.warn(`Failed to request accounts with 'eth_requestAccounts'`);
+      console.debug(
+        `Failed to request accounts with 'eth_requestAccounts', try to fallback to 'eth_accounts'`,
+      );
 
       const accounts = await this.provider.request<string[]>({
         method: 'eth_accounts',
@@ -148,7 +150,7 @@ export abstract class AbstractConnector<
     return await this.provider.request({ method: 'eth_chainId' });
   }
 
-  public override async autoConnect(): Promise<void> {
+  public override async autoConnect(): Promise<boolean> {
     const cancelActivation = this.actions.startConnection();
 
     try {
@@ -162,17 +164,22 @@ export abstract class AbstractConnector<
 
       this.updateChainId(chainId);
       this.updateAccounts(accounts);
+    } catch (e) {
+      console.debug(`Could not auto connect`, e);
+      return false;
     } finally {
       cancelActivation();
     }
+
+    return true;
   }
 
-  private resultOfConnectEagerlyOnce?: Promise<void>;
-  public override async autoConnectOnce(): Promise<void> {
-    if (!this.resultOfConnectEagerlyOnce) {
-      this.resultOfConnectEagerlyOnce = this.autoConnect();
+  private autoConnectOncePromise?: Promise<boolean>;
+  public override async autoConnectOnce(): Promise<boolean> {
+    if (!this.autoConnectOncePromise) {
+      this.autoConnectOncePromise = this.autoConnect();
     }
-    return await this.resultOfConnectEagerlyOnce;
+    return await this.autoConnectOncePromise;
   }
 
   /**
@@ -265,6 +272,7 @@ export abstract class AbstractConnector<
     });
 
     if (!success) throw new Error('Rejected');
+
     return true;
   }
 }
