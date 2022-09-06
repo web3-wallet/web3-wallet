@@ -1,10 +1,11 @@
-import { allWallets } from '@example-react/wallets';
-import type { WalletName } from '@web3-wallet/react';
+import type { Wallet, WalletName } from '@web3-wallet/react';
 
 export const WalletSelect = ({
+  wallets,
   selectedWalletName,
   setSelectedWallet,
 }: {
+  wallets: Wallet[];
   selectedWalletName: WalletName;
   setSelectedWallet: (walletName: WalletName) => void;
 }) => {
@@ -20,7 +21,7 @@ export const WalletSelect = ({
         cursor: 'pointer',
       }}
     >
-      {allWallets.map((wallet) => (
+      {wallets.map((wallet) => (
         <option key={wallet.name} value={wallet.name}>
           {wallet.name}
         </option>

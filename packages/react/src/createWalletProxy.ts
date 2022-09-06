@@ -3,26 +3,27 @@ import { useMemo } from 'react';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { SelectedWallet, SelectedWalletState, Wallet } from './types';
+import type { Wallet, WalletProxy, WalletProxyState } from './types';
 
-export const createSelectedWallet = (
+export const createWalletProxy = (
   wallets: Wallet[],
   options: {
-    defaultSelectedWallet?: WalletName;
+    defaultCurrentWallet?: WalletName;
     key?: string;
   } = {},
-): SelectedWallet => {
-  const { defaultSelectedWallet, key = '@web3-wallet' } = options;
+): WalletProxy => {
+  const { defaultCurrentWallet: defaultCurrentWallet, key = '@web3-wallet' } =
+    options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 
-  const useStore = create<SelectedWalletState>()(
+  const useStore = create<WalletProxyState>()(
     persist(
       () =>
         ({
           connectionId: undefined,
-          selectedWallet: defaultSelectedWallet || wallets[0].name,
-        } as SelectedWalletState),
+          currentWallet: defaultCurrentWallet || wallets[0].name,
+        } as WalletProxyState),
       {
         name: key,
         version: 0,
@@ -30,23 +31,23 @@ export const createSelectedWallet = (
     ),
   );
 
-  const useSelectedWallet: SelectedWallet['useSelectedWallet'] = () => {
-    const selectedWalletName = useStore((s) => s.selectedWallet);
+  const useCurrentWallet: WalletProxy['useCurrentWallet'] = () => {
+    const currentWalletName = useStore((s) => s.currentWallet);
     return useMemo(
-      () => wallets.find((w) => w.name === selectedWalletName) as Wallet,
-      [selectedWalletName],
+      () => wallets.find((w) => w.name === currentWalletName) as Wallet,
+      [currentWalletName],
     );
   };
 
-  const setSelectedWallet: SelectedWallet['setSelectedWallet'] = (
-    selectedWallet: WalletName,
+  const setCurrentWallet: WalletProxy['setCurrentWallet'] = (
+    currentWallet: WalletName,
   ): void => {
     useStore.setState({
-      selectedWallet,
+      currentWallet,
     });
   };
 
-  const useConnectionId: SelectedWallet['useConnectionId'] = () => {
+  const useConnectionId: WalletProxy['useConnectionId'] = () => {
     return useStore((s) => s.connectionId);
   };
 
@@ -55,7 +56,7 @@ export const createSelectedWallet = (
      * combine hooks
      *
      * If we don't combine the hooks, the hooks will be called base on
-     * selectedWalletName, which violates the react hook rules.
+     * currentWalletName, which violates the react hook rules.
      *
      * Combine hooks to always call all the hooks in consistent order
      *  so that we don't violates the react hook rules:
@@ -67,7 +68,7 @@ export const createSelectedWallet = (
     for (const hookName of Object.keys(wallets[0].hooks).sort()) {
       combinedHooks[hookName] = (...args: unknown[]) => {
         let hookFnOutput: unknown;
-        const selectedWalletName = useStore.getState().selectedWallet;
+        const currentWalletName = useStore.getState().currentWallet;
 
         for (const wallet of wallets) {
           const hookFn = wallet.hooks[hookName as keyof Wallet['hooks']] as (
@@ -76,7 +77,7 @@ export const createSelectedWallet = (
 
           const value = hookFn(...args);
 
-          if (wallet.name === selectedWalletName) {
+          if (wallet.name === currentWalletName) {
             hookFnOutput = value;
           }
         }
@@ -88,8 +89,8 @@ export const createSelectedWallet = (
     return combinedHooks as Wallet['hooks'];
   };
 
-  const useConnect: SelectedWallet['useConnect'] = () => {
-    const wallet = useSelectedWallet();
+  const useConnect: WalletProxy['useConnect'] = () => {
+    const wallet = useCurrentWallet();
 
     const connect: Wallet['connector']['connect'] = async (...args) => {
       await wallet.connector.connect(...args);
@@ -99,8 +100,8 @@ export const createSelectedWallet = (
     return connect;
   };
 
-  const useAutoConnect: SelectedWallet['useAutoConnect'] = () => {
-    const wallet = useSelectedWallet();
+  const useAutoConnect: WalletProxy['useAutoConnect'] = () => {
+    const wallet = useCurrentWallet();
     const autoConnect: Wallet['connector']['autoConnect'] = async (...args) => {
       const result = await wallet.connector.autoConnect(...args);
       useStore.setState({ connectionId: Date.now() });
@@ -109,8 +110,8 @@ export const createSelectedWallet = (
     return autoConnect;
   };
 
-  const useAutoConnectOnce: SelectedWallet['useAutoConnectOnce'] = () => {
-    const wallet = useSelectedWallet();
+  const useAutoConnectOnce: WalletProxy['useAutoConnectOnce'] = () => {
+    const wallet = useCurrentWallet();
     const autoConnectOnce: Wallet['connector']['autoConnectOnce'] = async (
       ...args
     ) => {
@@ -126,8 +127,8 @@ export const createSelectedWallet = (
     return autoConnectOnce;
   };
 
-  const useDisconnect: SelectedWallet['useDisconnect'] = () => {
-    const wallet = useSelectedWallet();
+  const useDisconnect: WalletProxy['useDisconnect'] = () => {
+    const wallet = useCurrentWallet();
 
     const disconnect: Wallet['connector']['disconnect'] = async (...args) => {
       const result = await wallet.connector.disconnect(...args);
@@ -140,8 +141,9 @@ export const createSelectedWallet = (
 
   return {
     ...getCombineHooks(),
-    useSelectedWallet,
-    setSelectedWallet,
+    wallets,
+    useCurrentWallet,
+    setCurrentWallet,
     useConnectionId,
     useConnect,
     useAutoConnect,

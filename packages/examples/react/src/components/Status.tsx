@@ -1,3 +1,5 @@
+import { Box } from './Box';
+
 export const Status = ({
   isConnecting,
   isConnected,
@@ -7,7 +9,7 @@ export const Status = ({
   error?: Error;
 }) => {
   return (
-    <div>
+    <Box>
       {isConnecting ? (
         <>🟡 Connecting</>
       ) : isConnected ? (
@@ -15,6 +17,6 @@ export const Status = ({
       ) : (
         <>⚪️ Disconnected</>
       )}
-    </div>
+    </Box>
   );
 };

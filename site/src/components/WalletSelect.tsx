@@ -1,12 +1,19 @@
-import { allWallets, selectedWallet } from '@site/wallets';
-import type { WalletName } from '@web3-wallet/react';
+import type { Wallet, WalletName } from '@web3-wallet/react';
 
-export const WalletSelect = () => {
+export const WalletSelect = ({
+  wallets,
+  selectedWalletName,
+  setSelectedWallet,
+}: {
+  wallets: Wallet[];
+  selectedWalletName: WalletName;
+  setSelectedWallet: (walletName: WalletName) => void;
+}) => {
   return (
     <select
-      value={selectedWallet.useSelectedWallet().name}
+      value={selectedWalletName}
       onChange={(event) => {
-        selectedWallet.setSelectedWallet(event.target.value as WalletName);
+        setSelectedWallet(event.target.value as WalletName);
       }}
       style={{
         height: '32px',
@@ -14,7 +21,7 @@ export const WalletSelect = () => {
         cursor: 'pointer',
       }}
     >
-      {allWallets.map((wallet) => (
+      {wallets.map((wallet) => (
         <option key={wallet.name} value={wallet.name}>
           {wallet.name}
         </option>

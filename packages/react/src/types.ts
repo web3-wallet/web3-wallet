@@ -35,15 +35,16 @@ export interface Wallet<
   };
 }
 
-export type SelectedWalletState = {
-  selectedWallet?: WalletName;
+export type WalletProxyState = {
+  currentWallet?: WalletName;
   connectionId?: number;
 };
 
-export type SelectedWallet = Wallet['hooks'] & {
-  setSelectedWallet: (walletName: WalletName) => void;
-  useSelectedWallet: () => Wallet;
-  useConnectionId: () => SelectedWalletState['connectionId'];
+export type WalletProxy = Wallet['hooks'] & {
+  wallets: Wallet[];
+  setCurrentWallet: (walletName: WalletName) => void;
+  useCurrentWallet: () => Wallet;
+  useConnectionId: () => WalletProxyState['connectionId'];
   useConnect: () => Wallet['connector']['connect'];
   useAutoConnect: () => Wallet['connector']['autoConnect'];
   useAutoConnectOnce: () => Wallet['connector']['autoConnectOnce'];

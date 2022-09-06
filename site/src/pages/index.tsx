@@ -1,13 +1,19 @@
+import { Box } from '@site/components/Box';
 import { Layout } from '@site/components/Layout';
-import { WalletCardList } from '@site/components/WalletCardList';
-import { WalletCardListContainer } from '@site/components/WalletCardListContainer';
+import { WalletSelectCard } from '@site/components/WalletSelectCard';
 
 export default function Home() {
   return (
     <Layout>
-      <WalletCardListContainer>
-        <WalletCardList />
-      </WalletCardListContainer>
+      <Box
+        style={{
+          marginTop: 50,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <WalletSelectCard />
+      </Box>
     </Layout>
   );
 }

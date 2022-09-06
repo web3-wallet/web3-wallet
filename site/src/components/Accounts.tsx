@@ -4,6 +4,7 @@ import type { Wallet } from '@web3-wallet/react';
 import React, { useEffect, useState } from 'react';
 
 import { Account } from './Account';
+import { Box } from './Box';
 
 const useBalances = (
   provider?: ReturnType<Wallet['hooks']['useProvider']>,
@@ -46,30 +47,37 @@ export const Accounts = ({
   if (accounts === undefined) return null;
   if (accounts.length === 0) {
     return (
-      <div>
-        Accounts: <b>None</b>
-      </div>
+      <Box style={{ display: 'flex', marginBottom: 10 }}>
+        <span style={{ marginRight: 10 }}>Account:</span>
+        <b>None</b>
+      </Box>
     );
   }
 
   return (
-    <div>
-      Accounts:{' '}
-      <b>
-        {accounts.map((account, i) =>
-          ENSNames?.[i] ? (
-            ENSNames?.[i]
-          ) : (
-            <div style={{ display: 'flex' }} key={account}>
-              <Account account={account} />
-              <div>
-                {!!balances?.[i] &&
-                  ` (Ξ${Number(formatEther(balances[i])).toFixed(4)})`}
-              </div>
-            </div>
-          ),
-        )}
-      </b>
-    </div>
+    <>
+      {accounts.map((account, i) =>
+        ENSNames?.[i] ? (
+          ENSNames?.[i]
+        ) : (
+          <React.Fragment key={account}>
+            <Box>
+              <span style={{ marginRight: 10 }}>Account:</span>
+              <b>
+                <Account account={account} />
+              </b>
+            </Box>
+            <Box>
+              <span style={{ marginRight: 10 }}>Balance:</span>
+              <b>
+                {balances?.[i]
+                  ? `Ξ ${Number(formatEther(balances[i])).toFixed(4)}`
+                  : '--'}
+              </b>
+            </Box>
+          </React.Fragment>
+        ),
+      )}
+    </>
   );
 };
