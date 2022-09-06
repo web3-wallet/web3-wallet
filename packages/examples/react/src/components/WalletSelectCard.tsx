@@ -1,11 +1,11 @@
-import { useCurrentWallet } from '@example-react/hooks/useCurrentWallet';
+import { useSelectedWallet } from '@example-react/wallets';
 
 import { Card } from './Card';
 import { WalletCard } from './WalletCard';
 import { WalletSelect } from './WalletSelect';
 
 export const WalletSelectCard = () => {
-  const currentWallet = useCurrentWallet();
+  const currentWallet = useSelectedWallet();
 
   return (
     <Card>

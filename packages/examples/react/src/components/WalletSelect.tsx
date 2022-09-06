@@ -1,14 +1,16 @@
-import { useCurrentWalletContext } from '@example-react/context';
-import { allWallets } from '@example-react/wallets';
+import {
+  allWallets,
+  setSelectedWallet,
+  useSelectedWallet,
+} from '@example-react/wallets';
 import type { WalletName } from '@web3-wallet/react';
 
 export const WalletSelect = () => {
-  const { currentWallet, switchCurrentWallet } = useCurrentWalletContext();
   return (
     <select
-      value={currentWallet}
+      value={useSelectedWallet().name}
       onChange={(event) => {
-        switchCurrentWallet(event.target.value as WalletName);
+        setSelectedWallet(event.target.value as WalletName);
       }}
       style={{
         height: '32px',
