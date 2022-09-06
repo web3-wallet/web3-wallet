@@ -10,21 +10,27 @@ type SelectedWalletState = {
   isDisconnected: boolean;
 };
 
+export type SelectedWalletApi = Wallet['hooks'] & {
+  setSelectedWallet: (walletName: WalletName) => void;
+  useSelectedWallet: () => Wallet;
+  useIsDisconnected: () => boolean;
+  useActivate: () => Wallet['connector']['activate'];
+  useConnectEagerly: () => Wallet['connector']['connectEagerly'];
+  useConnectEagerlyOnce: () => Wallet['connector']['connectEagerlyOnce'];
+  useDeactivate: () => Wallet['connector']['deactivate'];
+};
+
 export const createSelectedWallet = (
   wallets: Wallet[],
   options: {
     defaultSelectedWallet?: WalletName;
   } = {},
-): {
-  useSelectedWallet: () => Wallet;
-  setSelectedWallet: (walletName: WalletName) => void;
-  useIsDisconnected: () => boolean;
-} => {
+): SelectedWalletApi => {
   const { defaultSelectedWallet } = options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 
-  const store = create<SelectedWalletState>()(
+  const useStore = create<SelectedWalletState>()(
     persist(
       () =>
         ({
@@ -38,61 +44,120 @@ export const createSelectedWallet = (
     ),
   );
 
-  const setSelectedWallet = (selectedWallet: WalletName): void => {
-    store.setState({
+  const setSelectedWallet: SelectedWalletApi['setSelectedWallet'] = (
+    selectedWallet: WalletName,
+  ): void => {
+    useStore.setState({
       selectedWallet,
     });
   };
 
-  const useIsDisconnected = (): boolean => {
-    return store((s) => s.isDisconnected);
+  const useIsDisconnected: SelectedWalletApi['useIsDisconnected'] =
+    (): boolean => {
+      return useStore((s) => s.isDisconnected);
+    };
+
+  const useSelectedWallet: SelectedWalletApi['useSelectedWallet'] = () => {
+    const selectedWalletName = useStore((s) => s.selectedWallet);
+    return useMemo(
+      () => wallets.find((w) => w.name === selectedWalletName) as Wallet,
+      [selectedWalletName],
+    );
   };
 
-  const useSelectedWallet = () => {
-    const selectedWalletName = store((s) => s.selectedWallet);
-    return useMemo((): Wallet => {
-      const selectedWallet = wallets.find(
-        (w) => w.name === selectedWalletName,
-      ) as Wallet;
+  const getCombineHooks = (): Wallet['hooks'] => {
+    /**
+     * combine hooks
+     *
+     * If we don't combine the hooks, the hooks will be called base on
+     * selectedWalletName, which violates the react hook rules.
+     *
+     * Combine hooks to always call all the hooks in consistent order
+     *  so that we don't violates the react hook rules:
+     *
+     * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
+     */
+    const combinedHooks: Record<string, unknown> = {};
 
-      /**
-       * If we don't combine the hooks, the hooks will be called base on
-       * selectedWalletName, which violates the react hook rules.
-       *
-       * Combine hooks to always call all the hooks in consistent order
-       *  so that we don't violates the react hook rules:
-       *
-       * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
-       */
-      const combinedHooks: Record<string, unknown> = {};
+    for (const hookName of Object.keys(wallets[0].hooks).sort()) {
+      combinedHooks[hookName] = (...args: unknown[]) => {
+        let hookFnOutput: unknown;
+        const selectedWalletName = useStore.getState().selectedWallet;
 
-      for (const hookName of Object.keys(selectedWallet.hooks)) {
-        combinedHooks[hookName] = (...args: unknown[]) => {
-          let hookFnOutput: unknown;
+        for (const wallet of wallets) {
+          const hookFn = wallet.hooks[hookName as keyof Wallet['hooks']] as (
+            ...args: unknown[]
+          ) => unknown;
 
-          for (const wallet of wallets) {
-            const hookFn = wallet.hooks[hookName as keyof Wallet['hooks']] as (
-              ...args: unknown[]
-            ) => unknown;
+          const value = hookFn(...args);
 
-            const value = hookFn(...args);
-
-            if (wallet.name === selectedWallet.name) {
-              hookFnOutput = value;
-            }
+          if (wallet.name === selectedWalletName) {
+            hookFnOutput = value;
           }
+        }
 
-          return hookFnOutput;
-        };
-      }
+        return hookFnOutput;
+      };
+    }
 
-      return { ...selectedWallet, hooks: combinedHooks } as Wallet;
-    }, [selectedWalletName]);
+    return combinedHooks as Wallet['hooks'];
+  };
+
+  const useActivate: SelectedWalletApi['useActivate'] = () => {
+    const wallet = useSelectedWallet();
+
+    const activate: Wallet['connector']['activate'] = async (...args) => {
+      await wallet.connector.activate(...args);
+      useStore.setState({ isDisconnected: false });
+    };
+
+    return activate;
+  };
+
+  const useConnectEagerly: SelectedWalletApi['useConnectEagerly'] = () => {
+    const wallet = useSelectedWallet();
+    const connectEagerly: Wallet['connector']['connectEagerly'] = async (
+      ...args
+    ) => {
+      const result = await wallet.connector.connectEagerly(...args);
+      useStore.setState({ isDisconnected: false });
+      return result;
+    };
+    return connectEagerly;
+  };
+
+  const useConnectEagerlyOnce: SelectedWalletApi['useConnectEagerlyOnce'] =
+    () => {
+      const wallet = useSelectedWallet();
+      const connectEagerly: Wallet['connector']['connectEagerlyOnce'] = async (
+        ...args
+      ) => {
+        const result = await wallet.connector.connectEagerlyOnce(...args);
+        useStore.setState({ isDisconnected: false });
+        return result;
+      };
+      return connectEagerly;
+    };
+
+  const useDeactivate: SelectedWalletApi['useDeactivate'] = () => {
+    const wallet = useSelectedWallet();
+    const deactivate: Wallet['connector']['deactivate'] = async (...args) => {
+      const result = await wallet.connector.deactivate(...args);
+      useStore.setState({ isDisconnected: true });
+      return result;
+    };
+
+    return deactivate;
   };
 
   return {
-    useSelectedWallet,
     setSelectedWallet,
+    ...getCombineHooks(),
+    useSelectedWallet,
     useIsDisconnected,
+    useActivate,
+    useConnectEagerly,
+    useConnectEagerlyOnce,
+    useDeactivate,
   };
 };
