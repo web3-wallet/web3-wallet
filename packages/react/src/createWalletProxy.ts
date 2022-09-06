@@ -31,20 +31,23 @@ export const createWalletProxy = (
     ),
   );
 
-  const useCurrentWallet: WalletProxy['useCurrentWallet'] = () => {
-    const currentWalletName = useStore((s) => s.currentWallet);
-    return useMemo(
-      () => wallets.find((w) => w.name === currentWalletName) as Wallet,
-      [currentWalletName],
-    );
-  };
-
   const setCurrentWallet: WalletProxy['setCurrentWallet'] = (
     currentWallet: WalletName,
   ): void => {
     useStore.setState({
       currentWallet,
     });
+  };
+
+  const useCurrentWallet: WalletProxy['useCurrentWallet'] = () => {
+    const currentWalletName = useStore((s) => s.currentWallet);
+    return useMemo(() => {
+      const found = wallets.find((w) => w.name === currentWalletName);
+
+      if (!found) setCurrentWallet(wallets[0].name);
+
+      return found ?? wallets[0];
+    }, [currentWalletName]);
   };
 
   const useConnectionId: WalletProxy['useConnectionId'] = () => {
@@ -141,7 +144,7 @@ export const createWalletProxy = (
 
   return {
     ...getCombineHooks(),
-    wallets,
+    wallets: wallets.slice(),
     useCurrentWallet,
     setCurrentWallet,
     useConnectionId,

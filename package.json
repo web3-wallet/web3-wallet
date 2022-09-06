@@ -37,7 +37,7 @@
     "export": "pnpm -F site export",
     "example-react": "pnpm -F example-react dev",
     "example-vue": "pnpm -F example-vue dev",
-    "test": "jest",
+    "test": "jest --silent",
     "release": "changeset publish && git push --follow-tags",
     "lint": "pnpm -p -r -c exec eslint src",
     "fix": "pnpm -p -r -c exec eslint --fix src",
