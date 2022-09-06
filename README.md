@@ -56,7 +56,6 @@ export const metaMask = createWallet<MetaMaskConnector>(
 ```
 
 ```tsx
-// WalletCards/MetaMaskCard.tsx
 import { useEffect, useState } from 'react';
 import { metaMask } from 'wallets/metaMask';
 import { WalletCard } from '../WalletCard';
@@ -84,8 +83,10 @@ export const MetaMaskCard = () => {
   const ensNames = useEnsNames(provider);
 
   useEffect(() => {
-    connector.autoConnect().catch(() => {
-      console.debug('Failed to connect eagerly to metamask');
+    connector.autoConnectOnce().then((success) => {
+      if (!success) {
+        console.debug('Failed to connect eagerly to metamask');
+      }
     });
   }, []);
 
@@ -111,7 +112,6 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ```typescript
-// wallets/metaMask.ts
 import { MetaMaskConnector } from '@web3-wallet/core';
 import { createWallet } from '@web3-wallet/vue';
 
@@ -153,10 +153,11 @@ const {
 const provider = useProvider();
 const ensNName = useEnsName(provider);
 
-// attempt to connect eagerly on mount
 onMounted(() => {
-  connector.autoConnect().catch(() => {
-    console.debug('Failed to connect eagerly to metamask');
+  connector.autoConnectOnce().then((success) => {
+    if (!success) {
+      console.debug('Failed to connect eagerly to metamask');
+    }
   });
 });
 
@@ -259,7 +260,7 @@ pnpm example-react
 pnpm watch # watch for packages change
 
 # vue
-pnpm example-vue # start packages/examples/vue
+pnpm example-vue
 # optional
 pnpm watch # watch for packages change
 
