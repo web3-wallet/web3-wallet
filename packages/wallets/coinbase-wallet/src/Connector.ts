@@ -49,15 +49,15 @@ export class CoinbaseWalletConnector extends AbstractConnector<CoinbaseWalletPro
     return !!this.provider?.selectedAddress;
   }
 
-  public override async connectEagerly(): Promise<void> {
+  public override async autoConnect(): Promise<void> {
     await this.lazyInitialize();
     if (!this.connected) {
       throw Error('No existing connection');
     }
-    await super.connectEagerly();
+    await super.autoConnect();
   }
 
-  public override async deactivate(): Promise<void> {
+  public override async disconnect(): Promise<void> {
     this.coinbaseWallet?.disconnect();
   }
 }

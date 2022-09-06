@@ -5,14 +5,14 @@ import { getAddChainParameters, rpcMap } from '../chains';
 import { ChainSelect } from './ChainSelect';
 
 export const ConnectWithSelect = ({
-  activate,
-  deactivate,
+  connect,
+  disconnect,
   chainId,
   isActivating,
   isActive,
 }: {
-  deactivate: Wallet['connector']['deactivate'];
-  activate: Wallet['connector']['activate'];
+  disconnect: Wallet['connector']['disconnect'];
+  connect: Wallet['connector']['connect'];
   chainId?: number;
   isActivating: boolean;
   isActive: boolean;
@@ -23,9 +23,9 @@ export const ConnectWithSelect = ({
   const switchChain = useCallback(
     (desiredChainId: number) => {
       setDesiredChainId(desiredChainId);
-      activate(getAddChainParameters(desiredChainId));
+      connect(getAddChainParameters(desiredChainId));
     },
-    [activate],
+    [connect],
   );
 
   if (isActive) {
@@ -43,9 +43,9 @@ export const ConnectWithSelect = ({
           }}
           onClick={async () => {
             try {
-              await deactivate();
+              await disconnect();
             } catch (error) {
-              console.warn('activate error: ', error);
+              console.warn('connect error: ', error);
             }
           }}
         >
@@ -70,7 +70,7 @@ export const ConnectWithSelect = ({
         disabled={isActivating}
         onClick={() => {
           if (isActivating) return;
-          activate(
+          connect(
             desiredChainId === -1
               ? undefined
               : getAddChainParameters(desiredChainId),

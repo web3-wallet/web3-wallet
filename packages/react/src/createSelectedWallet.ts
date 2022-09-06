@@ -93,51 +93,49 @@ export const createSelectedWallet = (
     return combinedHooks as Wallet['hooks'];
   };
 
-  const useActivate: SelectedWallet['useActivate'] = () => {
+  const useConnect: SelectedWallet['useConnect'] = () => {
     const wallet = useSelectedWallet();
 
-    const activate: Wallet['connector']['activate'] = async (...args) => {
-      await wallet.connector.activate(...args);
+    const connect: Wallet['connector']['connect'] = async (...args) => {
+      await wallet.connector.connect(...args);
       useStore.setState({ connectionId: Date.now() });
     };
 
-    return activate;
+    return connect;
   };
 
-  const useConnectEagerly: SelectedWallet['useConnectEagerly'] = () => {
+  const useAutoConnect: SelectedWallet['useAutoConnect'] = () => {
     const wallet = useSelectedWallet();
-    const connectEagerly: Wallet['connector']['connectEagerly'] = async (
-      ...args
-    ) => {
-      const result = await wallet.connector.connectEagerly(...args);
+    const autoConnect: Wallet['connector']['autoConnect'] = async (...args) => {
+      const result = await wallet.connector.autoConnect(...args);
       useStore.setState({ connectionId: Date.now() });
       return result;
     };
-    return connectEagerly;
+    return autoConnect;
   };
 
-  const useConnectEagerlyOnce: SelectedWallet['useConnectEagerlyOnce'] = () => {
+  const useAutoConnectOnce: SelectedWallet['useAutoConnectOnce'] = () => {
     const wallet = useSelectedWallet();
-    const connectEagerly: Wallet['connector']['connectEagerlyOnce'] = async (
+    const autoConnect: Wallet['connector']['autoConnectOnce'] = async (
       ...args
     ) => {
-      const result = await wallet.connector.connectEagerlyOnce(...args);
+      const result = await wallet.connector.autoConnectOnce(...args);
       useStore.setState({ connectionId: Date.now() });
       return result;
     };
-    return connectEagerly;
+    return autoConnect;
   };
 
-  const useDeactivate: SelectedWallet['useDeactivate'] = () => {
+  const useDisconnect: SelectedWallet['useDisconnect'] = () => {
     const wallet = useSelectedWallet();
 
-    const deactivate: Wallet['connector']['deactivate'] = async (...args) => {
-      const result = await wallet.connector.deactivate(...args);
+    const disconnect: Wallet['connector']['disconnect'] = async (...args) => {
+      const result = await wallet.connector.disconnect(...args);
       useStore.setState({ connectionId: undefined });
       return result;
     };
 
-    return deactivate;
+    return disconnect;
   };
 
   return {
@@ -145,9 +143,9 @@ export const createSelectedWallet = (
     useSelectedWallet: useSelectedWallet,
     setSelectedWallet,
     useConnectionId: useConnectionId,
-    useActivate,
-    useConnectEagerly,
-    useConnectEagerlyOnce,
-    useDeactivate,
+    useConnect,
+    useAutoConnect: useAutoConnect,
+    useAutoConnectOnce,
+    useDisconnect,
   };
 };

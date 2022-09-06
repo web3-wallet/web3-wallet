@@ -84,7 +84,7 @@ export const MetaMaskCard = () => {
   const ensNames = useEnsNames(provider);
 
   useEffect(() => {
-    connector.connectEagerly().catch(() => {
+    connector.autoConnect().catch(() => {
       console.debug('Failed to connect eagerly to metamask');
     });
   }, []);
@@ -155,7 +155,7 @@ const ensNName = useEnsName(provider);
 
 // attempt to connect eagerly on mount
 onMounted(() => {
-  connector.connectEagerly().catch(() => {
+  connector.autoConnect().catch(() => {
     console.debug('Failed to connect eagerly to metamask');
   });
 });

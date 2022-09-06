@@ -116,13 +116,13 @@ export abstract class BaseAbstractConnector<P extends Provider> {
   public abstract detectProvider(
     providerFilter?: (provider: P) => boolean,
   ): Promise<P>;
-  public abstract connectEagerly(): Promise<void>;
-  public abstract connectEagerlyOnce(): Promise<void>;
-  public abstract activate(
+  public abstract autoConnect(): Promise<void>;
+  public abstract autoConnectOnce(): Promise<void>;
+  public abstract connect(
     chainIdOrAddEthereumChainParameter?: number | AddEthereumChainParameter,
   ): Promise<void>;
   public abstract watchAsset(param: WatchAssetParameters): void;
-  public abstract deactivate(): Promise<void>;
+  public abstract disconnect(): Promise<void>;
 
   protected abstract lazyInitialize(): Promise<void>;
   protected abstract addEventListeners(): RemoveEventListeners | undefined;

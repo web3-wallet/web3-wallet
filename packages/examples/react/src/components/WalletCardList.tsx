@@ -14,9 +14,9 @@ export const WalletCardList = () => {
           {...{
             name: wallet.name,
 
-            activate: wallet.connector.activate.bind(wallet.connector),
-            deactivate: wallet.connector.deactivate.bind(wallet.connector),
-            connectEagerlyOnce: wallet.connector.connectEagerlyOnce.bind(
+            connect: wallet.connector.connect.bind(wallet.connector),
+            disconnect: wallet.connector.disconnect.bind(wallet.connector),
+            autoConnectOnce: wallet.connector.autoConnectOnce.bind(
               wallet.connector,
             ),
 

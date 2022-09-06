@@ -38,7 +38,7 @@ export class ExtensionConnector extends AbstractConnector<DeFiWalletProvider> {
     return this.provider;
   }
 
-  public override async activate(chainId: number): Promise<void> {
+  public override async connect(chainId: number): Promise<void> {
     const cancelActivation = this.actions.startActivation();
 
     try {

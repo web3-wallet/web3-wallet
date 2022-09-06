@@ -71,17 +71,17 @@ export class WalletConnectConnector extends AbstractConnector<WalletConnectProvi
     };
   }
 
-  public override async connectEagerly(): Promise<void> {
+  public override async autoConnect(): Promise<void> {
     await this.lazyInitialize();
     if (!this.provider?.connected) {
       throw Error('No existing connection');
     }
-    await super.connectEagerly();
+    await super.autoConnect();
   }
 
-  public override async deactivate(): Promise<void> {
+  public override async disconnect(): Promise<void> {
     this.removeEventListeners?.();
     await this.provider?.disconnect();
-    super.deactivate();
+    super.disconnect();
   }
 }

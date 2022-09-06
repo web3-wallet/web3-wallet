@@ -35,22 +35,22 @@ describe('detectProvider', () => {
     expect(!!connector.provider).toBe(true);
   });
 
-  test('connectEagerly should be called internally by detectProvider', async () => {
+  test('autoConnect should be called internally by detectProvider', async () => {
     expect(!!connector.provider).toBe(false);
-    await connector.connectEagerly();
+    await connector.autoConnect();
     expect(!!connector.provider).toBe(true);
   });
 
-  test('connectEagerly should be called internally by activate', async () => {
+  test('autoConnect should be called internally by connect', async () => {
     expect(!!connector.provider).toBe(false);
-    await connector.activate();
+    await connector.connect();
     expect(!!connector.provider).toBe(true);
   });
 });
 
-/*********************** Connector.connectEagerly ****************************/
+/*********************** Connector.autoConnect ****************************/
 
-describe('connectEagerly', () => {
+describe('autoConnect', () => {
   let store: Store;
   let actions: Actions;
   let connector: MockConnector;
@@ -64,7 +64,7 @@ describe('connectEagerly', () => {
   });
 
   afterEach(() => {
-    // connectEagerly should not call any of those methods
+    // autoConnect should not call any of those methods
     expect(
       connector.provider?.wallet_switchEthereumChain.mock.calls,
     ).toHaveLength(0);
@@ -75,7 +75,7 @@ describe('connectEagerly', () => {
   });
 
   test('success', async () => {
-    await connector.connectEagerly();
+    await connector.autoConnect();
     expect(connector.provider?.eth_chainId.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_accounts.mock.calls).toHaveLength(0);
@@ -92,7 +92,7 @@ describe('connectEagerly', () => {
     // setChainId to undefined to mock `unable to connect`
     connector.provider?.setChainId(undefined);
 
-    await connector.connectEagerly().catch(() => {});
+    await connector.autoConnect().catch(() => {});
 
     expect(connector.provider?.eth_chainId.mock.calls).toHaveLength(0);
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(0);
@@ -106,7 +106,7 @@ describe('connectEagerly', () => {
 
     connector.provider?.setAccounts(undefined);
 
-    await connector.connectEagerly().catch(() => {});
+    await connector.autoConnect().catch(() => {});
 
     expect(connector.provider?.eth_chainId.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
@@ -120,7 +120,7 @@ describe('connectEagerly', () => {
 
     connector.provider?.setAccounts([]);
 
-    await connector.connectEagerly().catch(() => {});
+    await connector.autoConnect().catch(() => {});
 
     expect(connector.provider?.eth_chainId.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
@@ -129,8 +129,8 @@ describe('connectEagerly', () => {
     expect(store.getState()).toEqual<State>(DEFAULT_STATE);
   });
 
-  /*********************** Connector.activate ****************************/
-  /*********************** Connector.activate ****************************/
+  /*********************** Connector.connect ****************************/
+  /*********************** Connector.connect ****************************/
   /*********************** Connector.watchAsset ****************************/
-  /*********************** Connector.deactivate ****************************/
+  /*********************** Connector.disconnect ****************************/
 });

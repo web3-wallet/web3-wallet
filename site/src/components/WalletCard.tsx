@@ -9,17 +9,17 @@ import { Status } from './Status';
 
 type Props = {
   name: Wallet['name'];
-  activate: Wallet['connector']['activate'];
-  deactivate: Wallet['connector']['deactivate'];
-  connectEagerlyOnce: Wallet['connector']['connectEagerlyOnce'];
+  connect: Wallet['connector']['connect'];
+  disconnect: Wallet['connector']['disconnect'];
+  autoConnectOnce: Wallet['connector']['autoConnectOnce'];
 } & Wallet['hooks'];
 
 export const WalletCard = ({
   name,
 
-  activate,
-  deactivate,
-  connectEagerlyOnce,
+  connect,
+  disconnect,
+  autoConnectOnce,
 
   useChainId,
   useAccounts,
@@ -39,10 +39,10 @@ export const WalletCard = ({
 
   // attempt to connect eagerly on mount
   useEffect(() => {
-    connectEagerlyOnce()?.catch((e) => {
+    autoConnectOnce()?.catch((e) => {
       console.debug('Failed to connect eagerly', e);
     });
-  }, [connectEagerlyOnce]);
+  }, [autoConnectOnce]);
 
   return (
     <Card>
@@ -52,8 +52,8 @@ export const WalletCard = ({
       <Chain chainId={chainId} />
       <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       <ConnectWithSelect
-        activate={activate}
-        deactivate={deactivate}
+        connect={connect}
+        disconnect={disconnect}
         chainId={chainId}
         isActivating={isActivating}
         isActive={isActive}

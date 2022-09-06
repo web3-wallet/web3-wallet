@@ -22,11 +22,11 @@ import WalletCard from './WalletCard.vue';
 const { connector, account, chainId, isActivating, isActive } = metaMask;
 
 const connect = (chainId: number) => {
-  connector.activate(chainId);
+  connector.connect(chainId);
 };
 
 onMounted(() => {
-  connector.connectEagerly();
+  connector.autoConnect();
 });
 
 defineComponent({

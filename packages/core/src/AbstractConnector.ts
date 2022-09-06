@@ -153,7 +153,7 @@ export abstract class AbstractConnector<
     return await this.provider.request({ method: 'eth_chainId' });
   }
 
-  public override async connectEagerly(): Promise<void> {
+  public override async autoConnect(): Promise<void> {
     const cancelActivation = this.actions.startActivation();
 
     try {
@@ -173,9 +173,9 @@ export abstract class AbstractConnector<
   }
 
   private resultOfConnectEagerlyOnce?: Promise<void>;
-  public override async connectEagerlyOnce(): Promise<void> {
+  public override async autoConnectOnce(): Promise<void> {
     if (!this.resultOfConnectEagerlyOnce) {
-      this.resultOfConnectEagerlyOnce = this.connectEagerly();
+      this.resultOfConnectEagerlyOnce = this.autoConnect();
     }
     return await this.resultOfConnectEagerlyOnce;
   }
@@ -189,7 +189,7 @@ export abstract class AbstractConnector<
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
    * specified parameters first, before being prompted to switch.
    */
-  public async activate(
+  public async connect(
     chainIdOrChainParameter?: number | AddEthereumChainParameter,
   ): Promise<void> {
     const cancelActivation = this.actions.startActivation();
@@ -235,16 +235,16 @@ export abstract class AbstractConnector<
         await this.addChain(chainIdOrChainParameter);
 
         /**
-         * chain added, activate the added chainId again
+         * chain added, connect the added chainId again
          */
-        await this.activate(chainIdOrChainParameter.chainId);
+        await this.connect(chainIdOrChainParameter.chainId);
       }
     } finally {
       cancelActivation();
     }
   }
 
-  public async deactivate(): Promise<void> {
+  public async disconnect(): Promise<void> {
     this.resetState();
   }
 

@@ -39,8 +39,8 @@ export type SelectedWallet = Wallet['hooks'] & {
   setSelectedWallet: (walletName: WalletName) => void;
   useSelectedWallet: () => Wallet;
   useConnectionId: () => number | undefined;
-  useActivate: () => Wallet['connector']['activate'];
-  useConnectEagerly: () => Wallet['connector']['connectEagerly'];
-  useConnectEagerlyOnce: () => Wallet['connector']['connectEagerlyOnce'];
-  useDeactivate: () => Wallet['connector']['deactivate'];
+  useConnect: () => Wallet['connector']['connect'];
+  useAutoConnect: () => Wallet['connector']['autoConnect'];
+  useAutoConnectOnce: () => Wallet['connector']['autoConnectOnce'];
+  useDisconnect: () => Wallet['connector']['disconnect'];
 };

@@ -6,9 +6,9 @@ import { WalletSelect } from './WalletSelect';
 
 export const WalletSelectCard = () => {
   const {
-    useActivate,
-    useDeactivate,
-    useConnectEagerlyOnce,
+    useConnect,
+    useDisconnect,
+    useAutoConnectOnce,
 
     useSelectedWallet,
     useAccount,
@@ -28,9 +28,9 @@ export const WalletSelectCard = () => {
         {...{
           name: useSelectedWallet().name,
 
-          activate: useActivate(),
-          deactivate: useDeactivate(),
-          connectEagerlyOnce: useConnectEagerlyOnce(),
+          connect: useConnect(),
+          disconnect: useDisconnect(),
+          autoConnectOnce: useAutoConnectOnce(),
 
           useAccount,
           useAccounts,
