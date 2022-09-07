@@ -1,20 +1,8 @@
-import type { LinkProps } from '@chakra-ui/react';
-import { Flex, Icon, Link as ChakraLink } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Flex, Icon } from '@chakra-ui/react';
 import { AiOutlineGithub } from 'react-icons/ai';
 
+import { Link } from '../Link';
 import { Logo } from './Logo';
-
-const Link = (props: LinkProps) => (
-  <ChakraLink
-    _hover={{
-      textDecoration: 'none',
-      color: 'red.500',
-    }}
-    textShadow="2px 2px 4px #fff"
-    {...props}
-  />
-);
 
 export const SiteMenu = () => {
   return (
@@ -29,26 +17,20 @@ export const SiteMenu = () => {
       <Logo />
 
       <Flex gap={{ base: 6, md: 8, lg: 10 }}>
-        <NextLink href="/wallets" passHref>
-          <Link>Wallets</Link>
-        </NextLink>
-        <NextLink href="/examples" passHref>
-          <Link>Examples</Link>
-        </NextLink>
-        <NextLink href="/docs" passHref>
-          <Link>Docs</Link>
-        </NextLink>
-        <NextLink href="/docs-api" passHref>
-          <Link>API</Link>
-        </NextLink>
+        <Link href="/wallets">Wallets</Link>
+        <Link href="/docs">Docs</Link>
+        <Link href="/showcase">Showcase</Link>
+        <Link href="/docs-api">API</Link>
       </Flex>
 
       <Flex flexGrow="1" justifyContent="flex-end">
         <Link
-          display="flex"
-          justifySelf="end"
           href="https://github.com/web3-wallet/web3-wallet"
-          target="_blank"
+          linkProps={{
+            display: 'flex',
+            justifySelf: 'end',
+            target: '_blank',
+          }}
         >
           <Icon lineHeight="2rem" fontSize="1.4rem" as={AiOutlineGithub} />
         </Link>

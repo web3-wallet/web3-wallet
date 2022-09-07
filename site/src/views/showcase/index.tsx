@@ -6,7 +6,7 @@ export function Page() {
   return (
     <Layout>
       <Head>
-        <title>Examples | Web3 Wallet </title>
+        <title>Showcase | Web3 Wallet </title>
       </Head>
       <Spacer my={12} />
       <Flex flexDirection="column" gap={12}>
