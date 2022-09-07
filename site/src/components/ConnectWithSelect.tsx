@@ -1,4 +1,4 @@
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, useToast } from '@chakra-ui/react';
 import type { Wallet } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
@@ -20,6 +20,7 @@ export const ConnectWithSelect = ({
 }) => {
   const chainIds = Object.keys(rpcMap).map((chainId) => Number(chainId));
   const [desiredChainId, setDesiredChainId] = useState<number>(chainId || 1);
+  const toast = useToast();
 
   const switchChain = useCallback(
     (desiredChainId: number) => {
@@ -63,9 +64,16 @@ export const ConnectWithSelect = ({
       <Button
         colorScheme="blue"
         disabled={isConnecting}
-        onClick={() => {
-          if (isConnecting) return;
-          connect(getAddChainParameters(desiredChainId));
+        onClick={async () => {
+          try {
+            await connect(getAddChainParameters(desiredChainId));
+          } catch (e: unknown) {
+            toast({
+              position: 'top-right',
+              status: 'error',
+              description: (e as Error).message,
+            });
+          }
         }}
       >
         Connect
