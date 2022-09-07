@@ -23,8 +23,6 @@ const isAddChainParameter = (
 export abstract class AbstractConnector<
   P extends Provider = Provider,
 > extends BaseAbstractConnector<P> {
-  protected initialized = false;
-
   protected updateChainId(chainId: string | number): void {
     this.actions.update({
       chainId: parseChainId(chainId),
@@ -89,13 +87,8 @@ export abstract class AbstractConnector<
   }
 
   protected async lazyInitialize(): Promise<void> {
-    if (this.initialized) return;
-    try {
-      await this.detectProvider();
-      this.removeEventListeners = this.addEventListeners();
-    } finally {
-      this.initialized = true;
-    }
+    await this.detectProvider();
+    this.removeEventListeners = this.addEventListeners();
   }
 
   protected async switchChain(chainId: number): Promise<void> {

@@ -41,6 +41,8 @@ export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
   };
 
   public async detectProvider(): Promise<WalletConnectProvider> {
+    if (this.provider) return this.provider;
+
     const m = await import('@walletconnect/ethereum-provider');
 
     const provider = new m.default({
@@ -50,6 +52,23 @@ export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
     this.provider = provider;
 
     return provider;
+  }
+
+  protected override async requestAccounts(): Promise<string[]> {
+    if (!this.provider) throw this.providerNotFoundError;
+
+    try {
+      const accounts = await this.provider.request<string[]>({
+        method: 'eth_requestAccounts',
+      });
+      return accounts;
+    } catch (error: unknown) {
+      if ((error as Error).message === 'User closed modal') {
+        await this.disconnect();
+      }
+
+      throw error;
+    }
   }
 
   protected override addEventListeners(): AbstractConnector['removeEventListeners'] {
@@ -82,7 +101,13 @@ export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
 
   public override async disconnect(): Promise<void> {
     this.removeEventListeners?.();
-    await this.provider?.disconnect();
     super.disconnect();
+    await this.provider?.disconnect();
+    /**
+     * walletconnect sdk will throw alway the existing provider after disconnect.
+     *
+     * need to set provider to undefined so that a new provider can be created next time.
+     */
+    this.provider = undefined;
   }
 }
