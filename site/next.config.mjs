@@ -2,6 +2,7 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  basePath: '/web3-wallet',
   env: {
     infuraKey: process.env.INFURA_KEY,
     alchemyKey: process.env.ALCHEMY_KEY,
