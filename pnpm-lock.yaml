@@ -90,6 +90,7 @@ importers:
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
       '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/cryptocom-desktop-wallet': workspace:*
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/injected': workspace:*
@@ -105,6 +106,7 @@ importers:
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
       '@web3-wallet/coinbase-wallet': link:../../wallets/coinbase-wallet
+      '@web3-wallet/core': link:../../core
       '@web3-wallet/cryptocom-desktop-wallet': link:../../wallets/cryptocom-desktop-wallet
       '@web3-wallet/defiwallet': link:../../wallets/defiwallet
       '@web3-wallet/injected': link:../../wallets/injected
@@ -127,6 +129,7 @@ importers:
       '@vue/cli-plugin-typescript': ~5.0.0
       '@vue/cli-service': ~5.0.0
       '@vue/eslint-config-typescript': ^9.1.0
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/vue': workspace:*
       eslint: ^7.32.0
@@ -137,6 +140,7 @@ importers:
       vue: ^3.2.25
       vue-tsc: ^0.40.0
     dependencies:
+      '@web3-wallet/core': link:../../core
       '@web3-wallet/metamask': link:../../wallets/metamask
       '@web3-wallet/vue': link:../../vue
       vue: 3.2.37
@@ -245,6 +249,7 @@ importers:
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
       '@web3-wallet/coinbase-wallet': workspace:*
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/cryptocom-desktop-wallet': workspace:*
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/injected': workspace:*
@@ -266,6 +271,7 @@ importers:
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
       '@web3-wallet/coinbase-wallet': link:../packages/wallets/coinbase-wallet
+      '@web3-wallet/core': link:../packages/core
       '@web3-wallet/cryptocom-desktop-wallet': link:../packages/wallets/cryptocom-desktop-wallet
       '@web3-wallet/defiwallet': link:../packages/wallets/defiwallet
       '@web3-wallet/injected': link:../packages/wallets/injected

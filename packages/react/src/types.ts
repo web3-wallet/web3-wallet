@@ -8,8 +8,6 @@ import type {
 } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
-export * from '@web3-wallet/core';
-
 export interface Wallet<
   Connector extends AbstractConnector = AbstractConnector,
 > {

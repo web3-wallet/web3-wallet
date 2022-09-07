@@ -1,14 +1,14 @@
-import { computed, reactive } from 'vue';
-
-import { getUseEnsName, getUseEnsNames } from './ensNames';
-import { createGetProvider } from './provider';
 import {
   type AbstractConnector,
   type Actions,
   type State,
-  type Wallet,
   createStore,
-} from './types';
+} from '@web3-wallet/core';
+import { computed, reactive } from 'vue';
+
+import { getUseEnsName, getUseEnsNames } from './ensNames';
+import { createGetProvider } from './provider';
+import { type Wallet } from './types';
 
 const computeIsConnected = ({
   chainId,

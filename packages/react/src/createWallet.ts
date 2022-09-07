@@ -1,12 +1,12 @@
-import createReactStore from 'zustand';
-
-import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
 import {
   type AbstractConnector,
   type Actions,
-  type Wallet,
   createStore,
-} from './types';
+} from '@web3-wallet/core';
+import createReactStore from 'zustand';
+
+import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
+import type { Wallet } from './types';
 
 /**
  * @typeParam T - The type of the `connector` returned from `f`.

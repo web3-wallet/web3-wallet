@@ -22,7 +22,7 @@ export const Link = ({
           color: 'red.500',
         }}
         display="flex"
-        textShadow="2px 2px 4px #fff"
+        textShadow="1px 1px 2px #fff"
         {...linkProps}
       >
         {children}
@@ -30,5 +30,3 @@ export const Link = ({
     </NextLink>
   );
 };
-
-// export const Abc = <NextLink href="abc">hello</NextLink>;

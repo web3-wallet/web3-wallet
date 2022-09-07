@@ -3,8 +3,6 @@ import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
 import type { AbstractConnector, State, Store } from '@web3-wallet/core';
 import type { ComputedRef } from 'vue';
 
-export * from '@web3-wallet/core';
-
 export interface Wallet<
   Connector extends AbstractConnector = AbstractConnector,
 > {
