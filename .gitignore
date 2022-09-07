@@ -68,7 +68,6 @@ jspm_packages/
 # nextjs
 .next
 out/
-docs/
 
 # scripts local config file
 **/.scripts.config.json
