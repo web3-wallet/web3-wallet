@@ -6,6 +6,11 @@ const nextConfig = {
     infuraKey: process.env.INFURA_KEY,
     alchemyKey: process.env.ALCHEMY_KEY,
   },
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+  },
   webpack(
     config,
     {

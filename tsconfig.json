@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@site/*": ["site/src/*"],
+      "@public/*": ["site/public/*"],
       "@example-react/*": ["packages/examples/react/src/*"]
     }
   },
