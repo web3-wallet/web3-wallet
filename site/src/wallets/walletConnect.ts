@@ -1,10 +1,10 @@
 import { rpcMap } from '@site/chains';
 import { createWallet } from '@web3-wallet/react';
-import { WalletConnectConnector } from '@web3-wallet/walletconnect';
+import { WalletConnect } from '@web3-wallet/walletconnect';
 
-export const walletConnect = createWallet<WalletConnectConnector>(
+export const walletConnect = createWallet<WalletConnect>(
   (actions) =>
-    new WalletConnectConnector({
+    new WalletConnect({
       actions,
       options: {
         rpc: rpcMap,

@@ -13,7 +13,7 @@ import {
 
 export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
-export class ExtensionConnector extends AbstractConnector<DeFiWalletProvider> {
+export class DeFiWalletExtension extends AbstractConnector<DeFiWalletProvider> {
   public override provider?: DeFiWalletProvider;
   private options: DeFiWalletProviderOptions;
 

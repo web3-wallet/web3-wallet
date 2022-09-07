@@ -14,7 +14,7 @@ type WalletConnectProvider = _WalletConnectProvider & Provider;
 
 export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
 
-export class WalletConnectConnector extends AbstractConnector<WalletConnectProvider> {
+export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
   public provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 

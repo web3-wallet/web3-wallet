@@ -7,7 +7,7 @@ type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
 
 export type ProviderFilter<P> = (provider: P) => boolean;
 
-export abstract class InjectedConnector<
+export abstract class Injected<
   P extends Provider,
 > extends AbstractConnector<P> {
   public provider?: P;

@@ -10,7 +10,7 @@ type CoinbaseWalletSDKOptions = ConstructorParameters<
 
 export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
-export class CoinbaseWalletConnector extends AbstractConnector<CoinbaseWalletProvider> {
+export class CoinbaseWallet extends AbstractConnector<CoinbaseWalletProvider> {
   public override provider?: CoinbaseWalletProvider;
   private readonly options: CoinbaseWalletSDKOptions;
   /**

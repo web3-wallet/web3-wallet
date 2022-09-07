@@ -22,11 +22,11 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 
 ## Packages
 
-| Package                                | Version                                                      | Description                              |
-| -------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore) | Core types and and the AbstractConnector |
+| Package                                | Version                                                                                                            | Description                              |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)   | Core types and and the AbstractConnector |
 | [`@web3-wallet/react`](packages/react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for EVM wallets            |
-| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue) | Vue binding for EVM wallets              |
+| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)     | Vue binding for EVM wallets              |
 
 ## Wallets
 
@@ -48,11 +48,11 @@ pnpm add @web3-wallet/react @web3-wallet/metamask
 
 ```typescript
 // wallets/metaMask.ts
-import { MetaMaskConnector } from '@web3-wallet/metamask';
+import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
 
-export const metaMask = createWallet<MetaMaskConnector>(
-  (actions) => new MetaMaskConnector(actions),
+export const metaMask = createWallet<MetaMask>(
+  (actions) => new MetaMask(actions),
 );
 ```
 
@@ -113,11 +113,11 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ```typescript
-import { MetaMaskConnector } from '@web3-wallet/metamask';
+import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/vue';
 
-export const metaMask = createWallet<MetaMaskConnector>(
-  (actions) => new MetaMaskConnector(actions),
+export const metaMask = createWallet<MetaMask>(
+  (actions) => new MetaMask(actions),
 );
 ```
 
@@ -125,13 +125,13 @@ export const metaMask = createWallet<MetaMaskConnector>(
 <template>
   <WalletCard
     name="MetaMask"
-    connector="{connector}"
-    chainId="{chainId}"
-    isConnecting="{isConnecting}"
-    isConnected="{isConnected}"
-    account="{account}"
-    provider="{provider}"
-    ensNames="{ensNames}"
+    connector="connector"
+    chainId="chainId"
+    isConnecting="isConnecting"
+    isConnected="isConnected"
+    account="account"
+    provider="provider"
+    ensNames="ensNames"
   />
 </template>
 
@@ -172,20 +172,17 @@ defineComponent({
 
 ## More wallets
 
-If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet connector with few lines of code by extending the `InjectedConnector`.
+If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet AbstractConnector with few lines of code by extending the `Injected` Connector.
 
 ```typescript
 // Trust Wallet connector
 import type {
-  type Connector,
+  type AbstractConnector,
   type WalletName,
   createWallet,
 } from '@web3-wallet/react';
 
-import {
-  type InjectedProvider,
-  InjectedConnector,
-} from '@web3-wallet/injected';
+import { type InjectedProvider, Injected } from '@web3-wallet/injected';
 
 export const walletName = 'Trust' as WalletName<'Trust'>;
 
@@ -195,8 +192,11 @@ export type TrustWalletProvider = InjectedProvider & {
 
 const providerFilter = (p: TrustWalletProvider) => p.isTrust;
 
-export class TrustWalletConnector extends InjectedConnector {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
+export class TrustWallet extends Injected {
+  constructor(
+    actions: AbstractConnector['actions'],
+    onError?: AbstractConnector['onError'],
+  ) {
     super(walletName, actions, onError);
   }
 
@@ -205,16 +205,14 @@ export class TrustWalletConnector extends InjectedConnector {
   }
 }
 
-const trustWallet = createWallet(
-  (actions) => new TrustWalletConnector(actions),
-);
+const trustWallet = createWallet((actions) => new TrustWallet(actions));
 ```
 
-If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method and override few of the connector methods.
+If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `AbstractConnector` instead and then implement the `detectProvider` method and override few of the AbstractConnector methods.
 
 ```typescript
 import type {
-  type Connector,
+  type AbstractConnector,
   type WalletName,
   createWallet,
 } from '@web3-wallet/react';
@@ -224,8 +222,11 @@ type MyWalletProvider = Provider & {
 };
 export const walletName = 'MyWallet' as WalletName<'MyWallet'>;
 
-export class MyWalletConnector extends Connector {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
+export class MyWallet extends AbstractConnector {
+  constructor(
+    actions: AbstractConnector['actions'],
+    onError?: AbstractConnector['onError'],
+  ) {
     super(walletName, actions, onError);
   }
 
