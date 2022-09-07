@@ -1,45 +1,88 @@
 import type { EventEmitter } from 'node:events';
 import type { StoreApi } from 'zustand/vanilla';
 
+/**
+ * Utility type for branding/tagging types
+ */
+type Brand<K, T> = K & { __brand__: T };
+
+/**
+ * Each wallet must have unique wallet name, wallet name is served as the wallet id.
+ **/
+export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
+
+/**
+ * The minimal WalletState to keep track with
+ */
 export interface WalletState {
   isConnecting: boolean;
   chainId?: number;
   accounts?: string[];
 }
 
+/**
+ * WalletStore is for managing the state of WalletState
+ */
 export type WalletStore = StoreApi<WalletState>;
 
+/**
+ * WalletStoreActions is used to update the WalletStore
+ */
 export interface WalletStoreActions {
   startConnection: () => () => void;
   resetState: () => void;
   update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
 }
 
-// https://eips.ethereum.org/EIPS/eip-1193
+/**
+ * Defined in EIP-1193
+ *
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
+ */
 export interface RequestArguments {
   readonly method: string;
   readonly params?: readonly unknown[] | object;
 }
 
-// https://eips.ethereum.org/EIPS/eip-1193
+/**
+ * Defined in EIP-1193
+ *
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
+ */
 export interface ProviderRpcError extends Error {
   message: string;
   code: number;
   data?: unknown;
 }
 
-// https://eips.ethereum.org/EIPS/eip-1193
+/**
+ * Defined in EIP-1193
+ *
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
+ */
 export interface Provider extends EventEmitter {
   request<T>(args: RequestArguments): Promise<T>;
 }
 
-// per EIP-1193
+/**
+ * Defined in EIP-1193
+ *
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
+ */
 export interface ProviderConnectInfo {
   isConnecting: boolean;
   chainId: string;
   accounts?: string[];
 }
 
+/**
+ * dApps need retrieve the provider from the the host environment, but it may fail to retrieve the provider.
+ * ProviderNoFoundError should be thrown when a operation requires a provider, but there's no provider.
+ */
 export class ProviderNoFoundError extends Error {
   public constructor(message = 'Provider not found') {
     super(message);
@@ -48,41 +91,44 @@ export class ProviderNoFoundError extends Error {
   }
 }
 
-// https://docs.metamask.io/guide/rpc-api.html#unrestricted-methods
-// https://ethereum-magicians.org/t/eip-3326-wallet-switchethereumchain/5471
+/**
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-3326 | EIP-3326}
+ *  - {@link https://docs.metamask.io/guide/rpc-api.html#unrestricted-methods | MetaMask wallet_switchEthereumChain}
+ */
 export interface SwitchEthereumChainParameter {
   chainId: number;
 }
 
-// https://eips.ethereum.org/EIPS/eip-3085
+/**
+ * See
+ *  - {@link https://eips.ethereum.org/EIPS/eip-3085 | EIP 3085}
+ *  - {@link https://docs.metamask.io/guide/rpc-api.html#wallet-addethereumchain | MetaMask wallet_addEthereumChain}
+ */
 export interface AddEthereumChainParameter {
   chainId: number;
   chainName: string;
   nativeCurrency: {
     name: string;
-    // 2-6 characters
     symbol: string;
     decimals: 18;
   };
   rpcUrls: string[];
   blockExplorerUrls?: string[];
-  // Currently ignored.
+  /**
+   * Currently ignored.
+   */
   iconUrls?: string[];
 }
 
-// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md
-// https://docs.metamask.io/guide/rpc-api.html#wallet-watchasset
+/**
+ * See
+ *  - {@link https://github.com/ethereum/EIPs/blob/master/EIPS/eip-747.md | EIP-747}
+ *  - {@link https://docs.metamask.io/guide/rpc-api.html#wallet-watchasset | EIP-747 wallet_watchAsset}
+ */
 export interface WatchAssetParameters {
-  // The address that the token is at.
   address: string;
-  // A ticker symbol or shorthand, up to 5 chars.
   symbol: string;
-  // The number of decimals in the token
   decimals: number;
-  // A string url of the token logo
   image: string;
 }
-
-export type Brand<K, T> = K & { __brand__: T };
-
-export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;

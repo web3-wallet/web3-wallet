@@ -12,8 +12,7 @@ export const createWalletProxy = (
     key?: string;
   } = {},
 ): WalletProxy => {
-  const { defaultCurrentWallet: defaultCurrentWallet, key = '@web3-wallet' } =
-    options;
+  const { defaultCurrentWallet, key = '@web3-wallet' } = options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 

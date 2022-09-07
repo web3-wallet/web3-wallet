@@ -1,7 +1,7 @@
 import {
   type AbstractConnector,
   type WalletStoreActions,
-  createWalletStore,
+  createWalletStoreAndActions,
 } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
@@ -16,7 +16,7 @@ import type { Wallet } from './types';
 export const createWallet = <Connector extends AbstractConnector>(
   f: (actions: WalletStoreActions) => Connector,
 ): Wallet<Connector> => {
-  const { store, actions } = createWalletStore();
+  const { store, actions } = createWalletStoreAndActions();
 
   const connector = f(actions);
   const reactStore = createReactStore(store);

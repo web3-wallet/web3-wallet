@@ -1,9 +1,9 @@
-import { type WalletState, createWalletStore } from '../src';
+import { type WalletState, createWalletStoreAndActions } from '../src';
 import mockData from './mockData.spec';
 
 describe('store', () => {
   test('store default state', () => {
-    const { store } = createWalletStore();
+    const { store } = createWalletStoreAndActions();
     expect(store.getState()).toEqual({
       chainId: undefined,
       accounts: undefined,
@@ -14,7 +14,7 @@ describe('store', () => {
 
 describe('Activation', () => {
   test('startConnection', () => {
-    const { store, actions } = createWalletStore();
+    const { store, actions } = createWalletStoreAndActions();
     actions.startConnection();
     expect(store.getState()).toEqual({
       chainId: undefined,
@@ -24,7 +24,7 @@ describe('Activation', () => {
   });
 
   test('cancelActivation', () => {
-    const { store, actions } = createWalletStore();
+    const { store, actions } = createWalletStoreAndActions();
     const cancelActivation = actions.startConnection();
     expect(store.getState()).toEqual<WalletState>({
       chainId: undefined,
@@ -41,7 +41,7 @@ describe('Activation', () => {
 });
 
 describe('update/valid chainId', () => {
-  const { store, actions } = createWalletStore();
+  const { store, actions } = createWalletStoreAndActions();
   const table = mockData.chainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     actions.update({
@@ -55,7 +55,7 @@ describe('update/valid chainId', () => {
   });
 });
 describe('update/invalid chainId', () => {
-  const { actions } = createWalletStore();
+  const { actions } = createWalletStoreAndActions();
   const table = mockData.invalidChainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
@@ -68,7 +68,7 @@ describe('update/invalid chainId', () => {
 
 describe('update/valid accounts', () => {
   test('valid accounts', () => {
-    const { store, actions } = createWalletStore();
+    const { store, actions } = createWalletStoreAndActions();
     const accounts = [...mockData.accounts];
     actions.update({ accounts });
     expect(store.getState()).toEqual<WalletState>({
@@ -79,7 +79,7 @@ describe('update/valid accounts', () => {
   });
 });
 describe('update/invalid accounts', () => {
-  const { actions } = createWalletStore();
+  const { actions } = createWalletStoreAndActions();
   const table = mockData.invalidChainIds.map((v) => [v]);
   test.each(table)('chainId: %i', (chainId: number) => {
     expect(() => {
@@ -92,7 +92,7 @@ describe('update/invalid accounts', () => {
 
 describe('update/accounts & chainId', () => {
   test('valid accounts & valid chainId', () => {
-    const { store, actions } = createWalletStore();
+    const { store, actions } = createWalletStoreAndActions();
     const chainId = mockData.chainIds[0];
     const accounts = [...mockData.accounts];
     actions.update({
@@ -107,7 +107,7 @@ describe('update/accounts & chainId', () => {
   });
 
   test('valid chainId & invalid accounts', () => {
-    const { actions } = createWalletStore();
+    const { actions } = createWalletStoreAndActions();
     const chainId = mockData.chainIds[0];
     const accounts = [...mockData.invalidAccounts];
     expect(() => {
@@ -118,7 +118,7 @@ describe('update/accounts & chainId', () => {
     }).toThrow();
   });
   test('invalid chainId & invalid accounts', () => {
-    const { actions } = createWalletStore();
+    const { actions } = createWalletStoreAndActions();
     const chainId = mockData.invalidChainIds[0];
     const accounts = [...mockData.invalidAccounts];
     expect(() => {
@@ -132,7 +132,7 @@ describe('update/accounts & chainId', () => {
 
 describe('resetState', () => {
   test('resetState works', () => {
-    const { store, actions } = createWalletStore();
+    const { store, actions } = createWalletStoreAndActions();
     const stateUpdate = {
       chainId: mockData.chainIds[0],
       accounts: [...mockData.accounts],

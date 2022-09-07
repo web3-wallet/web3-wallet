@@ -3,42 +3,54 @@ import create from 'zustand/vanilla';
 import type { WalletState, WalletStore, WalletStoreActions } from './types';
 import { validateAccount, validateChainId } from './utils';
 
-export const DEFAULT_STATE: WalletState = {
+export const DEFAULT_WALLET_STATE: WalletState = {
   chainId: undefined,
   accounts: undefined,
   isConnecting: false,
 };
 
-export const createWalletStore = (): {
+/**
+ * Create a vanilla zustand store and wallet actions for managing the WalletState
+ */
+export const createWalletStoreAndActions = (): {
+  /**
+   * {@link WalletStore}
+   */
   store: WalletStore;
+  /**
+   * {@link WalletStoreActions}
+   */
   actions: WalletStoreActions;
 } => {
-  const store = create<WalletState>()(() => DEFAULT_STATE);
+  const store = create<WalletState>()(() => DEFAULT_WALLET_STATE);
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0;
 
   /**
-   * Sets activating to true, indicating that an update is in progress.
+   * Sets isConnecting to true, indicating that an connection is in progress.
    *
-   * @returns cancelActivation - A function that cancels the activation by setting activating to false,
-   * as long as there haven't been any intervening updates.
+   * @returns - the paired endConnection function
    */
   function startConnection(): () => void {
     const nullifierCached = ++nullifier;
 
     store.setState({ isConnecting: true });
 
-    // return a function that cancels the activation iff nothing else has happened
-    return () => {
+    const endConnection = () => {
       if (nullifier === nullifierCached)
         store.setState({ isConnecting: false });
     };
+
+    /**
+     * No matter the connection succeed or fail, should always finally call startConnection and endConnection in pair.
+     */
+    return endConnection;
   }
 
   /**
    * Used to report a `stateUpdate` which is merged with existing state. The first `stateUpdate` that results in chainId
-   * and accounts being set will also set activating to false, indicating a successful connection.
+   * and accounts being set will also set isConnecting to false, indicating a successful connection.
    *
    * @param stateUpdate - The state update to report.
    */
@@ -62,7 +74,7 @@ export const createWalletStore = (): {
       const chainId = stateUpdate.chainId ?? existingState.chainId;
       const accounts = stateUpdate.accounts ?? existingState.accounts;
 
-      // ensure that the activating flag is cleared when appropriate
+      // ensure that the isConnecting flag is cleared when appropriate
       let isConnecting = existingState.isConnecting;
       if (isConnecting && chainId && accounts) {
         isConnecting = false;
@@ -77,7 +89,7 @@ export const createWalletStore = (): {
    */
   function resetState(): void {
     nullifier++;
-    store.setState(DEFAULT_STATE);
+    store.setState(DEFAULT_WALLET_STATE);
   }
 
   return {

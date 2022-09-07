@@ -2,7 +2,7 @@ import {
   type AbstractConnector,
   type WalletState,
   type WalletStoreActions,
-  createWalletStore,
+  createWalletStoreAndActions,
 } from '@web3-wallet/core';
 import { computed, reactive } from 'vue';
 
@@ -23,12 +23,10 @@ const computeIsConnected = ({
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <
-  Connector extends AbstractConnector = AbstractConnector,
->(
+export const createWallet = <Connector extends AbstractConnector>(
   f: (actions: WalletStoreActions) => Connector,
 ): Wallet<Connector> => {
-  const { store, actions } = createWalletStore();
+  const { store, actions } = createWalletStoreAndActions();
 
   const state = reactive<WalletState>({
     ...store.getState(),
@@ -60,7 +58,7 @@ export const createWallet = <
   const useEnsName = getUseEnsName(account);
 
   return {
-    name: connector['name'],
+    name: connector.name,
     connector,
     store,
     chainId,
