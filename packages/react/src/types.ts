@@ -2,9 +2,9 @@ import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
 import type {
   AbstractConnector,
-  State,
-  Store,
   WalletName,
+  WalletState,
+  WalletStore,
 } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
@@ -14,14 +14,14 @@ export interface Wallet<
   name: WalletName;
   connector: Connector;
   store: UseBoundStore<
-    Store & {
-      getServerState?: () => State;
+    WalletStore & {
+      getServerState?: () => WalletState;
     }
   >;
   hooks: {
-    useChainId: () => State['chainId'];
-    useAccounts: () => State['accounts'];
-    useIsConnecting: () => State['isConnecting'];
+    useChainId: () => WalletState['chainId'];
+    useAccounts: () => WalletState['accounts'];
+    useIsConnecting: () => WalletState['isConnecting'];
     useAccount: () => string | undefined;
     useIsConnected: () => boolean;
     useProvider: <T extends BaseProvider = Web3Provider>(

@@ -1,18 +1,18 @@
 import type { EventEmitter } from 'node:events';
 import type { StoreApi } from 'zustand/vanilla';
 
-export interface State {
+export interface WalletState {
   isConnecting: boolean;
   chainId?: number;
   accounts?: string[];
 }
 
-export type Store = StoreApi<State>;
+export type WalletStore = StoreApi<WalletState>;
 
-export interface Actions {
+export interface WalletStoreActions {
   startConnection: () => () => void;
   resetState: () => void;
-  update: (stateUpdate: Partial<Omit<State, 'isConnecting'>>) => void;
+  update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
 }
 
 // https://eips.ethereum.org/EIPS/eip-1193

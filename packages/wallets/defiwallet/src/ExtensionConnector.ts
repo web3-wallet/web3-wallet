@@ -1,6 +1,6 @@
 import {
-  type Actions,
   type WalletName,
+  type WalletStoreActions,
   AbstractConnector,
   utils,
 } from '@web3-wallet/core';
@@ -18,7 +18,7 @@ export class ExtensionConnector extends AbstractConnector<DeFiWalletProvider> {
   private options: DeFiWalletProviderOptions;
 
   constructor(
-    actions: Actions,
+    actions: WalletStoreActions,
     options: DeFiWalletProviderOptions,
     onError?: AbstractConnector['onError'],
   ) {

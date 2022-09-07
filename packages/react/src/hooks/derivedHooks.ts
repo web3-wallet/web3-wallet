@@ -1,9 +1,13 @@
-import type { State } from '@web3-wallet/core';
+import type { WalletState } from '@web3-wallet/core';
 
 import type { Wallet } from '../types';
 import type { StateHooks } from './stateHooks';
 
-const computeIsConnected = ({ chainId, accounts, isConnecting }: State) => {
+const computeIsConnected = ({
+  chainId,
+  accounts,
+  isConnecting,
+}: WalletState) => {
   return Boolean(chainId && accounts?.length && !isConnecting);
 };
 

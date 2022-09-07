@@ -1,8 +1,8 @@
 import {
   type AbstractConnector,
-  type Actions,
-  type State,
-  createStore,
+  type WalletState,
+  type WalletStoreActions,
+  createWalletStore,
 } from '@web3-wallet/core';
 import { computed, reactive } from 'vue';
 
@@ -14,7 +14,7 @@ const computeIsConnected = ({
   chainId,
   accounts,
   isConnecting: isConnecting,
-}: State): boolean => {
+}: WalletState): boolean => {
   return Boolean(chainId && accounts && accounts.length && !isConnecting);
 };
 
@@ -26,11 +26,11 @@ const computeIsConnected = ({
 export const createWallet = <
   Connector extends AbstractConnector = AbstractConnector,
 >(
-  f: (actions: Actions) => Connector,
+  f: (actions: WalletStoreActions) => Connector,
 ): Wallet<Connector> => {
-  const { store, actions } = createStore();
+  const { store, actions } = createWalletStore();
 
-  const state = reactive<State>({
+  const state = reactive<WalletState>({
     ...store.getState(),
   });
 

@@ -1,4 +1,4 @@
-import type { State } from '@web3-wallet/core';
+import type { WalletState } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
 import type { Wallet } from '../types';
@@ -9,8 +9,8 @@ export type StateHooks = Pick<
 >;
 
 const ACCOUNTS_EQUALITY_CHECKER: (
-  a: State['accounts'],
-  b: State['accounts'],
+  a: WalletState['accounts'],
+  b: WalletState['accounts'],
 ) => boolean = (oldAccounts, newAccounts) => {
   if (oldAccounts === undefined && newAccounts === undefined) return true;
   if (oldAccounts === undefined && newAccounts !== undefined) return false;

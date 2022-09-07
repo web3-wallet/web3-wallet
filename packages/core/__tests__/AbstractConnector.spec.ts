@@ -1,6 +1,11 @@
 /* eslint-disable jest/no-standalone-expect */
-import type { Actions, State, Store, WalletName } from '../src';
-import { AbstractConnector, createStore, DEFAULT_STATE } from '../src';
+import type {
+  WalletName,
+  WalletState,
+  WalletStore,
+  WalletStoreActions,
+} from '../src';
+import { AbstractConnector, createWalletStore, DEFAULT_STATE } from '../src';
 import mockData from './mockData.spec';
 import { MockProvider } from './MockProvider.spec';
 
@@ -24,7 +29,7 @@ class MockConnector extends AbstractConnector<MockProvider> {
 describe('detectProvider', () => {
   let connector: MockConnector;
   beforeEach(() => {
-    const store = createStore();
+    const store = createWalletStore();
     const walletName = 'MockConnector' as WalletName<'MockConnector'>;
     connector = new MockConnector(walletName, store.actions);
   });
@@ -51,12 +56,12 @@ describe('detectProvider', () => {
 /*********************** Connector.autoConnect ****************************/
 
 describe('autoConnect', () => {
-  let store: Store;
-  let actions: Actions;
+  let store: WalletStore;
+  let actions: WalletStoreActions;
   let connector: MockConnector;
 
   beforeEach(() => {
-    const s = createStore();
+    const s = createWalletStore();
     store = s.store;
     actions = s.actions;
     const walletName = 'MockConnector' as WalletName<'MockConnector'>;
@@ -80,7 +85,7 @@ describe('autoConnect', () => {
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_accounts.mock.calls).toHaveLength(0);
 
-    expect(store.getState()).toEqual<State>({
+    expect(store.getState()).toEqual<WalletState>({
       chainId: Number(chainId),
       accounts,
       isConnecting: false,
@@ -98,7 +103,7 @@ describe('autoConnect', () => {
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(0);
     expect(connector.provider?.eth_accounts.mock.calls).toHaveLength(0);
 
-    expect(store.getState()).toEqual<State>(DEFAULT_STATE);
+    expect(store.getState()).toEqual<WalletState>(DEFAULT_STATE);
   });
 
   test('fail silently: case 2, accounts is undefined', async () => {
@@ -112,7 +117,7 @@ describe('autoConnect', () => {
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_accounts.mock.calls).toHaveLength(0);
 
-    expect(store.getState()).toEqual<State>(DEFAULT_STATE);
+    expect(store.getState()).toEqual<WalletState>(DEFAULT_STATE);
   });
 
   test('fail silently: case 3, accounts is empty', async () => {
@@ -126,7 +131,7 @@ describe('autoConnect', () => {
     expect(connector.provider?.eth_requestAccounts.mock.calls).toHaveLength(1);
     expect(connector.provider?.eth_accounts.mock.calls).toHaveLength(0);
 
-    expect(store.getState()).toEqual<State>(DEFAULT_STATE);
+    expect(store.getState()).toEqual<WalletState>(DEFAULT_STATE);
   });
 
   /*********************** Connector.connect ****************************/

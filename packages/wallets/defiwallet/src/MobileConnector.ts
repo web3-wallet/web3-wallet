@@ -1,8 +1,8 @@
 import type {
   AbstractConnector,
-  Actions,
   Provider,
   WalletName,
+  WalletStoreActions,
 } from '@web3-wallet/core';
 import type { ProviderFilter } from '@web3-wallet/injected';
 import { InjectedConnector } from '@web3-wallet/injected';
@@ -17,7 +17,10 @@ const providerFilter: ProviderFilter<MobileProvider> = (p) =>
   !!p.isTrust && window.navigator?.userAgent?.includes('DeFiWallet');
 
 export class MobileConnector extends InjectedConnector<MobileProvider> {
-  constructor(actions: Actions, onError?: AbstractConnector['onError']) {
+  constructor(
+    actions: WalletStoreActions,
+    onError?: AbstractConnector['onError'],
+  ) {
     super(walletName, actions, onError);
   }
 

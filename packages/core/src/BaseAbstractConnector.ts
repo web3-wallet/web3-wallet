@@ -1,10 +1,10 @@
 import type {
-  Actions,
   AddEthereumChainParameter,
   Provider,
   ProviderConnectInfo,
   ProviderRpcError,
   WalletName,
+  WalletStoreActions,
   WatchAssetParameters,
 } from './types';
 import { ProviderNoFoundError } from './types';
@@ -14,14 +14,14 @@ type RemoveEventListeners = () => void;
 export abstract class BaseAbstractConnector<P extends Provider> {
   public name: WalletName;
   public abstract provider?: P;
-  public actions: Actions;
+  public actions: WalletStoreActions;
   public onError?(error?: ProviderNoFoundError): Promise<void>;
   protected providerNotFoundError: ProviderNoFoundError;
   protected removeEventListeners?: RemoveEventListeners;
 
   constructor(
     name: WalletName,
-    actions: Actions,
+    actions: WalletStoreActions,
     onError?: (error: ProviderNoFoundError) => Promise<void>,
   ) {
     this.name = name;

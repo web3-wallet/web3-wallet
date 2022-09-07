@@ -1,19 +1,19 @@
 import create from 'zustand/vanilla';
 
-import type { Actions, State, Store } from './types';
+import type { WalletState, WalletStore, WalletStoreActions } from './types';
 import { validateAccount, validateChainId } from './utils';
 
-export const DEFAULT_STATE: State = {
+export const DEFAULT_STATE: WalletState = {
   chainId: undefined,
   accounts: undefined,
   isConnecting: false,
 };
 
-export const createStore = (): {
-  store: Store;
-  actions: Actions;
+export const createWalletStore = (): {
+  store: WalletStore;
+  actions: WalletStoreActions;
 } => {
-  const store = create<State>()(() => DEFAULT_STATE);
+  const store = create<WalletState>()(() => DEFAULT_STATE);
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0;
@@ -42,7 +42,7 @@ export const createStore = (): {
    *
    * @param stateUpdate - The state update to report.
    */
-  function update(stateUpdate: Partial<State>): void {
+  function update(stateUpdate: Partial<WalletState>): void {
     // validate chainId statically, independent of existing state
     if (stateUpdate.chainId !== undefined) {
       validateChainId(stateUpdate.chainId);
@@ -57,7 +57,7 @@ export const createStore = (): {
 
     nullifier++;
 
-    store.setState((existingState): State => {
+    store.setState((existingState): WalletState => {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId;
       const accounts = stateUpdate.accounts ?? existingState.accounts;
@@ -80,5 +80,8 @@ export const createStore = (): {
     store.setState(DEFAULT_STATE);
   }
 
-  return { store, actions: { startConnection, update, resetState } };
+  return {
+    store,
+    actions: { startConnection, update, resetState },
+  };
 };

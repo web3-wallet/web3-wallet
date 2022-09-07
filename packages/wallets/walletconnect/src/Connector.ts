@@ -1,9 +1,9 @@
 import type _WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
 import {
-  type Actions,
   type Provider,
   type WalletName,
+  type WalletStoreActions,
   AbstractConnector,
 } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
@@ -25,7 +25,7 @@ export class WalletConnectConnector extends AbstractConnector<WalletConnectProvi
     options,
     onError,
   }: {
-    actions: Actions;
+    actions: WalletStoreActions;
     options: IWCEthRpcConnectionOptions;
     onError?: AbstractConnector['onError'];
   }) {
