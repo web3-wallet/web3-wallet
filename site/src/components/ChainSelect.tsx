@@ -1,3 +1,5 @@
+import { Select } from '@chakra-ui/react';
+
 import { CHAINS } from '../chains';
 
 export const ChainSelect = ({
@@ -10,15 +12,10 @@ export const ChainSelect = ({
   chainIds: number[];
 }) => {
   return (
-    <select
+    <Select
       value={chainId}
       onChange={(event) => {
         switchChain?.(Number(event.target.value));
-      }}
-      style={{
-        height: '32px',
-        padding: '2px 10px',
-        cursor: 'pointer',
       }}
       disabled={switchChain === undefined}
     >
@@ -27,6 +24,6 @@ export const ChainSelect = ({
           {CHAINS[chainId]?.name ?? chainId}
         </option>
       ))}
-    </select>
+    </Select>
   );
 };

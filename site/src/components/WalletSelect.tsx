@@ -1,3 +1,4 @@
+import { Select } from '@chakra-ui/react';
 import type { Wallet, WalletName } from '@web3-wallet/react';
 
 export const WalletSelect = ({
@@ -10,15 +11,10 @@ export const WalletSelect = ({
   setSelectedWallet: (walletName: WalletName) => void;
 }) => {
   return (
-    <select
+    <Select
       value={selectedWalletName}
       onChange={(event) => {
         setSelectedWallet(event.target.value as WalletName);
-      }}
-      style={{
-        height: '32px',
-        padding: '2px 10px',
-        cursor: 'pointer',
       }}
     >
       {wallets.map((wallet) => (
@@ -26,6 +22,6 @@ export const WalletSelect = ({
           {wallet.name}
         </option>
       ))}
-    </select>
+    </Select>
   );
 };

@@ -1,13 +1,14 @@
+import { Text } from '@chakra-ui/react';
 import { walletProxy } from '@site/wallets';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
-import { Card } from './Card';
 import { Chain } from './Chain';
 import { ConnectWithSelect } from './ConnectWithSelect';
 import { NoSSR } from './NoSSR';
-import { Status } from './Status';
+import { WalletCard } from './WalletCard';
 import { WalletSelect } from './WalletSelect';
+import { WalletStatus } from './WalletStatus';
 
 export const WalletSelectCard = () => {
   const {
@@ -49,15 +50,17 @@ export const WalletSelectCard = () => {
 
   return (
     <NoSSR>
-      <Card style={{ minWidth: '280px', maxWidth: '320px', width: '100%' }}>
+      <WalletCard
+        style={{ minWidth: '280px', maxWidth: '420px', width: '100%' }}
+      >
         <WalletSelect
           wallets={wallets}
           selectedWalletName={currentWallet.name}
           setSelectedWallet={setCurrentWallet}
         />
-        <Card>
-          <b>{currentWallet.name}</b>
-          <Status isConnecting={isConnecting} isConnected={isConnected} />
+        <WalletCard>
+          <Text fontWeight="bold">{currentWallet.name}</Text>
+          <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
           <Chain chainId={chainId} />
           <Accounts
             accounts={accounts}
@@ -71,8 +74,8 @@ export const WalletSelectCard = () => {
             isConnecting={isConnecting}
             isConnected={isConnected}
           />
-        </Card>
-      </Card>
+        </WalletCard>
+      </WalletCard>
     </NoSSR>
   );
 };

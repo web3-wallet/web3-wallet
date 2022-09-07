@@ -12,19 +12,25 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.9",
+    "@chakra-ui/react": "^2.3.1",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/experimental": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
     "@ethersproject/units": "^5.7.0",
     "@web3-wallet/coinbase-wallet": "workspace:*",
-    "@web3-wallet/injected": "workspace:*",
+    "@web3-wallet/cryptocom-desktop-wallet": "workspace:*",
     "@web3-wallet/defiwallet": "workspace:*",
+    "@web3-wallet/injected": "workspace:*",
     "@web3-wallet/metamask": "workspace:*",
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
-    "@web3-wallet/cryptocom-desktop-wallet": "workspace:*",
+    "framer-motion": "^7.2.1",
     "next": "12.2.5",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@types/react-dom": "18.0.6",

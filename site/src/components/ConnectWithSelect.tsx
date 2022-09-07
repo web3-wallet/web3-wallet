@@ -1,8 +1,8 @@
+import { Button, Flex } from '@chakra-ui/react';
 import type { Wallet } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
 import { getAddChainParameters, rpcMap } from '../chains';
-import { Box } from './Box';
 import { ChainSelect } from './ChainSelect';
 
 export const ConnectWithSelect = ({
@@ -31,17 +31,14 @@ export const ConnectWithSelect = ({
 
   if (isConnected) {
     return (
-      <Box style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Flex flexDirection="column" gap={4}>
         <ChainSelect
           chainId={desiredChainId}
           switchChain={switchChain}
           chainIds={chainIds}
         />
-        <button
-          style={{
-            height: '32px',
-            cursor: 'pointer',
-          }}
+        <Button
+          colorScheme="red"
           onClick={async () => {
             try {
               await disconnect();
@@ -51,23 +48,20 @@ export const ConnectWithSelect = ({
           }}
         >
           Disconnect
-        </button>
-      </Box>
+        </Button>
+      </Flex>
     );
   }
 
   return (
-    <Box style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <Flex flexDirection="column" gap={4}>
       <ChainSelect
         chainId={desiredChainId}
         switchChain={isConnecting ? undefined : switchChain}
         chainIds={chainIds}
       />
-      <button
-        style={{
-          height: '32px',
-          cursor: 'pointer',
-        }}
+      <Button
+        colorScheme="blue"
         disabled={isConnecting}
         onClick={() => {
           if (isConnecting) return;
@@ -75,7 +69,7 @@ export const ConnectWithSelect = ({
         }}
       >
         Connect
-      </button>
-    </Box>
+      </Button>
+    </Flex>
   );
 };

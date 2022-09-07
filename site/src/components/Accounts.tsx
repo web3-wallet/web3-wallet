@@ -1,10 +1,10 @@
+import { Flex, Text } from '@chakra-ui/react';
 import type { BigNumber } from '@ethersproject/bignumber';
 import { formatEther } from '@ethersproject/units';
 import type { Wallet } from '@web3-wallet/react';
 import React, { useEffect, useState } from 'react';
 
 import { Account } from './Account';
-import { Box } from './Box';
 
 const useBalances = (
   provider?: ReturnType<Wallet['hooks']['useProvider']>,
@@ -47,10 +47,10 @@ export const Accounts = ({
   if (accounts === undefined) return null;
   if (accounts.length === 0) {
     return (
-      <Box style={{ display: 'flex', marginBottom: 10 }}>
-        <span style={{ marginRight: 10 }}>Account:</span>
-        <b>None</b>
-      </Box>
+      <Flex gap={2}>
+        <Text>Account:</Text>
+        <Text>None</Text>
+      </Flex>
     );
   }
 
@@ -61,20 +61,18 @@ export const Accounts = ({
           ENSNames?.[i]
         ) : (
           <React.Fragment key={account}>
-            <Box>
-              <span style={{ marginRight: 10 }}>Account:</span>
-              <b>
-                <Account account={account} />
-              </b>
-            </Box>
-            <Box>
-              <span style={{ marginRight: 10 }}>Balance:</span>
-              <b>
+            <Flex gap={2}>
+              <Text as="span">Account:</Text>
+              <Account account={account} fontWeight="bold" />
+            </Flex>
+            <Flex gap={2}>
+              <Text>Balance:</Text>
+              <Text fontWeight="bold">
                 {balances?.[i]
-                  ? `Ξ ${Number(formatEther(balances[i])).toFixed(4)}`
+                  ? `${Number(formatEther(balances[i])).toFixed(4)}`
                   : '--'}
-              </b>
-            </Box>
+              </Text>
+            </Flex>
           </React.Fragment>
         ),
       )}

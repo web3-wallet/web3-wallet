@@ -1,6 +1,6 @@
-import { Box } from './Box';
+import { Box } from '@chakra-ui/react';
 
-export const Status = ({
+export const WalletStatus = ({
   isConnecting,
   isConnected,
 }: {

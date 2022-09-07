@@ -1,5 +1,6 @@
+import { Flex, Text } from '@chakra-ui/react';
+
 import { CHAINS } from '../chains';
-import { Box } from './Box';
 
 export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
@@ -8,19 +9,19 @@ export const Chain = ({ chainId }: { chainId?: number }) => {
 
   if (name) {
     return (
-      <Box>
-        <span style={{ marginRight: 10 }}>Chain:</span>
-        <b>
+      <Flex gap={2}>
+        <Text>Chain:</Text>
+        <Text fontWeight="bold">
           {name} ({chainId})
-        </b>
-      </Box>
+        </Text>
+      </Flex>
     );
   }
 
   return (
-    <Box>
-      <span style={{ marginRight: 10 }}>Chain Id:</span>
-      <b>{chainId}</b>
-    </Box>
+    <Flex gap={2}>
+      <Text>Chain Id:</Text>
+      <Text fontWeight="bold">{chainId}</Text>
+    </Flex>
   );
 };
