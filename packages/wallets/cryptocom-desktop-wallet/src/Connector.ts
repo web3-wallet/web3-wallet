@@ -13,8 +13,15 @@ const providerFilter = (p: CryptocomDesktopWalletProvider) => {
 };
 
 export class CryptocomDesktopWallet extends Injected<CryptocomDesktopWalletProvider> {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
-    super(walletName, actions, onError);
+  /** {@inheritdoc Connector.constructor} */
+  constructor({
+    actions,
+    onError,
+  }: {
+    actions: Connector['actions'];
+    onError?: Connector['onError'];
+  }) {
+    super(walletName, actions, {}, onError);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

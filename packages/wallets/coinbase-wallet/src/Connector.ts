@@ -2,35 +2,46 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
+import type { WalletOptions } from '@web3-wallet/core';
 import { type WalletName, Connector } from '@web3-wallet/core';
 
-type CoinbaseWalletOptions = ConstructorParameters<
+type CoinbaseWalletProviderOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
 >[0] & { url: string };
 
 export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
-export class CoinbaseWallet extends Connector<CoinbaseWalletProvider> {
+export type CoinbaseWalletOptions =
+  WalletOptions<CoinbaseWalletProviderOptions>;
+
+export class CoinbaseWallet extends Connector<
+  CoinbaseWalletProvider,
+  CoinbaseWalletOptions
+> {
   /** {@inheritdoc Connector.provider} */
   public override provider?: CoinbaseWalletProvider;
-  private readonly options: CoinbaseWalletOptions;
   /**
    * A `CoinbaseWalletSDK` instance.
    */
   public coinbaseWallet?: CoinbaseWalletSDK;
 
   /**
+   * {@inheritdoc Connector.constructor}
+   *
    * @param actions - wallet store actions
    * @param options - Options to pass to `@coinbase/wallet-sdk`.
    * @param onError - Handler to report errors thrown from eventListeners.
    */
-  constructor(
-    actions: Connector['actions'],
-    options: CoinbaseWalletOptions,
-    onError?: Connector['onError'],
-  ) {
-    super(walletName, actions, onError);
-    this.options = options;
+  constructor({
+    actions,
+    options,
+    onError,
+  }: {
+    actions: Connector['actions'];
+    options: CoinbaseWalletOptions;
+    onError?: Connector['onError'];
+  }) {
+    super(walletName, actions, options, onError);
   }
 
   /** {@inheritdoc Connector.detectProvider} */
@@ -38,7 +49,7 @@ export class CoinbaseWallet extends Connector<CoinbaseWalletProvider> {
     if (this.provider) this.provider;
 
     const m = await import('@coinbase/wallet-sdk');
-    const { url, ...options } = this.options;
+    const { url, ...options } = this.options.providerOptions;
 
     this.coinbaseWallet = new m.default(options);
     this.provider = this.coinbaseWallet.makeWeb3Provider(url);

@@ -1,5 +1,6 @@
 import type _WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
+import type { WalletOptions } from '@web3-wallet/core';
 import {
   type Provider,
   type WalletName,
@@ -13,13 +14,15 @@ export const URI_AVAILABLE = 'URI_AVAILABLE';
 type WalletConnectProvider = _WalletConnectProvider & Provider;
 
 export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
+export type WalletConnectOptions = WalletOptions<IWCEthRpcConnectionOptions>;
 
-export class WalletConnect extends Connector<WalletConnectProvider> {
+export class WalletConnect extends Connector<
+  WalletConnectProvider,
+  WalletConnectOptions
+> {
   /** {@inheritdoc Connector.provider} */
   public provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
-
-  private readonly options: IWCEthRpcConnectionOptions;
 
   constructor({
     actions,
@@ -27,11 +30,10 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     onError,
   }: {
     actions: WalletStoreActions;
-    options: IWCEthRpcConnectionOptions;
+    options: WalletConnectOptions;
     onError?: Connector['onError'];
   }) {
-    super(walletName, actions, onError);
-    this.options = options;
+    super(walletName, actions, options, onError);
   }
 
   private onDisplayUri = (
@@ -48,7 +50,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     const m = await import('@walletconnect/ethereum-provider');
 
     const provider = new m.default({
-      ...this.options,
+      ...this.options.providerOptions,
     }) as unknown as WalletConnectProvider;
 
     this.provider = provider;

@@ -52,7 +52,7 @@ import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
 
 export const metaMask = createWallet<MetaMask>(
-  (actions) => new MetaMask(actions),
+  (actions) => new MetaMask({ actions }),
 );
 ```
 
@@ -117,7 +117,7 @@ import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/vue';
 
 export const metaMask = createWallet<MetaMask>(
-  (actions) => new MetaMask(actions),
+  (actions) => new MetaMask({ actions }),
 );
 ```
 
@@ -193,8 +193,14 @@ export type TrustWalletProvider = InjectedProvider & {
 const providerFilter = (p: TrustWalletProvider) => p.isTrust;
 
 export class TrustWallet extends Injected {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
-    super(walletName, actions, onError);
+  constructor({
+    actions,
+    onError,
+  }: {
+    actions: Connector['actions'];
+    onError?: Connector['onError'];
+  }) {
+    super(walletName, actions, {}, onError);
   }
 
   public override async detectProvider(): Promise<TrustWalletProvider> {
@@ -202,7 +208,7 @@ export class TrustWallet extends Injected {
   }
 }
 
-const trustWallet = createWallet((actions) => new TrustWallet(actions));
+const trustWallet = createWallet((actions) => new TrustWallet({ actions }));
 ```
 
 If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method and override few of the Connector methods.
@@ -220,8 +226,14 @@ type MyWalletProvider = Provider & {
 export const walletName = 'MyWallet' as WalletName<'MyWallet'>;
 
 export class MyWallet extends Connector {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
-    super(walletName, actions, onError);
+  constructor({
+    actions,
+    onError,
+  }: {
+    actions: Connector['actions'];
+    onError?: Connector['onError'];
+  }) {
+    super(walletName, actions, {}, onError);
   }
 
   public async detectProvider(): Promise<MyWalletProvider> {

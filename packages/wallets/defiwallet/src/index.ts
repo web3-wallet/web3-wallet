@@ -13,8 +13,17 @@ export const getDeFiWallet = (
   onError?: Connector['onError'],
 ): DeFiWalletMobile | DeFiWalletExtension => {
   if (isMobile()) {
-    return new DeFiWalletMobile(actions, onError);
+    return new DeFiWalletMobile({
+      actions,
+      onError,
+    });
   } else {
-    return new DeFiWalletExtension(actions, options.extension, onError);
+    return new DeFiWalletExtension({
+      actions,
+      options: {
+        providerOptions: options.extension,
+      },
+      onError,
+    });
   }
 };

@@ -12,6 +12,21 @@ type Brand<K, T> = K & { __brand__: T };
 export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
 
 /**
+ * ProviderOptions is specific to each wallet provider, and it will be used to
+ * to create/initialize the wallet provider instance.
+ */
+export type ProviderOptions = object | undefined;
+
+/**
+ * The wallet options object
+ */
+export type WalletOptions<T extends ProviderOptions = ProviderOptions> =
+  T extends undefined
+    ? object
+    : {
+        providerOptions: T;
+      };
+/**
  * The minimal WalletState to keep track with
  */
 export interface WalletState {

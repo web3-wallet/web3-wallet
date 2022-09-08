@@ -7,7 +7,9 @@ export const walletConnect = createWallet<WalletConnect>(
     new WalletConnect({
       actions,
       options: {
-        rpc: rpcMap,
+        providerOptions: {
+          rpc: rpcMap,
+        },
       },
     }),
 );

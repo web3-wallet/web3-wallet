@@ -1,4 +1,10 @@
-import type { Provider, WalletName, WalletStoreActions } from './types';
+/* eslint-disable max-lines */
+import type {
+  Provider,
+  WalletName,
+  WalletOptions,
+  WalletStoreActions,
+} from './types';
 import {
   type AddEthereumChainParameter,
   type ProviderConnectInfo,
@@ -20,19 +26,28 @@ const isAddChainParameter = (
   return !isChainId(chainIdOrChainParameter);
 };
 
-export abstract class Connector<P extends Provider = Provider> {
+export abstract class Connector<
+  P extends Provider = Provider,
+  Options extends WalletOptions = WalletOptions,
+> {
   /**
-   * See {@link WalletName}
+   * {@link WalletName}
    **/
   public name: WalletName;
   /**
-   * See {@link Provider}
+   * @import { Provider } from './types.ts'
+   * {@link Provider}
    **/
   public abstract provider?: P;
   /**
-   * See {@link WalletStoreActions}
+   * The wallet options object, specific to each wallet
    */
-  public actions: WalletStoreActions;
+  public options: Options;
+  /**
+   * @import { WalletStoreActions } from './types.ts'
+   * {@link WalletStoreActions}
+   */
+  protected actions: WalletStoreActions;
   /**
    * Report Error thrown by provider to the external world
    *
@@ -56,10 +71,12 @@ export abstract class Connector<P extends Provider = Provider> {
   constructor(
     name: WalletName,
     actions: WalletStoreActions,
+    options: Options,
     onError?: (error: ProviderRpcError) => Promise<void>,
   ) {
     this.name = name;
     this.actions = actions;
+    this.options = options;
     this.onError = onError;
     this.providerNotFoundError = new ProviderNoFoundError(
       `${name} provider not found`,

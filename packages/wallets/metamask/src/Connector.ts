@@ -9,8 +9,15 @@ export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
 export class MetaMask extends Injected<MetaMaskProvider> {
-  constructor(actions: Connector['actions'], onError?: Connector['onError']) {
-    super(walletName, actions, onError);
+  /** {@inheritdoc Connector.constructor} */
+  constructor({
+    actions,
+    onError,
+  }: {
+    actions: Connector['actions'];
+    onError?: Connector['onError'];
+  }) {
+    super(walletName, actions, {}, onError);
   }
 
   /** {@inheritdoc Connector.detectProvider} */
