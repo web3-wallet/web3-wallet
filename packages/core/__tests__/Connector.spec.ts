@@ -35,7 +35,7 @@ describe('detectProvider', () => {
   beforeEach(() => {
     const store = createWalletStoreAndActions();
     const walletName = 'MockConnector' as WalletName<'MockConnector'>;
-    connector = new MockConnector(walletName, store.actions);
+    connector = new MockConnector(walletName, store.actions, {});
   });
 
   test('provider available after detectProvider resolve', async () => {
@@ -69,7 +69,7 @@ describe('autoConnect', () => {
     store = s.store;
     actions = s.actions;
     const walletName = 'MockConnector' as WalletName<'MockConnector'>;
-    connector = new MockConnector(walletName, actions);
+    connector = new MockConnector(walletName, actions, {});
   });
 
   afterEach(() => {

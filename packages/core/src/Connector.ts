@@ -52,6 +52,7 @@ export abstract class Connector<
    * Report Error thrown by provider to the external world
    *
    * @param error the error object
+   * @returns Promise<void>
    */
   public onError?(error?: ProviderRpcError): Promise<void>;
 
@@ -85,23 +86,26 @@ export abstract class Connector<
 
   /**
    * Reset the wallet state to it's default status
+   *
+   * @returns void
    */
   public resetState(): void {
     this.actions.resetState();
   }
 
   /**
-   * Detect provider in host environments.
+   * Detect provider in the host environment.
    *
-   * @param providerFilter providerFilter is provided the detected provider as it's input
+   * @param providerFilter - providerFilter is provided the detected provider as it's input
    *  and providerFilter returns a boolean to indicated wether the detected provider can be used.
    *  1. detectProvider should throw the ProviderNoFoundError if providerFilter returns false
    *  2. detectProvider should throw the ProviderNoFoundError if providerFilter returns false
    *
    * detectProvider is internally called by {@link Connector#lazyInitialize}
    *
-   * @return 1. resolve with the provider if the detection succeeded.
-   *         2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
+   * @return Promise<p> -
+   *  1. resolve with the provider if the detection succeeded.
+   *  2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
    */
   public abstract detectProvider(
     providerFilter?: (provider: P) => boolean,
@@ -116,6 +120,8 @@ export abstract class Connector<
    *   - {@link Connector#connect}
    *   - {@link Connector#autoConnect}
    *   - {@link Connector#autoConnectOnce}
+   *
+   * @returns Promise<void>
    */
   protected async lazyInitialize(): Promise<void> {
     await this.detectProvider();
@@ -130,8 +136,9 @@ export abstract class Connector<
    * autoConnect only try to connect to wallet, if it don't need any further
    * user interaction with the wallet in the connecting process.
    *
-   * @return 1. resolve with `true` if the connection succeeded.
-   *         2. resolve with `false` if the connection failed.
+   * @return Promise<boolean> -
+   *  1. resolve with `true` if the connection succeeded.
+   *  2. resolve with `false` if the connection failed.
    *
    * See also autoConnectOnce {@link Connector#autoConnectOnce}
    */
@@ -169,8 +176,9 @@ export abstract class Connector<
    *
    * Calling autoConnectOnce multiple times is no-ops.
    *
-   * @return 1. resolve with `true` if the connection succeeded.
-   *         2. resolve with `false` if the connection failed.
+   * @return Promise<boolean> -
+   *  1. resolve with `true` if the connection succeeded.
+   *  2. resolve with `false` if the connection failed.
    *
    * See also autoConnect {@link Connector#autoConnect}
    */
@@ -189,6 +197,8 @@ export abstract class Connector<
    * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
    * specified parameters first, before being prompted to switch.
+   *
+   * @returns Promise<void>
    */
   public async connect(
     chainIdOrChainParameter?: number | AddEthereumChainParameter,
@@ -254,11 +264,12 @@ export abstract class Connector<
    *
    * For some wallets, MetaMask for example, there're not ways to force disconnect MetaMask.
    * For some wallets, Walletconnect for example, we are able to force disconnect Walletconnect.
-   * @param _force  wether to force disconnect to wallet, default is false.
+   * @param _force - wether to force disconnect to wallet, default is false.
    *
-   * @return 1. always resolve for soft disconnect.
-   *         2. resolve, if force disconnect succeeded
-   *         3. reject, if force disconnect failed
+   * @return Promise<void> -
+   *  1. always resolve for non-force disconnect.
+   *  2. resolve, if force disconnect succeeded.
+   *  3. reject, if force disconnect failed.
    *
    */
   public async disconnect(_force = false): Promise<void> {
@@ -266,11 +277,14 @@ export abstract class Connector<
   }
 
   /**
-   * @param watchAssetParameters {@link WatchAssetParameters}
+   * Add a asset to the wallet assets list
+   *
+   * @param watchAssetParameters - {@link WatchAssetParameters}
+   * @return Promise<void>
    */
   public async watchAsset(
     watchAssetParameters: WatchAssetParameters,
-  ): Promise<true> {
+  ): Promise<void> {
     if (!this.provider) throw this.providerNotFoundError;
 
     const success = await this.provider.request<boolean>({
@@ -283,13 +297,13 @@ export abstract class Connector<
 
     if (!success)
       throw new Error(`Failed to watch ${watchAssetParameters.symbol}`);
-
-    return true;
   }
+
   /**
    * Update the wallet store with new the chainId
    *
-   * @param chainId
+   * @param chainId - the chainId to update
+   * @return void
    */
   protected updateChainId(chainId: string | number): void {
     this.actions.update({
@@ -301,6 +315,7 @@ export abstract class Connector<
    * Update the wallet store with new the new accounts
    *
    * @param accounts
+   * @return void
    */
   protected updateAccounts(accounts: string[]): void {
     this.actions.update({ accounts });
@@ -308,20 +323,29 @@ export abstract class Connector<
 
   /**
    * wallet connect listener
+   *
+   * @param chainId - the connected chain id
+   * @return void
    */
   protected onConnect({ chainId }: ProviderConnectInfo): void {
     this.updateChainId(chainId);
   }
 
   /**
-   * wallet disconnect listener
+   * Wallet disconnect listener
+   *
+   * @param error - the disconnect ProviderRpcError
+   * @return void
    */
   protected onDisconnect(error: ProviderRpcError): void {
     this.onError?.(error);
   }
 
   /**
-   * wallet chainId change listener
+   * Wallet chainId change listener
+   *
+   * @param chainId - the new chainId
+   * @return void
    */
   protected onChainChanged(chainId: number | string): void {
     this.updateChainId(chainId);
@@ -335,16 +359,20 @@ export abstract class Connector<
   }
 
   /**
+   * Remove event listeners
+   *
    * Returned from addEventListeners {@link Connector#addEventListeners}
    *
    * don't need to remove event listeners if the provider never recreated in the whole lifecycle
+   *
+   * @returns void
    */
   protected removeEventListeners?: () => void;
 
   /**
    *  Register event listeners to the provider
    *
-   * @return a function to remove the registered event listeners {@link Connector#removeEventListeners}
+   * @return removeEventListeners -  a function to remove the registered event listeners {@link Connector#removeEventListeners}
    */
   protected addEventListeners(): Connector<P>['removeEventListeners'] {
     if (!this.provider) return;
@@ -384,11 +412,12 @@ export abstract class Connector<
   }
 
   /**
-   * switch network
+   * Switch network
    *
-   * See {@link SwitchEthereumChainParameter}
+   * - {@link SwitchEthereumChainParameter}
    *
-   * @param chainId the if the the chain to switch to
+   * @param chainId - the if the the chain to switch to
+   * @returns Promise<void>
    */
   protected async switchChain(chainId: number): Promise<void> {
     if (!this.provider) throw this.providerNotFoundError;
@@ -402,7 +431,8 @@ export abstract class Connector<
   /**
    * Add a new network/chain to wallet
    *
-   * @param see {@link AddEthereumChainParameter}
+   * @param - {@link AddEthereumChainParameter}
+   * @returns Promise<void>
    */
   protected async addChain(
     addChainParameter: AddEthereumChainParameter,
@@ -421,9 +451,9 @@ export abstract class Connector<
   }
 
   /**
-   * fetch wallet accounts via the wallet provider
+   * Fetch wallet accounts via the wallet provider
    *
-   * @return the fetched accounts
+   * @return Promise<string[]> - the fetched accounts
    */
   protected async requestAccounts(): Promise<string[]> {
     if (!this.provider) throw this.providerNotFoundError;
@@ -447,9 +477,9 @@ export abstract class Connector<
   }
 
   /**
-   * fetch wallet chainId via the wallet provider
+   * Fetch wallet chainId via the wallet provider
    *
-   * @return the fetched chainId
+   * @return Promise<string> - the fetched chainId
    */
   protected async requestChainId(): Promise<string> {
     if (!this.provider) throw this.providerNotFoundError;

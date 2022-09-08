@@ -13,7 +13,7 @@ let DynamicWeb3Provider: typeof Web3Provider | undefined;
 /**
  * Dynamic import the Web3Provider
  *
- * @returns it
+ * @returns -
  *  1. resolve with the imported Web3Provider,
  *  2. or reject with undefined, if failed to imported the Web3Provider
  */

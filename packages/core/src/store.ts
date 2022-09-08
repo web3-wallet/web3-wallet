@@ -11,6 +11,8 @@ export const DEFAULT_WALLET_STATE: WalletState = {
 
 /**
  * Create a vanilla zustand store and wallet actions for managing the WalletState
+ *
+ * @returns { store: WalletStore, actions: WalletStoreActions }
  */
 export const createWalletStoreAndActions = (): {
   /**
@@ -30,7 +32,7 @@ export const createWalletStoreAndActions = (): {
   /**
    * Sets isConnecting to true, indicating that an connection is in progress.
    *
-   * @returns - the paired endConnection function
+   * @returns endConnection - the paired endConnection function
    */
   function startConnection(): () => void {
     const nullifierCached = ++nullifier;
@@ -53,6 +55,7 @@ export const createWalletStoreAndActions = (): {
    * and accounts being set will also set isConnecting to false, indicating a successful connection.
    *
    * @param stateUpdate - The state update to report.
+   * @returns void
    */
   function update(stateUpdate: Partial<WalletState>): void {
     // validate chainId statically, independent of existing state
@@ -86,6 +89,8 @@ export const createWalletStoreAndActions = (): {
 
   /**
    * Reset the WalletStore back to the it's default state.
+   *
+   * @returns void
    */
   function resetState(): void {
     nullifier++;
