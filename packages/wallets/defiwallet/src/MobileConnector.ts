@@ -21,6 +21,7 @@ export class DeFiWalletMobile extends Injected<MobileProvider> {
     super(walletName, actions, onError);
   }
 
+  /** {@inheritdoc Connector.detectProvider} */
   public override async detectProvider() {
     return await super.detectProvider(providerFilter);
   }

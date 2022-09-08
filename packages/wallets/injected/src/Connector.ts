@@ -8,8 +8,10 @@ type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
 export type ProviderFilter<P> = (provider: P) => boolean;
 
 export abstract class Injected<P extends Provider> extends Connector<P> {
+  /** {@inheritdoc Connector.provider} */
   public provider?: P;
 
+  /** {@inheritdoc Connector.detectProvider} */
   public async detectProvider(
     providerFilter: ProviderFilter<P> = () => true,
   ): Promise<P> {

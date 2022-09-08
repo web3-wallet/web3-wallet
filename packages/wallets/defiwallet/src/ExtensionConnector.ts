@@ -14,6 +14,7 @@ import {
 export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
 export class DeFiWalletExtension extends Connector<DeFiWalletProvider> {
+  /** {@inheritdoc Connector.provider} */
   public override provider?: DeFiWalletProvider;
   private options: DeFiWalletProviderOptions;
 
@@ -26,6 +27,7 @@ export class DeFiWalletExtension extends Connector<DeFiWalletProvider> {
     this.options = options;
   }
 
+  /** {@inheritdoc Connector.detectProvider} */
   public async detectProvider() {
     if (this.provider) this.provider;
 
@@ -38,6 +40,7 @@ export class DeFiWalletExtension extends Connector<DeFiWalletProvider> {
     return this.provider;
   }
 
+  /** {@inheritdoc Connector.connect} */
   public override async connect(chainId: number): Promise<void> {
     const cancelActivation = this.actions.startConnection();
 

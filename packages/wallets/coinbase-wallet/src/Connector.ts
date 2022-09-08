@@ -4,15 +4,16 @@ import type {
 } from '@coinbase/wallet-sdk';
 import { type WalletName, Connector } from '@web3-wallet/core';
 
-type CoinbaseWalletSDKOptions = ConstructorParameters<
+type CoinbaseWalletOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
 >[0] & { url: string };
 
 export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
 export class CoinbaseWallet extends Connector<CoinbaseWalletProvider> {
+  /** {@inheritdoc Connector.provider} */
   public override provider?: CoinbaseWalletProvider;
-  private readonly options: CoinbaseWalletSDKOptions;
+  private readonly options: CoinbaseWalletOptions;
   /**
    * A `CoinbaseWalletSDK` instance.
    */
@@ -25,7 +26,7 @@ export class CoinbaseWallet extends Connector<CoinbaseWalletProvider> {
    */
   constructor(
     actions: Connector['actions'],
-    options: CoinbaseWalletSDKOptions,
+    options: CoinbaseWalletOptions,
     onError?: Connector['onError'],
   ) {
     super(walletName, actions, onError);

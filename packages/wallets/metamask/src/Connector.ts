@@ -13,6 +13,7 @@ export class MetaMask extends Injected<MetaMaskProvider> {
     super(walletName, actions, onError);
   }
 
+  /** {@inheritdoc Connector.detectProvider} */
   public override async detectProvider(): Promise<MetaMaskProvider> {
     return await super.detectProvider(providerFilter);
   }

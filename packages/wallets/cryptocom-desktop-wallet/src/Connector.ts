@@ -17,6 +17,7 @@ export class CryptocomDesktopWallet extends Injected<CryptocomDesktopWalletProvi
     super(walletName, actions, onError);
   }
 
+  /** {@inheritdoc Connector.detectProvider} */
   public override async detectProvider(): Promise<CryptocomDesktopWalletProvider> {
     return await super.detectProvider(providerFilter);
   }

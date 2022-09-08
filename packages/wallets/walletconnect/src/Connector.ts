@@ -15,6 +15,7 @@ type WalletConnectProvider = _WalletConnectProvider & Provider;
 export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
 
 export class WalletConnect extends Connector<WalletConnectProvider> {
+  /** {@inheritdoc Connector.provider} */
   public provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 
@@ -40,6 +41,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     this.events.emit(URI_AVAILABLE, payload.params[0]);
   };
 
+  /** {@inheritdoc Connector.detectProvider} */
   public async detectProvider(): Promise<WalletConnectProvider> {
     if (this.provider) return this.provider;
 
@@ -54,6 +56,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     return provider;
   }
 
+  /** {@inheritdoc Connector.requestAccounts} */
   protected override async requestAccounts(): Promise<string[]> {
     if (!this.provider) throw this.providerNotFoundError;
 
@@ -71,6 +74,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     }
   }
 
+  /** {@inheritdoc Connector.addEventListeners} */
   protected override addEventListeners(): Connector['removeEventListeners'] {
     if (!this.provider) return;
 
@@ -90,6 +94,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     };
   }
 
+  /** {@inheritdoc Connector.autoConnect} */
   public override async autoConnect(): Promise<boolean> {
     await this.lazyInitialize();
     if (!this.provider?.connected) {
@@ -99,6 +104,7 @@ export class WalletConnect extends Connector<WalletConnectProvider> {
     return await super.autoConnect();
   }
 
+  /** {@inheritdoc Connector.disconnect} */
   public override async disconnect(): Promise<void> {
     this.removeEventListeners?.();
     super.disconnect();
