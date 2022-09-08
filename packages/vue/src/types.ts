@@ -1,10 +1,10 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector, WalletState, WalletStore } from '@web3-wallet/core';
+import type { Connector, WalletState } from '@web3-wallet/core';
 import type { ComputedRef } from 'vue';
 
 export interface Wallet<C extends Connector = Connector> {
-  store: WalletStore;
+  getState: () => WalletState;
   connector: C;
   name: C['name'];
   chainId: ComputedRef<WalletState['chainId']>;

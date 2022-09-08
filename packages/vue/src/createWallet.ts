@@ -60,7 +60,12 @@ export const createWallet = <C extends Connector>(
   return {
     name: connector.name,
     connector,
-    store,
+    /**
+     * [Notice], the state return from getState reactive
+     *
+     * @returns WalletState
+     */
+    getState: () => store.getState(),
     chainId,
     accounts,
     isConnecting,

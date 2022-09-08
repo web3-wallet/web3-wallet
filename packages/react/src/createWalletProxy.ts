@@ -8,8 +8,8 @@ import type { Wallet, WalletProxy, WalletProxyState } from './types';
 /**
  * @param wallets - The wallets to proxy with
  * @param options - The options object
- * @param options.defaultCurrentWallet - the default current wallet, default to the first wallet
- * @param options.key - the persist key, optional, default to "@web3-wallet"
+ * @param options.defaultCurrentWallet - the optional defaultCurrentWallet, default to the first wallets[0].name
+ * @param options.key - the optional persist key, default to "@web3-wallet"
  *   if you are creating multiple WalletProxy, you must provide a stable and unique key to avoid
  *   the persist key clash.
  * @returns WalletProxy - the crate wallet proxy api
