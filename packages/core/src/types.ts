@@ -26,6 +26,7 @@ export type WalletOptions<T extends ProviderOptions = ProviderOptions> =
     : {
         providerOptions: T;
       };
+
 /**
  * The minimal WalletState to keep track with
  */

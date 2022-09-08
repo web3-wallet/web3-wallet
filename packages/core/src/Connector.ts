@@ -34,15 +34,18 @@ export abstract class Connector<
    * {@link WalletName}
    **/
   public name: WalletName;
+
   /**
    * @import { Provider } from './types.ts'
    * {@link Provider}
    **/
   public abstract provider?: P;
+
   /**
    * The wallet options object, specific to each wallet
    */
   public options: Options;
+
   /**
    * @import { WalletStoreActions } from './types.ts'
    * {@link WalletStoreActions}
@@ -221,30 +224,47 @@ export abstract class Connector<
           ? chainIdOrChainParameter
           : chainIdOrChainParameter?.chainId;
 
-      // if there's no desired chain, or it's equal to the received, update
+      /**
+       * there's no desired chain, or it's equal to the received chain
+       */
       if (!desiredChainId || receivedChainId === desiredChainId) {
         this.updateChainId(receivedChainId);
         this.updateAccounts(accounts);
+        /**
+         * The connection process completed successfully, we can stop from here.
+         */
         return;
       }
 
+      /**
+       * the desiredChainId does match the receivedChainId, try to switch chain
+       */
       try {
         await this.switchChain(desiredChainId);
         return this.actions.update({ chainId: desiredChainId, accounts });
       } catch (err: unknown) {
         const error = err as ProviderRpcError;
-
+        /**
+         * switch chain failed, try to add chain
+         */
         const shouldTryToAddChain =
           isAddChainParameter(chainIdOrChainParameter) &&
           (error.code === 4902 || error.code === -32603);
 
-        // can't handle the error, throw it again
+        /**
+         * don't know how to handle the error, throw the error again
+         * and stop from here, the whole connection process failed.
+         */
         if (!this.addChain || !shouldTryToAddChain) throw error;
 
-        // if we're here, we can try to add a new network
+        /**
+         * try to add a new chain to wallet
+         */
         await this.addChain(chainIdOrChainParameter);
 
-        // chain added, connect the added chainId again
+        /**
+         * chain added, connect to the added chainId again
+         */
         await this.connect(chainIdOrChainParameter.chainId);
       }
     } finally {
