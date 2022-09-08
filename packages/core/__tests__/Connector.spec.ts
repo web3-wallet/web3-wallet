@@ -6,7 +6,7 @@ import type {
   WalletStoreActions,
 } from '../src';
 import {
-  AbstractConnector,
+  Connector,
   createWalletStoreAndActions,
   DEFAULT_WALLET_STATE,
 } from '../src';
@@ -16,7 +16,7 @@ import { MockProvider } from './MockProvider.spec';
 const chainId = mockData.hexChainIds[0];
 const accounts = mockData.accounts.slice(0, 1);
 
-class MockConnector extends AbstractConnector<MockProvider> {
+class MockConnector extends Connector<MockProvider> {
   public provider?: MockProvider;
   public async detectProvider(): Promise<MockProvider> {
     if (this.provider) return this.provider;

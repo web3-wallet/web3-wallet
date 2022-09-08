@@ -1,4 +1,4 @@
-import { type Provider, AbstractConnector } from '@web3-wallet/core';
+import { type Provider, Connector } from '@web3-wallet/core';
 
 type InjectedProviders<P> = {
   providers?: P[];
@@ -7,9 +7,7 @@ type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
 
 export type ProviderFilter<P> = (provider: P) => boolean;
 
-export abstract class Injected<
-  P extends Provider,
-> extends AbstractConnector<P> {
+export abstract class Injected<P extends Provider> extends Connector<P> {
   public provider?: P;
 
   public async detectProvider(

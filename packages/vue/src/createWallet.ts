@@ -1,5 +1,5 @@
 import {
-  type AbstractConnector,
+  type Connector,
   type WalletState,
   type WalletStoreActions,
   createWalletStoreAndActions,
@@ -19,13 +19,13 @@ const computeIsConnected = ({
 };
 
 /**
- * @typeParam T - The type of the `connector` returned from `f`.
+ * @typeParam C - The type of the `connector` returned from `f`.
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns WalletApi - The created wallet.
  */
-export const createWallet = <Connector extends AbstractConnector>(
-  f: (actions: WalletStoreActions) => Connector,
-): Wallet<Connector> => {
+export const createWallet = <C extends Connector>(
+  f: (actions: WalletStoreActions) => C,
+): Wallet<C> => {
   const { store, actions } = createWalletStoreAndActions();
 
   const state = reactive<WalletState>({
@@ -49,7 +49,7 @@ export const createWallet = <Connector extends AbstractConnector>(
       isConnecting: isConnecting.value,
     }),
   );
-  const useProvider = createGetProvider<Connector>({
+  const useProvider = createGetProvider<C>({
     connector,
     chainId,
     isConnected,

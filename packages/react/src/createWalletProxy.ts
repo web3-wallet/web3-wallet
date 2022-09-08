@@ -5,6 +5,15 @@ import { persist } from 'zustand/middleware';
 
 import type { Wallet, WalletProxy, WalletProxyState } from './types';
 
+/**
+ * @param wallets - The wallets to proxy with
+ * @param options - The options object
+ * @param options.defaultCurrentWallet - the default current wallet, default to the first wallet
+ * @param options.key - the persist key, optional, default to "@web3-wallet"
+ *   if you are creating multiple WalletProxy, you must provide a stable and unique key to avoid
+ *   the persist key clash.
+ * @returns WalletProxy - the crate wallet proxy api
+ */
 export const createWalletProxy = (
   wallets: Wallet[],
   options: {
@@ -53,18 +62,18 @@ export const createWalletProxy = (
     return useStore((s) => s.connectionId);
   };
 
-  const getCombineHooks = (): Wallet['hooks'] => {
-    /**
-     * combine hooks
-     *
-     * If we don't combine the hooks, the hooks will be called base on
-     * currentWalletName, which violates the react hook rules.
-     *
-     * Combine hooks to always call all the hooks in consistent order
-     *  so that we don't violates the react hook rules:
-     *
-     * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
-     */
+  /**
+   * combine hooks
+   *
+   * If we don't combine the hooks, the hooks will be called base on
+   * currentWalletName, which violates the react hook rules.
+   *
+   * Combine hooks to always call all the hooks in consistent order
+   *  so that we don't violates the react hook rules:
+   *
+   * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
+   */
+  const getCombinedHooks = (): Wallet['hooks'] => {
     const combinedHooks: Record<string, unknown> = {};
 
     for (const hookName of Object.keys(wallets[0].hooks).sort()) {
@@ -142,7 +151,7 @@ export const createWalletProxy = (
   };
 
   return {
-    ...getCombineHooks(),
+    ...getCombinedHooks(),
     wallets: wallets.slice(),
     useCurrentWallet,
     setCurrentWallet,

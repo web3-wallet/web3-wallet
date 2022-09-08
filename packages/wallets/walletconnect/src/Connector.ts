@@ -4,7 +4,7 @@ import {
   type Provider,
   type WalletName,
   type WalletStoreActions,
-  AbstractConnector,
+  Connector,
 } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
 
@@ -14,7 +14,7 @@ type WalletConnectProvider = _WalletConnectProvider & Provider;
 
 export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
 
-export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
+export class WalletConnect extends Connector<WalletConnectProvider> {
   public provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 
@@ -27,7 +27,7 @@ export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
   }: {
     actions: WalletStoreActions;
     options: IWCEthRpcConnectionOptions;
-    onError?: AbstractConnector['onError'];
+    onError?: Connector['onError'];
   }) {
     super(walletName, actions, onError);
     this.options = options;
@@ -71,7 +71,7 @@ export class WalletConnect extends AbstractConnector<WalletConnectProvider> {
     }
   }
 
-  protected override addEventListeners(): AbstractConnector['removeEventListeners'] {
+  protected override addEventListeners(): Connector['removeEventListeners'] {
     if (!this.provider) return;
 
     const removeEventListeners = super.addEventListeners();

@@ -2,7 +2,7 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
-import { type WalletName, AbstractConnector } from '@web3-wallet/core';
+import { type WalletName, Connector } from '@web3-wallet/core';
 
 type CoinbaseWalletSDKOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
@@ -10,7 +10,7 @@ type CoinbaseWalletSDKOptions = ConstructorParameters<
 
 export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
 
-export class CoinbaseWallet extends AbstractConnector<CoinbaseWalletProvider> {
+export class CoinbaseWallet extends Connector<CoinbaseWalletProvider> {
   public override provider?: CoinbaseWalletProvider;
   private readonly options: CoinbaseWalletSDKOptions;
   /**
@@ -19,20 +19,20 @@ export class CoinbaseWallet extends AbstractConnector<CoinbaseWalletProvider> {
   public coinbaseWallet?: CoinbaseWalletSDK;
 
   /**
-   *
    * @param actions - wallet store actions
    * @param options - Options to pass to `@coinbase/wallet-sdk`.
    * @param onError - Handler to report errors thrown from eventListeners.
    */
   constructor(
-    actions: AbstractConnector['actions'],
+    actions: Connector['actions'],
     options: CoinbaseWalletSDKOptions,
-    onError?: AbstractConnector['onError'],
+    onError?: Connector['onError'],
   ) {
     super(walletName, actions, onError);
     this.options = options;
   }
 
+  /** {@inheritdoc Connector.detectProvider} */
   public async detectProvider() {
     if (this.provider) this.provider;
 
@@ -49,6 +49,7 @@ export class CoinbaseWallet extends AbstractConnector<CoinbaseWalletProvider> {
     return !!this.provider?.selectedAddress;
   }
 
+  /** {@inheritdoc Connector.autoConnect} */
   public override async autoConnect(): Promise<boolean> {
     await this.lazyInitialize();
 
@@ -59,6 +60,7 @@ export class CoinbaseWallet extends AbstractConnector<CoinbaseWalletProvider> {
     return await super.autoConnect();
   }
 
+  /** {@inheritdoc Connector.disconnect} */
   public override async disconnect(): Promise<void> {
     this.coinbaseWallet?.disconnect();
   }

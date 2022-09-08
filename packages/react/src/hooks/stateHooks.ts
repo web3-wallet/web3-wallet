@@ -1,4 +1,4 @@
-import type { WalletState } from '@web3-wallet/core';
+import type { WalletState, WalletStore } from '@web3-wallet/core';
 import type { UseBoundStore } from 'zustand';
 
 import type { Wallet } from '../types';
@@ -23,7 +23,7 @@ const ACCOUNTS_EQUALITY_CHECKER: (
 };
 
 export function getStateHooks(
-  useStore: UseBoundStore<Wallet['store']>,
+  useStore: UseBoundStore<WalletStore>,
 ): StateHooks {
   const useChainId: StateHooks['useChainId'] = () => {
     return useStore((s) => s.chainId);

@@ -20,7 +20,7 @@ const isAddChainParameter = (
   return !isChainId(chainIdOrChainParameter);
 };
 
-export abstract class AbstractConnector<P extends Provider = Provider> {
+export abstract class Connector<P extends Provider = Provider> {
   /**
    * See {@link WalletName}
    **/
@@ -51,7 +51,7 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
    *
    * @param name {@link WalletName}
    * @param actions {@link WalletStoreActions}
-   * @param onError {@link AbstractConnector#onError}
+   * @param onError {@link Connector#onError}
    */
   constructor(
     name: WalletName,
@@ -81,7 +81,7 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
    *  1. detectProvider should throw the ProviderNoFoundError if providerFilter returns false
    *  2. detectProvider should throw the ProviderNoFoundError if providerFilter returns false
    *
-   * detectProvider is internally called by {@link AbstractConnector#lazyInitialize}
+   * detectProvider is internally called by {@link Connector#lazyInitialize}
    *
    * @return 1. resolve with the provider if the detection succeeded.
    *         2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
@@ -92,13 +92,13 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
 
   /**
    * `lazyInitialize` does the following two things:
-   *   1. triggers the provider detection process {@link AbstractConnector#detectProvider}
-   *   2. Register event listeners to the provider {@link AbstractConnector#addEventListeners}
+   *   1. triggers the provider detection process {@link Connector#detectProvider}
+   *   2. Register event listeners to the provider {@link Connector#addEventListeners}
    *
    * `lazyInitialize` is internally called by the following public methods
-   *   - {@link AbstractConnector#connect}
-   *   - {@link AbstractConnector#autoConnect}
-   *   - {@link AbstractConnector#autoConnectOnce}
+   *   - {@link Connector#connect}
+   *   - {@link Connector#autoConnect}
+   *   - {@link Connector#autoConnectOnce}
    */
   protected async lazyInitialize(): Promise<void> {
     await this.detectProvider();
@@ -110,13 +110,13 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
    *
    * autoConnect never reject, it will always resolve.
    *
-   *  autoConnect should only try to connect to wallet, if it don't need any further
-   *  user interaction in the connecting process.
+   * autoConnect only try to connect to wallet, if it don't need any further
+   * user interaction with the wallet in the connecting process.
    *
    * @return 1. resolve with `true` if the connection succeeded.
    *         2. resolve with `false` if the connection failed.
    *
-   * See also {@link AbstractConnector#autoConnectOnce}
+   * See also autoConnectOnce {@link Connector#autoConnectOnce}
    */
   public async autoConnect(): Promise<boolean> {
     const endConnection = this.actions.startConnection();
@@ -142,22 +142,20 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
     return true;
   }
 
-  /**
-   * `autoConnectOnce` in turn calls autoConnect and memorize the return promise.
-   * `autoConnectOnce` returns the memorized promise directly for further calls.
-   *
-   */
   private autoConnectOncePromise?: Promise<boolean>;
 
   /**
-   * Same as autoConnect with one exception - autoConnectOnce only try to auto connect once.
+   * Same as autoConnect with the exception - autoConnectOnce only try to auto connect once.
    *
-   * Calling autoConnectOnce multiple times no-operation.
+   * `autoConnectOnce` in turn calls autoConnect and memorize the return promise.
+   * `autoConnectOnce` returns the memorized promise directly for further calls.
+   *
+   * Calling autoConnectOnce multiple times is no-ops.
    *
    * @return 1. resolve with `true` if the connection succeeded.
    *         2. resolve with `false` if the connection failed.
    *
-   * See also {@link AbstractConnector#autoConnect}
+   * See also autoConnect {@link Connector#autoConnect}
    */
   public async autoConnectOnce(): Promise<boolean> {
     if (!this.autoConnectOncePromise) {
@@ -228,23 +226,23 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   }
 
   /**
-   * Disconnect to wallet
+   * Disconnect wallet
    *
    * Wallet connector implementors should override this method if the wallet supports
    * force disconnect.
    *
    * What is force disconnect?
-   *   - force disconnect will try to actually disconnect to wallet.
+   *   - force disconnect will actually disconnect the wallet.
    *   - non-disconnect only sets the connectionId in wallet store to `undefined`.
    *
-   * For some wallets(MetaMask for example), there're not ways to force disconnect.
-   * For some wallets(Walletconnect for example), we are able to force disconnect.
-   *
+   * For some wallets, MetaMask for example, there're not ways to force disconnect MetaMask.
+   * For some wallets, Walletconnect for example, we are able to force disconnect Walletconnect.
    * @param _force  wether to force disconnect to wallet, default is false.
    *
    * @return 1. always resolve for soft disconnect.
    *         2. resolve, if force disconnect succeeded
    *         3. reject, if force disconnect failed
+   *
    */
   public async disconnect(_force = false): Promise<void> {
     this.resetState();
@@ -320,7 +318,7 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   }
 
   /**
-   * Returned from addEventListeners {@link AbstractConnector#addEventListeners}
+   * Returned from addEventListeners {@link Connector#addEventListeners}
    *
    * don't need to remove event listeners if the provider never recreated in the whole lifecycle
    */
@@ -329,9 +327,9 @@ export abstract class AbstractConnector<P extends Provider = Provider> {
   /**
    *  Register event listeners to the provider
    *
-   * @return a function to remove the registered event listeners {@link AbstractConnector#removeEventListeners}
+   * @return a function to remove the registered event listeners {@link Connector#removeEventListeners}
    */
-  protected addEventListeners(): AbstractConnector<P>['removeEventListeners'] {
+  protected addEventListeners(): Connector<P>['removeEventListeners'] {
     if (!this.provider) return;
 
     const onConnect = this.onConnect.bind(this);

@@ -1,5 +1,5 @@
 import type {
-  AbstractConnector,
+  Connector,
   Provider,
   WalletName,
   WalletStoreActions,
@@ -17,10 +17,7 @@ const providerFilter: ProviderFilter<MobileProvider> = (p) =>
   !!p.isTrust && window.navigator?.userAgent?.includes('DeFiWallet');
 
 export class DeFiWalletMobile extends Injected<MobileProvider> {
-  constructor(
-    actions: WalletStoreActions,
-    onError?: AbstractConnector['onError'],
-  ) {
+  constructor(actions: WalletStoreActions, onError?: Connector['onError']) {
     super(walletName, actions, onError);
   }
 

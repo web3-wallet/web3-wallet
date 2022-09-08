@@ -1,23 +1,11 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type {
-  AbstractConnector,
-  WalletName,
-  WalletState,
-  WalletStore,
-} from '@web3-wallet/core';
-import type { UseBoundStore } from 'zustand';
+import type { Connector, WalletName, WalletState } from '@web3-wallet/core';
 
-export interface Wallet<
-  Connector extends AbstractConnector = AbstractConnector,
-> {
+export interface Wallet<C extends Connector = Connector> {
   name: WalletName;
-  connector: Connector;
-  store: UseBoundStore<
-    WalletStore & {
-      getServerState?: () => WalletState;
-    }
-  >;
+  connector: C;
+  getState: () => WalletState;
   hooks: {
     useChainId: () => WalletState['chainId'];
     useAccounts: () => WalletState['accounts'];

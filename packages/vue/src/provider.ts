@@ -3,7 +3,7 @@ import type {
   Networkish,
   Web3Provider,
 } from '@ethersproject/providers';
-import type { AbstractConnector } from '@web3-wallet/core';
+import type { Connector } from '@web3-wallet/core';
 import { type Ref, computed, ref, watchEffect } from 'vue';
 
 import type { Wallet } from './types';
@@ -11,16 +11,23 @@ import type { Wallet } from './types';
 /**
  * Only try to import @ethersproject/providers once
  *
- * flag for tracking wether we have already imported @ethersproject/providers once
+ * Tracking wether we have already tried to imported @ethersproject/providers
  */
-let flag = false;
+let tried = false;
 
 const dynamicProvider: Ref<typeof Web3Provider | undefined> = ref(undefined);
 
+/**
+ * Dynamic import the Web3Provider
+ *
+ * @returns it
+ *  1. resolve with the imported Web3Provider,
+ *  2. or reject with undefined, if failed to imported the Web3Provider
+ */
 async function importProvider(): Promise<typeof dynamicProvider> {
-  if (flag) return dynamicProvider;
+  if (tried) return dynamicProvider;
 
-  flag = true;
+  tried = true;
 
   try {
     const { Web3Provider } = await import('@ethersproject/providers');
@@ -32,12 +39,12 @@ async function importProvider(): Promise<typeof dynamicProvider> {
   return dynamicProvider;
 }
 
-export const createGetProvider = <T extends AbstractConnector>({
+export const createGetProvider = <C extends Connector>({
   connector,
   isConnected,
   chainId,
 }: {
-  connector: T;
+  connector: C;
   isConnected: Wallet['isConnected'];
   chainId: Wallet['chainId'];
 }): Wallet['useProvider'] => {

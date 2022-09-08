@@ -85,7 +85,7 @@ export const createWalletStoreAndActions = (): {
   }
 
   /**
-   * Resets connector state back to the default state.
+   * Reset the WalletStore back to the it's default state.
    */
   function resetState(): void {
     nullifier++;

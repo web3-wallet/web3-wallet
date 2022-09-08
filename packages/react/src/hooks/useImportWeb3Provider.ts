@@ -4,26 +4,33 @@ import { useEffect, useState } from 'react';
 /**
  * Only try to import @ethersproject/providers once
  *
- * flag for tracking wether we have already imported @ethersproject/providers once
+ * Tracking wether we have already tried to imported @ethersproject/providers
  */
-let flag = false;
+let tried = false;
 
-let DynamicProvider: typeof Web3Provider | undefined;
+let DynamicWeb3Provider: typeof Web3Provider | undefined;
 
+/**
+ * Dynamic import the Web3Provider
+ *
+ * @returns it
+ *  1. resolve with the imported Web3Provider,
+ *  2. or reject with undefined, if failed to imported the Web3Provider
+ */
 async function importProvider(): Promise<typeof Web3Provider | undefined> {
-  if (flag) return DynamicProvider;
+  if (tried) return DynamicWeb3Provider;
 
-  flag = true;
+  tried = true;
   try {
     const m = await import('@ethersproject/providers');
-    DynamicProvider = m.Web3Provider;
+    DynamicWeb3Provider = m.Web3Provider;
   } catch {
     console.debug('@ethersproject/providers not available');
   }
 }
 
 export const useImportWeb3Provider = (): typeof Web3Provider | undefined => {
-  const [loaded, setLoaded] = useState(DynamicProvider !== undefined);
+  const [loaded, setLoaded] = useState(DynamicWeb3Provider !== undefined);
 
   useEffect(() => {
     if (loaded) return;
@@ -37,5 +44,5 @@ export const useImportWeb3Provider = (): typeof Web3Provider | undefined => {
     };
   }, [loaded]);
 
-  return DynamicProvider;
+  return DynamicWeb3Provider;
 };
