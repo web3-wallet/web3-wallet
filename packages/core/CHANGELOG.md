@@ -1,5 +1,11 @@
 # @web3-wallet/core
 
+## 0.6.0
+
+### Minor Changes
+
+- package version
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,10 +1,8 @@
 {
-  "name": "@web3-wallet/cryptocom-desktop-wallet",
-  "description": "Cryptocom Desktop Wallet connector",
+  "name": "@web3-wallet/vanilla",
   "keywords": [
     "web3-wallet",
-    "web3",
-    "Crypto.com Desktop Wallet"
+    "react"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -24,9 +22,15 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
+    "@ethersproject/networks": "^5.7.0",
+    "@ethersproject/providers": "^5.7.0",
     "@web3-wallet/core": "workspace:*",
-    "@web3-wallet/injected": "workspace:*"
+    "zustand": "^4.0.0-rc.0"
   },
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "description": "web3-wallet react",
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },
