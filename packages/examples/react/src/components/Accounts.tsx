@@ -7,7 +7,7 @@ import { Account } from './Account';
 import { Box } from './Box';
 
 const useBalances = (
-  provider?: ReturnType<Wallet['hooks']['useProvider']>,
+  provider?: ReturnType<Wallet['useProvider']>,
   accounts?: string[],
 ): BigNumber[] | undefined => {
   const [balances, setBalances] = useState<BigNumber[] | undefined>();
@@ -38,9 +38,9 @@ export const Accounts = ({
   provider,
   ENSNames,
 }: {
-  accounts: ReturnType<Wallet['hooks']['useAccounts']>;
-  provider: ReturnType<Wallet['hooks']['useProvider']>;
-  ENSNames: ReturnType<Wallet['hooks']['useENSNames']>;
+  accounts: ReturnType<Wallet['useAccounts']>;
+  provider: ReturnType<Wallet['useProvider']>;
+  ENSNames: ReturnType<Wallet['useENSNames']>;
 }) => {
   const balances = useBalances(provider, accounts);
 
