@@ -22,10 +22,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@ethersproject/networks": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
-    "@web3-wallet/core": "workspace:*",
-    "zustand": "^4.0.0-rc.0"
+    "@web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=16.8"

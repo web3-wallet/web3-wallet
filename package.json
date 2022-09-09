@@ -16,6 +16,11 @@
   "@web3-wallet/scripts": {
     "packages": [
       "core",
+      "vanilla",
+      [
+        "react",
+        "vue"
+      ],
       "injected",
       [
         "coinbase-wallet",
@@ -23,10 +28,6 @@
         "metamask",
         "walletconnect",
         "cryptocom-desktop-wallet"
-      ],
-      [
-        "react",
-        "vue"
       ]
     ]
   },

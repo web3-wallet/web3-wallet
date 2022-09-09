@@ -164,6 +164,12 @@ importers:
       '@web3-wallet/core': link:../core
       zustand: 4.0.0-rc.3
 
+  packages/vanilla:
+    specifiers:
+      '@web3-wallet/core': workspace:*
+    dependencies:
+      '@web3-wallet/core': link:../core
+
   packages/vue:
     specifiers:
       '@ethersproject/networks': ^5.7.0
