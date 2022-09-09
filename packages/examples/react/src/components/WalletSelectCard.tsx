@@ -11,13 +11,14 @@ import { WalletSelect } from './WalletSelect';
 
 export const WalletSelectCard = () => {
   const {
+    useName,
+
     wallets,
-    useCurrentWallet,
     setCurrentWallet,
 
-    useConnect,
-    useDisconnect,
-    useAutoConnectOnce,
+    connect,
+    autoConnectOnce,
+    disconnect,
 
     useIsConnecting,
     useIsConnected,
@@ -28,11 +29,7 @@ export const WalletSelectCard = () => {
     useProvider,
   } = walletProxy;
 
-  const currentWallet = useCurrentWallet();
-
-  const connect = useConnect();
-  const autoConnectOnce = useAutoConnectOnce();
-  const disconnect = useDisconnect();
+  const walletName = useName();
 
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
@@ -52,11 +49,11 @@ export const WalletSelectCard = () => {
       <Card style={{ minWidth: '280px', maxWidth: '320px', width: '100%' }}>
         <WalletSelect
           wallets={wallets}
-          selectedWalletName={currentWallet.name}
+          selectedWalletName={walletName}
           setSelectedWallet={setCurrentWallet}
         />
         <Card>
-          <b>{currentWallet.name}</b>
+          <b>{walletName}</b>
           <Status isConnecting={isConnecting} isConnected={isConnected} />
           <Chain chainId={chainId} />
           <Accounts
