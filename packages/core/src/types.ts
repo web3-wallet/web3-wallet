@@ -17,13 +17,23 @@ export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
  */
 export type ProviderOptions = object | undefined;
 
+export type BaseWalletOptions = {
+  /**
+   * Report Error thrown by provider to the external world
+   *
+   * @param error the error object
+   * @returns void
+   */
+  onError?: (error: ProviderRpcError) => void;
+};
+
 /**
  * The wallet options object
  */
-export type WalletOptions<T extends ProviderOptions = ProviderOptions> =
+export type WalletOptions<T extends ProviderOptions = undefined> =
   T extends undefined
-    ? object
-    : {
+    ? BaseWalletOptions
+    : BaseWalletOptions & {
         providerOptions: T;
       };
 

@@ -4,7 +4,6 @@ import type { Connector, WalletState } from '@web3-wallet/core';
 import type { ComputedRef } from 'vue';
 
 export interface Wallet<C extends Connector = Connector> {
-  getState: () => WalletState;
   connector: C;
   name: C['name'];
   chainId: ComputedRef<WalletState['chainId']>;

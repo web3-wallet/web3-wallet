@@ -1,8 +1,5 @@
-import type { Connector, WalletStoreActions } from '@web3-wallet/core';
-import {
-  createWalletStoreAndActions,
-  UserConnectionStatus,
-} from '@web3-wallet/core';
+import type { Connector } from '@web3-wallet/core';
+import { UserConnectionStatus } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
@@ -13,13 +10,8 @@ import type { Wallet } from './types';
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns Wallet - The created wallet api.
  */
-export const createWallet = <C extends Connector>(
-  f: (actions: WalletStoreActions) => C,
-): Wallet<C> => {
-  const { store, actions } = createWalletStoreAndActions();
-
-  const connector = f(actions);
-  const reactStore = createReactStore(store);
+export const createWallet = <C extends Connector>(connector: C): Wallet<C> => {
+  const reactStore = createReactStore(connector.store);
 
   const stateHooks = getStateHooks(reactStore);
   const derivedHooks = getDerivedHooks(stateHooks);
@@ -32,7 +24,7 @@ export const createWallet = <C extends Connector>(
   const connect: Wallet['connect'] = async (...args) => {
     const result = await connector.connect(...args);
 
-    actions.update({
+    connector.actions.update({
       userConnectionStatus: UserConnectionStatus.UserConnected,
     });
 
@@ -41,7 +33,7 @@ export const createWallet = <C extends Connector>(
 
   const autoConnect: Wallet['autoConnect'] = async (...args) => {
     const result = await connector.autoConnect(...args);
-    actions.update({
+    connector.actions.update({
       userConnectionStatus: UserConnectionStatus.UserConnected,
     });
     return result;
@@ -49,7 +41,7 @@ export const createWallet = <C extends Connector>(
 
   const autoConnectOnce: Wallet['autoConnectOnce'] = async (...args) => {
     const result = await connector.autoConnectOnce(...args);
-    actions.update({
+    connector.actions.update({
       userConnectionStatus: UserConnectionStatus.UserConnected,
     });
     return result;
@@ -57,7 +49,7 @@ export const createWallet = <C extends Connector>(
 
   const disconnect: Wallet['disconnect'] = async (...args) => {
     const result = await connector.disconnect(...args);
-    actions.update({
+    connector.actions.update({
       userConnectionStatus: UserConnectionStatus.UserDisconnected,
     });
     return result;

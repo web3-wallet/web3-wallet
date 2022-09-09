@@ -1,29 +1,16 @@
-import type { Connector, WalletStoreActions } from '@web3-wallet/core';
-
 import type { DeFiWalletProviderOptions } from './detectProvider';
 import { DeFiWalletExtension } from './ExtensionConnector';
 import { isMobile } from './isMobile';
 import { DeFiWalletMobile } from './MobileConnector';
 
-export const getDeFiWallet = (
-  actions: WalletStoreActions,
-  options: {
-    extension: DeFiWalletProviderOptions;
-  },
-  onError?: Connector['onError'],
-): DeFiWalletMobile | DeFiWalletExtension => {
+export const getDeFiWallet = (options: {
+  extension: DeFiWalletProviderOptions;
+}): DeFiWalletMobile | DeFiWalletExtension => {
   if (isMobile()) {
-    return new DeFiWalletMobile({
-      actions,
-      onError,
-    });
+    return new DeFiWalletMobile();
   } else {
     return new DeFiWalletExtension({
-      actions,
-      options: {
-        providerOptions: options.extension,
-      },
-      onError,
+      providerOptions: options.extension,
     });
   }
 };

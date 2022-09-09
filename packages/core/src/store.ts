@@ -97,10 +97,13 @@ export const createWalletStoreAndActions = (): {
   }
 
   const disconnect = (): void => {
-    const connectionStatus = store.getState().userConnectionStatus;
-    if (connectionStatus !== UserConnectionStatus.UserConnected) return;
+    const userConnectionStatus = store.getState().userConnectionStatus;
+    if (userConnectionStatus !== UserConnectionStatus.UserConnected) return;
 
-    update({ userConnectionStatus: UserConnectionStatus.UserDisconnected });
+    store.setState({
+      ...DEFAULT_WALLET_STATE,
+      userConnectionStatus: UserConnectionStatus.UserDisconnected,
+    });
   };
 
   return {

@@ -1,12 +1,7 @@
 import type _WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
 import type { WalletOptions } from '@web3-wallet/core';
-import {
-  type Provider,
-  type WalletName,
-  type WalletStoreActions,
-  Connector,
-} from '@web3-wallet/core';
+import { type Provider, type WalletName, Connector } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
 
 export const URI_AVAILABLE = 'URI_AVAILABLE';
@@ -24,16 +19,8 @@ export class WalletConnect extends Connector<
   public provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 
-  constructor({
-    actions,
-    options,
-    onError,
-  }: {
-    actions: WalletStoreActions;
-    options: WalletConnectOptions;
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, options, onError);
+  constructor(options: WalletConnectOptions) {
+    super(walletName, options);
   }
 
   private onDisplayUri = (
@@ -50,7 +37,7 @@ export class WalletConnect extends Connector<
     const m = await import('@walletconnect/ethereum-provider');
 
     const provider = new m.default({
-      ...this.options.providerOptions,
+      ...(this.options as WalletConnectOptions).providerOptions,
     }) as unknown as WalletConnectProvider;
 
     this.provider = provider;

@@ -1,8 +1,10 @@
 /* eslint-disable max-lines */
+import { createWalletStoreAndActions } from './store';
 import type {
   Provider,
   WalletName,
   WalletOptions,
+  WalletStore,
   WalletStoreActions,
 } from './types';
 import {
@@ -44,20 +46,19 @@ export abstract class Connector<
   /**
    * The wallet options object, specific to each wallet
    */
-  public options: Options;
+  public options?: Options;
 
   /**
    * @import { WalletStoreActions } from './types.ts'
    * {@link WalletStoreActions}
    */
-  protected actions: WalletStoreActions;
+  public store: WalletStore;
+
   /**
-   * Report Error thrown by provider to the external world
-   *
-   * @param error the error object
-   * @returns Promise<void>
+   * @import { WalletStoreActions } from './types.ts'
+   * {@link WalletStoreActions}
    */
-  public onError?(error?: ProviderRpcError): Promise<void>;
+  public actions: WalletStoreActions;
 
   /**
    * ProviderNoFoundError should be thrown in the following cases
@@ -72,16 +73,12 @@ export abstract class Connector<
    * @param actions {@link WalletStoreActions}
    * @param onError {@link Connector#onError}
    */
-  constructor(
-    name: WalletName,
-    actions: WalletStoreActions,
-    options: Options,
-    onError?: (error: ProviderRpcError) => Promise<void>,
-  ) {
+  constructor(name: WalletName, options?: Options) {
     this.name = name;
+    const { actions, store } = createWalletStoreAndActions();
+    this.store = store;
     this.actions = actions;
     this.options = options;
-    this.onError = onError;
     this.providerNotFoundError = new ProviderNoFoundError(
       `${name} provider not found`,
     );
@@ -349,7 +346,7 @@ export abstract class Connector<
    * @return void
    */
   protected onDisconnect(error: ProviderRpcError): void {
-    this.onError?.(error);
+    this.options?.onError?.(error);
   }
 
   /**

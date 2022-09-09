@@ -1,9 +1,4 @@
-import type {
-  Connector,
-  Provider,
-  WalletName,
-  WalletStoreActions,
-} from '@web3-wallet/core';
+import type { Provider, WalletName } from '@web3-wallet/core';
 import type { ProviderFilter } from '@web3-wallet/injected';
 import { Injected } from '@web3-wallet/injected';
 
@@ -18,14 +13,8 @@ const providerFilter: ProviderFilter<MobileProvider> = (p) =>
 
 export class DeFiWalletMobile extends Injected<MobileProvider> {
   /** {@inheritdoc Connector.constructor} */
-  constructor({
-    actions,
-    onError,
-  }: {
-    actions: WalletStoreActions;
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, {}, onError);
+  constructor() {
+    super(walletName);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

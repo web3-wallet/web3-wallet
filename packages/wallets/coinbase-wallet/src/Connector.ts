@@ -28,20 +28,10 @@ export class CoinbaseWallet extends Connector<
   /**
    * {@inheritdoc Connector.constructor}
    *
-   * @param actions - wallet store actions
    * @param options - Options to pass to `@coinbase/wallet-sdk`.
-   * @param onError - Handler to report errors thrown from eventListeners.
    */
-  constructor({
-    actions,
-    options,
-    onError,
-  }: {
-    actions: Connector['actions'];
-    options: CoinbaseWalletOptions;
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, options, onError);
+  constructor(options: CoinbaseWalletOptions) {
+    super(walletName, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */
@@ -49,7 +39,8 @@ export class CoinbaseWallet extends Connector<
     if (this.provider) this.provider;
 
     const m = await import('@coinbase/wallet-sdk');
-    const { url, ...options } = this.options.providerOptions;
+    const { url, ...options } = (this.options as CoinbaseWalletOptions)
+      .providerOptions;
 
     this.coinbaseWallet = new m.default(options);
     this.provider = this.coinbaseWallet.makeWeb3Provider(url);

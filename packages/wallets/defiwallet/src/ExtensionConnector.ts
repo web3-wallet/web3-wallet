@@ -1,10 +1,5 @@
 import type { WalletOptions } from '@web3-wallet/core';
-import {
-  type WalletName,
-  type WalletStoreActions,
-  Connector,
-  utils,
-} from '@web3-wallet/core';
+import { type WalletName, Connector, utils } from '@web3-wallet/core';
 
 import {
   type DeFiWalletProvider,
@@ -24,16 +19,8 @@ export class DeFiWalletExtension extends Connector<
   public override provider?: DeFiWalletProvider;
 
   /** {@inheritdoc Connector.constructor} */
-  constructor({
-    actions,
-    options,
-    onError,
-  }: {
-    actions: WalletStoreActions;
-    options: DeFiWalletExtensionOptions;
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, options, onError);
+  constructor(options: DeFiWalletExtensionOptions) {
+    super(walletName, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */
@@ -81,7 +68,7 @@ export class DeFiWalletExtension extends Connector<
        *
        */
       await this.provider.connect({
-        ...this.options.providerOptions,
+        ...(this.options as DeFiWalletExtensionOptions).providerOptions,
         chainId,
       });
 

@@ -51,9 +51,7 @@ pnpm add @web3-wallet/react @web3-wallet/metamask
 import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
 
-export const metaMask = createWallet<MetaMask>(
-  (actions) => new MetaMask({ actions }),
-);
+export const metaMask = createWallet<MetaMask>(new MetaMask());
 ```
 
 ```tsx
@@ -114,9 +112,7 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/vue';
 
-export const metaMask = createWallet<MetaMask>(
-  (actions) => new MetaMask({ actions }),
-);
+export const metaMask = createWallet<MetaMask>(new MetaMask());
 ```
 
 ```vue
@@ -177,6 +173,7 @@ If the wallet you want integrate with is not included in the @web3-wallet packag
 import type {
   type Connector,
   type WalletName,
+  type WalletOptions,
   createWallet,
 } from '@web3-wallet/react';
 
@@ -188,17 +185,16 @@ export type TrustWalletProvider = InjectedProvider & {
   isTrust?: boolean;
 };
 
+export type TrustWalletOptions = WalletOptions;
+
 const providerFilter = (p: TrustWalletProvider) => p.isTrust;
 
-export class TrustWallet extends Injected {
-  constructor({
-    actions,
-    onError,
-  }: {
-    actions: Connector['actions'];
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, {}, onError);
+export class TrustWallet extends Injected<
+  TrustWalletProvider,
+  TrustWalletOptions
+> {
+  constructor(options?: TrustWalletOptions) {
+    super(walletName, options);
   }
 
   public override async detectProvider(): Promise<TrustWalletProvider> {
@@ -215,23 +211,23 @@ If the wallet you want to integrate with is not eip1193 compatible or has specia
 import type {
   type Connector,
   type WalletName,
+  type WalletOptions,
   createWallet,
 } from '@web3-wallet/react';
 
 type MyWalletProvider = Provider & {
   // wallet provider props
 };
+
+export type MyWalletOptions = WalletOptions & {
+  // wallet provider props
+};
+
 export const walletName = 'MyWallet' as WalletName<'MyWallet'>;
 
-export class MyWallet extends Connector {
-  constructor({
-    actions,
-    onError,
-  }: {
-    actions: Connector['actions'];
-    onError?: Connector['onError'];
-  }) {
-    super(walletName, actions, {}, onError);
+export class MyWallet extends Connector<MyWalletProvider, MyWalletOptions> {
+  constructor(options?: MyWalletOptions) {
+    super(walletName, options);
   }
 
   public async detectProvider(): Promise<MyWalletProvider> {
