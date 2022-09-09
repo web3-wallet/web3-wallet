@@ -7,14 +7,11 @@ const computeIsConnected = ({
   chainId,
   accounts,
   isConnecting,
-}: WalletState) => {
+}: Pick<WalletState, 'chainId' | 'accounts' | 'isConnecting'>) => {
   return Boolean(chainId && accounts?.length && !isConnecting);
 };
 
-export type DerivedHooks = Pick<
-  Wallet['hooks'],
-  'useAccount' | 'useIsConnected'
->;
+export type DerivedHooks = Pick<Wallet, 'useAccount' | 'useIsConnected'>;
 
 export const getDerivedHooks = ({
   useChainId,

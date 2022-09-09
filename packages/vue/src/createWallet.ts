@@ -13,8 +13,8 @@ import { type Wallet } from './types';
 const computeIsConnected = ({
   chainId,
   accounts,
-  isConnecting: isConnecting,
-}: WalletState): boolean => {
+  isConnecting,
+}: Pick<WalletState, 'chainId' | 'accounts' | 'isConnecting'>): boolean => {
   return Boolean(chainId && accounts && accounts.length && !isConnecting);
 };
 

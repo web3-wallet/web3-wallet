@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react';
-import { walletProxy } from '@site/wallets';
+import { currentWallet } from '@site/wallets';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -10,31 +10,26 @@ import { WalletCard } from './WalletCard';
 import { WalletSelect } from './WalletSelect';
 import { WalletStatus } from './WalletStatus';
 
+const {
+  wallets,
+  setCurrentWallet,
+  useName,
+
+  connect,
+  autoConnectOnce,
+  disconnect,
+
+  useIsConnecting,
+  useIsConnected,
+
+  useAccounts,
+  useChainId,
+  useENSNames,
+  useProvider,
+} = currentWallet;
+
 export const WalletSelectCard = () => {
-  const {
-    wallets,
-    useCurrentWallet,
-    setCurrentWallet,
-
-    useConnect,
-    useDisconnect,
-    useAutoConnectOnce,
-
-    useIsConnecting,
-    useIsConnected,
-
-    useAccounts,
-    useChainId,
-    useENSNames,
-    useProvider,
-  } = walletProxy;
-
-  const currentWallet = useCurrentWallet();
-
-  const connect = useConnect();
-  const autoConnectOnce = useAutoConnectOnce();
-  const disconnect = useDisconnect();
-
+  const walletName = useName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
 
@@ -43,10 +38,12 @@ export const WalletSelectCard = () => {
   const provider = useProvider();
   const ENSNames = useENSNames(provider);
 
-  // try to auto connect on mount
   useEffect(() => {
     autoConnectOnce();
-  }, [autoConnectOnce]);
+    /**
+     * autoConnect per wallet
+     */
+  }, [walletName]);
 
   return (
     <NoSSR>
@@ -55,11 +52,11 @@ export const WalletSelectCard = () => {
       >
         <WalletSelect
           wallets={wallets}
-          selectedWalletName={currentWallet.name}
+          selectedWalletName={walletName}
           setSelectedWallet={setCurrentWallet}
         />
         <WalletCard>
-          <Text fontWeight="bold">{currentWallet.name}</Text>
+          <Text fontWeight="bold">{walletName}</Text>
           <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
           <Chain chainId={chainId} />
           <Accounts

@@ -63,14 +63,12 @@ import { WalletCard } from '../WalletCard';
 
 const {
   connector,
-  hooks: {
-    useChainId,
-    useAccount,
-    useIsConnecting,
-    useIsConnected,
-    useProvider,
-    useEnsName,
-  },
+  useChainId,
+  useAccount,
+  useIsConnecting,
+  useIsConnected,
+  useProvider,
+  useEnsName,
 } = metaMask;
 
 export const MetaMaskCard = () => {

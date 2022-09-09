@@ -1,5 +1,8 @@
 import type { Connector, WalletStoreActions } from '@web3-wallet/core';
-import { createWalletStoreAndActions } from '@web3-wallet/core';
+import {
+  createWalletStoreAndActions,
+  UserConnectionStatus,
+} from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
@@ -26,14 +29,51 @@ export const createWallet = <C extends Connector>(
     derivedHooks,
   );
 
+  const connect: Wallet['connect'] = async (...args) => {
+    const result = await connector.connect(...args);
+
+    actions.update({
+      userConnectionStatus: UserConnectionStatus.UserConnected,
+    });
+
+    return result;
+  };
+
+  const autoConnect: Wallet['autoConnect'] = async (...args) => {
+    const result = await connector.autoConnect(...args);
+    actions.update({
+      userConnectionStatus: UserConnectionStatus.UserConnected,
+    });
+    return result;
+  };
+
+  const autoConnectOnce: Wallet['autoConnectOnce'] = async (...args) => {
+    const result = await connector.autoConnectOnce(...args);
+    actions.update({
+      userConnectionStatus: UserConnectionStatus.UserConnected,
+    });
+    return result;
+  };
+
+  const disconnect: Wallet['disconnect'] = async (...args) => {
+    const result = await connector.disconnect(...args);
+    actions.update({
+      userConnectionStatus: UserConnectionStatus.UserDisconnected,
+    });
+    return result;
+  };
+
   return {
     name: connector.name,
     connector,
-    getState: () => reactStore.getState(),
-    hooks: {
-      ...stateHooks,
-      ...derivedHooks,
-      ...augmentedHooks,
-    },
+
+    connect,
+    autoConnect,
+    autoConnectOnce,
+    disconnect,
+
+    ...stateHooks,
+    ...derivedHooks,
+    ...augmentedHooks,
   };
 };

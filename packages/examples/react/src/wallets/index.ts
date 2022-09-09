@@ -1,4 +1,4 @@
-import { createWalletProxy } from '@web3-wallet/react';
+import { createCurrentWallet } from '@web3-wallet/react';
 
 import { coinbaseWallet } from './coinbaseWallet';
 import { cryptocomDesktopWallet } from './CryptocomDesktopWallet';
@@ -6,7 +6,7 @@ import { defiWallet } from './defiWallet';
 import { metaMask } from './metaMask';
 import { walletConnect } from './walletConnect';
 
-export const walletProxy = createWalletProxy([
+export const walletProxy = createCurrentWallet([
   metaMask,
   defiWallet,
   coinbaseWallet,

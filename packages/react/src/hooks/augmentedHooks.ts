@@ -12,7 +12,7 @@ import type { StateHooks } from './stateHooks';
 import { useImportWeb3Provider } from './useImportWeb3Provider';
 
 export type AugmentedHooks = Pick<
-  Wallet['hooks'],
+  Wallet,
   'useProvider' | 'useENSNames' | 'useENSName'
 >;
 

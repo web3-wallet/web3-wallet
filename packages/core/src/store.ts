@@ -1,12 +1,14 @@
 import create from 'zustand/vanilla';
 
 import type { WalletState, WalletStore, WalletStoreActions } from './types';
+import { UserConnectionStatus } from './types';
 import { validateAccount, validateChainId } from './utils';
 
 export const DEFAULT_WALLET_STATE: WalletState = {
+  userConnectionStatus: UserConnectionStatus.UserUntouched,
+  isConnecting: false,
   chainId: undefined,
   accounts: undefined,
-  isConnecting: false,
 };
 
 /**
@@ -76,6 +78,8 @@ export const createWalletStoreAndActions = (): {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId;
       const accounts = stateUpdate.accounts ?? existingState.accounts;
+      const userConnectionStatus =
+        stateUpdate.userConnectionStatus ?? existingState.userConnectionStatus;
 
       // ensure that the isConnecting flag is cleared when appropriate
       let isConnecting = existingState.isConnecting;
@@ -83,22 +87,24 @@ export const createWalletStoreAndActions = (): {
         isConnecting = false;
       }
 
-      return { chainId, accounts, isConnecting: isConnecting };
+      return {
+        chainId,
+        accounts,
+        isConnecting,
+        userConnectionStatus,
+      };
     });
   }
 
-  /**
-   * Reset the WalletStore back to the it's default state.
-   *
-   * @returns void
-   */
-  function resetState(): void {
-    nullifier++;
-    store.setState(DEFAULT_WALLET_STATE);
-  }
+  const disconnect = (): void => {
+    const connectionStatus = store.getState().userConnectionStatus;
+    if (connectionStatus !== UserConnectionStatus.UserConnected) return;
+
+    update({ userConnectionStatus: UserConnectionStatus.UserDisconnected });
+  };
 
   return {
     store,
-    actions: { startConnection, update, resetState },
+    actions: { startConnection, update, disconnect },
   };
 };

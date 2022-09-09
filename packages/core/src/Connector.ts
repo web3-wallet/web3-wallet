@@ -88,15 +88,6 @@ export abstract class Connector<
   }
 
   /**
-   * Reset the wallet state to it's default status
-   *
-   * @returns void
-   */
-  public resetState(): void {
-    this.actions.resetState();
-  }
-
-  /**
    * Detect provider in the host environment.
    *
    * @param providerFilter - providerFilter is provided the detected provider as it's input
@@ -293,7 +284,7 @@ export abstract class Connector<
    *
    */
   public async disconnect(_force = false): Promise<void> {
-    this.resetState();
+    this.actions.disconnect();
   }
 
   /**

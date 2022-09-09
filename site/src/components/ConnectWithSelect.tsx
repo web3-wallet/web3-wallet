@@ -34,7 +34,7 @@ export const ConnectWithSelect = ({
     return (
       <Flex flexDirection="column" gap={4}>
         <ChainSelect
-          chainId={desiredChainId}
+          chainId={chainId as number}
           switchChain={switchChain}
           chainIds={chainIds}
         />
@@ -57,7 +57,7 @@ export const ConnectWithSelect = ({
   return (
     <Flex flexDirection="column" gap={4}>
       <ChainSelect
-        chainId={desiredChainId}
+        chainId={chainId || 1}
         switchChain={isConnecting ? undefined : switchChain}
         chainIds={chainIds}
       />

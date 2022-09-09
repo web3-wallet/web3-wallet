@@ -5,34 +5,51 @@ import type { Connector, WalletName, WalletState } from '@web3-wallet/core';
 export interface Wallet<C extends Connector = Connector> {
   name: WalletName;
   connector: C;
-  getState: () => WalletState;
-  hooks: {
-    useChainId: () => WalletState['chainId'];
-    useAccounts: () => WalletState['accounts'];
-    useIsConnecting: () => WalletState['isConnecting'];
-    useAccount: () => string | undefined;
-    useIsConnected: () => boolean;
-    useProvider: <T extends BaseProvider = Web3Provider>(
-      network?: Networkish,
-      enabled?: boolean,
-    ) => T | undefined;
-    useENSNames: (provider?: BaseProvider) => (string | undefined)[];
-    useENSName: (provider?: BaseProvider) => undefined | string;
-  };
+  /**
+   * methods
+   */
+  connect: C['connect'];
+  autoConnect: C['autoConnect'];
+  autoConnectOnce: C['autoConnectOnce'];
+  disconnect: C['disconnect'];
+
+  /**
+   * hooks
+   */
+  useChainId: () => WalletState['chainId'];
+  useAccounts: () => WalletState['accounts'];
+  useAccount: () => string | undefined;
+  useUserConnectionStatus: () => WalletState['userConnectionStatus'];
+  useIsConnecting: () => WalletState['isConnecting'];
+  useIsConnected: () => boolean;
+  useProvider: <T extends BaseProvider = Web3Provider>(
+    network?: Networkish,
+    enabled?: boolean,
+  ) => T | undefined;
+  useENSNames: (provider?: BaseProvider) => (string | undefined)[];
+  useENSName: (provider?: BaseProvider) => undefined | string;
 }
 
-export type WalletProxyState = {
-  currentWallet?: WalletName;
-  connectionId?: number;
+export type WalletHooks = Pick<
+  Wallet,
+  | 'useChainId'
+  | 'useAccount'
+  | 'useAccounts'
+  | 'useUserConnectionStatus'
+  | 'useIsConnecting'
+  | 'useIsConnected'
+  | 'useProvider'
+  | 'useENSNames'
+  | 'useENSName'
+>;
+
+export type CurrentWalletState = Pick<WalletState, 'userConnectionStatus'> & {
+  currentWallet: WalletName;
 };
 
-export type WalletProxy = Wallet['hooks'] & {
+export type CurrentWallet = Omit<Wallet, 'name' | 'connector'> & {
   wallets: Wallet[];
   setCurrentWallet: (walletName: WalletName) => void;
-  useCurrentWallet: () => Wallet;
-  useConnectionId: () => WalletProxyState['connectionId'];
-  useConnect: () => Wallet['connector']['connect'];
-  useAutoConnect: () => Wallet['connector']['autoConnect'];
-  useAutoConnectOnce: () => Wallet['connector']['autoConnectOnce'];
-  useDisconnect: () => Wallet['connector']['disconnect'];
+  useConnector: () => Wallet['connector'];
+  useName: () => Wallet['name'];
 };

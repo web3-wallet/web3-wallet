@@ -27,10 +27,17 @@ export type WalletOptions<T extends ProviderOptions = ProviderOptions> =
         providerOptions: T;
       };
 
+export enum UserConnectionStatus {
+  UserUntouched = 'UserUntouched',
+  UserConnected = 'UserConnected',
+  UserDisconnected = 'UserDisconnected',
+}
+
 /**
  * The minimal WalletState to keep track with
  */
 export interface WalletState {
+  userConnectionStatus: UserConnectionStatus;
   isConnecting: boolean;
   chainId?: number;
   accounts?: string[];
@@ -46,8 +53,8 @@ export type WalletStore = StoreApi<WalletState>;
  */
 export interface WalletStoreActions {
   startConnection: () => () => void;
-  resetState: () => void;
   update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
+  disconnect: () => void;
 }
 
 /**
