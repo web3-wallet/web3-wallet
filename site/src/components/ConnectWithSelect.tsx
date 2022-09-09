@@ -12,8 +12,8 @@ export const ConnectWithSelect = ({
   isConnecting,
   isConnected,
 }: {
-  disconnect: Wallet['connector']['disconnect'];
-  connect: Wallet['connector']['connect'];
+  disconnect: Wallet['disconnect'];
+  connect: Wallet['connect'];
   chainId?: number;
   isConnecting: boolean;
   isConnected: boolean;
