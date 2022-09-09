@@ -9,6 +9,7 @@ import {
   Connector,
   createWalletStoreAndActions,
   DEFAULT_WALLET_STATE,
+  UserConnectionStatus,
 } from '../src';
 import mockData from './mockData.spec';
 import { MockProvider } from './MockProvider.spec';
@@ -93,6 +94,7 @@ describe('autoConnect', () => {
       chainId: Number(chainId),
       accounts,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
   test('fail silently: case 1, unable to connect', async () => {

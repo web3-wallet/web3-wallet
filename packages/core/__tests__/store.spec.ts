@@ -1,4 +1,8 @@
-import { type WalletState, createWalletStoreAndActions } from '../src';
+import {
+  type WalletState,
+  createWalletStoreAndActions,
+  UserConnectionStatus,
+} from '../src';
 import mockData from './mockData.spec';
 
 describe('store', () => {
@@ -8,6 +12,7 @@ describe('store', () => {
       chainId: undefined,
       accounts: undefined,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 });
@@ -20,6 +25,7 @@ describe('Activation', () => {
       chainId: undefined,
       accounts: undefined,
       isConnecting: true,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 
@@ -30,12 +36,14 @@ describe('Activation', () => {
       chainId: undefined,
       accounts: undefined,
       isConnecting: true,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
     cancelActivation();
     expect(store.getState()).toEqual<WalletState>({
       chainId: undefined,
       accounts: undefined,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 });
@@ -51,6 +59,7 @@ describe('update/valid chainId', () => {
       chainId,
       accounts: undefined,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 });
@@ -75,6 +84,7 @@ describe('update/valid accounts', () => {
       chainId: undefined,
       accounts,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 });
@@ -103,6 +113,7 @@ describe('update/accounts & chainId', () => {
       chainId,
       accounts,
       isConnecting: false,
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     });
   });
 
@@ -136,6 +147,7 @@ describe('resetState', () => {
     const stateUpdate = {
       chainId: mockData.chainIds[0],
       accounts: [...mockData.accounts],
+      userConnectionStatus: UserConnectionStatus.UserUntouched,
     };
     actions.update(stateUpdate);
     const cancelActivation = actions.startConnection();
@@ -146,12 +158,6 @@ describe('resetState', () => {
     cancelActivation();
     expect(store.getState()).toEqual<WalletState>({
       ...stateUpdate,
-      isConnecting: false,
-    });
-    actions.resetState();
-    expect(store.getState()).toEqual<WalletState>({
-      chainId: undefined,
-      accounts: undefined,
       isConnecting: false,
     });
   });
