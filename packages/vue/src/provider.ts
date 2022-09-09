@@ -39,12 +39,12 @@ async function importProvider(): Promise<typeof dynamicProvider> {
   return dynamicProvider;
 }
 
-export const createGetProvider = <C extends Connector>({
+export const createGetProvider = ({
   connector,
   isConnected,
   chainId,
 }: {
-  connector: C;
+  connector: Connector;
   isConnected: Wallet['isConnected'];
   chainId: Wallet['chainId'];
 }): Wallet['useProvider'] => {

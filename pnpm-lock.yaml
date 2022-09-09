@@ -157,11 +157,13 @@ importers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@web3-wallet/core': workspace:*
+      '@web3-wallet/vanilla': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@web3-wallet/core': link:../core
+      '@web3-wallet/vanilla': link:../vanilla
       zustand: 4.0.0-rc.3
 
   packages/vanilla:
@@ -175,8 +177,10 @@ importers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@web3-wallet/core': workspace:*
+      '@web3-wallet/vanilla': workspace:*
     dependencies:
       '@web3-wallet/core': link:../core
+      '@web3-wallet/vanilla': link:../vanilla
     optionalDependencies:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0

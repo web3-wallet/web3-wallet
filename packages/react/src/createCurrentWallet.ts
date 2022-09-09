@@ -1,6 +1,5 @@
 import type { WalletName } from '@web3-wallet/core';
 import { UserConnectionStatus } from '@web3-wallet/core';
-import { useMemo } from 'react';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -58,17 +57,6 @@ export const createCurrentWallet = (
     store.setState({
       currentWallet,
     });
-  };
-
-  const useConnector: CurrentWallet['useConnector'] = () => {
-    const currentWalletName = store((s) => s.currentWallet);
-    return useMemo(() => {
-      const found = wallets.find((w) => w.name === currentWalletName);
-
-      if (!found) setCurrentWallet(wallets[0].name);
-
-      return found ? found.connector : wallets[0].connector;
-    }, [currentWalletName]);
   };
 
   const useUserConnectionStatus: CurrentWallet['useUserConnectionStatus'] =
@@ -200,13 +188,13 @@ export const createCurrentWallet = (
   return {
     wallets,
     setCurrentWallet,
-    useConnector,
     useName,
 
     connect,
     autoConnect,
     autoConnectOnce,
     disconnect,
+    watchAsset: (...args) => getCurrentWallet().watchAsset(...args),
 
     ...getCombinedHooks(),
     useUserConnectionStatus,

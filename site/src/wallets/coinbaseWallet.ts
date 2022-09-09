@@ -2,7 +2,7 @@ import { rpcMap } from '@site/chains';
 import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { createWallet } from '@web3-wallet/react';
 
-export const coinbaseWallet = createWallet<CoinbaseWallet>(
+export const coinbaseWallet = createWallet(
   new CoinbaseWallet({
     providerOptions: {
       appName: '@web3-wallet example',

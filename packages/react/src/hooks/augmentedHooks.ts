@@ -49,8 +49,8 @@ function useENS(
   return ENSNames ?? new Array<undefined>(accounts.length).fill(undefined);
 }
 
-export const getAugmentedHooks = <T extends Connector>(
-  connector: T,
+export const getAugmentedHooks = (
+  connector: Connector,
   { useAccounts, useChainId }: StateHooks,
   { useAccount, useIsConnected }: DerivedHooks,
 ): AugmentedHooks => {

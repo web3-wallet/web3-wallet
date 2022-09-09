@@ -1,18 +1,9 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { Connector, WalletName, WalletState } from '@web3-wallet/core';
+import type { WalletName, WalletState } from '@web3-wallet/core';
+import type { VanillaWallet } from '@web3-wallet/vanilla';
 
-export interface Wallet<C extends Connector = Connector> {
-  name: WalletName;
-  connector: C;
-  /**
-   * methods
-   */
-  connect: C['connect'];
-  autoConnect: C['autoConnect'];
-  autoConnectOnce: C['autoConnectOnce'];
-  disconnect: C['disconnect'];
-
+export interface Wallet extends VanillaWallet {
   /**
    * hooks
    */
@@ -47,9 +38,11 @@ export type CurrentWalletState = Pick<WalletState, 'userConnectionStatus'> & {
   currentWallet: WalletName;
 };
 
-export type CurrentWallet = Omit<Wallet, 'name' | 'connector'> & {
+export type CurrentWallet = Omit<
+  Wallet,
+  'name' | '$getStore' | '$getActions'
+> & {
   wallets: Wallet[];
   setCurrentWallet: (walletName: WalletName) => void;
-  useConnector: () => Wallet['connector'];
   useName: () => Wallet['name'];
 };
