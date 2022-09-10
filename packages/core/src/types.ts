@@ -4,7 +4,7 @@ import type { StoreApi } from 'zustand/vanilla';
 /**
  * Utility type for branding/tagging types
  */
-type Brand<K, T> = K & { __brand__: T };
+export type Brand<K, T> = K & { __brand__: T };
 
 /**
  * Each wallet must have unique wallet name, wallet name is served as the wallet id.

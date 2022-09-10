@@ -21,6 +21,9 @@
         "react",
         "vue"
       ],
+      [
+        "plugin-connection-status"
+      ],
       "injected",
       [
         "coinbase-wallet",

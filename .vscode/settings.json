@@ -19,6 +19,7 @@
     "esbuild",
     "ethersproject",
     "imtoken",
+    "middlewares",
     "Networkish",
     "nextjs",
     "pnpm",

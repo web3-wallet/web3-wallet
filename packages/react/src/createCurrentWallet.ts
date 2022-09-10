@@ -187,6 +187,8 @@ export const createCurrentWallet = (
 
   return {
     wallets,
+    $getVanillaWallet: () => getCurrentWallet().$getVanillaWallet(),
+
     setCurrentWallet,
     useName,
 
@@ -198,5 +200,6 @@ export const createCurrentWallet = (
 
     ...getCombinedHooks(),
     useUserConnectionStatus,
+    plugin: {},
   };
 };

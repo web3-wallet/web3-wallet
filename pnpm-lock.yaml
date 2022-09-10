@@ -152,17 +152,31 @@ importers:
       vite: 3.1.0
       vue-tsc: 0.40.10
 
+  packages/plugins/connection-status:
+    specifiers:
+      '@web3-wallet/core': workspace:*
+      '@web3-wallet/react': workspace:*
+      '@web3-wallet/vanilla': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@web3-wallet/core': link:../../core
+      '@web3-wallet/react': link:../../react
+      '@web3-wallet/vanilla': link:../../vanilla
+      zustand: 4.0.0-rc.3
+
   packages/react:
     specifiers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@web3-wallet/core': workspace:*
+      '@web3-wallet/plugin-connection-status': workspace:*
       '@web3-wallet/vanilla': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@web3-wallet/core': link:../core
+      '@web3-wallet/plugin-connection-status': link:../plugins/connection-status
       '@web3-wallet/vanilla': link:../vanilla
       zustand: 4.0.0-rc.3
 

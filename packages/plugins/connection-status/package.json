@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/react",
+  "name": "@web3-wallet/plugin-connection-status",
   "keywords": [
     "web3-wallet",
     "react"
@@ -15,22 +15,21 @@
   },
   "version": "0.6.0",
   "files": [
-    "dist",
-    "src"
+    "**"
   ],
+  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@ethersproject/networks": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
     "@web3-wallet/core": "workspace:*",
     "@web3-wallet/vanilla": "workspace:*",
-    "@web3-wallet/plugin-connection-status": "workspace:*",
+    "@web3-wallet/react": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {
-    "react": ">=16.8"
+    "react": ">=16.8",
+    "vue": ">=3.2.13"
   },
   "description": "web3-wallet react",
   "bugs": {
