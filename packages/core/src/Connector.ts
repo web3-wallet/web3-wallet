@@ -1,44 +1,53 @@
 /* eslint-disable max-lines */
-import { createWalletStoreAndActions } from './store';
+import type { WalletName } from './createWallet';
+import type { WalletStore, WalletStoreActions } from './createWalletStore';
+import { createWalletStoreAndActions } from './createWalletStore';
 import type {
+  AddEthereumChainParameter,
   Provider,
-  WalletName,
-  WalletOptions,
-  WalletStore,
-  WalletStoreActions,
-} from './types';
-import {
-  type AddEthereumChainParameter,
-  type ProviderConnectInfo,
-  type ProviderRpcError,
-  type WatchAssetParameters,
-  ProviderNoFoundError,
-} from './types';
+  ProviderConnectInfo,
+  ProviderRpcError,
+  WatchAssetParameters,
+} from './provider';
+import { isAddChainParameter, ProviderNoFoundError } from './provider';
 import { parseChainId, toHexChainId } from './utils';
 
-const isChainId = (
-  chainIdOrChainParameter?: number | AddEthereumChainParameter,
-): chainIdOrChainParameter is number => {
-  return typeof chainIdOrChainParameter === 'number';
+/**
+ * ProviderOptions is specific to each wallet provider, and it will be used to
+ * to create/initialize the wallet provider instance.
+ */
+export type ProviderOptions = object | undefined;
+
+export type BaseConnectorOptions = {
+  /**
+   * Report Error thrown by provider to the external world
+   *
+   * @param error the error object
+   * @returns void
+   */
+  onError?: (error: ProviderRpcError) => void;
 };
 
-const isAddChainParameter = (
-  chainIdOrChainParameter?: number | AddEthereumChainParameter,
-): chainIdOrChainParameter is AddEthereumChainParameter => {
-  return !isChainId(chainIdOrChainParameter);
-};
+/**
+ * The wallet options object
+ */
+export type ConnectorOptions<T extends ProviderOptions = undefined> =
+  T extends undefined
+    ? BaseConnectorOptions
+    : BaseConnectorOptions & {
+        providerOptions: T;
+      };
 
 export abstract class Connector<
   P extends Provider = Provider,
-  Options extends WalletOptions = WalletOptions,
+  Options extends ConnectorOptions = ConnectorOptions,
 > {
   /**
    * {@link WalletName}
-   **/
+   */
   public name: WalletName;
 
   /**
-   * @import { Provider } from './types.ts'
    * {@link Provider}
    **/
   public abstract provider?: P;
@@ -49,18 +58,17 @@ export abstract class Connector<
   public options?: Options;
 
   /**
-   * @import { WalletStoreActions } from './types.ts'
-   * {@link WalletStoreActions}
+   * {@link WalletStore}
    */
   public store: WalletStore;
 
   /**
-   * @import { WalletStoreActions } from './types.ts'
    * {@link WalletStoreActions}
    */
-  public actions: WalletStoreActions;
+  protected actions: WalletStoreActions;
 
   /**
+   *
    * ProviderNoFoundError should be thrown in the following cases
    *  1. detectProvider failed to retrieve the provider from a host environment.
    *  2. calling functions that requires a provider, but we have been unable to retrieve the provider
@@ -69,13 +77,13 @@ export abstract class Connector<
 
   /**
    *
-   * @param name {@link WalletName}
-   * @param actions {@link WalletStoreActions}
-   * @param onError {@link Connector#onError}
+   * @param name - {@link Connector#WalletName}
+   * @param actions - {@link WalletStoreActions}
+   * @param onError - {@link Connector#onError}
    */
   constructor(name: WalletName, options?: Options) {
+    const { store, actions } = createWalletStoreAndActions();
     this.name = name;
-    const { actions, store } = createWalletStoreAndActions();
     this.store = store;
     this.actions = actions;
     this.options = options;
@@ -281,7 +289,7 @@ export abstract class Connector<
    *
    */
   public async disconnect(_force = false): Promise<void> {
-    this.actions.disconnect();
+    this.actions.resetState();
   }
 
   /**

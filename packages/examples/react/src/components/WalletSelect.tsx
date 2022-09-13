@@ -2,18 +2,18 @@ import type { Wallet } from '@web3-wallet/react';
 
 export const WalletSelect = ({
   wallets,
-  selectedWalletName,
-  setSelectedWallet,
+  currentWalletName,
+  switchCurrentWallet,
 }: {
   wallets: Wallet[];
-  selectedWalletName: Wallet['name'];
-  setSelectedWallet: (walletName: Wallet['name']) => void;
+  currentWalletName: Wallet['name'];
+  switchCurrentWallet: (walletName: Wallet['name']) => void;
 }) => {
   return (
     <select
-      value={selectedWalletName}
+      value={currentWalletName}
       onChange={(event) => {
-        setSelectedWallet(event.target.value as Wallet['name']);
+        switchCurrentWallet(event.target.value as Wallet['name']);
       }}
       style={{
         height: '32px',

@@ -1,4 +1,6 @@
 export * from './Connector';
-export * from './store';
-export * from './types';
+export * from './createWallet';
+export * from './createWalletStore';
+export * from './provider';
 export * as utils from './utils';
+export * from './utilTypes';

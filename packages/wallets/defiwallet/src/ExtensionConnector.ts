@@ -1,4 +1,4 @@
-import type { WalletOptions } from '@web3-wallet/core';
+import type { ConnectorOptions } from '@web3-wallet/core';
 import { type WalletName, Connector, utils } from '@web3-wallet/core';
 
 import {
@@ -10,7 +10,7 @@ import {
 export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
 
 export type DeFiWalletExtensionOptions =
-  WalletOptions<DeFiWalletProviderOptions>;
+  ConnectorOptions<DeFiWalletProviderOptions>;
 export class DeFiWalletExtension extends Connector<
   DeFiWalletProvider,
   DeFiWalletExtensionOptions

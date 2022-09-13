@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/plugin-connection-status",
+  "name": "@web3-wallet/plugin-connection-status-react",
   "keywords": [
     "web3-wallet",
     "react"
@@ -22,8 +22,6 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/core": "workspace:*",
-    "@web3-wallet/vanilla": "workspace:*",
     "@web3-wallet/react": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },

@@ -1,5 +1,8 @@
-import { type Connector, type WalletState } from '@web3-wallet/core';
-import { createVanillaWallet } from '@web3-wallet/vanilla';
+import {
+  type Connector,
+  type WalletState,
+  createWallet as createCoreWallet,
+} from '@web3-wallet/core';
 import { computed, reactive } from 'vue';
 
 import { getUseEnsName, getUseEnsNames } from './ensNames';
@@ -17,16 +20,16 @@ const computeIsConnected = ({
 /**
  * @typeParam C - The type of the `connector` returned from `f`.
  * @param f - A function which is called with `actions` bound to the returned `store`.
- * @returns WalletApi - The created wallet.
+ * @returns Wallet - The created wallet.
  */
 export const createWallet = (connector: Connector): Wallet => {
-  const vanillaWallet = createVanillaWallet(connector);
+  const coreWallet = createCoreWallet(connector);
 
   const state = reactive<WalletState>({
-    ...vanillaWallet.$getStore().getState(),
+    ...coreWallet.$getStore().getState(),
   });
 
-  vanillaWallet.$getStore().subscribe((nextState) => {
+  coreWallet.$getStore().subscribe((nextState) => {
     Object.assign(state, nextState);
   });
 
@@ -50,7 +53,7 @@ export const createWallet = (connector: Connector): Wallet => {
   const useEnsName = getUseEnsName(account);
 
   return {
-    ...vanillaWallet,
+    ...coreWallet,
     chainId,
     accounts,
     isConnecting,

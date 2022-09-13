@@ -1,11 +1,33 @@
+import { getAddress } from '@ethersproject/address';
+import type { StoreApi } from 'zustand/vanilla';
 import create from 'zustand/vanilla';
 
-import type { WalletState, WalletStore, WalletStoreActions } from './types';
-import { UserConnectionStatus } from './types';
-import { validateAccount, validateChainId } from './utils';
+import { validateChainId } from './utils';
+
+/**
+ * The minimal WalletState to keep track with
+ */
+export interface WalletState {
+  isConnecting: boolean;
+  chainId?: number;
+  accounts?: string[];
+}
+
+/**
+ * WalletStore is for managing the state of WalletState
+ */
+export type WalletStore = StoreApi<WalletState>;
+
+/**
+ * WalletStoreActions is used to update the WalletStore
+ */
+export interface WalletStoreActions {
+  startConnection: () => () => void;
+  update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
+  resetState: () => void;
+}
 
 export const DEFAULT_WALLET_STATE: WalletState = {
-  userConnectionStatus: UserConnectionStatus.UserUntouched,
   isConnecting: false,
   chainId: undefined,
   accounts: undefined,
@@ -68,7 +90,8 @@ export const createWalletStoreAndActions = (): {
     // validate accounts statically, independent of existing state
     if (stateUpdate.accounts !== undefined) {
       for (let i = 0; i < stateUpdate.accounts.length; i++) {
-        stateUpdate.accounts[i] = validateAccount(stateUpdate.accounts[i]);
+        // throw is account is not a valid ethereum address
+        stateUpdate.accounts[i] = getAddress(stateUpdate.accounts[i]);
       }
     }
 
@@ -78,8 +101,6 @@ export const createWalletStoreAndActions = (): {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId;
       const accounts = stateUpdate.accounts ?? existingState.accounts;
-      const userConnectionStatus =
-        stateUpdate.userConnectionStatus ?? existingState.userConnectionStatus;
 
       // ensure that the isConnecting flag is cleared when appropriate
       let isConnecting = existingState.isConnecting;
@@ -91,23 +112,18 @@ export const createWalletStoreAndActions = (): {
         chainId,
         accounts,
         isConnecting,
-        userConnectionStatus,
       };
     });
   }
 
-  const disconnect = (): void => {
-    const userConnectionStatus = store.getState().userConnectionStatus;
-    if (userConnectionStatus !== UserConnectionStatus.UserConnected) return;
-
+  const resetState = (): void => {
     store.setState({
       ...DEFAULT_WALLET_STATE,
-      userConnectionStatus: UserConnectionStatus.UserDisconnected,
     });
   };
 
   return {
     store,
-    actions: { startConnection, update, disconnect },
+    actions: { startConnection, update, resetState },
   };
 };

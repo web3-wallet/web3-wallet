@@ -1,5 +1,6 @@
 import { Text } from '@chakra-ui/react';
-import { currentWallet } from '@site/wallets';
+import { allWallets, currentWallet } from '@site/wallets';
+import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -11,9 +12,10 @@ import { WalletSelect } from './WalletSelect';
 import { WalletStatus } from './WalletStatus';
 
 const {
-  wallets,
-  setCurrentWallet,
   useName,
+  switchCurrentWallet,
+
+  usePlugin,
 
   connect,
   autoConnectOnce,
@@ -38,6 +40,12 @@ export const WalletSelectCard = () => {
   const provider = useProvider();
   const ENSNames = useENSNames(provider);
 
+  const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
+    ConnectionStatusPlugin.pluginName,
+  ).api.hooks;
+
+  console.log('useConnectionStatus', useConnectionStatus());
+
   useEffect(() => {
     autoConnectOnce();
     /**
@@ -51,9 +59,9 @@ export const WalletSelectCard = () => {
         style={{ minWidth: '280px', maxWidth: '420px', width: '100%' }}
       >
         <WalletSelect
-          wallets={wallets}
-          selectedWalletName={walletName}
-          setSelectedWallet={setCurrentWallet}
+          wallets={allWallets}
+          currentWalletName={walletName}
+          switchCurrentWallet={switchCurrentWallet}
         />
         <WalletCard>
           <Text fontWeight="bold">{walletName}</Text>

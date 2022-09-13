@@ -1,11 +1,11 @@
-import type { Provider, WalletName, WalletOptions } from '@web3-wallet/core';
+import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
 import { Injected } from '@web3-wallet/injected';
 
 export type CryptocomDesktopWalletProvider = Provider & {
   isDesktopWallet?: boolean;
 };
 
-export type CryptocomDesktopWalletOptions = WalletOptions<undefined>;
+export type CryptocomDesktopWalletOptions = ConnectorOptions<undefined>;
 
 export const walletName =
   'Crypto.com Desktop Wallet' as WalletName<'Crypto.com Desktop Wallet'>;

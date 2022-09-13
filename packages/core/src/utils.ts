@@ -1,5 +1,3 @@
-import { getAddress } from '@ethersproject/address';
-
 /**
  * The largest possible chain ID we can handle.
  * Explanation: https://gist.github.com/rekmarks/a47bd5f2525936c4b8eee31a16345553
@@ -24,19 +22,6 @@ export const isValidChainId = (chainId: number): boolean => {
     return false;
   }
 };
-
-export function validateAccount(account: string): never | string {
-  return getAddress(account);
-}
-
-export function isValidAccount(account: string): boolean {
-  try {
-    validateAccount(account);
-    return true;
-  } catch (_) {
-    return false;
-  }
-}
 
 export const parseChainId = (chainId: string | number): number => {
   return typeof chainId === 'number'

@@ -1,14 +1,7 @@
 import { utils } from '../src';
 import mockData from './mockData.spec';
 
-const {
-  isValidAccount,
-  isValidChainId,
-  parseChainId,
-  toHexChainId,
-  validateAccount,
-  validateChainId,
-} = utils;
+const { isValidChainId, parseChainId, toHexChainId, validateChainId } = utils;
 
 describe('utils', () => {
   describe('validateChainId', () => {
@@ -36,31 +29,6 @@ describe('utils', () => {
     });
   });
 
-  describe('validateAccount', () => {
-    let table = mockData.accounts.map((v) => [v]);
-    test.each(table)('account: %i', (account: string) => {
-      expect(validateAccount(account)).toBe(account);
-    });
-
-    table = mockData.invalidAccounts.map((v) => [v]);
-    test.each(table)('account: %i', (account: string) => {
-      expect(() => {
-        validateAccount(account);
-      }).toThrow();
-    });
-  });
-  describe('isValidAccount', () => {
-    let table = mockData.accounts.map((v) => [v]);
-
-    test.each(table)('account: %i', (account: string) => {
-      expect(isValidAccount(account)).toBe(true);
-    });
-
-    table = mockData.invalidAccounts.map((v) => [v]);
-    test.each(table)('account: %i', (account: string) => {
-      expect(isValidAccount(account)).toBe(false);
-    });
-  });
   describe('parseChainId', () => {
     const table: [number | string, number][] = [
       ['1', 1],

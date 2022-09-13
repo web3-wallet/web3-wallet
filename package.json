@@ -16,16 +16,13 @@
   "@web3-wallet/scripts": {
     "packages": [
       "core",
-      "vanilla",
       [
         "react",
         "vue"
       ],
-      [
-        "plugin-connection-status"
-      ],
       "injected",
       [
+        "plugin-connection-status-react",
         "coinbase-wallet",
         "defiwallet",
         "metamask",

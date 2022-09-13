@@ -1,11 +1,11 @@
-import type { Connector } from '@web3-wallet/core';
-import { createConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status';
-import { createVanillaWallet } from '@web3-wallet/vanilla';
+import {
+  type Connector,
+  createWallet as createCoreWallet,
+} from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
-import { applyPlugins } from './applyPlugin';
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
-import type { Plugin, Wallet } from './types';
+import type { Wallet } from './types';
 
 /**
  * @typeParam connector - The wallet connector.
@@ -13,24 +13,21 @@ import type { Plugin, Wallet } from './types';
  */
 export const createWallet = (
   connector: Connector,
-  plugins: Plugin[] = [],
-): Wallet => {
-  const vanillaWallet = createVanillaWallet(connector);
+): Omit<Wallet, 'getPlugin'> => {
+  const coreWallet = createCoreWallet(connector);
 
-  const reactStore = createReactStore(vanillaWallet.$getStore());
+  const reactStore = createReactStore(coreWallet.$getStore());
 
   const stateHooks = getStateHooks(reactStore);
   const derivedHooks = getDerivedHooks(stateHooks);
   const augmentedHooks = getAugmentedHooks(connector, stateHooks, derivedHooks);
 
   const wallet = {
-    $getVanillaWallet: () => vanillaWallet,
-    ...vanillaWallet,
+    ...coreWallet,
     ...stateHooks,
     ...derivedHooks,
     ...augmentedHooks,
   };
-  const connectionStatusPlugin = createConnectionStatusPlugin();
 
-  return applyPlugins(wallet, [connectionStatusPlugin, ...plugins]);
+  return wallet;
 };

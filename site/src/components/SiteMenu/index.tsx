@@ -17,16 +17,17 @@ export const SiteMenu = () => {
       <Logo />
 
       <Flex gap={{ base: 6, md: 8, lg: 10 }}>
-        <Link href="/wallets">Wallets</Link>
-        <Link href="/docs">Docs</Link>
         <Link href="/showcase">Showcase</Link>
+        <Link href="/wallets">Wallets</Link>
+        <Link href="/plugins">Plugins</Link>
+        <Link href="/docs">Docs</Link>
         <Link href="/docs-api">API</Link>
       </Flex>
 
       <Flex flexGrow="1" justifyContent="flex-end">
         <Link
           href="https://github.com/web3-wallet/web3-wallet"
-          linkProps={{
+          chakraLinkProps={{
             display: 'flex',
             justifySelf: 'end',
             target: '_blank',

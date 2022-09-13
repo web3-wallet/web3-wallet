@@ -1,71 +1,4 @@
 import type { EventEmitter } from 'node:events';
-import type { StoreApi } from 'zustand/vanilla';
-
-/**
- * Utility type for branding/tagging types
- */
-export type Brand<K, T> = K & { __brand__: T };
-
-/**
- * Each wallet must have unique wallet name, wallet name is served as the wallet id.
- **/
-export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
-
-/**
- * ProviderOptions is specific to each wallet provider, and it will be used to
- * to create/initialize the wallet provider instance.
- */
-export type ProviderOptions = object | undefined;
-
-export type BaseWalletOptions = {
-  /**
-   * Report Error thrown by provider to the external world
-   *
-   * @param error the error object
-   * @returns void
-   */
-  onError?: (error: ProviderRpcError) => void;
-};
-
-/**
- * The wallet options object
- */
-export type WalletOptions<T extends ProviderOptions = undefined> =
-  T extends undefined
-    ? BaseWalletOptions
-    : BaseWalletOptions & {
-        providerOptions: T;
-      };
-
-export enum UserConnectionStatus {
-  UserUntouched = 'UserUntouched',
-  UserConnected = 'UserConnected',
-  UserDisconnected = 'UserDisconnected',
-}
-
-/**
- * The minimal WalletState to keep track with
- */
-export interface WalletState {
-  userConnectionStatus: UserConnectionStatus;
-  isConnecting: boolean;
-  chainId?: number;
-  accounts?: string[];
-}
-
-/**
- * WalletStore is for managing the state of WalletState
- */
-export type WalletStore = StoreApi<WalletState>;
-
-/**
- * WalletStoreActions is used to update the WalletStore
- */
-export interface WalletStoreActions {
-  startConnection: () => () => void;
-  update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
-  disconnect: () => void;
-}
 
 /**
  * Defined in EIP-1193
@@ -165,3 +98,15 @@ export interface WatchAssetParameters {
   decimals: number;
   image: string;
 }
+
+export const isChainId = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is number => {
+  return typeof chainIdOrChainParameter === 'number';
+};
+
+export const isAddChainParameter = (
+  chainIdOrChainParameter?: number | AddEthereumChainParameter,
+): chainIdOrChainParameter is AddEthereumChainParameter => {
+  return !isChainId(chainIdOrChainParameter);
+};
