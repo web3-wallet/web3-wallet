@@ -14,10 +14,16 @@
 
 ```
 # React
+# pnpm
 pnpm add @web3-wallet/react @web3-wallet/metamask
+# npm
+npm install @web3-wallet/react @web3-wallet/metamask
 
 # Vue
+# pnpm
 pnpm add @web3-wallet/vue @web3-wallet/metamask
+#npm
+npm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ## Packages
@@ -38,6 +44,16 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase Wallet Connector        |
 | [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)     | Walletconnect Connector          |
 
+
+
+## Plugins
+
+| Package                                                      | Version                                                      | Description                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------- |
+| [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | Tracking the wallet connection status. |
+
+
+
 ## Getting started
 
 ### React
@@ -47,122 +63,57 @@ pnpm add @web3-wallet/react @web3-wallet/metamask
 ```
 
 ```typescript
+import { rpcMap } from '@site/chains';
+import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
+import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
+import { getDeFiWallet } from '@web3-wallet/defiwallet';
 import { MetaMask } from '@web3-wallet/metamask';
-import { createWallet } from '@web3-wallet/react';
+import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
+import { WalletProxy } from '@web3-wallet/react';
+import { WalletConnect } from '@web3-wallet/walletconnect';
 
-export const metaMask = createWallet(new MetaMask());
-```
+const connectors = [
+  new MetaMask(),
+  getDeFiWallet({
+    extension: {
+      chainType: 'eth',
+      appName: '@web3-wallet example',
+      chainId: 1,
+      rpcUrls: {},
+    },
+  }),
+  new CoinbaseWallet({
+    providerOptions: {
+      appName: '@web3-wallet example',
+      reloadOnDisconnect: false,
+      url: rpcMap[1],
+    },
+  }),
+  new CryptocomDesktopWallet(),
+  new WalletConnect({
+    providerOptions: {
+      rpc: rpcMap,
+    },
+  }),
+];
 
-```tsx
-import { useEffect, useState } from 'react';
-import { metaMask } from 'wallets/metaMask';
-import { WalletCard } from '../WalletCard';
+const plugins = [ConnectionStatusPlugin.createPlugin()];
 
-const {
-  autoConnectOnce,
-
-  useChainId,
-  useAccount,
-  useIsConnecting,
-  useIsConnected,
-  useProvider,
-  useEnsName,
-} = metaMask;
-
-export const MetaMaskCard = () => {
-  const chainId = useChainId();
-  const account = useAccount();
-  const isConnecting = useIsConnecting();
-
-  const isConnected = useIsConnected();
-
-  const provider = useProvider();
-  const ensNames = useEnsNames(provider);
-
-  useEffect(() => {
-    autoConnectOnce().then((success) => {
-      if (!success) {
-        console.debug('Failed to auto connect to metamask');
-      }
-    });
-  }, []);
-
-  return (
-    <WalletCard
-      name="MetaMask"
-      connector={connector}
-      chainId={chainId}
-      isConnecting={isConnecting}
-      isConnected={isConnected}
-      account={account}
-      provider={provider}
-      ensName={ensName}
-    />
-  );
-};
-```
-
-### vue
-
-```bash
-pnpm add @web3-wallet/vue @web3-wallet/metamask
-```
-
-```typescript
-import { MetaMask } from '@web3-wallet/metamask';
-import { createWallet } from '@web3-wallet/vue';
-
-export const metaMask = createWallet(new MetaMask());
-```
-
-```vue
-<template>
-  <WalletCard
-    name="MetaMask"
-    connector="connector"
-    chainId="chainId"
-    isConnecting="isConnecting"
-    isConnected="isConnected"
-    account="account"
-    provider="provider"
-    ensNames="ensNames"
-  />
-</template>
-
-<script setup lang="ts">
-import { onMounted, defineComponent } from 'vue';
-import { metaMask } from 'wallets/metaMask';
-import { WalletCard } from './WalletCard.vue';
-
-const {
-  autoConnectOnce,
-
-  chainId,
-  account,
-  isConnecting,
-  isConnected,
-  useProvider,
-  useEnsName,
-} = metaMask;
-
-const provider = useProvider();
-const ensNName = useEnsName(provider);
-
-onMounted(() => {
-  autoConnectOnce().then((success) => {
-    if (!success) {
-      console.debug('Failed to auto connect to metamask');
-    }
-  });
+export const walletProxy = new WalletProxy(connectors, {
+  plugins,
 });
 
-defineComponent({
-  name: 'MetaMaskCard',
-  components: {
-    WalletCard,
-  },
-});
-</script>
+export const allWallets = walletProxy.getWallets();
+
+export const currentWallet = walletProxy.getCurrentWallet();
+
+// wallets
+export const metamask = walletProxy.getWallet(connectors[0].name);
+export const defiwallet = walletProxy.getWallet(connectors[1].name);
+export const coinbaseWallet = walletProxy.getWallet(connectors[2].name);
+export const desktopWallet = walletProxy.getWallet(connectors[3].name);
+export const walletconnect = walletProxy.getWallet(connectors[4].name);
+
 ```
 
 ## More wallets
