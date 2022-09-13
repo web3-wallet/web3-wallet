@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { PluginName } from './plugin';
 import type {
   CurrentWallet,
   CurrentWalletState,
@@ -11,6 +10,11 @@ import type {
   WalletCoreHooks,
 } from './types';
 import { ConnectionStatus } from './types';
+
+export type CreateCurrentWalletOptions = {
+  defaultCurrentWallet?: WalletName;
+  persistKey?: string;
+};
 
 /**
  * @param wallets - The wallets to proxy with
@@ -190,8 +194,12 @@ export const createCurrentWallet = (
     return result;
   };
 
-  const usePlugin: CurrentWallet['usePlugin'] = (pluginName: PluginName) => {
-    return useUnderliningCurrentWallet().getPlugin(pluginName);
+  const getPlugin: CurrentWallet['getPlugin'] = (...args) => {
+    return getUnderliningCurrentWallet().getPlugin(...args);
+  };
+
+  const usePlugin: CurrentWallet['usePlugin'] = (...args) => {
+    return useUnderliningCurrentWallet().getPlugin(...args);
   };
 
   return {
@@ -209,7 +217,7 @@ export const createCurrentWallet = (
     $getProvider: (...args) =>
       getUnderliningCurrentWallet().$getProvider(...args),
 
-    getPlugin: (...args) => getUnderliningCurrentWallet().getPlugin(...args),
+    getPlugin,
     usePlugin,
 
     ...getCombinedHooks(),

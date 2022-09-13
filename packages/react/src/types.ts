@@ -10,8 +10,9 @@ import type { PluginApi as PluginApi, PluginInfo, PluginName } from './plugin';
 
 export interface Wallet extends CoreWallet {
   getPlugin: <T extends PluginApi = PluginApi>(
-    name: PluginName,
+    pluginName: PluginName,
   ) => PluginInfo<T>;
+
   useIsConnecting: () => WalletState['isConnecting'];
   useChainId: () => WalletState['chainId'];
   useAccounts: () => WalletState['accounts'];

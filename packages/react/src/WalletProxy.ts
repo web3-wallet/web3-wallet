@@ -1,20 +1,20 @@
 import type { Connector, WalletName } from '@web3-wallet/core';
 
-import { createCurrentWallet } from './createCurrentWallet';
+import {
+  type CreateCurrentWalletOptions,
+  createCurrentWallet,
+} from './createCurrentWallet';
 import { createWallet as createReactWallet } from './createWallet';
 import type { Plugin, PluginApi, PluginInfo, PluginName } from './plugin';
 import type { CurrentWallet, Wallet } from './types';
 
 export type WalletProxyOptions = {
   plugins?: Plugin[];
-  currentWalletOptions?: {
-    defaultCurrentWallet?: WalletName;
-    key?: string;
-  };
+  currentWalletOptions?: CreateCurrentWalletOptions;
 };
 
 export class WalletProxy {
-  private pluginApiMap: Record<WalletName, Record<PluginName, PluginInfo>> = {};
+  private pluginMap: Record<WalletName, Record<PluginName, PluginInfo>> = {};
   private wallets: Wallet[] = [];
   private connectors: Connector[];
   private options?: WalletProxyOptions;
@@ -38,11 +38,11 @@ export class WalletProxy {
     return this.currentWallet;
   }
 
-  public hasPlugin(walletName: WalletName, pluginName: PluginName) {
-    return !!this.pluginApiMap[walletName]?.[pluginName];
+  public hasPlugin(walletName: WalletName, pluginName: PluginName): boolean {
+    return !!this.pluginMap[walletName]?.[pluginName];
   }
 
-  public hasWallet(name: WalletName) {
+  public hasWallet(name: WalletName): boolean {
     return this.wallets.some((w) => w.name === name);
   }
 
@@ -66,7 +66,7 @@ export class WalletProxy {
       throw new Error(`Can't find plugin '${pluginName}'`);
     }
 
-    return this.pluginApiMap[walletName][pluginName] as PluginInfo<T>;
+    return this.pluginMap[walletName][pluginName] as PluginInfo<T>;
   }
 
   private createWallet(connector: Connector): Wallet {
@@ -81,14 +81,14 @@ export class WalletProxy {
       getPlugin: <T extends PluginApi = PluginApi>(
         pluginName: PluginName,
       ): PluginInfo<T> => {
-        return this.getPlugin<T>(reactWallet.name, pluginName);
+        return this.getPlugin<T>(wallet.name, pluginName);
       },
     };
 
     this.options?.plugins?.forEach((plugin) => {
       const pluginInfo = plugin(wallet);
-      this.pluginApiMap[wallet.name] = this.pluginApiMap[wallet.name] ?? {};
-      this.pluginApiMap[wallet.name][pluginInfo.name] = pluginInfo;
+      this.pluginMap[wallet.name] = this.pluginMap[wallet.name] ?? {};
+      this.pluginMap[wallet.name][pluginInfo.name] = pluginInfo;
 
       const { middleware } = pluginInfo;
 
