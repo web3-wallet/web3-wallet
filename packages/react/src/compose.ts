@@ -36,6 +36,15 @@ export function compose<A, B, C, T extends unknown[], R>(
   f4: Func<T, A>,
 ): Func<T, R>;
 
+/* five functions */
+export function compose<A, B, C, D, T extends unknown[], R>(
+  f1: (c: D) => R,
+  f2: (c: C) => D,
+  f3: (b: B) => C,
+  f4: (a: A) => B,
+  f5: Func<T, A>,
+): Func<T, R>;
+
 /* rest */
 export function compose<R>(
   f1: (a: unknown) => R,
