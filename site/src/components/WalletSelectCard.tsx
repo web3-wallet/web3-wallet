@@ -49,7 +49,7 @@ export const WalletSelectCard = () => {
   useEffect(() => {
     autoConnectOnce();
     /**
-     * autoConnect per wallet
+     * autoConnectOnce per wallet
      */
   }, [walletName]);
 

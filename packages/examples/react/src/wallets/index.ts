@@ -39,10 +39,7 @@ export const walletProxy = new WalletProxy(connectors, {
 });
 
 export const allWallets = walletProxy.getWallets();
-
 export const currentWallet = walletProxy.getCurrentWallet();
-
-// wallets
 export const metamask = walletProxy.getWallet(connectors[0].name);
 export const defiwallet = walletProxy.getWallet(connectors[1].name);
 export const coinbaseWallet = walletProxy.getWallet(connectors[2].name);

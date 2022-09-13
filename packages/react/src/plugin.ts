@@ -4,7 +4,7 @@ import type { Wallet } from './types';
 
 export type PluginName<T extends string = string> = Brand<
   T,
-  '@web-3wallet/react-plugin'
+  '@web-3wallet/plugin-react'
 >;
 
 export type WalletMiddleware = {

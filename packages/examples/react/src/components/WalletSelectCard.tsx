@@ -38,10 +38,9 @@ export const WalletSelectCard = () => {
   const provider = useProvider();
   const ENSNames = useENSNames(provider);
 
-  // try to auto connect on mount
   useEffect(() => {
     autoConnectOnce();
-  }, [autoConnectOnce]);
+  }, [autoConnectOnce, walletName]);
 
   return (
     <NoSSR>

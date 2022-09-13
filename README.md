@@ -14,25 +14,19 @@
 
 ```
 # React
-# pnpm
 pnpm add @web3-wallet/react @web3-wallet/metamask
-# npm
-npm install @web3-wallet/react @web3-wallet/metamask
 
 # Vue
-# pnpm
 pnpm add @web3-wallet/vue @web3-wallet/metamask
-#npm
-npm add @web3-wallet/vue @web3-wallet/metamask
 ```
 
 ## Packages
 
-| Package                                | Version                                                      | Description                                      |
-| -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
-| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore) | Core types and and the abstract wallet connector |
+| Package                                | Version                                                                                                            | Description                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)   | Core types and and the abstract wallet connector |
 | [`@web3-wallet/react`](packages/react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for web3 wallet                    |
-| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue) | Vue binding for web3 wallet                      |
+| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)     | Vue binding for web3 wallet                      |
 
 ## Wallets
 
@@ -44,19 +38,20 @@ npm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase Wallet Connector        |
 | [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)     | Walletconnect Connector          |
 
-
-
 ## Plugins
 
-| Package                                                      | Version                                                      | Description                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------- |
-| [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | Tracking the wallet connection status. |
-
-
+| Package                                                                                   | Version                                                                                                                                                              | Description                            |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | Tracking the wallet connection status. |
 
 ## Getting started
 
 ### React
+
+#### please check out the examples
+
+- [site](./site)
+- [example-react](./packages/examples/react/)
 
 ```bash
 pnpm add @web3-wallet/react @web3-wallet/metamask
@@ -74,14 +69,6 @@ import { WalletConnect } from '@web3-wallet/walletconnect';
 
 const connectors = [
   new MetaMask(),
-  getDeFiWallet({
-    extension: {
-      chainType: 'eth',
-      appName: '@web3-wallet example',
-      chainId: 1,
-      rpcUrls: {},
-    },
-  }),
   new CoinbaseWallet({
     providerOptions: {
       appName: '@web3-wallet example',
@@ -104,16 +91,75 @@ export const walletProxy = new WalletProxy(connectors, {
 });
 
 export const allWallets = walletProxy.getWallets();
-
 export const currentWallet = walletProxy.getCurrentWallet();
-
-// wallets
 export const metamask = walletProxy.getWallet(connectors[0].name);
-export const defiwallet = walletProxy.getWallet(connectors[1].name);
 export const coinbaseWallet = walletProxy.getWallet(connectors[2].name);
 export const desktopWallet = walletProxy.getWallet(connectors[3].name);
 export const walletconnect = walletProxy.getWallet(connectors[4].name);
 
+const {
+  useName,
+  switchCurrentWallet,
+
+  usePlugin,
+
+  connect,
+  autoConnectOnce,
+  disconnect,
+
+  useIsConnecting,
+  useIsConnected,
+
+  useAccounts,
+  useChainId,
+  useENSNames,
+  useProvider,
+} = currentWallet;
+
+export const WalletSelectCard = () => {
+  const walletName = useName();
+  const isConnecting = useIsConnecting();
+  const isConnected = useIsConnected();
+
+  const chainId = useChainId();
+  const accounts = useAccounts();
+  const provider = useProvider();
+  const ENSNames = useENSNames(provider);
+
+  const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
+    ConnectionStatusPlugin.pluginName,
+  ).api.hooks;
+
+  useEffect(() => {
+    autoConnectOnce();
+    /**
+     * autoConnectOnce per wallet
+     */
+  }, [walletName]);
+
+  return (
+    <Card>
+      <WalletSelect
+        wallets={allWallets}
+        currentWalletName={walletName}
+        switchCurrentWallet={switchCurrentWallet}
+      />
+      <WalletCard>
+        <Text fontWeight="bold">{walletName}</Text>
+        <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
+        <Chain chainId={chainId} />
+        <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
+        <ConnectWithSelect
+          connect={connect}
+          disconnect={disconnect}
+          chainId={chainId}
+          isConnecting={isConnecting}
+          isConnected={isConnected}
+        />
+      </WalletCard>
+    </Card>
+  );
+};
 ```
 
 ## More wallets
