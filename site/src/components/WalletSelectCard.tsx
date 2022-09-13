@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react';
-import { allWallets, currentWallet } from '@site/wallets';
+import { allWallets, currentWallet, metamask } from '@site/wallets';
 import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
 import { useEffect } from 'react';
 
@@ -45,6 +45,7 @@ export const WalletSelectCard = () => {
   ).api.hooks;
 
   console.log('useConnectionStatus', useConnectionStatus());
+  console.log(metamask.useAccount());
 
   useEffect(() => {
     autoConnectOnce();

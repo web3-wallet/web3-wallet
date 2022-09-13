@@ -4,7 +4,7 @@ import {
   type CreateCurrentWalletOptions,
   createCurrentWallet,
 } from './createCurrentWallet';
-import { createWallet as createReactWallet } from './createWallet';
+import { createWallet } from './createWallet';
 import type { Plugin, PluginApi, PluginInfo, PluginName } from './plugin';
 import type { CurrentWallet, Wallet } from './types';
 
@@ -76,7 +76,7 @@ export class WalletProxy {
       throw new Error(`Wallet '${connector.name}' already exits`);
     }
 
-    const reactWallet = createReactWallet(connector);
+    const reactWallet = createWallet(connector);
 
     let wallet: Wallet = {
       ...reactWallet,
@@ -87,6 +87,9 @@ export class WalletProxy {
       },
     };
 
+    /**
+     * Register plugins
+     */
     this.options?.plugins?.forEach((plugin) => {
       const pluginInfo = plugin(wallet);
       this.pluginMap[wallet.name] = this.pluginMap[wallet.name] ?? {};
@@ -95,7 +98,7 @@ export class WalletProxy {
       const { middleware } = pluginInfo;
 
       /**
-       * Apply middleware
+       * Apply plugin middlewares
        */
       if (middleware) {
         const { connect, autoConnect, autoConnectOnce, disconnect } =

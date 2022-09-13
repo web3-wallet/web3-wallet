@@ -40,8 +40,10 @@ export const walletProxy = new WalletProxy(connectors, {
 
 export const allWallets = walletProxy.getWallets();
 export const currentWallet = walletProxy.getCurrentWallet();
-export const metamask = walletProxy.getWallet(connectors[0].name);
-export const defiwallet = walletProxy.getWallet(connectors[1].name);
-export const coinbaseWallet = walletProxy.getWallet(connectors[2].name);
-export const desktopWallet = walletProxy.getWallet(connectors[3].name);
-export const walletconnect = walletProxy.getWallet(connectors[4].name);
+export const [
+  metamask,
+  defiwallet,
+  coinbaseWallet,
+  desktopWallet,
+  walletconnect,
+] = allWallets;

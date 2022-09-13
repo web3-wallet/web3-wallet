@@ -67,6 +67,9 @@ import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-re
 import { WalletProxy } from '@web3-wallet/react';
 import { WalletConnect } from '@web3-wallet/walletconnect';
 
+// setup wallets and plugins
+// ===========================
+
 const connectors = [
   new MetaMask(),
   new CoinbaseWallet({
@@ -92,10 +95,16 @@ export const walletProxy = new WalletProxy(connectors, {
 
 export const allWallets = walletProxy.getWallets();
 export const currentWallet = walletProxy.getCurrentWallet();
-export const metamask = walletProxy.getWallet(connectors[0].name);
-export const coinbaseWallet = walletProxy.getWallet(connectors[2].name);
-export const desktopWallet = walletProxy.getWallet(connectors[3].name);
-export const walletconnect = walletProxy.getWallet(connectors[4].name);
+export const [
+  metamask,
+  defiwallet,
+  coinbaseWallet,
+  desktopWallet,
+  walletconnect,
+] = allWallets;
+
+// use wallets and plugins in UI components
+// ========================================
 
 const {
   useName,
@@ -129,6 +138,9 @@ export const WalletSelectCard = () => {
   const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
     ConnectionStatusPlugin.pluginName,
   ).api.hooks;
+
+  console.log('useConnectionStatus', useConnectionStatus());
+  console.log(metamask.useAccount());
 
   useEffect(() => {
     autoConnectOnce();
@@ -199,8 +211,6 @@ export class TrustWallet extends Injected<
     return await super.detectProvider(providerFilter);
   }
 }
-
-const trustWallet = createWallet((actions) => new TrustWallet({ actions }));
 ```
 
 If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method and override few of the Connector methods.
