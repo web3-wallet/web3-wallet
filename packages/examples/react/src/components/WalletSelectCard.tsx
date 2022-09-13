@@ -1,4 +1,4 @@
-import { walletProxy } from '@example-react/wallets';
+import { allWallets, currentWallet } from '@example-react/wallets';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -13,8 +13,7 @@ export const WalletSelectCard = () => {
   const {
     useName,
 
-    wallets,
-    setCurrentWallet,
+    switchCurrentWallet,
 
     connect,
     autoConnectOnce,
@@ -27,7 +26,7 @@ export const WalletSelectCard = () => {
     useChainId,
     useENSNames,
     useProvider,
-  } = walletProxy;
+  } = currentWallet;
 
   const walletName = useName();
 
@@ -48,9 +47,9 @@ export const WalletSelectCard = () => {
     <NoSSR>
       <Card style={{ minWidth: '280px', maxWidth: '320px', width: '100%' }}>
         <WalletSelect
-          wallets={wallets}
-          selectedWalletName={walletName}
-          setSelectedWallet={setCurrentWallet}
+          wallets={allWallets}
+          currentWalletName={walletName}
+          switchCurrentWallet={switchCurrentWallet}
         />
         <Card>
           <b>{walletName}</b>

@@ -22,12 +22,11 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 
 ## Packages
 
-| Package                                    | Version                                                                                                                | Description                                      |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [`@web3-wallet/core`](packages/core)       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)       | Core types and and the abstract wallet connector |
-| [`@web3-wallet/vanilla`](packages/vanilla) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvanilla.svg)](https://badge.fury.io/js/@web3-wallet%2Fvanilla) | Vanilla web3 wallet                              |
-| [`@web3-wallet/react`](packages/react)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)     | React binding for web3 wallet                    |
-| [`@web3-wallet/vue`](packages/vue)         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)         | Vue binding for web3 wallet                      |
+| Package                                | Version                                                      | Description                                      |
+| -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore) | Core types and and the abstract wallet connector |
+| [`@web3-wallet/react`](packages/react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for web3 wallet                    |
+| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue) | Vue binding for web3 wallet                      |
 
 ## Wallets
 
@@ -48,7 +47,6 @@ pnpm add @web3-wallet/react @web3-wallet/metamask
 ```
 
 ```typescript
-// wallets/metaMask.ts
 import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
 

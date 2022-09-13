@@ -1,4 +1,4 @@
-import type { WalletOptions } from '@web3-wallet/core';
+import type { ConnectorOptions } from '@web3-wallet/core';
 import { type Provider, Connector } from '@web3-wallet/core';
 
 type InjectedProviders<P> = {
@@ -10,7 +10,7 @@ export type ProviderFilter<P> = (provider: P) => boolean;
 
 export abstract class Injected<
   P extends Provider = Provider,
-  O extends WalletOptions = WalletOptions,
+  O extends ConnectorOptions = ConnectorOptions,
 > extends Connector<P, O> {
   /** {@inheritdoc Connector.provider} */
   public provider?: P;

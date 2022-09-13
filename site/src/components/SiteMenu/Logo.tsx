@@ -5,7 +5,7 @@ import { Link } from '../Link';
 
 export const Logo = () => {
   return (
-    <Link href="/">
+    <Link chakraLinkProps={{ flexShrink: 0 }} href="/">
       <Image width="32px" height="32px" src={logo} alt="web3 wallet logo" />
     </Link>
   );

@@ -1,17 +1,21 @@
 import type { Networkish } from '@ethersproject/networks';
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers';
-import type { WalletName, WalletState } from '@web3-wallet/core';
-import type { VanillaWallet } from '@web3-wallet/vanilla';
+import type {
+  Wallet as CoreWallet,
+  WalletName,
+  WalletState,
+} from '@web3-wallet/core';
 
-export interface Wallet extends VanillaWallet {
-  /**
-   * hooks
-   */
+import type { PluginApi as PluginApi, PluginInfo, PluginName } from './plugin';
+
+export interface Wallet extends CoreWallet {
+  getPlugin: <T extends PluginApi = PluginApi>(
+    name: PluginName,
+  ) => PluginInfo<T>;
+  useIsConnecting: () => WalletState['isConnecting'];
   useChainId: () => WalletState['chainId'];
   useAccounts: () => WalletState['accounts'];
   useAccount: () => string | undefined;
-  useUserConnectionStatus: () => WalletState['userConnectionStatus'];
-  useIsConnecting: () => WalletState['isConnecting'];
   useIsConnected: () => boolean;
   useProvider: <T extends BaseProvider = Web3Provider>(
     network?: Networkish,
@@ -21,28 +25,35 @@ export interface Wallet extends VanillaWallet {
   useENSName: (provider?: BaseProvider) => undefined | string;
 }
 
-export type WalletHooks = Pick<
+export type WalletCoreHooks = Pick<
   Wallet,
-  | 'useChainId'
-  | 'useAccount'
-  | 'useAccounts'
-  | 'useUserConnectionStatus'
   | 'useIsConnecting'
+  | 'useChainId'
+  | 'useAccounts'
+  | 'useAccount'
   | 'useIsConnected'
   | 'useProvider'
   | 'useENSNames'
   | 'useENSName'
 >;
 
-export type CurrentWalletState = Pick<WalletState, 'userConnectionStatus'> & {
+export enum ConnectionStatus {
+  Untouched = 'Untouched',
+  Connected = 'Connected',
+  Disconnected = 'Disconnected',
+}
+
+export type CurrentWalletState = {
   currentWallet: WalletName;
+  connectionStatus: ConnectionStatus;
 };
 
-export type CurrentWallet = Omit<
-  Wallet,
-  'name' | '$getStore' | '$getActions'
-> & {
-  wallets: Wallet[];
-  setCurrentWallet: (walletName: WalletName) => void;
+export type CurrentWallet = Omit<Wallet, 'name'> & {
+  switchCurrentWallet: (name: WalletName) => void;
   useName: () => Wallet['name'];
+  useConnectionStatus: () => ConnectionStatus;
+  /**
+   * usePlugin has the same signature as getPlugin
+   */
+  usePlugin: Wallet['getPlugin'];
 };

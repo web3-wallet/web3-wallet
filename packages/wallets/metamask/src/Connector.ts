@@ -1,11 +1,11 @@
-import type { Provider, WalletName, WalletOptions } from '@web3-wallet/core';
+import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
 import { Injected } from '@web3-wallet/injected';
 
 export type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
 };
 
-export type MetaMaskOptions = WalletOptions<undefined>;
+export type MetaMaskOptions = ConnectorOptions<undefined>;
 
 export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;

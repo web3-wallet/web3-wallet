@@ -1,19 +1,21 @@
 import type { LinkProps as ChakraLinkProps } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
-import type { LinkProps } from 'next/link';
+import type { LinkProps as NextLinkProps } from 'next/link';
 import NextLink from 'next/link';
 import type { ReactNode } from 'react';
 import React from 'react';
 
+export type LinkProps = NextLinkProps & {
+  children: ReactNode;
+  chakraLinkProps?: ChakraLinkProps;
+};
+
 export const Link = ({
   href,
   children,
-  linkProps,
+  chakraLinkProps,
   ...rest
-}: LinkProps & {
-  children: ReactNode;
-  linkProps?: ChakraLinkProps;
-}) => {
+}: LinkProps) => {
   return (
     <NextLink href={href} {...rest} passHref>
       <ChakraLink
@@ -23,7 +25,7 @@ export const Link = ({
         }}
         display="flex"
         textShadow="1px 1px 2px #fff"
-        {...linkProps}
+        {...chakraLinkProps}
       >
         {children}
       </ChakraLink>

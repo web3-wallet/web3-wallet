@@ -1,6 +1,6 @@
 import type _WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
-import type { WalletOptions } from '@web3-wallet/core';
+import type { ConnectorOptions } from '@web3-wallet/core';
 import { type Provider, type WalletName, Connector } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
 
@@ -9,7 +9,7 @@ export const URI_AVAILABLE = 'URI_AVAILABLE';
 type WalletConnectProvider = _WalletConnectProvider & Provider;
 
 export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
-export type WalletConnectOptions = WalletOptions<IWCEthRpcConnectionOptions>;
+export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
 
 export class WalletConnect extends Connector<
   WalletConnectProvider,
