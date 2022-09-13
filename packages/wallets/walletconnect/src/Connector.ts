@@ -94,15 +94,17 @@ export class WalletConnect extends Connector<
   }
 
   /** {@inheritdoc Connector.disconnect} */
-  public override async disconnect(): Promise<void> {
-    this.removeEventListeners?.();
+  public override async disconnect(force = true): Promise<void> {
     super.disconnect();
-    await this.provider?.disconnect();
-    /**
-     * walletconnect sdk will throw alway the existing provider after disconnect.
-     *
-     * need to set provider to undefined so that a new provider can be created next time.
-     */
-    this.provider = undefined;
+    if (force) {
+      this.removeEventListeners?.();
+      await this.provider?.disconnect();
+      /**
+       * walletconnect sdk will throw alway the existing provider after disconnect.
+       *
+       * need to set provider to undefined so that a new provider can be created next time.
+       */
+      this.provider = undefined;
+    }
   }
 }

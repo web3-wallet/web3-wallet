@@ -64,8 +64,10 @@ export class CoinbaseWallet extends Connector<
   }
 
   /** {@inheritdoc Connector.disconnect} */
-  public override async disconnect(): Promise<void> {
+  public override async disconnect(force = true): Promise<void> {
     await super.disconnect();
-    await this.coinbaseWallet?.disconnect();
+    if (force) {
+      await this.coinbaseWallet?.disconnect();
+    }
   }
 }

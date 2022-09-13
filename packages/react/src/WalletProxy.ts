@@ -22,8 +22,10 @@ export class WalletProxy {
 
   constructor(connectors: Connector[], options?: WalletProxyOptions) {
     if (!connectors.length) throw new Error(`connectors can't be empty`);
+
     this.options = options;
     this.connectors = connectors;
+
     this.connectors.forEach((connector) => {
       this.createWallet(connector);
     });
@@ -54,7 +56,7 @@ export class WalletProxy {
     return this.wallets.find((w) => w.name === name) as Wallet;
   }
 
-  public getWallets() {
+  public getWallets(): Wallet[] {
     return this.wallets.slice(0);
   }
 
