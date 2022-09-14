@@ -1,1 +1,1 @@
-export * as CoreHooks from './plugin';
+export * as CoreHooksPlugin from './plugin';

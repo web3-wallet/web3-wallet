@@ -38,7 +38,7 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
   const provider = useProvider();
-  const ENSNames = useENSNames(provider);
+  const ENSNames = useENSNames();
 
   const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
     ConnectionStatusPlugin.name,

@@ -4,8 +4,9 @@ import {
 } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
-import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
-import { CoreHooks } from './plugins/core-hooks';
+import { CoreHooksPlugin } from './plugins/core-hooks';
+import { ENSPlugin } from './plugins/ens';
+import { Web3ProviderPlugin } from './plugins/web3-provider';
 import type { Wallet } from './types';
 
 /**
@@ -19,22 +20,23 @@ export const createWallet = (
 
   const reactStore = createReactStore(coreWallet.$getStore());
 
-  const stateHooks = getStateHooks(reactStore);
-  const derivedHooks = getDerivedHooks(stateHooks);
-  const augmentedHooks = getAugmentedHooks(connector, stateHooks, derivedHooks);
+  const builtinPlugins = [
+    CoreHooksPlugin.createPlugin(),
+    Web3ProviderPlugin.createPlugin(),
+    ENSPlugin.createPlugin(),
+  ];
 
   const wallet = {
     ...coreWallet,
     $getStore: () => reactStore,
-    ...augmentedHooks,
-  };
+  } as Wallet;
 
-  const { createApi } = CoreHooks.createPlugin();
-
-  return {
-    ...wallet,
-    ...createApi({
-      wallet: wallet as unknown as Wallet,
-    }).hooks,
-  };
+  // merge builtin plugin hooks to wallet
+  return builtinPlugins.reduce(
+    (wallet, plugin) => ({
+      ...wallet,
+      ...plugin.createApi({ wallet }).hooks,
+    }),
+    wallet,
+  );
 };

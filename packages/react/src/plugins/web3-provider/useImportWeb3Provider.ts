@@ -17,7 +17,7 @@ let DynamicWeb3Provider: typeof Web3Provider | undefined;
  *  1. resolve with the imported Web3Provider,
  *  2. or reject with undefined, if failed to imported the Web3Provider
  */
-async function importProvider(): Promise<typeof Web3Provider | undefined> {
+async function importWeb3Provider(): Promise<typeof Web3Provider | undefined> {
   if (tried) return DynamicWeb3Provider;
 
   tried = true;
@@ -35,7 +35,7 @@ export const useImportWeb3Provider = (): typeof Web3Provider | undefined => {
   useEffect(() => {
     if (loaded) return;
     let stale = false;
-    void importProvider().then(() => {
+    void importWeb3Provider().then(() => {
       if (stale) return;
       setLoaded(true);
     });

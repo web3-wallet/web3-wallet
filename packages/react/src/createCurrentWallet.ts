@@ -7,7 +7,7 @@ import type {
   CurrentWallet,
   CurrentWalletState,
   Wallet,
-  WalletCoreHooks,
+  WalletBuiltinHooks,
 } from './types';
 import { ConnectionStatus } from './types';
 
@@ -92,7 +92,7 @@ export const createCurrentWallet = (
    *
    * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
    */
-  const getCombinedHooks = (): WalletCoreHooks => {
+  const getCombinedHooks = (): WalletBuiltinHooks => {
     const combinedHooks: Record<string, unknown> = {};
 
     const {
@@ -106,7 +106,7 @@ export const createCurrentWallet = (
       useProvider,
     } = wallets[0];
 
-    const hooks: WalletCoreHooks = {
+    const hooks: WalletBuiltinHooks = {
       useChainId,
       useAccount,
       useAccounts,
@@ -123,7 +123,7 @@ export const createCurrentWallet = (
         const currentWalletName = store.getState().currentWallet;
 
         for (const wallet of wallets) {
-          const hookFn = wallet[hookName as keyof WalletCoreHooks] as (
+          const hookFn = wallet[hookName as keyof WalletBuiltinHooks] as (
             ...args: unknown[]
           ) => unknown;
 
@@ -138,7 +138,7 @@ export const createCurrentWallet = (
       };
     }
 
-    return combinedHooks as WalletCoreHooks;
+    return combinedHooks as WalletBuiltinHooks;
   };
 
   const connect: Wallet['connect'] = async (...args) => {

@@ -24,6 +24,20 @@ const computeIsConnected = ({
   return Boolean(chainId && accounts?.length && !isConnecting);
 };
 
+const ACCOUNTS_EQUALITY_CHECKER: (
+  a: WalletState['accounts'],
+  b: WalletState['accounts'],
+) => boolean = (oldAccounts, newAccounts) => {
+  if (oldAccounts === undefined && newAccounts === undefined) return true;
+  if (oldAccounts === undefined && newAccounts !== undefined) return false;
+  if (oldAccounts !== undefined && newAccounts === undefined) return false;
+  if (oldAccounts?.length !== newAccounts?.length) return false;
+
+  return !!oldAccounts?.every(
+    (oldAccount, i) => oldAccount === newAccounts?.[i],
+  );
+};
+
 export const createPlugin: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { $getStore } = wallet;
@@ -39,7 +53,7 @@ export const createPlugin: CreatePlugin<undefined, Api> = () => {
     };
 
     const useAccounts: Api['hooks']['useAccounts'] = () => {
-      return useStore((s) => s.accounts);
+      return useStore((s) => s.accounts, ACCOUNTS_EQUALITY_CHECKER);
     };
 
     const useIsConnected: Api['hooks']['useIsConnected'] = () => {
