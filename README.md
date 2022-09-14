@@ -22,27 +22,19 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 
 ## Packages
 
-| Package                                | Version                                                                                                            | Description                                      |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| [`@web3-wallet/core`](packages/core)   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)   | Core types and and the abstract wallet connector |
-| [`@web3-wallet/react`](packages/react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact) | React binding for web3 wallet                    |
-| [`@web3-wallet/vue`](packages/vue)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)     | Vue binding for web3 wallet                      |
-
-## Wallets
-
-| Package                                                            | Version                                                                                                                                | Description                      |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| [`@web3-wallet/injected`](packages/wallets/injected)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected)               | Abstract Injected Connector      |
-| [`@web3-wallet/metamask`](packages/wallets/metamask)               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)               | Metamask Connector               |
-| [`@web3-wallet/defiwallet`](packages/wallets/defiwallet)           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)           | Crypto.com DeFi Wallet Connector |
-| [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet) | Coinbase Wallet Connector        |
-| [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)     | Walletconnect Connector          |
-
-## Plugins
-
-| Package                                                                                   | Version                                                                                                                                                              | Description                            |
-| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | Tracking the wallet connection status. |
+| Package                                                                                   | Version                                                                                                                                                              | Docs |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| [`@web3-wallet/core`](packages/core)                                                      | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)                                                     | --   |
+| [`@web3-wallet/react`](packages/react)                                                    | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                                                   | --   |
+| [`@web3-wallet/vue`](packages/vue)                                                        | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                                                       | --   |
+| **Wallets**                                                                               |                                                                                                                                                                      |      |
+| [`@web3-wallet/injected`](packages/wallets/injected)                                      | [![npm version](https://badge.fury.io/js/@web3-wallet%2Finjected.svg)](https://badge.fury.io/js/@web3-wallet%2Finjected)                                             | --   |
+| [`@web3-wallet/metamask`](packages/wallets/metamask)                                      | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)                                             | --   |
+| [`@web3-wallet/defiwallet`](packages/wallets/defiwallet)                                  | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)                                         | --   |
+| [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet)                        | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet)                               | --   |
+| [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)                            | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)                                   | --   |
+| **Plugins**                                                                               |                                                                                                                                                                      |      |
+| [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | --   |
 
 ## Getting started
 
