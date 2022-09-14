@@ -4,9 +4,7 @@ import {
 } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
-import { CoreHooksPlugin } from './plugins/core-hooks';
-import { ENSPlugin } from './plugins/ens';
-import { Web3ProviderPlugin } from './plugins/web3-provider';
+import { builtinPlugins } from './builtPlugins';
 import type { Wallet } from './types';
 
 /**
@@ -19,12 +17,6 @@ export const createWallet = (
   const coreWallet = createCoreWallet(connector);
 
   const reactStore = createReactStore(coreWallet.$getStore());
-
-  const builtinPlugins = [
-    CoreHooksPlugin.createPlugin(),
-    Web3ProviderPlugin.createPlugin(),
-    ENSPlugin.createPlugin(),
-  ];
 
   const wallet = {
     ...coreWallet,
