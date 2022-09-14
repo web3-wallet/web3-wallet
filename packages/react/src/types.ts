@@ -26,7 +26,7 @@ export enum ConnectionStatus {
 }
 
 export type CurrentWalletState = {
-  currentWallet: WalletName;
+  name: WalletName;
   connectionStatus: ConnectionStatus;
 };
 

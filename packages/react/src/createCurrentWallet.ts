@@ -17,7 +17,13 @@ export type CreateCurrentWalletOptions = {
 };
 
 /**
- * @param wallets - The wallets to proxy with
+ * Create and maintain the current wallet status.
+ *
+ * Context:
+ * dApps usually support multiple wallets and need to maintain a current wallet.
+ * The api of the current wallet is slily different with the api of a non current wallet.
+ *
+ * @param wallets - The wallets that can be chose as the current wallet.
  * @param options - The options object
  * @param options.defaultCurrentWallet - the optional defaultCurrentWallet, default to the first wallets[0].name
  * @param options.persistKey - the optional persist key, default to "@web3-wallet"
@@ -32,13 +38,14 @@ export const createCurrentWallet = (
     persistKey?: string;
   } = {},
 ): CurrentWallet => {
-  const { defaultCurrentWallet, persistKey = '@web3-wallet' } = options;
+  const { defaultCurrentWallet, persistKey = '@web3-wallet/current-wallet' } =
+    options;
 
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 
   const DEFAULT_STATE: CurrentWalletState = {
     connectionStatus: ConnectionStatus.Untouched,
-    currentWallet: defaultCurrentWallet || wallets[0].name,
+    name: defaultCurrentWallet || wallets[0].name,
   };
 
   const store = create<CurrentWalletState>()(
@@ -48,22 +55,22 @@ export const createCurrentWallet = (
     }),
   );
 
-  const useName: CurrentWallet['useName'] = () => store((s) => s.currentWallet);
+  const useName: CurrentWallet['useName'] = () => store((s) => s.name);
 
   const switchCurrentWallet: CurrentWallet['switchCurrentWallet'] = (
-    currentWallet: WalletName,
+    name: WalletName,
   ): void => {
-    if (wallets.find((w) => w.name === currentWallet)) {
+    if (wallets.find((w) => w.name === name)) {
       store.setState({
-        currentWallet,
+        name,
       });
     } else {
-      console.debug(`Wallet '${currentWallet}' don't exists`);
+      console.debug(`Wallet '${name}' don't exists`);
     }
   };
 
   const getUnderliningCurrentWallet = (): Wallet => {
-    const currentWalletName = store.getState().currentWallet;
+    const currentWalletName = store.getState().name;
     const found = wallets.find((w) => w.name === currentWalletName);
     return found ?? wallets[0];
   };
@@ -120,7 +127,7 @@ export const createCurrentWallet = (
     for (const hookName of Object.keys(hooks)) {
       combinedHooks[hookName] = (...args: unknown[]) => {
         let hookFnOutput: unknown;
-        const currentWalletName = store.getState().currentWallet;
+        const currentWalletName = store.getState().name;
 
         for (const wallet of wallets) {
           const hookFn = wallet[hookName as keyof WalletBuiltinHooks] as (
