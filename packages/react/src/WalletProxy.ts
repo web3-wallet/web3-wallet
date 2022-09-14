@@ -1,5 +1,6 @@
 import type { Connector, WalletName } from '@web3-wallet/core';
 
+import { applyWalletMiddleWares } from './applyWalletMiddlewares';
 import {
   type CreateCurrentWalletOptions,
   createCurrentWallet,
@@ -91,33 +92,14 @@ export class WalletProxy {
      * Register plugins
      */
     this.options?.plugins?.forEach((plugin) => {
-      const pluginInfo = plugin(wallet);
+      const pluginInfo = plugin({ wallet });
       this.pluginMap[wallet.name] = this.pluginMap[wallet.name] ?? {};
       this.pluginMap[wallet.name][pluginInfo.name] = pluginInfo;
-
-      const { middleware } = pluginInfo;
 
       /**
        * Apply plugin middlewares
        */
-      if (middleware) {
-        const { connect, autoConnect, autoConnectOnce, disconnect } =
-          middleware;
-
-        wallet = {
-          ...wallet,
-          connect: connect ? connect(wallet)(wallet.connect) : wallet.connect,
-          autoConnect: autoConnect
-            ? autoConnect(wallet)(wallet.autoConnect)
-            : wallet.autoConnect,
-          autoConnectOnce: autoConnectOnce
-            ? autoConnectOnce(wallet)(wallet.autoConnectOnce)
-            : wallet.autoConnectOnce,
-          disconnect: disconnect
-            ? disconnect(wallet)(wallet.disconnect)
-            : wallet.disconnect,
-        };
-      }
+      wallet = applyWalletMiddleWares(wallet, pluginInfo.middlewares);
     });
 
     this.wallets.push(wallet);

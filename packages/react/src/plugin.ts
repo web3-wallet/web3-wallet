@@ -7,29 +7,46 @@ export type PluginName<T extends string = string> = Brand<
   '@web-3wallet/plugin-react'
 >;
 
-export type WalletMiddleware = {
-  connect: (wallet: Wallet) => (next: Wallet['connect']) => Wallet['connect'];
-  autoConnect: (
-    wallet: Wallet,
-  ) => (next: Wallet['autoConnect']) => Wallet['autoConnect'];
-  autoConnectOnce: (
-    wallet: Wallet,
-  ) => (next: Wallet['autoConnectOnce']) => Wallet['autoConnectOnce'];
-  disconnect: (
-    wallet: Wallet,
-  ) => (next: Wallet['disconnect']) => Wallet['disconnect'];
+export const walletMiddlewareNames = [
+  'connect',
+  'autoConnect',
+  'autoConnectOnce',
+  'disconnect',
+] as const;
+
+export type WalletMiddlewareName = typeof walletMiddlewareNames[number];
+
+/**
+ * May expose other APIs to PluginContext later on
+ */
+export type MiddlewareContext = {
+  wallet: Wallet;
 };
 
+export type WalletMiddlewares = Partial<{
+  [K in WalletMiddlewareName]: (
+    context: MiddlewareContext,
+  ) => (next: Wallet[K]) => Wallet[K];
+}>;
+
 export type PluginApi = object | undefined;
+
 export interface PluginInfo<P extends PluginApi = PluginApi> {
   name: PluginName;
   dependencies?: PluginName[];
-  middleware?: WalletMiddleware;
+  middlewares?: WalletMiddlewares;
   api: P extends undefined ? never : P;
 }
 
+/**
+ * May expose other APIs to PluginContext later on
+ */
+export type PluginContext = {
+  wallet: Wallet;
+};
+
 export type Plugin<P extends PluginApi = PluginApi> = (
-  wallet: Wallet,
+  context: PluginContext,
 ) => PluginInfo<P>;
 
 export type CreatePlugin<

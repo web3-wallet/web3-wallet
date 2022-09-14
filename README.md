@@ -136,7 +136,7 @@ export const WalletSelectCard = () => {
   const ENSNames = useENSNames(provider);
 
   const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
-    ConnectionStatusPlugin.pluginName,
+    ConnectionStatusPlugin.name,
   ).api.hooks;
 
   console.log('useConnectionStatus', useConnectionStatus());

@@ -1,14 +1,16 @@
 import type {
   CreatePlugin,
+  MiddlewareContext,
+  PluginContext,
   PluginName,
-  WalletMiddleware,
+  WalletMiddlewares,
 } from '@web3-wallet/react';
 import type { StoreApi, UseBoundStore } from 'zustand';
 import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 
-const name = '@web3-wallet/plugin-connection-status-react';
-export const pluginName = name as PluginName<typeof name>;
+const _name = '@web3-wallet/plugin-connection-status-react';
+export const name = _name as PluginName<typeof _name>;
 
 export enum ConnectionStatus {
   Untouched = 'Untouched',
@@ -35,90 +37,91 @@ export type Options = {
   persistKey?: string;
 };
 
-export const createPlugin: CreatePlugin<Options, Api> = (options) => () => {
-  const { isPersist = false, persistKey = pluginName } = options || {};
+export const createPlugin: CreatePlugin<Options, Api> =
+  (options) => (_: PluginContext) => {
+    const { isPersist = false, persistKey = name } = options || {};
 
-  let store: UseBoundStore<StoreApi<State>>;
+    let store: UseBoundStore<StoreApi<State>>;
 
-  if (isPersist) {
-    store = createStore<State>()(
-      persist<State>(() => DEFAULT_STATE, {
-        name: persistKey,
-        version: 0,
-      }),
-    );
-  } else {
-    store = createStore<State>()(() => DEFAULT_STATE);
-  }
+    if (isPersist) {
+      store = createStore<State>()(
+        persist<State>(() => DEFAULT_STATE, {
+          name: persistKey,
+          version: 0,
+        }),
+      );
+    } else {
+      store = createStore<State>()(() => DEFAULT_STATE);
+    }
 
-  const connect: WalletMiddleware['connect'] =
-    () =>
-    (next) =>
-    async (...args) => {
-      const result = await next(...args);
+    const connect: WalletMiddlewares['connect'] =
+      (_: MiddlewareContext) =>
+      (next) =>
+      async (...args) => {
+        const result = await next(...args);
 
-      store.setState({
-        connectionStatus: ConnectionStatus.Connected,
-      });
+        store.setState({
+          connectionStatus: ConnectionStatus.Connected,
+        });
 
-      return result;
+        return result;
+      };
+
+    const autoConnect: WalletMiddlewares['autoConnect'] =
+      (_: MiddlewareContext) =>
+      (next) =>
+      async (...args) => {
+        const result = await next(...args);
+
+        store.setState({
+          connectionStatus: ConnectionStatus.Connected,
+        });
+
+        return result;
+      };
+
+    const autoConnectOnce: WalletMiddlewares['autoConnectOnce'] =
+      (_: MiddlewareContext) =>
+      (next) =>
+      async (...args) => {
+        const result = await next(...args);
+
+        store.setState({
+          connectionStatus: ConnectionStatus.Connected,
+        });
+
+        return result;
+      };
+
+    const disconnect: WalletMiddlewares['disconnect'] =
+      (_: MiddlewareContext) =>
+      (next) =>
+      async (...args) => {
+        const result = await next(...args);
+
+        store.setState({
+          connectionStatus: ConnectionStatus.Disconnected,
+        });
+
+        return result;
+      };
+
+    const useConnectionStatus: Api['hooks']['useConnectionStatus'] = () => {
+      return store((s) => s.connectionStatus);
     };
 
-  const autoConnect: WalletMiddleware['autoConnect'] =
-    () =>
-    (next) =>
-    async (...args) => {
-      const result = await next(...args);
-
-      store.setState({
-        connectionStatus: ConnectionStatus.Connected,
-      });
-
-      return result;
-    };
-
-  const autoConnectOnce: WalletMiddleware['autoConnectOnce'] =
-    () =>
-    (next) =>
-    async (...args) => {
-      const result = await next(...args);
-
-      store.setState({
-        connectionStatus: ConnectionStatus.Connected,
-      });
-
-      return result;
-    };
-
-  const disconnect: WalletMiddleware['disconnect'] =
-    () =>
-    (next) =>
-    async (...args) => {
-      const result = await next(...args);
-
-      store.setState({
-        connectionStatus: ConnectionStatus.Disconnected,
-      });
-
-      return result;
-    };
-
-  const useConnectionStatus: Api['hooks']['useConnectionStatus'] = () => {
-    return store((s) => s.connectionStatus);
-  };
-
-  return {
-    name: pluginName,
-    middleware: {
-      connect,
-      autoConnect,
-      autoConnectOnce,
-      disconnect,
-    },
-    api: {
-      hooks: {
-        useConnectionStatus,
+    return {
+      name,
+      middlewares: {
+        connect,
+        autoConnect,
+        autoConnectOnce,
+        disconnect,
       },
-    },
+      api: {
+        hooks: {
+          useConnectionStatus,
+        },
+      },
+    };
   };
-};
