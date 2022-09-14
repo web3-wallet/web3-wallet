@@ -1,30 +1,42 @@
-import type { WalletMiddlewares } from './plugin';
+import type { MiddlewareContext, WalletMiddlewares } from './plugin';
 import { walletMiddlewareNames } from './plugin';
 import type { Wallet } from './types';
 
+/**
+ * Apply middleWares to wallet
+ *
+ * @param middleWares
+ * @param wallet
+ * @returns Wallet - A new wallet enhanced with the middleWares,
+ *  the interface of the new wallet is the same as the input as wallet.
+ */
 export const applyWalletMiddleWares = (
-  wallet: Wallet,
   middleWares: WalletMiddlewares | undefined,
+  wallet: Wallet,
 ): Wallet => {
-  const nextWallet: Wallet = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nextWallet: any = {
     ...wallet,
   };
 
   if (!middleWares) return nextWallet;
 
+  const middlewareContext: MiddlewareContext = {};
+
   for (const name of walletMiddlewareNames) {
-    const m = middleWares[name];
+    const middleware = middleWares[name];
 
-    if (!m) continue;
+    if (!middleware) continue;
 
-    if (typeof m !== 'function') {
-      console.debug(`Middleware "${name}" must be a function, got ${typeof m}`);
+    if (typeof middleware !== 'function') {
+      console.debug(
+        `Middleware "${name}" must be a function, got ${typeof middleware}`,
+      );
       continue;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (nextWallet as any)[name] = m({ wallet })((nextWallet as any)[name]);
+    nextWallet[name] = middleware(middlewareContext)(nextWallet[name]);
   }
 
-  return nextWallet;
+  return nextWallet as Wallet;
 };

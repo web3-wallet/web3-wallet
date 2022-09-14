@@ -42,7 +42,7 @@ export const WalletSelectCard = () => {
 
   const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
     ConnectionStatusPlugin.name,
-  ).api.hooks;
+  ).hooks;
 
   console.log('useConnectionStatus', useConnectionStatus());
   console.log(metamask.useAccount());

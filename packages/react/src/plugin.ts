@@ -17,11 +17,9 @@ export const walletMiddlewareNames = [
 export type WalletMiddlewareName = typeof walletMiddlewareNames[number];
 
 /**
- * May expose other APIs to PluginContext later on
+ * May expose specific context to middleware later on
  */
-export type MiddlewareContext = {
-  wallet: Wallet;
-};
+export type MiddlewareContext = object;
 
 export type WalletMiddlewares = Partial<{
   [K in WalletMiddlewareName]: (
@@ -29,25 +27,25 @@ export type WalletMiddlewares = Partial<{
   ) => (next: Wallet[K]) => Wallet[K];
 }>;
 
-export type PluginApi = object | undefined;
-
-export interface PluginInfo<P extends PluginApi = PluginApi> {
-  name: PluginName;
-  dependencies?: PluginName[];
-  middlewares?: WalletMiddlewares;
-  api: P extends undefined ? never : P;
-}
+export type PluginApi = {
+  hooks?: object;
+};
 
 /**
  * May expose other APIs to PluginContext later on
  */
 export type PluginContext = {
   wallet: Wallet;
+  dependencies?: unknown[];
 };
 
-export type Plugin<P extends PluginApi = PluginApi> = (
-  context: PluginContext,
-) => PluginInfo<P>;
+export interface Plugin<P extends PluginApi = PluginApi> {
+  name: PluginName;
+  dependencies?: PluginName[];
+  createApi: (context: PluginContext) => P & {
+    middlewares: WalletMiddlewares;
+  };
+}
 
 export type CreatePlugin<
   O extends object = object,

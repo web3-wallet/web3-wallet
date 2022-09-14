@@ -6,12 +6,10 @@ import type {
   WalletState,
 } from '@web3-wallet/core';
 
-import type { PluginApi as PluginApi, PluginInfo, PluginName } from './plugin';
+import type { PluginApi, PluginName } from './plugin';
 
 export interface Wallet extends CoreWallet {
-  getPlugin: <T extends PluginApi = PluginApi>(
-    pluginName: PluginName,
-  ) => PluginInfo<T>;
+  getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
 
   useIsConnecting: () => WalletState['isConnecting'];
   useChainId: () => WalletState['chainId'];

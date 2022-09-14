@@ -6,7 +6,7 @@ import {
   createCurrentWallet,
 } from './createCurrentWallet';
 import { createWallet } from './createWallet';
-import type { Plugin, PluginApi, PluginInfo, PluginName } from './plugin';
+import type { Plugin, PluginApi, PluginName } from './plugin';
 import type { CurrentWallet, Wallet } from './types';
 
 export type WalletProxyOptions = {
@@ -15,7 +15,7 @@ export type WalletProxyOptions = {
 };
 
 export class WalletProxy {
-  private pluginMap: Record<WalletName, Record<PluginName, PluginInfo>> = {};
+  private pluginMap: Record<WalletName, Record<PluginName, PluginApi>> = {};
   private wallets: Wallet[] = [];
   private connectors: Connector[];
   private options?: WalletProxyOptions;
@@ -64,15 +64,15 @@ export class WalletProxy {
   private getPlugin<T extends PluginApi = PluginApi>(
     walletName: WalletName,
     pluginName: PluginName,
-  ): PluginInfo<T> {
+  ): T {
     if (!this.hasPlugin(walletName, pluginName)) {
       throw new Error(`Can't find plugin '${pluginName}'`);
     }
 
-    return this.pluginMap[walletName][pluginName] as PluginInfo<T>;
+    return this.pluginMap[walletName][pluginName] as T;
   }
 
-  private createWallet(connector: Connector): Wallet {
+  private createWallet(connector: Connector): void {
     if (this.hasWallet(connector.name)) {
       throw new Error(`Wallet '${connector.name}' already exits`);
     }
@@ -83,7 +83,7 @@ export class WalletProxy {
       ...reactWallet,
       getPlugin: <T extends PluginApi = PluginApi>(
         pluginName: PluginName,
-      ): PluginInfo<T> => {
+      ): T => {
         return this.getPlugin<T>(wallet.name, pluginName);
       },
     };
@@ -92,17 +92,37 @@ export class WalletProxy {
      * Register plugins
      */
     this.options?.plugins?.forEach((plugin) => {
-      const pluginInfo = plugin({ wallet });
-      this.pluginMap[wallet.name] = this.pluginMap[wallet.name] ?? {};
-      this.pluginMap[wallet.name][pluginInfo.name] = pluginInfo;
-
-      /**
-       * Apply plugin middlewares
-       */
-      wallet = applyWalletMiddleWares(wallet, pluginInfo.middlewares);
+      wallet = this.applyPlugin(plugin, wallet);
     });
 
     this.wallets.push(wallet);
+  }
+
+  private applyPlugin(plugin: Plugin, wallet: Wallet): Wallet {
+    /**
+     * check and retrieve plugin dependencies
+     */
+    const dependencies: PluginApi[] = (plugin.dependencies ?? []).map(
+      (dep: PluginName) => {
+        if (this.hasPlugin(wallet.name, plugin.name)) {
+          throw new Error(
+            `Plugin dependency ${dep} don't exists: ${plugin.name} depends on ${dep} `,
+          );
+        }
+
+        return this.pluginMap[wallet.name][dep];
+      },
+    );
+
+    const pluginApi = plugin.createApi({ wallet, dependencies });
+
+    this.pluginMap[wallet.name] = this.pluginMap[wallet.name] ?? {};
+    this.pluginMap[wallet.name][plugin.name] = pluginApi;
+
+    /**
+     * Apply plugin middlewares
+     */
+    wallet = applyWalletMiddleWares(pluginApi.middlewares, wallet);
 
     return wallet;
   }

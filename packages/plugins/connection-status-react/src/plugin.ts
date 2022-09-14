@@ -26,6 +26,9 @@ const DEFAULT_STATE: State = {
   connectionStatus: ConnectionStatus.Untouched,
 };
 
+/**
+ * Public plugin api
+ */
 export type Api = {
   hooks: {
     useConnectionStatus: () => ConnectionStatus;
@@ -37,8 +40,8 @@ export type Options = {
   persistKey?: string;
 };
 
-export const createPlugin: CreatePlugin<Options, Api> =
-  (options) => (_: PluginContext) => {
+export const createPlugin: CreatePlugin<Options, Api> = (options) => {
+  const createApi = (_: PluginContext) => {
     const { isPersist = false, persistKey = name } = options || {};
 
     let store: UseBoundStore<StoreApi<State>>;
@@ -111,17 +114,20 @@ export const createPlugin: CreatePlugin<Options, Api> =
     };
 
     return {
-      name,
       middlewares: {
         connect,
         autoConnect,
         autoConnectOnce,
         disconnect,
       },
-      api: {
-        hooks: {
-          useConnectionStatus,
-        },
+      hooks: {
+        useConnectionStatus,
       },
     };
   };
+
+  return {
+    name,
+    createApi,
+  };
+};
