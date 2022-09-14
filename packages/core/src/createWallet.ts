@@ -13,6 +13,7 @@ export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
  */
 export interface Wallet {
   name: WalletName;
+
   $getStore: () => WalletStore;
   $getProvider: () => Provider | undefined;
 

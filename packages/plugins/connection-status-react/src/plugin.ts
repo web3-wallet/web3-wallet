@@ -1,9 +1,9 @@
 import type {
   CreatePlugin,
   MiddlewareContext,
+  Middlewares,
   PluginContext,
   PluginName,
-  WalletMiddlewares,
 } from '@web3-wallet/react';
 import type { StoreApi, UseBoundStore } from 'zustand';
 import createStore from 'zustand';
@@ -57,7 +57,7 @@ export const createPlugin: CreatePlugin<Options, Api> = (options) => {
       store = createStore<State>()(() => DEFAULT_STATE);
     }
 
-    const connect: WalletMiddlewares['connect'] =
+    const connect: Middlewares['connect'] =
       (_: MiddlewareContext) =>
       (next) =>
       async (...args) => {
@@ -70,7 +70,7 @@ export const createPlugin: CreatePlugin<Options, Api> = (options) => {
         return result;
       };
 
-    const autoConnect: WalletMiddlewares['autoConnect'] =
+    const autoConnect: Middlewares['autoConnect'] =
       (_: MiddlewareContext) =>
       (next) =>
       async (...args) => {
@@ -83,7 +83,7 @@ export const createPlugin: CreatePlugin<Options, Api> = (options) => {
         return result;
       };
 
-    const autoConnectOnce: WalletMiddlewares['autoConnectOnce'] =
+    const autoConnectOnce: Middlewares['autoConnectOnce'] =
       (_: MiddlewareContext) =>
       (next) =>
       async (...args) => {
@@ -96,7 +96,7 @@ export const createPlugin: CreatePlugin<Options, Api> = (options) => {
         return result;
       };
 
-    const disconnect: WalletMiddlewares['disconnect'] =
+    const disconnect: Middlewares['disconnect'] =
       (_: MiddlewareContext) =>
       (next) =>
       async (...args) => {

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { CreatePlugin, Plugin, PluginName } from '../../plugin';
+import type { CreatePlugin, Plugin, PluginName } from '../../types';
 import { useENS } from './useENS';
 
 const _name = '@web3-wallet/plugin-ens-react';

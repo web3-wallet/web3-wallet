@@ -5,7 +5,7 @@ import type {
 } from '@ethersproject/providers';
 import { useMemo } from 'react';
 
-import type { CreatePlugin, Plugin, PluginName } from '../../plugin';
+import type { CreatePlugin, Plugin, PluginName } from '../../types';
 import { useImportWeb3Provider } from './useImportWeb3Provider';
 
 const _name = '@web3-wallet/plugin-web3-provider-react';

@@ -9,7 +9,7 @@ import type {
   Wallet,
   WalletBuiltinHooks,
 } from './types';
-import { ConnectionStatus } from './types';
+import { WalletConnectionStatus } from './types';
 
 export type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
@@ -44,7 +44,7 @@ export const createCurrentWallet = (
   if (!wallets.length) throw new Error(`wallets can't be empty`);
 
   const DEFAULT_STATE: CurrentWalletState = {
-    connectionStatus: ConnectionStatus.Untouched,
+    connectionStatus: WalletConnectionStatus.Untouched,
     name: defaultCurrentWallet || wallets[0].name,
   };
 
@@ -154,7 +154,7 @@ export const createCurrentWallet = (
     const result = await wallet.connect(...args);
 
     store.setState({
-      connectionStatus: ConnectionStatus.Connected,
+      connectionStatus: WalletConnectionStatus.Connected,
     });
 
     return result;
@@ -164,13 +164,15 @@ export const createCurrentWallet = (
     const wallet = getUnderliningCurrentWallet();
     const result = await wallet.autoConnect(...args);
 
-    if (store.getState().connectionStatus === ConnectionStatus.Disconnected) {
+    if (
+      store.getState().connectionStatus === WalletConnectionStatus.Disconnected
+    ) {
       console.debug(`connectionId don't exists, auto connect is suppressed`);
       return false;
     }
 
     store.setState({
-      connectionStatus: ConnectionStatus.Connected,
+      connectionStatus: WalletConnectionStatus.Connected,
     });
     return result;
   };
@@ -178,7 +180,9 @@ export const createCurrentWallet = (
   const autoConnectOnce: Wallet['autoConnectOnce'] = async (...args) => {
     const wallet = getUnderliningCurrentWallet();
 
-    if (store.getState().connectionStatus === ConnectionStatus.Disconnected) {
+    if (
+      store.getState().connectionStatus === WalletConnectionStatus.Disconnected
+    ) {
       console.debug(`connectionId don't exists, auto connect is suppressed`);
       return false;
     }
@@ -186,7 +190,7 @@ export const createCurrentWallet = (
     const result = await wallet.autoConnectOnce(...args);
 
     store.setState({
-      connectionStatus: ConnectionStatus.Connected,
+      connectionStatus: WalletConnectionStatus.Connected,
     });
 
     return result;
@@ -196,7 +200,7 @@ export const createCurrentWallet = (
     const wallet = getUnderliningCurrentWallet();
     const result = await wallet.disconnect(...args);
     store.setState({
-      connectionStatus: ConnectionStatus.Disconnected,
+      connectionStatus: WalletConnectionStatus.Disconnected,
     });
     return result;
   };

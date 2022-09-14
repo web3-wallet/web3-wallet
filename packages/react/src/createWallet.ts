@@ -4,8 +4,14 @@ import {
 } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
-import { builtinPlugins } from './builtPlugins';
-import type { Wallet } from './types';
+import { applyPlugins, builtinPlugins } from './plugin';
+import type {
+  Plugin,
+  PluginApi,
+  PluginApiCache,
+  PluginName,
+  Wallet,
+} from './types';
 
 /**
  * @typeParam connector - The wallet connector.
@@ -13,22 +19,36 @@ import type { Wallet } from './types';
  */
 export const createWallet = (
   connector: Connector,
-): Omit<Wallet, 'getPlugin'> => {
+  plugins?: Plugin[],
+): Wallet => {
   const coreWallet = createCoreWallet(connector);
 
   const reactStore = createReactStore(coreWallet.$getStore());
 
-  const wallet = {
+  const cache: PluginApiCache = new Map();
+
+  let wallet = {
     ...coreWallet,
     $getStore: () => reactStore,
+    getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => {
+      if (!cache.has(pluginName)) {
+        throw new Error(`Plugin ${pluginName} don't exists!`);
+      }
+
+      return cache.get(pluginName) as T;
+    },
   } as Wallet;
 
   // merge builtin plugin hooks to wallet
-  return builtinPlugins.reduce(
+  wallet = builtinPlugins.reduce(
     (wallet, plugin) => ({
       ...wallet,
       ...plugin.createApi({ wallet }).hooks,
     }),
     wallet,
   );
+
+  if (!plugins || !plugins.length) return wallet;
+
+  return applyPlugins(plugins, wallet, cache);
 };

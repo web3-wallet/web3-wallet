@@ -1,53 +1,68 @@
-import type { Brand } from '@web3-wallet/core';
-
-import type { Wallet } from './types';
-
-export type PluginName<T extends string = string> = Brand<
-  T,
-  '@web-3wallet/plugin-react'
->;
-
-export const walletMiddlewareNames = [
-  'connect',
-  'autoConnect',
-  'autoConnectOnce',
-  'disconnect',
-] as const;
-
-export type WalletMiddlewareName = typeof walletMiddlewareNames[number];
+import { applyMiddleWares } from './applyMiddlewares';
+import { CoreHooksPlugin } from './plugins/core-hooks';
+import { ENSPlugin } from './plugins/ens';
+import { Web3ProviderPlugin } from './plugins/web3-provider';
+import type {
+  Plugin,
+  PluginApi,
+  PluginApiCache,
+  PluginName,
+  Wallet,
+} from './types';
 
 /**
- * May expose specific context to middleware later on
+ * The dependencies of the builtin plugins are not checked, don't mix up orders.
  */
-export type MiddlewareContext = object;
-
-export type WalletMiddlewares = Partial<{
-  [K in WalletMiddlewareName]: (
-    context: MiddlewareContext,
-  ) => (next: Wallet[K]) => Wallet[K];
-}>;
-
-export type PluginApi = {
-  hooks?: object;
-};
+export const builtinPlugins = [
+  CoreHooksPlugin.createPlugin(),
+  Web3ProviderPlugin.createPlugin(),
+  ENSPlugin.createPlugin(),
+];
 
 /**
- * May expose other APIs to PluginContext later on
+ * Apply plugins and update the cache of the applied plugins
+ *
+ * @param plugins - the plugins to apply
+ * @param wallet - the wallet on which the plugins will be applied
+ * @param cache - the cache of the applied plugins for the wallet
+ * @returns a new wallet with the plugins applied to it
  */
-export type PluginContext = {
-  wallet: Wallet;
-  dependencies?: unknown[];
+export const applyPlugins = (
+  plugins: Plugin[],
+  wallet: Wallet,
+  cache: PluginApiCache,
+): Wallet => {
+  return plugins.reduce((prevWallet, plugin) => {
+    /**
+     * check for plugin duplication
+     */
+    if (cache.has(plugin.name)) {
+      throw new Error(`Plugin '${plugin.name}' duplicated`);
+    }
+
+    /**
+     * check and retrieve the plugin dependencies
+     */
+    const dependencies: PluginApi[] = (plugin.dependencies ?? []).map(
+      (dep: PluginName) => {
+        if (!cache.has(dep)) {
+          throw new Error(
+            `Plugin dependency ${dep} don't exists: ${plugin.name} depends on ${dep} `,
+          );
+        }
+        return cache.get(dep) as PluginApi;
+      },
+    );
+
+    const pluginApi = plugin.createApi({ wallet, dependencies });
+
+    /**
+     * Apply plugin middlewares
+     */
+    const nextWallet = applyMiddleWares(pluginApi.middlewares, prevWallet);
+
+    cache.set(plugin.name, pluginApi);
+
+    return nextWallet;
+  }, wallet);
 };
-
-export interface Plugin<P extends PluginApi = PluginApi> {
-  name: PluginName;
-  dependencies?: PluginName[];
-  createApi: (context: PluginContext) => P & {
-    middlewares?: WalletMiddlewares;
-  };
-}
-
-export type CreatePlugin<
-  O extends object | undefined = undefined,
-  P extends PluginApi = PluginApi,
-> = (options?: O) => Plugin<P>;

@@ -1,6 +1,5 @@
-import type { MiddlewareContext, WalletMiddlewares } from './plugin';
-import { walletMiddlewareNames } from './plugin';
-import type { Wallet } from './types';
+import type { MiddlewareContext, Middlewares, Wallet } from './types';
+import { middlewareNames } from './types';
 
 /**
  * Apply middleWares to wallet
@@ -10,8 +9,8 @@ import type { Wallet } from './types';
  * @returns Wallet - A new wallet enhanced with the middleWares,
  *  the interface of the new wallet is the same as the input as wallet.
  */
-export const applyWalletMiddleWares = (
-  middleWares: WalletMiddlewares | undefined,
+export const applyMiddleWares = (
+  middleWares: Middlewares | undefined,
   wallet: Wallet,
 ): Wallet => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,7 +22,7 @@ export const applyWalletMiddleWares = (
 
   const middlewareContext: MiddlewareContext = {};
 
-  for (const name of walletMiddlewareNames) {
+  for (const name of middlewareNames) {
     const middleware = middleWares[name];
 
     if (!middleware) continue;
