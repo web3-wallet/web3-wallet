@@ -5,10 +5,13 @@ import type {
   WalletName,
   WalletState,
 } from '@web3-wallet/core';
+import type { StoreApi, UseBoundStore } from 'zustand';
 
 import type { PluginApi, PluginName } from './plugin';
 
 export interface Wallet extends CoreWallet {
+  $getStore: () => UseBoundStore<StoreApi<WalletState>>;
+
   getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
 
   useIsConnecting: () => WalletState['isConnecting'];

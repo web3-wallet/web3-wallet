@@ -43,11 +43,11 @@ export interface Plugin<P extends PluginApi = PluginApi> {
   name: PluginName;
   dependencies?: PluginName[];
   createApi: (context: PluginContext) => P & {
-    middlewares: WalletMiddlewares;
+    middlewares?: WalletMiddlewares;
   };
 }
 
 export type CreatePlugin<
-  O extends object = object,
+  O extends object | undefined = undefined,
   P extends PluginApi = PluginApi,
 > = (options?: O) => Plugin<P>;

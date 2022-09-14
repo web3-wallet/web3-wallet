@@ -5,6 +5,7 @@ import {
 import createReactStore from 'zustand';
 
 import { getAugmentedHooks, getDerivedHooks, getStateHooks } from './hooks';
+import { CoreHooks } from './plugins/core-hooks';
 import type { Wallet } from './types';
 
 /**
@@ -24,10 +25,16 @@ export const createWallet = (
 
   const wallet = {
     ...coreWallet,
-    ...stateHooks,
-    ...derivedHooks,
+    $getStore: () => reactStore,
     ...augmentedHooks,
   };
 
-  return wallet;
+  const { createApi } = CoreHooks.createPlugin();
+
+  return {
+    ...wallet,
+    ...createApi({
+      wallet: wallet as unknown as Wallet,
+    }).hooks,
+  };
 };
