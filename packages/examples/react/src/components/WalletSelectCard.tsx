@@ -1,4 +1,6 @@
 import { allWallets, currentWallet } from '@example-react/wallets';
+import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -12,6 +14,7 @@ import { WalletSelect } from './WalletSelect';
 export const WalletSelectCard = () => {
   const {
     useName,
+    getPlugin,
 
     switchCurrentWallet,
 
@@ -24,7 +27,6 @@ export const WalletSelectCard = () => {
 
     useAccounts,
     useChainId,
-    useENSNames,
     useProvider,
   } = currentWallet;
 
@@ -36,7 +38,14 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
   const provider = useProvider();
-  const ENSNames = useENSNames();
+
+  const { useEnsNames } = getPlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
+  const { useBalances } = getPlugin<BalancePlugin.Api>(
+    BalancePlugin.name,
+  ).hooks;
+
+  const balances = useBalances();
+  const ensNames = useEnsNames();
 
   useEffect(() => {
     autoConnectOnce();
@@ -56,8 +65,8 @@ export const WalletSelectCard = () => {
           <Chain chainId={chainId} />
           <Accounts
             accounts={accounts}
-            provider={provider}
-            ENSNames={ENSNames}
+            balances={balances}
+            ensNames={ensNames}
           />
           <ConnectWithSelect
             connect={connect}

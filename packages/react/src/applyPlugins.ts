@@ -1,7 +1,4 @@
 import { applyMiddleWares } from './applyMiddlewares';
-import { CoreHooksPlugin } from './plugins/core-hooks';
-import { ENSPlugin } from './plugins/ens';
-import { Web3ProviderPlugin } from './plugins/web3-provider';
 import type {
   Plugin,
   PluginApi,
@@ -9,15 +6,6 @@ import type {
   PluginName,
   Wallet,
 } from './types';
-
-/**
- * The dependencies of the builtin plugins are not checked, don't mix up orders.
- */
-export const builtinPlugins = [
-  CoreHooksPlugin.createPlugin(),
-  Web3ProviderPlugin.createPlugin(),
-  ENSPlugin.createPlugin(),
-];
 
 /**
  * Apply plugins and update the cache of the applied plugins

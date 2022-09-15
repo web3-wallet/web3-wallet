@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/react';
-import { allWallets, currentWallet, metamask } from '@site/wallets';
-import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
+import { allWallets, currentWallet } from '@site/wallets';
+import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -26,8 +27,6 @@ const {
 
   useAccounts,
   useChainId,
-  useENSNames,
-  useProvider,
 } = currentWallet;
 
 export const WalletSelectCard = () => {
@@ -37,15 +36,14 @@ export const WalletSelectCard = () => {
 
   const chainId = useChainId();
   const accounts = useAccounts();
-  const provider = useProvider();
-  const ENSNames = useENSNames();
 
-  const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
-    ConnectionStatusPlugin.name,
+  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
+  const { useBalances } = usePlugin<BalancePlugin.Api>(
+    BalancePlugin.name,
   ).hooks;
 
-  console.log('useConnectionStatus', useConnectionStatus());
-  console.log(metamask.useAccount());
+  const balances = useBalances();
+  const ensNames = useEnsNames();
 
   useEffect(() => {
     autoConnectOnce();
@@ -56,9 +54,7 @@ export const WalletSelectCard = () => {
 
   return (
     <NoSSR>
-      <WalletCard
-        style={{ minWidth: '280px', maxWidth: '420px', width: '100%' }}
-      >
+      <WalletCard minW="280px" maxW="420px" width="100%">
         <WalletSelect
           wallets={allWallets}
           currentWalletName={walletName}
@@ -70,8 +66,8 @@ export const WalletSelectCard = () => {
           <Chain chainId={chainId} />
           <Accounts
             accounts={accounts}
-            provider={provider}
-            ENSNames={ENSNames}
+            balances={balances}
+            ensNames={ensNames}
           />
           <ConnectWithSelect
             connect={connect}

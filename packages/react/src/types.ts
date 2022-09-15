@@ -6,18 +6,24 @@ import type {
 } from '@web3-wallet/core';
 import type { StoreApi, UseBoundStore } from 'zustand';
 
-import type { CoreHooksPlugin } from './plugins/core-hooks';
-import type { ENSPlugin } from './plugins/ens';
-import type { Web3ProviderPlugin } from './plugins/web3-provider';
+import { CoreHooksPlugin } from './plugins/core-hooks';
+import { Web3ProviderPlugin } from './plugins/web3-provider';
 
 export interface Wallet extends CoreWallet, WalletBuiltinHooks {
   $getStore: () => UseBoundStore<StoreApi<WalletState>>;
   getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
 }
 
+/**
+ * The dependencies of the builtin plugins are not checked, don't mix up orders.
+ */
+export const builtinPlugins = [
+  CoreHooksPlugin.createPlugin(),
+  Web3ProviderPlugin.createPlugin(),
+];
+
 export type WalletBuiltinHooks = CoreHooksPlugin.Api['hooks'] &
-  Web3ProviderPlugin.Api['hooks'] &
-  ENSPlugin.Api['hooks'];
+  Web3ProviderPlugin.Api['hooks'];
 
 export type CurrentWallet = Omit<Wallet, 'name'> & {
   switchCurrentWallet: (name: WalletName) => void;
@@ -85,3 +91,9 @@ export type Middlewares = Partial<{
     context: MiddlewareContext,
   ) => (next: Wallet[K]) => Wallet[K];
 }>;
+
+export type AsyncFetchResult<T = unknown> = {
+  data?: T;
+  error?: Error;
+  isLoading: boolean;
+};

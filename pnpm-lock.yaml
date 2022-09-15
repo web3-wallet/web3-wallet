@@ -91,7 +91,9 @@ importers:
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/injected': workspace:*
       '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/plugin-balance-react': workspace:*
       '@web3-wallet/plugin-connection-status-react': workspace:*
+      '@web3-wallet/plugin-ens-react': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/walletconnect': workspace:*
       eslint-config-next: 12.2.5
@@ -108,7 +110,9 @@ importers:
       '@web3-wallet/defiwallet': link:../../wallets/defiwallet
       '@web3-wallet/injected': link:../../wallets/injected
       '@web3-wallet/metamask': link:../../wallets/metamask
+      '@web3-wallet/plugin-balance-react': link:../../plugins/balance-react
       '@web3-wallet/plugin-connection-status-react': link:../../plugins/connection-status-react
+      '@web3-wallet/plugin-ens-react': link:../../plugins/ens-react
       '@web3-wallet/react': link:../../react
       '@web3-wallet/walletconnect': link:../../wallets/walletconnect
       next: 12.2.5_react-dom@18.2.0
@@ -150,11 +154,35 @@ importers:
       vite: 3.1.0
       vue-tsc: 0.40.10
 
+  packages/plugins/balance-react:
+    specifiers:
+      '@ethersproject/bignumber': ^5.7.0
+      '@ethersproject/providers': ^5.7.0
+      '@ethersproject/units': ^5.7.0
+      '@web3-wallet/react': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/providers': 5.7.0
+      '@ethersproject/units': 5.7.0
+      '@web3-wallet/react': link:../../react
+      zustand: 4.0.0-rc.3
+
   packages/plugins/connection-status-react:
     specifiers:
       '@web3-wallet/react': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
+      '@web3-wallet/react': link:../../react
+      zustand: 4.0.0-rc.3
+
+  packages/plugins/ens-react:
+    specifiers:
+      '@ethersproject/providers': ^5.7.0
+      '@web3-wallet/react': workspace:*
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      '@ethersproject/providers': 5.7.0
       '@web3-wallet/react': link:../../react
       zustand: 4.0.0-rc.3
 
@@ -252,7 +280,9 @@ importers:
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/injected': workspace:*
       '@web3-wallet/metamask': workspace:*
+      '@web3-wallet/plugin-balance-react': workspace:*
       '@web3-wallet/plugin-connection-status-react': workspace:*
+      '@web3-wallet/plugin-ens-react': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/walletconnect': workspace:*
       eslint-config-next: 12.2.5
@@ -275,7 +305,9 @@ importers:
       '@web3-wallet/defiwallet': link:../packages/wallets/defiwallet
       '@web3-wallet/injected': link:../packages/wallets/injected
       '@web3-wallet/metamask': link:../packages/wallets/metamask
+      '@web3-wallet/plugin-balance-react': link:../packages/plugins/balance-react
       '@web3-wallet/plugin-connection-status-react': link:../packages/plugins/connection-status-react
+      '@web3-wallet/plugin-ens-react': link:../packages/plugins/ens-react
       '@web3-wallet/react': link:../packages/react
       '@web3-wallet/walletconnect': link:../packages/wallets/walletconnect
       framer-motion: 7.2.1_react-dom@18.2.0

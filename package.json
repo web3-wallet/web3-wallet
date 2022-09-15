@@ -23,6 +23,8 @@
       "injected",
       [
         "plugin-connection-status-react",
+        "plugin-balance-react",
+        "plugin-ens-react",
         "coinbase-wallet",
         "defiwallet",
         "metamask",

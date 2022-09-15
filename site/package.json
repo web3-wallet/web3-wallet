@@ -29,6 +29,8 @@
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
     "@web3-wallet/plugin-connection-status-react": "workspace:*",
+    "@web3-wallet/plugin-balance-react": "workspace:*",
+    "@web3-wallet/plugin-ens-react": "workspace:*",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
     "react-dom": "18.2.0",

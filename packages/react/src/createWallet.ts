@@ -4,7 +4,7 @@ import {
 } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
-import { applyPlugins, builtinPlugins } from './plugin';
+import { applyPlugins } from './applyPlugins';
 import type {
   Plugin,
   PluginApi,
@@ -12,6 +12,7 @@ import type {
   PluginName,
   Wallet,
 } from './types';
+import { builtinPlugins } from './types';
 
 /**
  * @typeParam connector - The wallet connector.

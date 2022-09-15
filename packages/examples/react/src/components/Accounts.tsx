@@ -1,49 +1,20 @@
-import type { BigNumber } from '@ethersproject/bignumber';
-import { formatEther } from '@ethersproject/units';
+import type { BalancePlugin } from '@web3-wallet/plugin-balance-react';
+import type { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import type { Wallet } from '@web3-wallet/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Account } from './Account';
 import { Box } from './Box';
 
-const useBalances = (
-  provider?: ReturnType<Wallet['useProvider']>,
-  accounts?: string[],
-): BigNumber[] | undefined => {
-  const [balances, setBalances] = useState<BigNumber[] | undefined>();
-
-  useEffect(() => {
-    if (provider && accounts?.length) {
-      let stale = false;
-
-      void Promise.all(
-        accounts.map((account) => provider.getBalance(account)),
-      ).then((balances) => {
-        if (stale) return;
-        setBalances(balances);
-      });
-
-      return () => {
-        stale = true;
-        setBalances(undefined);
-      };
-    }
-  }, [provider, accounts]);
-
-  return balances;
-};
-
 export const Accounts = ({
   accounts,
-  provider,
-  ENSNames,
+  balances,
+  ensNames,
 }: {
   accounts: ReturnType<Wallet['useAccounts']>;
-  provider: ReturnType<Wallet['useProvider']>;
-  ENSNames: ReturnType<Wallet['useENSNames']>;
+  balances: ReturnType<BalancePlugin.Api['hooks']['useBalances']>;
+  ensNames: ReturnType<EnsPlugin.Api['hooks']['useEnsNames']>;
 }) => {
-  const balances = useBalances(provider, accounts);
-
   if (accounts === undefined) return null;
   if (accounts.length === 0) {
     return (
@@ -57,8 +28,8 @@ export const Accounts = ({
   return (
     <>
       {accounts.map((account, i) =>
-        ENSNames?.[i] ? (
-          ENSNames?.[i]
+        ensNames.data?.[i] ? (
+          ensNames.data?.[i]
         ) : (
           <React.Fragment key={account}>
             <Box>
@@ -69,11 +40,7 @@ export const Accounts = ({
             </Box>
             <Box>
               <span style={{ marginRight: 10 }}>Balance:</span>
-              <b>
-                {balances?.[i]
-                  ? `Ξ ${Number(formatEther(balances[i])).toFixed(4)}`
-                  : '--'}
-              </b>
+              <b>{balances.data?.[i] ? `Ξ ${balances.data[i]}` : '--'}</b>
             </Box>
           </React.Fragment>
         ),

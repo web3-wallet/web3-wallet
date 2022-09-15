@@ -3,7 +3,9 @@ import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
 import { getDeFiWallet } from '@web3-wallet/defiwallet';
 import { MetaMask } from '@web3-wallet/metamask';
+import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { WalletProxy } from '@web3-wallet/react';
 import { WalletConnect } from '@web3-wallet/walletconnect';
 
@@ -32,7 +34,11 @@ const connectors = [
   }),
 ];
 
-const plugins = [ConnectionStatusPlugin.createPlugin()];
+const plugins = [
+  ConnectionStatusPlugin.createPlugin(),
+  EnsPlugin.createPlugin(),
+  BalancePlugin.createPlugin(),
+];
 
 export const walletProxy = new WalletProxy(connectors, {
   plugins,

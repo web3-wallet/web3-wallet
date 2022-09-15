@@ -1,49 +1,20 @@
 import { Flex, Text } from '@chakra-ui/react';
-import type { BigNumber } from '@ethersproject/bignumber';
-import { formatEther } from '@ethersproject/units';
+import type { BalancePlugin } from '@web3-wallet/plugin-balance-react';
+import type { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import type { Wallet } from '@web3-wallet/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Account } from './Account';
 
-const useBalances = (
-  provider?: ReturnType<Wallet['useProvider']>,
-  accounts?: string[],
-): BigNumber[] | undefined => {
-  const [balances, setBalances] = useState<BigNumber[] | undefined>();
-
-  useEffect(() => {
-    if (provider && accounts?.length) {
-      let stale = false;
-
-      void Promise.all(
-        accounts.map((account) => provider.getBalance(account)),
-      ).then((balances) => {
-        if (stale) return;
-        setBalances(balances);
-      });
-
-      return () => {
-        stale = true;
-        setBalances(undefined);
-      };
-    }
-  }, [provider, accounts]);
-
-  return balances;
-};
-
 export const Accounts = ({
   accounts,
-  provider,
-  ENSNames,
+  ensNames,
+  balances,
 }: {
   accounts: ReturnType<Wallet['useAccounts']>;
-  provider: ReturnType<Wallet['useProvider']>;
-  ENSNames: ReturnType<Wallet['useENSNames']>;
+  ensNames: ReturnType<EnsPlugin.Api['hooks']['useEnsNames']>;
+  balances: ReturnType<BalancePlugin.Api['hooks']['useBalances']>;
 }) => {
-  const balances = useBalances(provider, accounts);
-
   if (accounts === undefined) return null;
   if (accounts.length === 0) {
     return (
@@ -57,8 +28,8 @@ export const Accounts = ({
   return (
     <>
       {accounts.map((account, i) =>
-        ENSNames?.[i] ? (
-          ENSNames?.[i]
+        ensNames.data?.[i] ? (
+          ensNames.data?.[i]
         ) : (
           <React.Fragment key={account}>
             <Flex gap={2}>
@@ -68,9 +39,7 @@ export const Accounts = ({
             <Flex gap={2}>
               <Text>Balance:</Text>
               <Text fontWeight="bold">
-                {balances?.[i]
-                  ? `${Number(formatEther(balances[i])).toFixed(4)}`
-                  : '--'}
+                {balances.data?.[i] ? `${balances.data[i]}` : '--'}
               </Text>
             </Flex>
           </React.Fragment>

@@ -1,0 +1,40 @@
+{
+  "name": "@web3-wallet/plugin-balance-react",
+  "keywords": [
+    "web3-wallet",
+    "react"
+  ],
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.8.0",
+  "files": [
+    "**"
+  ],
+  "sideEffects": false,
+  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "dependencies": {
+    "@web3-wallet/react": "workspace:*",
+    "@ethersproject/bignumber": "^5.7.0",
+    "@ethersproject/providers": "^5.7.0",
+    "@ethersproject/units": "^5.7.0",
+    "zustand": "^4.0.0-rc.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "vue": ">=3.2.13"
+  },
+  "description": "web3-wallet react",
+  "bugs": {
+    "url": "https://github.com/web3-wallet/web3-wallet/issues"
+  },
+  "homepage": "https://github.com/web3-wallet/web3-wallet#readme"
+}

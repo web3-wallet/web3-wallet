@@ -55,9 +55,10 @@ import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
 import { getDeFiWallet } from '@web3-wallet/defiwallet';
 import { MetaMask } from '@web3-wallet/metamask';
-import { ConnectionStatusPlugin } from '@web3-wallet/plugin-connection-status-react';
 import { WalletProxy } from '@web3-wallet/react';
 import { WalletConnect } from '@web3-wallet/walletconnect';
+import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 
 // setup wallets and plugins
 // ===========================
@@ -125,13 +126,12 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
   const provider = useProvider();
-  const ENSNames = useENSNames(provider);
 
-  const { useConnectionStatus } = usePlugin<ConnectionStatusPlugin.Api>(
-    ConnectionStatusPlugin.name,
+  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
+  const { useBalances } = usePlugin<BalancePlugin.Api>(
+    BalancePlugin.name,
   ).hooks;
 
-  console.log('useConnectionStatus', useConnectionStatus());
   console.log(metamask.useAccount());
 
   useEffect(() => {
@@ -152,7 +152,12 @@ export const WalletSelectCard = () => {
         <Text fontWeight="bold">{walletName}</Text>
         <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
         <Chain chainId={chainId} />
-        <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
+        <Accounts
+          accounts={accounts}
+          provider={provider}
+          balances={balances}
+          ensNames={ensNames}
+        />
         <ConnectWithSelect
           connect={connect}
           disconnect={disconnect}
