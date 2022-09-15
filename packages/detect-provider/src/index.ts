@@ -31,7 +31,7 @@ export interface Provider extends EventEmitter {
   request<T>(args: RequestArguments): Promise<T>;
 }
 
-type DetectProviderOptions = {
+export type DetectProviderOptions = {
   providerName?: string;
   eventName?: string;
   detectInterval?: Milliseconds;

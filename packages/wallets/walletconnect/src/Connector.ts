@@ -18,7 +18,7 @@ export class WalletConnect extends Connector<
   WalletConnectOptions
 > {
   /** {@inheritdoc Connector.provider} */
-  public provider?: WalletConnectProvider;
+  public override provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 
   constructor(options: WalletConnectOptions) {
@@ -33,7 +33,7 @@ export class WalletConnect extends Connector<
   };
 
   /** {@inheritdoc Connector.detectProvider} */
-  public async detectProvider(): Promise<WalletConnectProvider> {
+  public override async detectProvider(): Promise<WalletConnectProvider> {
     if (this.provider) return this.provider;
 
     const m = await import('@walletconnect/ethereum-provider');

@@ -69,7 +69,6 @@ export const SiteMenu = () => {
                 aria-label="site menu"
                 cursor="pointer"
                 transform={`scale(${isOpen ? 1.2 : 1.8})`}
-                isActive={isOpen}
                 _hover={{
                   color: 'red.500',
                 }}

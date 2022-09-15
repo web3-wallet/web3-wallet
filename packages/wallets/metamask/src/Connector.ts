@@ -1,5 +1,5 @@
 import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
-import { Injected } from '@web3-wallet/injected';
+import { Connector } from '@web3-wallet/core';
 
 export type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
@@ -11,7 +11,7 @@ const _name = 'MetaMask';
 export const name = _name as WalletName<typeof _name>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
-export class MetaMask extends Injected<MetaMaskProvider, MetaMaskOptions> {
+export class MetaMask extends Connector<MetaMaskProvider, MetaMaskOptions> {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: MetaMaskOptions) {
     super(name, options);

@@ -1,5 +1,5 @@
 import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
-import { Injected } from '@web3-wallet/injected';
+import { Connector } from '@web3-wallet/core';
 
 export type BraveWalletProvider = Provider & {
   isBraveWallet?: boolean;
@@ -12,7 +12,7 @@ export const name = _name as WalletName<typeof _name>;
 
 const providerFilter = (p: BraveWalletProvider) => !!p.isBraveWallet;
 
-export class BraveWallet extends Injected<
+export class BraveWallet extends Connector<
   BraveWalletProvider,
   BraveWalletOptions
 > {

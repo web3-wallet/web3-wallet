@@ -3,7 +3,7 @@
   "description": "DeFiWallet connector",
   "keywords": [
     "web3-wallet",
-    "crypto.com Defi Wallet"
+    "crypto.com DeFi Wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -23,8 +23,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
-    "@web3-wallet/core": "workspace:*",
-    "@web3-wallet/injected": "workspace:*"
+    "@web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "@coinbase/wallet-sdk": "^3.0.4"

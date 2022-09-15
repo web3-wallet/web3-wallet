@@ -24,6 +24,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "dependencies": {
+    "@web3-wallet/detect-provider": "workspace:*",
     "@ethersproject/address": "^5.7.0",
     "zustand": "^4.0.0-rc.0"
   },

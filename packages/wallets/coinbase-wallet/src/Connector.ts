@@ -36,7 +36,7 @@ export class CoinbaseWallet extends Connector<
   }
 
   /** {@inheritdoc Connector.detectProvider} */
-  public async detectProvider() {
+  public override async detectProvider() {
     if (this.provider) this.provider;
 
     const m = await import('@coinbase/wallet-sdk');

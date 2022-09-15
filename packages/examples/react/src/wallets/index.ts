@@ -1,7 +1,7 @@
 import { rpcMap } from '@example-react/chains';
 import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
-import { getDeFiWallet } from '@web3-wallet/defiwallet';
+import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { MetaMask } from '@web3-wallet/metamask';
 import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
@@ -10,14 +10,7 @@ import { WalletConnect } from '@web3-wallet/walletconnect';
 
 const connectors = [
   new MetaMask(),
-  getDeFiWallet({
-    extension: {
-      chainType: 'eth',
-      appName: '@web3-wallet example',
-      chainId: 1,
-      rpcUrls: {},
-    },
-  }),
+  new DeFiWallet(),
   new CoinbaseWallet({
     providerOptions: {
       appName: '@web3-wallet example',
@@ -43,7 +36,7 @@ export const allWallets = walletProxy.getWallets();
 export const currentWallet = walletProxy.getCurrentWallet();
 export const [
   metamask,
-  defiwallet,
+  defiWallet,
   coinbaseWallet,
   desktopWallet,
   walletconnect,

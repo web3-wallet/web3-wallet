@@ -1,4 +1,6 @@
 /* eslint-disable max-lines */
+import type { DetectProviderOptions } from '@web3-wallet/detect-provider';
+
 import type { WalletName } from './createWallet';
 import type { WalletStore, WalletStoreActions } from './createWalletStore';
 import { createWalletStoreAndActions } from './createWalletStore';
@@ -28,6 +30,14 @@ export type BaseConnectorOptions = {
   onError?: (error: ProviderRpcError) => void;
 };
 
+export type ProviderFilter<P> = (provider: P) => boolean;
+
+type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
+
+type InjectedProviders<P> = {
+  providers?: P[];
+};
+
 /**
  * The wallet options object
  */
@@ -50,7 +60,7 @@ export abstract class Connector<
   /**
    * {@link Provider}
    **/
-  public abstract provider?: P;
+  public provider?: P;
 
   /**
    * The wallet options object, specific to each wallet
@@ -106,9 +116,41 @@ export abstract class Connector<
    *  1. resolve with the provider if the detection succeeded.
    *  2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
    */
-  public abstract detectProvider(
-    providerFilter?: (provider: P) => boolean,
-  ): Promise<P>;
+  public async detectProvider(
+    providerFilter: ProviderFilter<P> = () => true,
+    options?: DetectProviderOptions,
+  ): Promise<P> {
+    if (this.provider) this.provider;
+
+    const m = await import('@web3-wallet/detect-provider');
+
+    const injectedProvider = (await m.detectProvider(
+      options,
+    )) as InjectedProvider<P>;
+
+    if (!injectedProvider) throw this.providerNotFoundError;
+
+    let provider = injectedProvider as P | undefined;
+
+    /**
+     * handle the case when e.g. metamask and coinbase wallet are both installed
+     * */
+    if ((injectedProvider as InjectedProviders<P>).providers?.length) {
+      provider = (injectedProvider as InjectedProviders<P>).providers?.find(
+        providerFilter,
+      );
+    } else {
+      provider = provider && providerFilter(provider) ? provider : undefined;
+    }
+
+    if (!provider) {
+      throw this.providerNotFoundError;
+    }
+
+    this.provider = provider;
+
+    return provider;
+  }
 
   /**
    * `lazyInitialize` does the following two things:

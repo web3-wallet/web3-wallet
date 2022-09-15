@@ -15,12 +15,12 @@
   "packageManager": "pnpm@7.5.0",
   "@web3-wallet/scripts": {
     "packages": [
+      "detect-provider",
       "core",
       [
         "react",
         "vue"
       ],
-      "injected",
       [
         "plugin-connection-status-react",
         "plugin-balance-react",

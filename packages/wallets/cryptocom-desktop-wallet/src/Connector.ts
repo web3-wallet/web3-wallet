@@ -1,5 +1,5 @@
 import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
-import { Injected } from '@web3-wallet/injected';
+import { Connector } from '@web3-wallet/core';
 
 export type CryptocomDesktopWalletProvider = Provider & {
   isDesktopWallet?: boolean;
@@ -14,7 +14,7 @@ const providerFilter = (p: CryptocomDesktopWalletProvider) => {
   return !!p.isDesktopWallet;
 };
 
-export class CryptocomDesktopWallet extends Injected<
+export class CryptocomDesktopWallet extends Connector<
   CryptocomDesktopWalletProvider,
   CryptocomDesktopWalletOptions
 > {
