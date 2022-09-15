@@ -27,7 +27,6 @@ export const WalletSelectCard = () => {
 
     useAccounts,
     useChainId,
-    useProvider,
   } = currentWallet;
 
   const walletName = useName();
@@ -37,7 +36,6 @@ export const WalletSelectCard = () => {
 
   const chainId = useChainId();
   const accounts = useAccounts();
-  const provider = useProvider();
 
   const { useEnsNames } = getPlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
   const { useBalances } = getPlugin<BalancePlugin.Api>(

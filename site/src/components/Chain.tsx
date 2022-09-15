@@ -5,7 +5,7 @@ import { CHAINS } from '../chains';
 export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
 
-  const name = chainId ? CHAINS[chainId]?.name : undefined;
+  const name = chainId ? CHAINS[chainId]?.chainName : undefined;
 
   if (name) {
     return (
