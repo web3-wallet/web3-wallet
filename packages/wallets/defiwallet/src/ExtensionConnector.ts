@@ -1,5 +1,14 @@
-import type { ConnectorOptions } from '@web3-wallet/core';
-import { type WalletName, Connector, utils } from '@web3-wallet/core';
+import type {
+  AddEthereumChainParameter,
+  ConnectorOptions,
+} from '@web3-wallet/core';
+import {
+  type WalletName,
+  Connector,
+  isAddChainParameter,
+  isChainId,
+  utils,
+} from '@web3-wallet/core';
 
 import {
   type DeFiWalletProvider,
@@ -38,8 +47,15 @@ export class DeFiWalletExtension extends Connector<
   }
 
   /** {@inheritdoc Connector.connect} */
-  public override async connect(chainId: number): Promise<void> {
+  public override async connect(
+    chainIdOrChainParameter?: number | AddEthereumChainParameter,
+  ): Promise<void> {
     const cancelActivation = this.actions.startConnection();
+    const chainId: number = isChainId(chainIdOrChainParameter)
+      ? chainIdOrChainParameter
+      : isAddChainParameter(chainIdOrChainParameter)
+      ? chainIdOrChainParameter.chainId
+      : 1;
 
     try {
       await this.lazyInitialize();

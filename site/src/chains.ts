@@ -1,190 +1,139 @@
 import type { AddEthereumChainParameter } from '@web3-wallet/core';
 
-const ETH: AddEthereumChainParameter['nativeCurrency'] = {
-  name: 'Ether',
-  symbol: 'ETH',
-  decimals: 18,
-};
+const INFURA_KEY = process.env.infuraKey;
+const ALCHEMY_KEY = process.env.alchemyKey;
 
-const MATIC: AddEthereumChainParameter['nativeCurrency'] = {
-  name: 'Matic',
-  symbol: 'MATIC',
-  decimals: 18,
-};
-
-const CRO: AddEthereumChainParameter['nativeCurrency'] = {
-  name: 'Cro',
-  symbol: 'CRO',
-  decimals: 18,
-};
-
-interface BasicChainInformation {
-  urls: string[];
-  name: string;
-}
-
-interface ExtendedChainInformation extends BasicChainInformation {
-  nativeCurrency: AddEthereumChainParameter['nativeCurrency'];
-  blockExplorerUrls: AddEthereumChainParameter['blockExplorerUrls'];
-}
-
-function isExtendedChainInformation(
-  chainInformation: BasicChainInformation | ExtendedChainInformation,
-): chainInformation is ExtendedChainInformation {
-  return !!(chainInformation as ExtendedChainInformation).nativeCurrency;
-}
-
-export function getAddChainParameters(
-  chainId: number,
-): AddEthereumChainParameter | number {
-  const chainInformation = CHAINS[chainId];
-  if (isExtendedChainInformation(chainInformation)) {
-    return {
-      chainId,
-      chainName: chainInformation.name,
-      nativeCurrency: chainInformation.nativeCurrency,
-      rpcUrls: chainInformation.urls,
-      blockExplorerUrls: chainInformation.blockExplorerUrls,
-    };
-  } else {
-    return chainId;
-  }
-}
-
-export const CHAINS: {
-  [chainId: number]: BasicChainInformation | ExtendedChainInformation;
-} = {
-  1: {
-    urls: [
-      process.env.infuraKey
-        ? `https://mainnet.infura.io/v3/${process.env.infuraKey}`
-        : '',
-      process.env.alchemyKey
-        ? `https://eth-mainnet.alchemyapi.io/v2/${process.env.alchemyKey}`
-        : '',
+export const CHAINS: AddEthereumChainParameter[] = [
+  {
+    chainId: 1,
+    chainName: 'Mainnet',
+    nativeCurrency: {
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [
+      INFURA_KEY ? `https://mainnet.infura.io/v3/${INFURA_KEY}` : '',
+      ALCHEMY_KEY ? `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}` : '',
       'https://cloudflare-eth.com',
-    ].filter((url) => !!url),
-    name: 'Mainnet',
+    ],
+    blockExplorerUrls: ['https://etherscan.io'],
   },
-  3: {
-    urls: [
-      process.env.infuraKey
-        ? `https://ropsten.infura.io/v3/${process.env.infuraKey}`
-        : '',
-    ].filter((url) => !!url),
-    name: 'Ropsten',
+  {
+    chainId: 25,
+    chainName: 'Cronos',
+    nativeCurrency: {
+      name: 'CRO',
+      symbol: 'CRO',
+      decimals: 18,
+    },
+    rpcUrls: ['https://evm-cronos.crypto.org'],
+    blockExplorerUrls: ['https://cronoscan.com/'],
   },
-  4: {
-    urls: [
-      process.env.infuraKey
-        ? `https://rinkeby.infura.io/v3/${process.env.infuraKey}`
-        : '',
-    ].filter((url) => !!url),
-    name: 'Rinkeby',
+  {
+    chainId: 5,
+    chainName: 'Görli',
+    nativeCurrency: {
+      name: 'Görli Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [INFURA_KEY ? `https://goerli.infura.io/v3/${INFURA_KEY}` : ''],
   },
-  5: {
-    urls: [
-      process.env.infuraKey
-        ? `https://goerli.infura.io/v3/${process.env.infuraKey}`
-        : '',
-    ].filter((url) => !!url),
-    name: 'Görli',
+  {
+    chainId: 3,
+    chainName: 'Ropsten',
+    nativeCurrency: {
+      name: 'Ropsten Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [INFURA_KEY ? `https://ropsten.infura.io/v3/${INFURA_KEY}` : ''],
+    blockExplorerUrls: ['https://ropsten.etherscan.io'],
   },
-  25: {
-    urls: [`https://evm-cronos.crypto.org`],
-    name: 'Cronos',
-    nativeCurrency: CRO,
+  {
+    chainId: 338,
+    chainName: 'Cronos Testnet',
+    nativeCurrency: {
+      name: 'TCRO',
+      symbol: 'TCRO',
+      decimals: 18,
+    },
+    rpcUrls: [`https://evm-t3.cronos.org`],
+    blockExplorerUrls: ['https://testnet.cronoscan.com/'],
   },
-  338: {
-    urls: [`https://evm-t3.cronos.org`],
-    name: 'Cronos Test',
-    nativeCurrency: CRO,
-  },
-  42: {
-    urls: [
-      process.env.infuraKey
-        ? `https://kovan.infura.io/v3/${process.env.infuraKey}`
-        : '',
-    ].filter((url) => !!url),
-    name: 'Kovan',
-  },
-  // Optimism
-  10: {
-    urls: [
-      process.env.infuraKey
-        ? `https://optimism-mainnet.infura.io/v3/${process.env.infuraKey}`
-        : '',
+  {
+    chainId: 10,
+    chainName: 'Optimism',
+    rpcUrls: [
+      INFURA_KEY ? `https://optimism-mainnet.infura.io/v3/${INFURA_KEY}` : '',
       'https://mainnet.optimism.io',
-    ].filter((url) => !!url),
-    name: 'Optimism',
-    nativeCurrency: ETH,
+    ],
+    nativeCurrency: {
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
     blockExplorerUrls: ['https://optimistic.etherscan.io'],
   },
-  69: {
-    urls: [
-      process.env.infuraKey
-        ? `https://optimism-kovan.infura.io/v3/${process.env.infuraKey}`
-        : '',
+  {
+    chainId: 69,
+    chainName: 'Optimism Kovan',
+    nativeCurrency: {
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [
+      INFURA_KEY ? `https://optimism-kovan.infura.io/v3/${INFURA_KEY}` : '',
       'https://kovan.optimism.io',
-    ].filter((url) => !!url),
-    name: 'Optimism Kovan',
-    nativeCurrency: ETH,
+    ],
     blockExplorerUrls: ['https://kovan-optimistic.etherscan.io'],
   },
-  // Arbitrum
-  42161: {
-    urls: [
-      process.env.infuraKey
-        ? `https://arbitrum-mainnet.infura.io/v3/${process.env.infuraKey}`
-        : '',
+  {
+    chainId: 42161,
+    chainName: 'Arbitrum One',
+    rpcUrls: [
+      INFURA_KEY ? `https://arbitrum-mainnet.infura.io/v3/${INFURA_KEY}` : '',
       'https://arb1.arbitrum.io/rpc',
-    ].filter((url) => !!url),
-    name: 'Arbitrum One',
-    nativeCurrency: ETH,
+    ],
+    nativeCurrency: {
+      name: 'Ether',
+      symbol: 'ETH',
+      decimals: 18,
+    },
     blockExplorerUrls: ['https://arbiscan.io'],
   },
-  421611: {
-    urls: [
-      process.env.infuraKey
-        ? `https://arbitrum-rinkeby.infura.io/v3/${process.env.infuraKey}`
-        : '',
-      'https://rinkeby.arbitrum.io/rpc',
-    ].filter((url) => !!url),
-    name: 'Arbitrum Testnet',
-    nativeCurrency: ETH,
-    blockExplorerUrls: ['https://testnet.arbiscan.io'],
-  },
-  // Polygon
-  137: {
-    urls: [
-      process.env.infuraKey
-        ? `https://polygon-mainnet.infura.io/v3/${process.env.infuraKey}`
-        : '',
+  {
+    chainId: 137,
+    chainName: 'Polygon Mainnet',
+    rpcUrls: [
+      INFURA_KEY ? `https://polygon-mainnet.infura.io/v3/${INFURA_KEY}` : '',
       'https://polygon-rpc.com',
-    ].filter((url) => !!url),
-    name: 'Polygon Mainnet',
-    nativeCurrency: MATIC,
+    ],
+    nativeCurrency: {
+      name: 'Matic',
+      symbol: 'MATIC',
+      decimals: 18,
+    },
     blockExplorerUrls: ['https://polygonscan.com'],
   },
-  80001: {
-    urls: [
-      process.env.infuraKey
-        ? `https://polygon-mumbai.infura.io/v3/${process.env.infuraKey}`
-        : '',
-    ].filter((url) => !!url),
-    name: 'Polygon Mumbai',
-    nativeCurrency: MATIC,
-    blockExplorerUrls: ['https://mumbai.polygonscan.com'],
-  },
-};
+].map(
+  (v) =>
+    ({
+      ...v,
+      rpcUrls: v.rpcUrls.filter((url) => !!url),
+    } as AddEthereumChainParameter),
+);
 
-export const rpcMap: { [chainId: number]: string } = Object.keys(
-  CHAINS,
-).reduce<{
+export const rpcMap: { [chainId: number]: string } = CHAINS.reduce<{
   [chainId: number]: string;
-}>((accumulator, chainId) => {
-  const validURL: string = CHAINS[Number(chainId)].urls[0];
-  accumulator[Number(chainId)] = validURL;
-
-  return accumulator;
+}>((acc, params) => {
+  acc[params.chainId] = params.rpcUrls[0];
+  return acc;
 }, {});
+
+export const getAddChainParameters = (
+  chainId: number,
+): AddEthereumChainParameter | undefined =>
+  CHAINS.find((v) => v.chainId === chainId);

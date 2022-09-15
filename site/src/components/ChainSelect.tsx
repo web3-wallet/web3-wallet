@@ -5,11 +5,9 @@ import { CHAINS } from '../chains';
 export const ChainSelect = ({
   chainId,
   switchChain,
-  chainIds,
 }: {
   chainId: number;
   switchChain: ((chainId: number) => void) | undefined;
-  chainIds: number[];
 }) => {
   return (
     <Select
@@ -19,9 +17,9 @@ export const ChainSelect = ({
       }}
       disabled={switchChain === undefined}
     >
-      {chainIds.map((chainId) => (
-        <option key={chainId} value={chainId}>
-          {CHAINS[chainId]?.name ?? chainId}
+      {CHAINS.map((chain) => (
+        <option key={chain.chainId} value={chain.chainId}>
+          {chain.chainName}
         </option>
       ))}
     </Select>
