@@ -12,6 +12,12 @@ const MATIC: AddEthereumChainParameter['nativeCurrency'] = {
   decimals: 18,
 };
 
+const CRO: AddEthereumChainParameter['nativeCurrency'] = {
+  name: 'Cro',
+  symbol: 'CRO',
+  decimals: 18,
+};
+
 interface BasicChainInformation {
   urls: string[];
   name: string;
@@ -87,10 +93,12 @@ export const CHAINS: {
   25: {
     urls: [`https://evm-cronos.crypto.org`],
     name: 'Cronos',
+    nativeCurrency: CRO,
   },
   338: {
     urls: [`https://evm-t3.cronos.org`],
     name: 'Cronos Test',
+    nativeCurrency: CRO,
   },
   42: {
     urls: [

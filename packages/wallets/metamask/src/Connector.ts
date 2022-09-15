@@ -5,7 +5,7 @@ export type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
 };
 
-export type MetaMaskOptions = ConnectorOptions<undefined>;
+export type MetaMaskOptions = ConnectorOptions;
 
 export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;

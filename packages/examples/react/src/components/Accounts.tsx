@@ -40,7 +40,13 @@ export const Accounts = ({
             </Box>
             <Box>
               <span style={{ marginRight: 10 }}>Balance:</span>
-              <b>{balances.data?.[i] ? `Ξ ${balances.data[i]}` : '--'}</b>
+              <b>
+                {balances.data?.[i]
+                  ? `${balances.data[i]}`
+                  : balances.data?.[i] === 0
+                  ? 0
+                  : '--'}
+              </b>
             </Box>
           </React.Fragment>
         ),

@@ -209,6 +209,14 @@ importers:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
 
+  packages/wallets/brave-wallet:
+    specifiers:
+      '@web3-wallet/core': workspace:*
+      '@web3-wallet/injected': workspace:*
+    dependencies:
+      '@web3-wallet/core': link:../../core
+      '@web3-wallet/injected': link:../injected
+
   packages/wallets/coinbase-wallet:
     specifiers:
       '@web3-wallet/core': workspace:*
@@ -274,6 +282,7 @@ importers:
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
+      '@web3-wallet/brave-wallet': workspace:*
       '@web3-wallet/coinbase-wallet': workspace:*
       '@web3-wallet/core': workspace:*
       '@web3-wallet/cryptocom-desktop-wallet': workspace:*
@@ -299,6 +308,7 @@ importers:
       '@ethersproject/experimental': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
+      '@web3-wallet/brave-wallet': link:../packages/wallets/brave-wallet
       '@web3-wallet/coinbase-wallet': link:../packages/wallets/coinbase-wallet
       '@web3-wallet/core': link:../packages/core
       '@web3-wallet/cryptocom-desktop-wallet': link:../packages/wallets/cryptocom-desktop-wallet

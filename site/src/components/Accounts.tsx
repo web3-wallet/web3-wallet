@@ -39,7 +39,11 @@ export const Accounts = ({
             <Flex gap={2}>
               <Text>Balance:</Text>
               <Text fontWeight="bold">
-                {balances.data?.[i] ? `${balances.data[i]}` : '--'}
+                {balances.data?.[i]
+                  ? `${balances.data[i]}`
+                  : balances.data?.[i] === 0
+                  ? 0
+                  : '--'}
               </Text>
             </Flex>
           </React.Fragment>

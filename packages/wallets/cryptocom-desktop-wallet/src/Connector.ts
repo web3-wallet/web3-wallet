@@ -5,7 +5,7 @@ export type CryptocomDesktopWalletProvider = Provider & {
   isDesktopWallet?: boolean;
 };
 
-export type CryptocomDesktopWalletOptions = ConnectorOptions<undefined>;
+export type CryptocomDesktopWalletOptions = ConnectorOptions;
 
 export const walletName =
   'Crypto.com Desktop Wallet' as WalletName<'Crypto.com Desktop Wallet'>;

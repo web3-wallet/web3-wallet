@@ -1,4 +1,5 @@
 import { rpcMap } from '@site/chains';
+import { BraveWallet } from '@web3-wallet/brave-wallet';
 import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
 import { getDeFiWallet } from '@web3-wallet/defiwallet';
@@ -18,6 +19,7 @@ const connectors = [
       rpcUrls: {},
     },
   }),
+  new BraveWallet(),
   new CoinbaseWallet({
     providerOptions: {
       appName: '@web3-wallet example',

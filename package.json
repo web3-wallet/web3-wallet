@@ -29,7 +29,8 @@
         "defiwallet",
         "metamask",
         "walletconnect",
-        "cryptocom-desktop-wallet"
+        "cryptocom-desktop-wallet",
+        "brave-wallet"
       ]
     ]
   },

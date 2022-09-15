@@ -35,6 +35,7 @@ export const useBalances = (
           );
         })
         .catch((error) => {
+          console.log('cache', error);
           if (stale) return;
           console.debug('Could not fetch ENS names', error);
 
