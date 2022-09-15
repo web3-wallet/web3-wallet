@@ -1,5 +1,11 @@
 # @web3-wallet/scripts
 
+## 0.8.1
+
+### Patch Changes
+
+- package version
+
 ## 0.8.0
 
 ### Minor Changes
