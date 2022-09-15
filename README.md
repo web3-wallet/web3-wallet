@@ -118,7 +118,6 @@ const {
 
   useAccounts,
   useChainId,
-  useENSNames,
   useProvider,
 } = currentWallet;
 
@@ -131,12 +130,13 @@ export const WalletSelectCard = () => {
   const accounts = useAccounts();
   const provider = useProvider();
 
-  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
   const { useBalances } = usePlugin<BalancePlugin.Api>(
     BalancePlugin.name,
   ).hooks;
+  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
 
-  console.log(metamask.useAccount());
+  const balances = useBalances();
+  const ensNames = useEnsNames();
 
   useEffect(() => {
     autoConnectOnce();

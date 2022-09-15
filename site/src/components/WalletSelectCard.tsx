@@ -37,10 +37,10 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
 
-  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
   const { useBalances } = usePlugin<BalancePlugin.Api>(
     BalancePlugin.name,
   ).hooks;
+  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
 
   const balances = useBalances();
   const ensNames = useEnsNames();
