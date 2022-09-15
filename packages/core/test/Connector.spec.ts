@@ -8,8 +8,8 @@ const chainId = mockData.hexChainIds[0];
 const accounts = mockData.accounts.slice(0, 1);
 
 class MockConnector extends Connector<MockProvider> {
-  public provider?: MockProvider;
-  public async detectProvider(): Promise<MockProvider> {
+  public override provider?: MockProvider;
+  public override async detectProvider(): Promise<MockProvider> {
     if (this.provider) return this.provider;
 
     const provider = new MockProvider();
