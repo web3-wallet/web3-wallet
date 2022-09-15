@@ -42,12 +42,11 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 
 ## Getting started
 
-### React
-
-#### please check out the examples
-
 - [site](./site)
 - [example-react](./packages/examples/react/)
+- [example-vue](./packages/examples/vue/)
+
+### React
 
 ```bash
 pnpm add @web3-wallet/react @web3-wallet/metamask
