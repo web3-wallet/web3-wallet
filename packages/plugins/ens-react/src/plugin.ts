@@ -18,7 +18,7 @@ export type Api = {
   };
 };
 
-export const createPlugin: CreatePlugin<undefined, Api> = () => {
+export const create: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { useProvider, useAccounts, useAccount } = wallet;
 

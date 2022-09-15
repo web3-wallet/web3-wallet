@@ -18,8 +18,8 @@ export interface Wallet extends CoreWallet, WalletBuiltinHooks {
  * The dependencies of the builtin plugins are not checked, don't mix up orders.
  */
 export const builtinPlugins = [
-  CoreHooksPlugin.createPlugin(),
-  Web3ProviderPlugin.createPlugin(),
+  CoreHooksPlugin.create(),
+  Web3ProviderPlugin.create(),
 ];
 
 export type WalletBuiltinHooks = CoreHooksPlugin.Api['hooks'] &

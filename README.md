@@ -82,7 +82,7 @@ const connectors = [
   }),
 ];
 
-const plugins = [ConnectionStatusPlugin.createPlugin()];
+const plugins = [BalancePlugin.create(), EnsPlugin.create()];
 
 export const walletProxy = new WalletProxy(connectors, {
   plugins,

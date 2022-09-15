@@ -40,7 +40,7 @@ export type Options = {
   persistKey?: string;
 };
 
-export const createPlugin: CreatePlugin<Options, Api> = (options) => {
+export const create: CreatePlugin<Options, Api> = (options) => {
   const createApi = (_: PluginContext) => {
     const { isPersist = false, persistKey = name } = options || {};
 

@@ -38,7 +38,7 @@ const ACCOUNTS_EQUALITY_CHECKER: (
   );
 };
 
-export const createPlugin: CreatePlugin<undefined, Api> = () => {
+export const create: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { $getStore } = wallet;
 
