@@ -6,7 +6,8 @@
   },
   "files.associations": {
     // allow comments in .evn.scripts.json
-    ".scripts.config.json": "jsonc"
+    ".scripts.config.json": "jsonc",
+    "turbo.json": "jsonc"
   },
   "cSpell.words": [
     "bignumber",

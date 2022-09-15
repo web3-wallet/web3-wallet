@@ -1,6 +1,7 @@
 {
   "name": "@web3-wallet/core",
   "description": "web3-wallet core",
+  "version": "0.9.1",
   "keywords": [
     "web3-wallet",
     "web3",
@@ -15,14 +16,20 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.9.1",
   "files": [
     "dist",
     "src"
   ],
+  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
   "dependencies": {
     "@web3-wallet/detect-provider": "workspace:*",
     "@ethersproject/address": "^5.7.0",

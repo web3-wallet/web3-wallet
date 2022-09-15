@@ -78,3 +78,6 @@ out/
 **/.env.staging
 **/.env.uat
 **/.env.production
+
+# turbo
+.turbo

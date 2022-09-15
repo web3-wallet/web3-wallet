@@ -1,27 +1,28 @@
 {
   "name": "@web3-wallet/vue",
+  "description": "web3-wallet vue",
   "keywords": [
     "web3-wallet",
     "vue",
     "vue3"
   ],
+  "version": "0.9.1",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "version": "0.9.1",
   "files": [
     "dist",
     "src"
   ],
+  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
   "dependencies": {
     "@web3-wallet/core": "workspace:*"
   },
@@ -32,7 +33,13 @@
     "@ethersproject/networks": "^5.7.0",
     "@ethersproject/providers": "^5.7.0"
   },
-  "description": "web3-wallet vue",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },

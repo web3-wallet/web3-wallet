@@ -1,19 +1,13 @@
 {
   "name": "@web3-wallet/plugin-connection-status-react",
+  "description": "web3-wallet connection status plugin for tracking connections status",
+  "version": "0.9.1",
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "MIT",
   "keywords": [
     "web3-wallet",
     "react"
   ],
-  "author": "logan <logan.luo@crypto.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "version": "0.9.1",
   "files": [
     "**"
   ],
@@ -21,6 +15,12 @@
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
   "dependencies": {
     "@web3-wallet/react": "workspace:*",
     "zustand": "^4.0.0-rc.0"
@@ -29,7 +29,13 @@
     "react": ">=16.8",
     "vue": ">=3.2.13"
   },
-  "description": "web3-wallet react",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },

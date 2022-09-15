@@ -1,32 +1,39 @@
 {
   "name": "@web3-wallet/coinbase-wallet",
   "description": "Coinbase wallet connector",
+  "version": "0.9.1",
   "keywords": [
     "web3-wallet",
     "Coinbase wallet"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
+  "dependencies": {
+    "@web3-wallet/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "@coinbase/wallet-sdk": "^3.0.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/web3-wallet/web3-wallet.git"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "version": "0.9.1",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "types": "./dist/esm/index.d.ts",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "dependencies": {
-    "@web3-wallet/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "@coinbase/wallet-sdk": "^3.0.4"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"

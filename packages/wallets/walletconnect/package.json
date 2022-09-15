@@ -1,6 +1,7 @@
 {
   "name": "@web3-wallet/walletconnect",
   "description": "WalletConnect connector",
+  "version": "0.9.1",
   "keywords": [
     "web3-wallet",
     "web3",
@@ -8,21 +9,20 @@
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "version": "0.9.1",
   "files": [
     "dist",
     "src"
   ],
+  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
   "dependencies": {
     "@walletconnect/types": "^1.8.0",
     "@web3-wallet/core": "workspace:*",
@@ -30,6 +30,13 @@
   },
   "peerDependencies": {
     "@walletconnect/ethereum-provider": "^1.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"

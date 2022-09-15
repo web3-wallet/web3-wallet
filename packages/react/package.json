@@ -1,19 +1,13 @@
 {
   "name": "@web3-wallet/react",
+  "description": "web3-wallet react",
+  "version": "0.9.1",
   "keywords": [
     "web3-wallet",
     "react"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "version": "0.9.1",
   "files": [
     "dist",
     "src"
@@ -21,6 +15,19 @@
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit",
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@ethersproject/networks": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
@@ -30,7 +37,6 @@
   "peerDependencies": {
     "react": ">=16.8"
   },
-  "description": "web3-wallet react",
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
   },
