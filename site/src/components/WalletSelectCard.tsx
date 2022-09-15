@@ -1,5 +1,5 @@
-import { Text } from '@chakra-ui/react';
-import { allWallets, currentWallet } from '@site/wallets';
+import { HStack, Image, Text } from '@chakra-ui/react';
+import { allWallets, currentWallet, walletIconMap } from '@site/wallets';
 import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { useEffect } from 'react';
@@ -61,7 +61,14 @@ export const WalletSelectCard = () => {
           switchCurrentWallet={switchCurrentWallet}
         />
         <WalletCard>
-          <Text fontWeight="bold">{walletName}</Text>
+          <HStack>
+            <Image
+              width="24px"
+              src={walletIconMap[walletName]}
+              alt="MetaMask logo"
+            />
+            <Text fontWeight="bold">{walletName}</Text>
+          </HStack>
           <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
           <Chain chainId={chainId} />
           <Accounts

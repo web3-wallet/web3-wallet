@@ -7,7 +7,8 @@ import {
   detectProvider,
 } from './detectProvider';
 
-export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
+const _name = 'Defi Wallet';
+export const name = _name as WalletName<typeof _name>;
 
 export type DeFiWalletExtensionOptions =
   ConnectorOptions<DeFiWalletProviderOptions>;
@@ -20,7 +21,7 @@ export class DeFiWalletExtension extends Connector<
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options: DeFiWalletExtensionOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

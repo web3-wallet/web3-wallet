@@ -7,13 +7,14 @@ export type MetaMaskProvider = Provider & {
 
 export type MetaMaskOptions = ConnectorOptions;
 
-export const walletName = 'MetaMask' as WalletName<'MetaMask'>;
+const _name = 'MetaMask';
+export const name = _name as WalletName<typeof _name>;
 const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
 export class MetaMask extends Injected<MetaMaskProvider, MetaMaskOptions> {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: MetaMaskOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

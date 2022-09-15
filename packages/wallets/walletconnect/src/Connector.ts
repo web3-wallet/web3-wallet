@@ -8,7 +8,9 @@ export const URI_AVAILABLE = 'URI_AVAILABLE';
 
 type WalletConnectProvider = _WalletConnectProvider & Provider;
 
-export const walletName = 'WalletConnect' as WalletName<'WalletConnect'>;
+const _name = 'WalletConnect';
+export const name = _name as WalletName<typeof _name>;
+
 export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
 
 export class WalletConnect extends Connector<
@@ -20,7 +22,7 @@ export class WalletConnect extends Connector<
   public readonly events = new EventEmitter3();
 
   constructor(options: WalletConnectOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   private onDisplayUri = (

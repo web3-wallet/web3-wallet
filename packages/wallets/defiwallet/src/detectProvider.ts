@@ -17,13 +17,13 @@ type ChainId = number;
 type ChainIdHex = string;
 export interface DeFiWalletProvider extends Provider {
   /**
-   * DeFi Wallet chrome extension
+   * Defi Wallet chrome extension
    */
   isDeficonnectProvider: boolean;
   /**
-   * DeFi Wallet mobile app
+   * Defi Wallet mobile app
    *
-   * crypto.com DeFi Wallet mobile app uses trust wallet's provider, and it is injected to
+   * crypto.com Defi Wallet mobile app uses trust wallet's provider, and it is injected to
    * the dApp/builtin-browser.
    */
   chainId?: ChainIdHex;
@@ -68,7 +68,7 @@ export const detectProvider = async (
 const useProvider = (): DeFiWalletProvider | undefined => {
   if (typeof window === 'undefined') return undefined;
   /**
-   * `window.deficonnectProvider` is injected by crypto.com DeFi Wallet chrome extension.
+   * `window.deficonnectProvider` is injected by crypto.com Defi Wallet chrome extension.
    */
   if (window.deficonnectProvider) {
     return window.deficonnectProvider;

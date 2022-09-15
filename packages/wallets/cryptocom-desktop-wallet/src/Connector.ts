@@ -7,8 +7,8 @@ export type CryptocomDesktopWalletProvider = Provider & {
 
 export type CryptocomDesktopWalletOptions = ConnectorOptions;
 
-export const walletName =
-  'Crypto.com Desktop Wallet' as WalletName<'Crypto.com Desktop Wallet'>;
+const _name = 'Crypto.com Defi Desktop Wallet';
+export const name = _name as WalletName<typeof _name>;
 
 const providerFilter = (p: CryptocomDesktopWalletProvider) => {
   return !!p.isDesktopWallet;
@@ -20,7 +20,7 @@ export class CryptocomDesktopWallet extends Injected<
 > {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: CryptocomDesktopWalletOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

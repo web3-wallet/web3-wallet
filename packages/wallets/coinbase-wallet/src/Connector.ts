@@ -9,7 +9,8 @@ type CoinbaseWalletProviderOptions = ConstructorParameters<
   typeof CoinbaseWalletSDK
 >[0] & { url: string };
 
-export const walletName = 'Coinbase Wallet' as WalletName<'Coinbase Wallet'>;
+export const _name = 'Coinbase Wallet';
+export const name = _name as WalletName<typeof _name>;
 
 export type CoinbaseWalletOptions =
   ConnectorOptions<CoinbaseWalletProviderOptions>;
@@ -31,7 +32,7 @@ export class CoinbaseWallet extends Connector<
    * @param options - Options to pass to `@coinbase/wallet-sdk`.
    */
   constructor(options: CoinbaseWalletOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

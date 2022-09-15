@@ -1,13 +1,25 @@
 import { rpcMap } from '@site/chains';
-import { BraveWallet } from '@web3-wallet/brave-wallet';
-import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
-import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
-import { getDeFiWallet } from '@web3-wallet/defiwallet';
-import { MetaMask } from '@web3-wallet/metamask';
+import {
+  BraveWallet,
+  icon as braveWalletIcon,
+} from '@web3-wallet/brave-wallet';
+import {
+  CoinbaseWallet,
+  icon as coinbaseWalletIcon,
+} from '@web3-wallet/coinbase-wallet';
+import {
+  CryptocomDesktopWallet,
+  icon as desktopWalletIcon,
+} from '@web3-wallet/cryptocom-desktop-wallet';
+import { getDeFiWallet, icon as defiWalletIcon } from '@web3-wallet/defiwallet';
+import { icon as metaMaskIcon, MetaMask } from '@web3-wallet/metamask';
 import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { WalletProxy } from '@web3-wallet/react';
-import { WalletConnect } from '@web3-wallet/walletconnect';
+import {
+  icon as walletConnectIcon,
+  WalletConnect,
+} from '@web3-wallet/walletconnect';
 
 const connectors = [
   new MetaMask(),
@@ -19,7 +31,6 @@ const connectors = [
       rpcUrls: {},
     },
   }),
-  new BraveWallet(),
   new CoinbaseWallet({
     providerOptions: {
       appName: '@web3-wallet example',
@@ -27,12 +38,13 @@ const connectors = [
       url: rpcMap[1],
     },
   }),
-  new CryptocomDesktopWallet(),
   new WalletConnect({
     providerOptions: {
       rpc: rpcMap,
     },
   }),
+  new CryptocomDesktopWallet(),
+  new BraveWallet(),
 ];
 
 const plugins = [EnsPlugin.create(), BalancePlugin.create()];
@@ -47,6 +59,16 @@ export const [
   metamask,
   defiwallet,
   coinbaseWallet,
-  desktopWallet,
   walletconnect,
+  desktopWallet,
+  braveWallet,
 ] = allWallets;
+
+export const walletIconMap = {
+  [metamask.name]: metaMaskIcon,
+  [defiwallet.name]: defiWalletIcon,
+  [coinbaseWallet.name]: coinbaseWalletIcon,
+  [walletconnect.name]: walletConnectIcon,
+  [desktopWallet.name]: desktopWalletIcon,
+  [braveWallet.name]: braveWalletIcon,
+};

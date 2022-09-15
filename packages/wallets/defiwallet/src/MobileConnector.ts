@@ -6,7 +6,8 @@ export type MobileProvider = Provider & {
   isTrust?: boolean;
 };
 
-export const walletName = 'DeFi Wallet' as WalletName<'DeFi Wallet'>;
+const _name = 'Defi Wallet';
+export const name = _name as WalletName<typeof _name>;
 
 const providerFilter: ProviderFilter<MobileProvider> = (p) =>
   !!p.isTrust && window.navigator?.userAgent?.includes('DeFiWallet');
@@ -14,7 +15,7 @@ const providerFilter: ProviderFilter<MobileProvider> = (p) =>
 export class DeFiWalletMobile extends Injected<MobileProvider> {
   /** {@inheritdoc Connector.constructor} */
   constructor() {
-    super(walletName);
+    super(name);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

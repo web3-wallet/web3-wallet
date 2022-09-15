@@ -14,3 +14,5 @@ export const getDeFiWallet = (options: {
     });
   }
 };
+
+export * from './assets';
