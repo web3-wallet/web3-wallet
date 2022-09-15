@@ -1,5 +1,17 @@
 # @web3-wallet/cryptocom-desktop-wallet
 
+## 0.9.0
+
+### Minor Changes
+
+- package version
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@0.9.0
+  - @web3-wallet/injected@0.9.0
+
 ## 0.8.0
 
 ### Minor Changes

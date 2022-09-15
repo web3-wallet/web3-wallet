@@ -34,6 +34,8 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet)                        | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet)                               | --   |
 | [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)                            | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)                                   | --   |
 | **Plugins**                                                                               |                                                                                                                                                                      |      |
+| [`@web3-wallet/plugin-balance-react`](packages/plugins/balance-react)                     | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-balance-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-balance-react)                     | --   |
+| [`@web3-wallet/plugin-ens-react`](packages/plugins/ens-react)                             | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-ens-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-ens-react)                             | --   |
 | [`@web3-wallet/plugin-connection-status-react`](packages/plugins/connection-status-react) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status-react) | --   |
 
 ## Getting started
