@@ -27,6 +27,7 @@
     "@web3-wallet/metamask": "workspace:*",
     "@web3-wallet/brave-wallet": "workspace:*",
     "@web3-wallet/trust-wallet": "workspace:*",
+    "@web3-wallet/imtoken": "workspace:*",
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
     "@web3-wallet/plugin-connection-status-react": "workspace:*",

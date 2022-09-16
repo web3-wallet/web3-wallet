@@ -12,6 +12,7 @@ import {
   icon as desktopWalletIcon,
 } from '@web3-wallet/cryptocom-desktop-wallet';
 import { DeFiWallet, icon as defiWalletIcon } from '@web3-wallet/defiwallet';
+import { icon as imTokenIcon, ImToken } from '@web3-wallet/imtoken';
 import { icon as metaMaskIcon, MetaMask } from '@web3-wallet/metamask';
 import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
@@ -43,6 +44,7 @@ const connectors = [
   new TrustWallet(),
   new CryptocomDesktopWallet(),
   new BraveWallet(),
+  new ImToken(),
 ];
 
 const plugins = [EnsPlugin.create(), BalancePlugin.create()];
@@ -61,6 +63,7 @@ export const [
   trustWallet,
   desktopWallet,
   braveWallet,
+  imToken,
 ] = allWallets;
 
 export const walletIconMap = {
@@ -71,4 +74,5 @@ export const walletIconMap = {
   [trustWallet.name]: trustWalletIcon,
   [desktopWallet.name]: desktopWalletIcon,
   [braveWallet.name]: braveWalletIcon,
+  [imToken.name]: imTokenIcon,
 };

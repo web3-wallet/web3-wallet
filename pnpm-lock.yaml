@@ -240,6 +240,12 @@ importers:
     dependencies:
       '@web3-wallet/core': link:../../core
 
+  packages/wallets/imtoken:
+    specifiers:
+      '@web3-wallet/core': workspace:*
+    dependencies:
+      '@web3-wallet/core': link:../../core
+
   packages/wallets/metamask:
     specifiers:
       '@web3-wallet/core': workspace:*
@@ -278,6 +284,7 @@ importers:
       '@web3-wallet/core': workspace:*
       '@web3-wallet/cryptocom-desktop-wallet': workspace:*
       '@web3-wallet/defiwallet': workspace:*
+      '@web3-wallet/imtoken': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/plugin-balance-react': workspace:*
       '@web3-wallet/plugin-connection-status-react': workspace:*
@@ -304,6 +311,7 @@ importers:
       '@web3-wallet/core': link:../packages/core
       '@web3-wallet/cryptocom-desktop-wallet': link:../packages/wallets/cryptocom-desktop-wallet
       '@web3-wallet/defiwallet': link:../packages/wallets/defiwallet
+      '@web3-wallet/imtoken': link:../packages/wallets/imtoken
       '@web3-wallet/metamask': link:../packages/wallets/metamask
       '@web3-wallet/plugin-balance-react': link:../packages/plugins/balance-react
       '@web3-wallet/plugin-connection-status-react': link:../packages/plugins/connection-status-react
