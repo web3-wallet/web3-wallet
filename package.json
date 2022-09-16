@@ -1,7 +1,7 @@
 {
   "name": "web3-wallet",
   "private": true,
-  "description": "Use web3 wallets in your react/vue web3 apps with easy.",
+  "description": "A Modular, Extensible and Flexible web3 wallet framework for building dApps.",
   "author": "logan.luo",
   "license": "MIT",
   "keywords": [
@@ -13,31 +13,10 @@
     "ethereum"
   ],
   "packageManager": "pnpm@7.5.0",
-  "@web3-wallet/scripts": {
-    "packages": [
-      "detect-provider",
-      "core",
-      [
-        "react",
-        "vue"
-      ],
-      [
-        "plugin-connection-status-react",
-        "plugin-balance-react",
-        "plugin-ens-react",
-        "coinbase-wallet",
-        "defiwallet",
-        "metamask",
-        "walletconnect",
-        "cryptocom-desktop-wallet",
-        "brave-wallet"
-      ]
-    ]
-  },
   "scripts": {
     "build": "turbo run build --filter=!./packages/examples/* --filter=!./site",
     "watch": "turbo run watch --parallel",
-    "test": "turbo run test",
+    "test": "jest --silent",
     "ts-check": "turbo run ts-check",
     "lint": "turbo run lint",
     "dev": "turbo run dev --filter=site",
