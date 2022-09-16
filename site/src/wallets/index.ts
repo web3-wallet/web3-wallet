@@ -17,6 +17,10 @@ import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
 import { WalletProxy } from '@web3-wallet/react';
 import {
+  icon as trustWalletIcon,
+  TrustWallet,
+} from '@web3-wallet/trust-wallet';
+import {
   icon as walletConnectIcon,
   WalletConnect,
 } from '@web3-wallet/walletconnect';
@@ -36,6 +40,7 @@ const connectors = [
       rpc: rpcMap,
     },
   }),
+  new TrustWallet(),
   new CryptocomDesktopWallet(),
   new BraveWallet(),
 ];
@@ -53,6 +58,7 @@ export const [
   defiWallet,
   coinbaseWallet,
   walletconnect,
+  trustWallet,
   desktopWallet,
   braveWallet,
 ] = allWallets;
@@ -62,6 +68,7 @@ export const walletIconMap = {
   [defiWallet.name]: defiWalletIcon,
   [coinbaseWallet.name]: coinbaseWalletIcon,
   [walletconnect.name]: walletConnectIcon,
+  [trustWallet.name]: trustWalletIcon,
   [desktopWallet.name]: desktopWalletIcon,
   [braveWallet.name]: braveWalletIcon,
 };
