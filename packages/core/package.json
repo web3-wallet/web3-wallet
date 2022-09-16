@@ -20,7 +20,6 @@
     "dist",
     "src"
   ],
-  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -28,11 +27,12 @@
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build  --filter=core'",
     "build": "tsc;tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@web3-wallet/detect-provider": "workspace:*",
     "@ethersproject/address": "^5.7.0",
+    "@web3-wallet/detect-provider": "workspace:*",
     "zustand": "^4.0.0-rc.0"
   },
   "bugs": {

@@ -11,15 +11,15 @@
   "files": [
     "**"
   ],
-  "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "scripts": {
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=plugin-balance-react'",
     "lint": "eslint src",
     "fix": "eslint src --fix",
-    "ts-check": "tsc --noEmit",
-    "build": "tsc;tsc --module commonjs --outDir dist/cjs"
+    "ts-check": "tsc --noEmit"
   },
   "dependencies": {
     "@web3-wallet/react": "workspace:*",
