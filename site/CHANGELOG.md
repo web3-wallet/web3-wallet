@@ -1,5 +1,14 @@
 # @web3-wallet/nextjs
 
+## 0.9.2
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/imtoken@0.9.2
+  - @web3-wallet/trust-wallet@0.9.2
+
 ## 0.9.1
 
 ### Patch Changes
