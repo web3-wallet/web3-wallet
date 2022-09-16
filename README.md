@@ -181,7 +181,7 @@ export const WalletSelectCard = () => {
 
 ## More wallets
 
-If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet Connector with few lines of code by extending the `Injected` Connector.
+If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet Connector with few lines of code by extending the abstract Connector.
 
 ```typescript
 // Trust Wallet connector
@@ -192,11 +192,12 @@ import type {
   createWallet,
 } from '@web3-wallet/react';
 
-import { type InjectedProvider, Injected } from '@web3-wallet/injected';
+import { Provider, Connector } from '@web3-wallet/core';
 
-export const walletName = 'Trust' as WalletName<'Trust'>;
+const _name = 'Trust Wallet';
+export const name = _name as WalletName<typeof _name>;
 
-export type TrustWalletProvider = InjectedProvider & {
+export type TrustWalletProvider = Provider & {
   isTrust?: boolean;
 };
 
@@ -204,51 +205,16 @@ export type TrustWalletOptions = WalletOptions;
 
 const providerFilter = (p: TrustWalletProvider) => p.isTrust;
 
-export class TrustWallet extends Injected<
+export class TrustWallet extends Connector<
   TrustWalletProvider,
   TrustWalletOptions
 > {
   constructor(options?: TrustWalletOptions) {
-    super(walletName, options);
+    super(name, options);
   }
 
   public override async detectProvider(): Promise<TrustWalletProvider> {
     return await super.detectProvider(providerFilter);
-  }
-}
-```
-
-If the wallet you want to integrate with is not eip1193 compatible or has special provider detection logic, you can extend the `Connector` instead and then implement the `detectProvider` method and override few of the Connector methods.
-
-```typescript
-import type {
-  type Connector,
-  type WalletName,
-  type WalletOptions,
-  createWallet,
-} from '@web3-wallet/react';
-
-type MyWalletProvider = Provider & {
-  // wallet provider props
-};
-
-export type MyWalletOptions = WalletOptions & {
-  // wallet provider props
-};
-
-export const walletName = 'MyWallet' as WalletName<'MyWallet'>;
-
-export class MyWallet extends Connector<MyWalletProvider, MyWalletOptions> {
-  constructor(options?: MyWalletOptions) {
-    super(walletName, options);
-  }
-
-  public async detectProvider(): Promise<MyWalletProvider> {
-    // ...
-  }
-
-  protected override switchChain(...args) {
-    // ...
   }
 }
 ```
