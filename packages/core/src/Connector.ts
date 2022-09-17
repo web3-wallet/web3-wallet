@@ -396,6 +396,7 @@ export abstract class Connector<
    * @return void
    */
   protected onDisconnect(error: ProviderRpcError): void {
+    this.actions.resetState();
     this.options?.onError?.(error);
   }
 
