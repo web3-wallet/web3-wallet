@@ -62,7 +62,7 @@ export type DetectProviderOptions = {
  * @returns A Promise that resolves with the Provider if it is detected within
  * given timeout, otherwise undefined.
  */
-export const detectProvider = <T = Provider>(
+export const detectProvider = <T extends Provider = Provider>(
   options: DetectProviderOptions = {},
 ): Promise<T | undefined> => {
   const {
@@ -111,7 +111,8 @@ export const detectProvider = <T = Provider>(
   function checkForProvider(): T | undefined {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const provider: T | undefined = (window as any)[providerName];
-    return provider;
+
+    return typeof provider?.request === 'function' ? provider : undefined;
   }
 
   let handled = false;
