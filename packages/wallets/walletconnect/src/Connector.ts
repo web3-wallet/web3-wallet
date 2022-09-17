@@ -1,6 +1,6 @@
 import type _WalletConnectProvider from '@walletconnect/ethereum-provider';
 import type { IWCEthRpcConnectionOptions } from '@walletconnect/types';
-import type { ConnectorOptions } from '@web3-wallet/core';
+import type { ConnectorOptions, ProviderRpcError } from '@web3-wallet/core';
 import { type Provider, type WalletName, Connector } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
 
@@ -93,6 +93,17 @@ export class WalletConnect extends Connector<
       return false;
     }
     return await super.autoConnect();
+  }
+
+  /**
+   * {@inheritdoc Connector.onDisconnect}
+   */
+  protected override onDisconnect(error: ProviderRpcError): void {
+    this.options?.onError?.(error);
+    /**
+     * force disconnect(reset provider) to avoid some edge walletconnect disconnect issue
+     */
+    this.disconnect(true);
   }
 
   /** {@inheritdoc Connector.disconnect} */
