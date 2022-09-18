@@ -6,7 +6,7 @@ import type {
 } from '@web3-wallet/react';
 import { useMemo } from 'react';
 
-import { useBalances } from './useEnsBalances';
+import { useBalances } from './useBalances';
 
 const _name = '@web3-wallet/plugin-balance-react';
 export const name = _name as PluginName<typeof _name>;

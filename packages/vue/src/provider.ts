@@ -60,12 +60,15 @@ export const createGetProvider = ({
     return computed(() => {
       // to ensure connectors remain fresh, we condition re-renders on loaded, isConnected and chainId
       void isConnected.value && chainId.value;
+
       if (dynamicProvider.value && connector.provider) {
         return new dynamicProvider.value(
           connector.provider,
           network,
         ) as unknown as T;
       }
+
+      return undefined;
     });
   };
 

@@ -27,6 +27,8 @@ async function importWeb3Provider(): Promise<typeof Web3Provider | undefined> {
   } catch {
     console.debug('@ethersproject/providers not available');
   }
+
+  return undefined;
 }
 
 export const useImportWeb3Provider = (): typeof Web3Provider | undefined => {

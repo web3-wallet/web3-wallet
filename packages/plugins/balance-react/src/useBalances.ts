@@ -1,29 +1,43 @@
 import type { BaseProvider } from '@ethersproject/providers';
-import type { AsyncFetchResult } from 'packages/react/dist/esm';
+import { formatEther } from '@ethersproject/units';
+import type { AsyncFetchResult } from '@web3-wallet/react';
 import { useEffect, useState } from 'react';
 
-export type EnsNames = (string | undefined)[];
-export const useEnsNames = (
+export type Balances = (number | undefined)[];
+
+export const useBalances = (
   provider?: BaseProvider,
   accounts: string[] = [],
-): AsyncFetchResult<EnsNames> => {
+  precision = 4,
+): AsyncFetchResult<Balances> => {
   const [data, setData] =
-    useState<AsyncFetchResult<EnsNames>['data']>(undefined);
+    useState<AsyncFetchResult<Balances>['data']>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
 
   useEffect(() => {
     if (!provider || !accounts.length) return;
+
     let stale = false;
 
     setIsLoading(true);
 
-    Promise.all(accounts.map((account) => provider.lookupAddress(account)))
-      .then((ENSNames) => {
+    Promise.all(accounts.map((account) => provider.getBalance(account)))
+      .then((balances) => {
         if (stale) return;
-        setData(ENSNames.map((v) => (v ? v : undefined)));
+
+        setData(
+          balances.map((v) =>
+            v
+              ? Number(Number(formatEther(v)).toFixed(precision))
+              : v === 0
+              ? 0
+              : undefined,
+          ),
+        );
       })
       .catch((error) => {
+        console.log('cache', error);
         if (stale) return;
         console.debug('Could not fetch ENS names', error);
 
