@@ -16,6 +16,7 @@ export interface Wallet {
 
   $getStore: () => WalletStore;
   $getProvider: () => Provider | undefined;
+  detectProvider: () => ReturnType<Connector['detectProvider']>;
 
   // core methods
   connect: Connector['connect'];
@@ -35,6 +36,7 @@ export const createWallet = (connector: Connector): Wallet => {
 
     $getProvider: () => connector.provider,
     $getStore: () => connector.store,
+    detectProvider: () => connector.detectProvider(),
 
     connect: (...args) => connector.connect(...args),
     autoConnect: (...args) => connector.autoConnect(...args),

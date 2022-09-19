@@ -223,7 +223,7 @@ export const createCurrentWallet = (
     $getStore: (...args) => getUnderliningCurrentWallet().$getStore(...args),
     $getProvider: (...args) =>
       getUnderliningCurrentWallet().$getProvider(...args),
-
+    detectProvider: () => getUnderliningCurrentWallet().detectProvider(),
     getPlugin,
     usePlugin,
 
