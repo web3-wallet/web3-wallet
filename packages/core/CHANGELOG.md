@@ -1,5 +1,11 @@
 # @web3-wallet/core
 
+## 0.9.3
+
+### Patch Changes
+
+- c2334d4: package version
+
 ## 0.9.2
 
 ### Patch Changes

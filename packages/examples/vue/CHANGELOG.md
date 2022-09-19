@@ -1,5 +1,14 @@
 # @web3-wallet/vuejs
 
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [c2334d4]
+  - @web3-wallet/core@0.9.3
+  - @web3-wallet/vue@0.9.3
+  - @web3-wallet/metamask@0.9.3
+
 ## 0.9.2
 
 ### Patch Changes

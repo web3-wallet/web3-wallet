@@ -1,5 +1,13 @@
 # @web3-wallet/react
 
+## 0.9.3
+
+### Patch Changes
+
+- c2334d4: package version
+- Updated dependencies [c2334d4]
+  - @web3-wallet/core@0.9.3
+
 ## 0.9.2
 
 ### Patch Changes
