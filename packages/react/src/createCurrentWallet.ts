@@ -75,7 +75,20 @@ export const createCurrentWallet = (
 
   const getCurrentWallet = (): Wallet => {
     const currentWalletName = store.getState().name;
-    return getWallet(currentWalletName);
+    const currentWallet = getWallet(currentWalletName);
+
+    if (currentWallet) return currentWallet;
+
+    console.debug(
+      `Wallet ${currentWalletName}, don't exist, reset current wallet to ${wallets[0].name}`,
+    );
+
+    store.setState({
+      name: wallets[0].name,
+      connectionStatus: WalletConnectionStatus.Untouched,
+    });
+
+    return wallets[0];
   };
 
   const useCurrentWallet = (): Wallet => {
@@ -221,14 +234,6 @@ export const createCurrentWallet = (
       return result;
     };
 
-  const getPlugin: CurrentWallet['getPlugin'] = (...args) => {
-    return getCurrentWallet().getPlugin(...args);
-  };
-
-  const usePlugin: CurrentWallet['usePlugin'] = (...args) => {
-    return useCurrentWallet().getPlugin(...args);
-  };
-
   return {
     useName,
     switchCurrentWallet,
@@ -252,8 +257,9 @@ export const createCurrentWallet = (
     $getStore: (...args) => getCurrentWallet().$getStore(...args),
     $getProvider: (...args) => getCurrentWallet().$getProvider(...args),
     detectProvider: () => getCurrentWallet().detectProvider(),
-    getPlugin,
-    usePlugin,
+
+    getPlugin: (...args) => getCurrentWallet().getPlugin(...args),
+    usePlugin: (...args) => useCurrentWallet().getPlugin(...args),
 
     ...getCombinedHooks(),
   };
