@@ -124,24 +124,27 @@ export const createCurrentWallet = (
     };
 
     for (const hookName of Object.keys(hooks)) {
-      combinedHooks[hookName] = (...args: unknown[]) => {
-        let hookFnOutput: unknown;
-        const currentWalletName = store.getState().name;
+      const useCombinedHook = (...args: unknown[]) => {
+        let hookOutput: unknown;
+        const currentWalletName = useName();
 
         for (const wallet of wallets) {
-          const hookFn = wallet[hookName as keyof WalletBuiltinHooks] as (
+          const useHook = wallet[hookName as keyof WalletBuiltinHooks] as (
             ...args: unknown[]
           ) => unknown;
 
-          const value = hookFn(...args);
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const value = useHook(...args);
 
           if (wallet.name === currentWalletName) {
-            hookFnOutput = value;
+            hookOutput = value;
           }
         }
 
-        return hookFnOutput;
+        return hookOutput;
       };
+
+      combinedHooks[hookName] = useCombinedHook;
     }
 
     return combinedHooks as WalletBuiltinHooks;
