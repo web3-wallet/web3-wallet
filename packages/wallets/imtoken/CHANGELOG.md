@@ -1,5 +1,13 @@
 # @web3-wallet/imtoken
 
+## 0.9.9
+
+### Patch Changes
+
+- b1ea7de: package version
+- Updated dependencies [b1ea7de]
+  - @web3-wallet/core@0.9.8
+
 ## 0.9.8
 
 ### Patch Changes

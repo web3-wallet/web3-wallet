@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-balance-react",
   "description": "web3-wallet react",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [

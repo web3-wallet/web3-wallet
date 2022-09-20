@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/cryptocom-desktop-wallet",
   "description": "Cryptocom Desktop Wallet connector",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "keywords": [
     "web3-wallet",
     "web3",
