@@ -10,6 +10,8 @@ const delay = (milliseconds: Milliseconds): Promise<void> => {
   });
 };
 
+const startTime = Date.now();
+
 /**
  * Defined in EIP-1193
  *
@@ -69,7 +71,7 @@ export const detectProvider = <T extends Provider = Provider>(
     providerName: providerName = 'ethereum',
     eventName = 'ethereum#initialized',
     detectInterval = 50,
-    timeout = 3000,
+    timeout = 2000,
     silent = false,
   } = options;
 
@@ -128,6 +130,8 @@ export const detectProvider = <T extends Provider = Provider>(
       return;
     }
 
+    if (Date.now() - startTime > timeout) resolve(undefined);
+
     const handleEthereum = () => {
       if (handled) return;
 
@@ -157,6 +161,11 @@ export const detectProvider = <T extends Provider = Provider>(
 
     const detectRecursively = async () => {
       if (handled) return;
+
+      if (Date.now() - startTime > timeout) {
+        resolve(undefined);
+        return;
+      }
 
       await delay(detectInterval);
 
