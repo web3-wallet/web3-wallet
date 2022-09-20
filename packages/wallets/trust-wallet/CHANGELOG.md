@@ -1,5 +1,13 @@
 # @web3-wallet/trust-wallet
 
+## 0.9.5
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@0.9.4
+
 ## 0.9.4
 
 ### Patch Changes
