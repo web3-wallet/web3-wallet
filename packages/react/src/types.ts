@@ -29,6 +29,28 @@ export type CurrentWallet = Omit<Wallet, 'name'> & {
   switchCurrentWallet: (name: WalletName) => void;
   useName: () => Wallet['name'];
   useConnectionStatus: () => WalletConnectionStatus;
+
+  connectWith: (
+    name: WalletName,
+    ...args: Parameters<Wallet['connect']>
+  ) => ReturnType<Wallet['connect']>;
+  autoConnectWith: (
+    name: WalletName,
+    ...args: Parameters<Wallet['autoConnect']>
+  ) => ReturnType<Wallet['autoConnect']>;
+  autoConnectOnceWith: (
+    name: WalletName,
+    ...args: Parameters<Wallet['autoConnectOnce']>
+  ) => ReturnType<Wallet['autoConnectOnce']>;
+  disconnectWith: (
+    name: WalletName,
+    ...args: Parameters<Wallet['disconnect']>
+  ) => ReturnType<Wallet['disconnect']>;
+  watchAssetWith: (
+    name: WalletName,
+    ...args: Parameters<Wallet['watchAsset']>
+  ) => ReturnType<Wallet['watchAsset']>;
+
   /**
    * usePlugin has the same signature as getPlugin
    */

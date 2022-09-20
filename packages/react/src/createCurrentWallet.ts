@@ -69,18 +69,21 @@ export const createCurrentWallet = (
     }
   };
 
-  const getUnderliningCurrentWallet = (): Wallet => {
-    const currentWalletName = store.getState().name;
-    const found = wallets.find((w) => w.name === currentWalletName);
-    return found ?? wallets[0];
+  const getWallet = (name: WalletName): Wallet => {
+    return wallets.find((w) => w.name === name) as Wallet;
   };
 
-  const useUnderliningCurrentWallet = (): Wallet => {
+  const getCurrentWallet = (): Wallet => {
+    const currentWalletName = store.getState().name;
+    return getWallet(currentWalletName);
+  };
+
+  const useCurrentWallet = (): Wallet => {
     const name = useName();
     return useMemo(() => {
       // refresh useCurrentWallet when wallet name changed
       void name;
-      return getUnderliningCurrentWallet();
+      return getCurrentWallet();
     }, [name]);
   };
 
@@ -144,69 +147,80 @@ export const createCurrentWallet = (
     return combinedHooks as WalletBuiltinHooks;
   };
 
-  const connect: Wallet['connect'] = async (...args) => {
-    const wallet = getUnderliningCurrentWallet();
+  const getConnect: (walletName?: WalletName) => Wallet['connect'] =
+    (walletName) =>
+    async (...args) => {
+      const wallet = walletName ? getWallet(walletName) : getCurrentWallet();
 
-    const result = await wallet.connect(...args);
+      const result = await wallet.connect(...args);
 
-    store.setState({
-      connectionStatus: WalletConnectionStatus.Connected,
-    });
+      store.setState({
+        connectionStatus: WalletConnectionStatus.Connected,
+      });
 
-    return result;
-  };
+      return result;
+    };
 
-  const autoConnect: Wallet['autoConnect'] = async (...args) => {
-    const wallet = getUnderliningCurrentWallet();
-    const result = await wallet.autoConnect(...args);
+  const getAutoConnect: (walletName?: WalletName) => Wallet['autoConnect'] =
+    (walletName) =>
+    async (...args) => {
+      const wallet = walletName ? getWallet(walletName) : getCurrentWallet();
+      const result = await wallet.autoConnect(...args);
 
-    if (
-      store.getState().connectionStatus === WalletConnectionStatus.Disconnected
-    ) {
-      console.debug(`connectionId don't exists, auto connect is suppressed`);
-      return false;
-    }
+      if (
+        store.getState().connectionStatus ===
+        WalletConnectionStatus.Disconnected
+      ) {
+        console.debug(`connectionId don't exists, auto connect is suppressed`);
+        return false;
+      }
 
-    store.setState({
-      connectionStatus: WalletConnectionStatus.Connected,
-    });
-    return result;
-  };
+      store.setState({
+        connectionStatus: WalletConnectionStatus.Connected,
+      });
+      return result;
+    };
 
-  const autoConnectOnce: Wallet['autoConnectOnce'] = async (...args) => {
-    const wallet = getUnderliningCurrentWallet();
+  const getAutoConnectOnce: (
+    walletName?: WalletName,
+  ) => Wallet['autoConnectOnce'] =
+    (walletName) =>
+    async (...args) => {
+      const wallet = walletName ? getWallet(walletName) : getCurrentWallet();
+      if (
+        store.getState().connectionStatus ===
+        WalletConnectionStatus.Disconnected
+      ) {
+        console.debug(`connectionId don't exists, auto connect is suppressed`);
+        return false;
+      }
 
-    if (
-      store.getState().connectionStatus === WalletConnectionStatus.Disconnected
-    ) {
-      console.debug(`connectionId don't exists, auto connect is suppressed`);
-      return false;
-    }
+      const result = await wallet.autoConnectOnce(...args);
 
-    const result = await wallet.autoConnectOnce(...args);
+      store.setState({
+        connectionStatus: WalletConnectionStatus.Connected,
+      });
 
-    store.setState({
-      connectionStatus: WalletConnectionStatus.Connected,
-    });
+      return result;
+    };
 
-    return result;
-  };
-
-  const disconnect: Wallet['disconnect'] = async (...args) => {
-    const wallet = getUnderliningCurrentWallet();
-    const result = await wallet.disconnect(...args);
-    store.setState({
-      connectionStatus: WalletConnectionStatus.Disconnected,
-    });
-    return result;
-  };
+  const getDisconnect: (walletName?: WalletName) => Wallet['disconnect'] =
+    (walletName) =>
+    async (...args) => {
+      const wallet = walletName ? getWallet(walletName) : getCurrentWallet();
+      const result = await wallet.disconnect(...args);
+      store.setState({
+        connectionStatus: WalletConnectionStatus.Disconnected,
+      });
+      return result;
+    };
 
   const getPlugin: CurrentWallet['getPlugin'] = (...args) => {
-    return getUnderliningCurrentWallet().getPlugin(...args);
+    return getCurrentWallet().getPlugin(...args);
   };
 
   const usePlugin: CurrentWallet['usePlugin'] = (...args) => {
-    return useUnderliningCurrentWallet().getPlugin(...args);
+    return useCurrentWallet().getPlugin(...args);
   };
 
   return {
@@ -214,16 +228,24 @@ export const createCurrentWallet = (
     switchCurrentWallet,
     useConnectionStatus,
 
-    connect,
-    autoConnect,
-    autoConnectOnce,
-    disconnect,
+    connect: getConnect(),
+    connectWith: (name, ...args) => getConnect(name)(...args),
 
-    watchAsset: (...args) => getUnderliningCurrentWallet().watchAsset(...args),
-    $getStore: (...args) => getUnderliningCurrentWallet().$getStore(...args),
-    $getProvider: (...args) =>
-      getUnderliningCurrentWallet().$getProvider(...args),
-    detectProvider: () => getUnderliningCurrentWallet().detectProvider(),
+    autoConnect: getAutoConnect(),
+    autoConnectWith: (name, ...args) => getAutoConnect(name)(...args),
+
+    autoConnectOnce: getAutoConnectOnce(),
+    autoConnectOnceWith: (name, ...args) => getAutoConnectOnce(name)(...args),
+
+    disconnectWith: (name, ...args) => getDisconnect(name)(...args),
+    disconnect: getDisconnect(),
+
+    watchAsset: (...args) => getCurrentWallet().watchAsset(...args),
+    watchAssetWith: (name, ...args) => getWallet(name).watchAsset(...args),
+
+    $getStore: (...args) => getCurrentWallet().$getStore(...args),
+    $getProvider: (...args) => getCurrentWallet().$getProvider(...args),
+    detectProvider: () => getCurrentWallet().detectProvider(),
     getPlugin,
     usePlugin,
 
