@@ -1,8 +1,8 @@
-import { getAddress } from '@ethersproject/address';
+import { getAddress, isAddress } from '@ethersproject/address';
 import type { StoreApi } from 'zustand/vanilla';
 import create from 'zustand/vanilla';
 
-import { validateChainId } from './utils';
+import { isValidChainId } from './utils';
 
 /**
  * The minimal WalletState to keep track with
@@ -84,14 +84,26 @@ export const createWalletStoreAndActions = (): {
   function update(stateUpdate: Partial<WalletState>): void {
     // validate chainId statically, independent of existing state
     if (stateUpdate.chainId !== undefined) {
-      validateChainId(stateUpdate.chainId);
+      if (!isValidChainId(stateUpdate.chainId)) {
+        // reset state and return immediately if chainId is invalid
+        resetState();
+        return;
+      }
     }
 
     // validate accounts statically, independent of existing state
     if (stateUpdate.accounts !== undefined) {
       for (let i = 0; i < stateUpdate.accounts.length; i++) {
         // throw is account is not a valid ethereum address
-        stateUpdate.accounts[i] = getAddress(stateUpdate.accounts[i]);
+        const account = stateUpdate.accounts[i];
+
+        if (isAddress(account)) {
+          stateUpdate.accounts[i] = getAddress(stateUpdate.accounts[i]);
+        } else {
+          resetState();
+          // reset state and return immediately if account is invalid
+          return;
+        }
       }
     }
 
