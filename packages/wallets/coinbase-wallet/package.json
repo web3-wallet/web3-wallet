@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/coinbase-wallet",
   "description": "Coinbase wallet connector",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "keywords": [
     "web3-wallet",
     "Coinbase wallet"
