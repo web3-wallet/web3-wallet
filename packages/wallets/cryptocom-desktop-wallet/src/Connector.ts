@@ -7,7 +7,7 @@ export type CryptocomDesktopWalletProvider = Provider & {
 
 export type CryptocomDesktopWalletOptions = ConnectorOptions;
 
-const _name = 'Crypto.com Defi Desktop Wallet';
+const _name = 'Crypto.com DeFi Desktop Wallet';
 export const name = _name as WalletName<typeof _name>;
 
 const providerFilter = (p: CryptocomDesktopWalletProvider) => {

@@ -3,7 +3,7 @@ import { Connector } from '@web3-wallet/core';
 
 export type DefiWalletProvider = Provider;
 
-const _name = 'Defi Wallet';
+const _name = 'DeFi Wallet';
 export const name = _name as WalletName<typeof _name>;
 
 export class DeFiWallet extends Connector<DefiWalletProvider> {

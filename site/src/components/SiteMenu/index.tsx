@@ -20,7 +20,7 @@ const links = [
   { href: '/wallets', label: 'Wallets' },
   { href: '/plugins', label: 'Plugins' },
   { href: '/docs', label: 'Docs' },
-  { href: '/docs-api', label: 'Api' },
+  { href: '/docs-api', label: 'API' },
 ];
 
 export const SiteMenu = () => {
