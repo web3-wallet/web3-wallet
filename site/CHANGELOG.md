@@ -1,5 +1,25 @@
 # @web3-wallet/nextjs
 
+## 0.9.8
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@0.9.7
+  - @web3-wallet/plugin-balance-react@0.9.7
+  - @web3-wallet/plugin-connection-status-react@0.9.7
+  - @web3-wallet/plugin-ens-react@0.9.7
+  - @web3-wallet/react@0.9.7
+  - @web3-wallet/brave-wallet@0.9.7
+  - @web3-wallet/coinbase-wallet@0.9.7
+  - @web3-wallet/cryptocom-desktop-wallet@0.9.7
+  - @web3-wallet/defiwallet@0.9.7
+  - @web3-wallet/imtoken@0.9.8
+  - @web3-wallet/metamask@0.9.7
+  - @web3-wallet/trust-wallet@0.9.8
+  - @web3-wallet/walletconnect@0.9.7
+
 ## 0.9.7
 
 ### Patch Changes
