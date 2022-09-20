@@ -158,6 +158,7 @@ export const createCurrentWallet = (
       const result = await wallet.connect(...args);
 
       store.setState({
+        name: wallet.name,
         connectionStatus: WalletConnectionStatus.Connected,
       });
 
@@ -179,6 +180,7 @@ export const createCurrentWallet = (
       }
 
       store.setState({
+        name: wallet.name,
         connectionStatus: WalletConnectionStatus.Connected,
       });
       return result;
@@ -201,6 +203,7 @@ export const createCurrentWallet = (
       const result = await wallet.autoConnectOnce(...args);
 
       store.setState({
+        name: wallet.name,
         connectionStatus: WalletConnectionStatus.Connected,
       });
 
