@@ -3,7 +3,7 @@
   "private": true,
   "description": "web3-wallet vuejs example",
   "author": "logan <logan.luo@crypto.com>",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

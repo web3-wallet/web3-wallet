@@ -3,12 +3,12 @@
 [![CI](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml)
 
 <p align="center">
-  <img width="560px" src="site/public/images/site-home-screenshot.png?v3" alt="web3 wallet logo" />
+  <a href="https://web3-wallet.github.io/web3-wallet" target="_blank">
+    <img width="560px" src="site/public/images/site-home-screenshot.png?v3" alt="web3 wallet website" />
+  </a>
 </p>
 
 ## Examples
-
-<a href="https://web3-wallet.github.io/web3-wallet" target="_blank">https://web3-wallet.github.io/web3-wallet</a>
 
 ## Install
 

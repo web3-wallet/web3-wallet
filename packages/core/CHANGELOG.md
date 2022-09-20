@@ -1,5 +1,13 @@
 # @web3-wallet/core
 
+## 0.9.7
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/detect-provider@0.9.6
+
 ## 0.9.6
 
 ### Patch Changes
