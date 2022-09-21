@@ -16,10 +16,6 @@ export class ImToken extends Connector<ImTokenProvider, ImTokenOptions> {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: ImTokenOptions) {
     super(name, options);
-  }
-
-  /** {@inheritdoc Connector.detectProvider} */
-  public override async detectProvider(): Promise<ImTokenProvider> {
-    return await super.detectProvider(providerFilter);
+    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }

@@ -19,10 +19,6 @@ export class BraveWallet extends Connector<
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: BraveWalletOptions) {
     super(name, options);
-  }
-
-  /** {@inheritdoc Connector.detectProvider} */
-  public override async detectProvider(): Promise<BraveWalletProvider> {
-    return await super.detectProvider(providerFilter);
+    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }

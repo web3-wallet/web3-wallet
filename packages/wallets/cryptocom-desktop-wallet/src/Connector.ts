@@ -21,10 +21,6 @@ export class CryptocomDesktopWallet extends Connector<
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: CryptocomDesktopWalletOptions) {
     super(name, options);
-  }
-
-  /** {@inheritdoc Connector.detectProvider} */
-  public override async detectProvider(): Promise<CryptocomDesktopWalletProvider> {
-    return await super.detectProvider(providerFilter);
+    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }

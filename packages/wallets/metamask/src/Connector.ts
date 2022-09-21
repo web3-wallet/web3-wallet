@@ -20,6 +20,7 @@ export class MetaMask extends Connector<MetaMaskProvider, MetaMaskOptions> {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: MetaMaskOptions) {
     super(name, options);
+    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 
   /**
@@ -34,10 +35,5 @@ export class MetaMask extends Connector<MetaMaskProvider, MetaMaskOptions> {
    */
   protected override onDisconnect(error: ProviderRpcError): void {
     this.options?.onError?.(error);
-  }
-
-  /** {@inheritdoc Connector.detectProvider} */
-  public override async detectProvider(): Promise<MetaMaskProvider> {
-    return await super.detectProvider(providerFilter);
   }
 }

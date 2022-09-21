@@ -14,6 +14,14 @@ import type {
 import { isAddChainParameter, ProviderNoFoundError } from './provider';
 import { parseChainId, toHexChainId } from './utils';
 
+export type ProviderFilter<P = Provider> = (provider: P) => boolean;
+
+type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
+
+type InjectedProviders<P> = {
+  providers?: P[];
+};
+
 /**
  * ProviderOptions is specific to each wallet provider, and it will be used to
  * to create/initialize the wallet provider instance.
@@ -21,6 +29,7 @@ import { parseChainId, toHexChainId } from './utils';
 export type ProviderOptions = object | undefined;
 
 export type BaseConnectorOptions = {
+  providerFilter?: ProviderFilter;
   /**
    * Report Error thrown by provider to the external world
    *
@@ -30,20 +39,12 @@ export type BaseConnectorOptions = {
   onError?: (error: ProviderRpcError) => void;
 };
 
-export type ProviderFilter<P> = (provider: P) => boolean;
-
-type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
-
-type InjectedProviders<P> = {
-  providers?: P[];
-};
-
 /**
  * The wallet options object
  */
 export type ConnectorOptions<T extends ProviderOptions = undefined> =
   T extends undefined
-    ? BaseConnectorOptions
+    ? BaseConnectorOptions | undefined
     : BaseConnectorOptions & {
         providerOptions: T;
       };
@@ -61,6 +62,8 @@ export abstract class Connector<
    * {@link Provider}
    **/
   public provider?: P;
+
+  public providerFilter: ProviderFilter<P> = () => true;
 
   /**
    * The wallet options object, specific to each wallet
@@ -97,6 +100,9 @@ export abstract class Connector<
     this.store = store;
     this.actions = actions;
     this.options = options;
+
+    this.providerFilter = this.options?.providerFilter ?? this.providerFilter;
+
     this.providerNotFoundError = new ProviderNoFoundError(
       `${name} provider not found`,
     );
@@ -131,6 +137,8 @@ export abstract class Connector<
     if (!injectedProvider) throw this.providerNotFoundError;
 
     let provider = injectedProvider as P | undefined;
+
+    providerFilter = providerFilter ?? this.providerFilter;
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed

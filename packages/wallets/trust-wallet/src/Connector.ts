@@ -19,10 +19,6 @@ export class TrustWallet extends Connector<
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: TrustWalletOptions) {
     super(name, options);
-  }
-
-  /** {@inheritdoc Connector.detectProvider} */
-  public override async detectProvider(): Promise<TrustWalletProvider> {
-    return await super.detectProvider(providerFilter);
+    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }
