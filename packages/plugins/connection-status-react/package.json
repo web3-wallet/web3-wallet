@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-connection-status-react",
   "description": "web3-wallet connection status plugin for tracking connections status",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [
