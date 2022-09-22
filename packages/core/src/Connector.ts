@@ -28,8 +28,9 @@ type InjectedProviders<P> = {
  */
 export type ProviderOptions = object | undefined;
 
-export type BaseConnectorOptions = {
-  providerFilter?: ProviderFilter;
+export type BaseConnectorOptions<P> = {
+  detectProviderOptions?: DetectProviderOptions;
+  providerFilter?: ProviderFilter<P>;
   /**
    * Report Error thrown by provider to the external world
    *
@@ -42,16 +43,20 @@ export type BaseConnectorOptions = {
 /**
  * The wallet options object
  */
-export type ConnectorOptions<T extends ProviderOptions = undefined> =
-  T extends undefined
-    ? BaseConnectorOptions | undefined
-    : BaseConnectorOptions & {
-        providerOptions: T;
-      };
+export type ConnectorOptions<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  P extends Provider = any,
+  T extends ProviderOptions = undefined,
+> = T extends undefined
+  ? BaseConnectorOptions<P>
+  : BaseConnectorOptions<P> & {
+      providerOptions: T;
+    };
 
 export abstract class Connector<
-  P extends Provider = Provider,
-  Options extends ConnectorOptions = ConnectorOptions,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  P extends Provider = any,
+  Options extends ConnectorOptions<P> = ConnectorOptions<P>,
 > {
   /**
    * {@link WalletName}
@@ -101,7 +106,9 @@ export abstract class Connector<
     this.actions = actions;
     this.options = options;
 
-    this.providerFilter = this.options?.providerFilter ?? this.providerFilter;
+    if (options?.providerFilter) {
+      this.providerFilter = options.providerFilter;
+    }
 
     this.providerNotFoundError = new ProviderNoFoundError(
       `${name} provider not found`,
@@ -123,7 +130,7 @@ export abstract class Connector<
    *  2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
    */
   public async detectProvider(
-    providerFilter: ProviderFilter<P> = () => true,
+    providerFilter?: ProviderFilter<P>,
     options?: DetectProviderOptions,
   ): Promise<P> {
     if (this.provider) this.provider;
@@ -131,7 +138,7 @@ export abstract class Connector<
     const m = await import('@web3-wallet/detect-provider');
 
     const injectedProvider = (await m.detectProvider(
-      options,
+      options ?? this.options?.detectProviderOptions,
     )) as InjectedProvider<P>;
 
     if (!injectedProvider) throw this.providerNotFoundError;

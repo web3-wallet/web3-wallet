@@ -11,7 +11,10 @@ type WalletConnectProvider = _WalletConnectProvider & Provider;
 const _name = 'WalletConnect';
 export const name = _name as WalletName<typeof _name>;
 
-export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
+export type WalletConnectOptions = ConnectorOptions<
+  WalletConnectProvider,
+  IWCEthRpcConnectionOptions
+>;
 
 export class WalletConnect extends Connector<
   WalletConnectProvider,

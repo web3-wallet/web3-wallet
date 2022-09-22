@@ -12,8 +12,10 @@ type CoinbaseWalletProviderOptions = ConstructorParameters<
 export const _name = 'Coinbase Wallet';
 export const name = _name as WalletName<typeof _name>;
 
-export type CoinbaseWalletOptions =
-  ConnectorOptions<CoinbaseWalletProviderOptions>;
+export type CoinbaseWalletOptions = ConnectorOptions<
+  CoinbaseWalletProvider,
+  CoinbaseWalletProviderOptions
+>;
 
 export class CoinbaseWallet extends Connector<
   CoinbaseWalletProvider,
