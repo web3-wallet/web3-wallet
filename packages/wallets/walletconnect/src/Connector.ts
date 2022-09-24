@@ -11,15 +11,9 @@ type WalletConnectProvider = _WalletConnectProvider & Provider;
 const _name = 'WalletConnect';
 export const name = _name as WalletName<typeof _name>;
 
-export type WalletConnectOptions = ConnectorOptions<
-  WalletConnectProvider,
-  IWCEthRpcConnectionOptions
->;
+export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
 
-export class WalletConnect extends Connector<
-  WalletConnectProvider,
-  WalletConnectOptions
-> {
+export class WalletConnect extends Connector<WalletConnectOptions> {
   /** {@inheritdoc Connector.provider} */
   public override provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();

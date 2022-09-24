@@ -1,15 +1,16 @@
-import type { Provider, WalletName } from '@web3-wallet/core';
+import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
 import { Connector } from '@web3-wallet/core';
 
 export type DefiWalletProvider = Provider;
+export type DefiWalletOptions = ConnectorOptions;
 
 const _name = 'DeFi Wallet';
 export const name = _name as WalletName<typeof _name>;
 
-export class DeFiWallet extends Connector<DefiWalletProvider> {
+export class DeFiWallet extends Connector<DefiWalletOptions> {
   /** {@inheritdoc Connector.constructor} */
-  constructor() {
-    super(name);
+  constructor(options?: DefiWalletOptions) {
+    super(name, options);
   }
 
   /** {@inheritdoc Connector.detectProvider} */

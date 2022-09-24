@@ -14,12 +14,12 @@ import type {
 import { isAddChainParameter, ProviderNoFoundError } from './provider';
 import { parseChainId, toHexChainId } from './utils';
 
-export type ProviderFilter<P = Provider> = (provider: P) => boolean;
+export type ProviderFilter = (provider: Provider) => boolean;
 
-type InjectedProvider<P> = P | InjectedProviders<P> | undefined;
+type InjectedProvider = Provider | InjectedProviders | undefined;
 
-type InjectedProviders<P> = {
-  providers?: P[];
+type InjectedProviders = {
+  providers?: Provider[];
 };
 
 /**
@@ -28,9 +28,9 @@ type InjectedProviders<P> = {
  */
 export type ProviderOptions = object | undefined;
 
-export type BaseConnectorOptions<P> = {
+export type BaseConnectorOptions = {
   detectProviderOptions?: DetectProviderOptions;
-  providerFilter?: ProviderFilter<P>;
+  providerFilter?: ProviderFilter;
   /**
    * Report Error thrown by provider to the external world
    *
@@ -43,20 +43,15 @@ export type BaseConnectorOptions<P> = {
 /**
  * The wallet options object
  */
-export type ConnectorOptions<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  P extends Provider = any,
-  T extends ProviderOptions = undefined,
-> = T extends undefined
-  ? BaseConnectorOptions<P>
-  : BaseConnectorOptions<P> & {
-      providerOptions: T;
-    };
+export type ConnectorOptions<T extends ProviderOptions = undefined> =
+  T extends undefined
+    ? BaseConnectorOptions
+    : BaseConnectorOptions & {
+        providerOptions: T;
+      };
 
 export abstract class Connector<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  P extends Provider = any,
-  Options extends ConnectorOptions<P> = ConnectorOptions<P>,
+  Options extends ConnectorOptions = ConnectorOptions,
 > {
   /**
    * {@link WalletName}
@@ -66,9 +61,9 @@ export abstract class Connector<
   /**
    * {@link Provider}
    **/
-  public provider?: P;
+  public provider?: Provider;
 
-  public providerFilter: ProviderFilter<P> = () => true;
+  public providerFilter: ProviderFilter = () => true;
 
   /**
    * The wallet options object, specific to each wallet
@@ -130,28 +125,28 @@ export abstract class Connector<
    *  2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
    */
   public async detectProvider(
-    providerFilter?: ProviderFilter<P>,
+    providerFilter?: ProviderFilter,
     options?: DetectProviderOptions,
-  ): Promise<P> {
+  ): Promise<Provider> {
     if (this.provider) this.provider;
 
     const m = await import('@web3-wallet/detect-provider');
 
     const injectedProvider = (await m.detectProvider(
       options ?? this.options?.detectProviderOptions,
-    )) as InjectedProvider<P>;
+    )) as InjectedProvider;
 
     if (!injectedProvider) throw this.providerNotFoundError;
 
-    let provider = injectedProvider as P | undefined;
+    let provider = injectedProvider as Provider | undefined;
 
     providerFilter = providerFilter ?? this.providerFilter;
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
      * */
-    if ((injectedProvider as InjectedProviders<P>).providers?.length) {
-      provider = (injectedProvider as InjectedProviders<P>).providers?.find(
+    if ((injectedProvider as InjectedProviders).providers?.length) {
+      provider = (injectedProvider as InjectedProviders).providers?.find(
         providerFilter,
       );
     } else {
@@ -448,7 +443,7 @@ export abstract class Connector<
    *
    * @return removeEventListeners -  a function to remove the registered event listeners {@link Connector#removeEventListeners}
    */
-  protected addEventListeners(): Connector<P>['removeEventListeners'] {
+  protected addEventListeners(): Connector['removeEventListeners'] {
     if (!this.provider) return;
 
     const onConnect = this.onConnect.bind(this);

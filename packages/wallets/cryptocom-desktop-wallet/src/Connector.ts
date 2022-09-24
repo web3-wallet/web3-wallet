@@ -14,13 +14,11 @@ const providerFilter = (p: CryptocomDesktopWalletProvider) => {
   return !!p.isDesktopWallet;
 };
 
-export class CryptocomDesktopWallet extends Connector<
-  CryptocomDesktopWalletProvider,
-  CryptocomDesktopWalletOptions
-> {
+export class CryptocomDesktopWallet extends Connector<CryptocomDesktopWalletOptions> {
+  public override providerFilter = providerFilter;
+
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: CryptocomDesktopWalletOptions) {
     super(name, options);
-    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }

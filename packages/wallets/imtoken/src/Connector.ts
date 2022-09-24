@@ -5,17 +5,18 @@ export type ImTokenProvider = Provider & {
   isImToken?: boolean;
 };
 
+const providerFilter = (p: ImTokenProvider) => !!p.isImToken;
+
 export type ImTokenOptions = ConnectorOptions;
 
 const _name = 'imToken';
 export const name = _name as WalletName<typeof _name>;
 
-const providerFilter = (p: ImTokenProvider) => !!p.isImToken;
+export class ImToken extends Connector<ImTokenOptions> {
+  public override providerFilter = providerFilter;
 
-export class ImToken extends Connector<ImTokenProvider, ImTokenOptions> {
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: ImTokenOptions) {
     super(name, options);
-    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 }

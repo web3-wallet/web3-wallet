@@ -9,18 +9,19 @@ import { Connector } from '@web3-wallet/core';
 export type MetaMaskProvider = Provider & {
   isMetaMask?: boolean;
 };
+const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
 export type MetaMaskOptions = ConnectorOptions;
 
 const _name = 'MetaMask';
 export const name = _name as WalletName<typeof _name>;
-const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
 
-export class MetaMask extends Connector<MetaMaskProvider, MetaMaskOptions> {
+export class MetaMask extends Connector<MetaMaskOptions> {
+  public override providerFilter = providerFilter;
+
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: MetaMaskOptions) {
     super(name, options);
-    this.providerFilter = options?.providerFilter ?? providerFilter;
   }
 
   /**
