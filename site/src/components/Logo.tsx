@@ -1,7 +1,7 @@
 import logo from '@public/logos/logo.svg';
 import Image from 'next/image';
 
-import { Link } from '../Link';
+import { Link } from './Link';
 
 export const Logo = () => {
   return (

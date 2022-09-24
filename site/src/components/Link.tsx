@@ -24,7 +24,6 @@ export const Link = ({
           color: 'red.500',
         }}
         display="flex"
-        textShadow="1px 1px 2px #fff"
         {...chakraLinkProps}
       >
         {children}

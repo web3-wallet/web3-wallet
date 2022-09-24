@@ -35,7 +35,7 @@ const nextConfig = {
         __SERVER__: isServer,
         __CLIENT__: !isServer,
         __DEV__: process.env.NODE_ENV !== 'production',
-        __SITE_PREFIX__: JSON.stringify(
+        __BASE_PATH__: JSON.stringify(
           process.env.IS_LOCAL ? '' : '/web3-wallet',
         ),
       }),

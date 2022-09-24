@@ -1,3 +1,9 @@
-# @web3-wallet/plugin-ens-react
+# ENS
 
-Plugin for fetch the ens names.
+## Install
+
+```bash
+pnpm add @web3-wallet/plugin-ens
+```
+
+## WIP...

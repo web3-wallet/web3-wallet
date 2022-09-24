@@ -1,1 +1,9 @@
-# @web3-wallet/imtoken
+# imToken
+
+## Install
+
+```bash
+pnpm add @web3-wallet/imtoken
+```
+
+## WIP...

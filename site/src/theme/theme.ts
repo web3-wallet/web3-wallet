@@ -1,7 +1,10 @@
 import type { ChakraTheme } from '@chakra-ui/react';
 import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
 
+import { styles } from './styles';
+
 const { colors } = chakraTheme;
+
 const brand = {
   blue: '#2D80EE',
   red: '#E94637',
@@ -9,22 +12,10 @@ const brand = {
   yellow: '#FBBD14',
 };
 
-const fontFamily = `"Space Mono", monospace, sans-serif`;
-
 export const theme = extendTheme({
   config: {
     initialColorMode: 'light',
     useSystemColorMode: false,
-  },
-  styles: {
-    global: {
-      body: {
-        fontFamily,
-      },
-      'h1,h2,h3,h4,h5,h6': {
-        fontFamily: `${fontFamily}!important`,
-      },
-    },
   },
   colors: {
     brand,
@@ -45,5 +36,6 @@ export const theme = extendTheme({
       500: brand.blue,
     },
   },
+  styles,
   components: {},
 } as Partial<ChakraTheme>);

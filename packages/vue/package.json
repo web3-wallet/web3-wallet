@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/vue",
   "description": "web3-wallet vue",
-  "private": "true",
+  "private": true,
   "keywords": [
     "web3-wallet",
     "vue",

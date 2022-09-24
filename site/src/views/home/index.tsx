@@ -1,21 +1,14 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import {
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  Link,
-  Spacer,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, Heading, Icon, Spacer, Text } from '@chakra-ui/react';
 import { Layout } from '@site/components/Layout';
+import { Link } from '@site/components/Link';
 import { WalletSelectCard } from '@site/components/WalletSelectCard';
 import Head from 'next/head';
 import { AiOutlineGithub } from 'react-icons/ai';
 
 export function Page() {
   return (
-    <Layout>
+    <Layout hideLeftSideBar>
       <Head>
         <title>Home | Web3 Wallet </title>
       </Head>
@@ -50,17 +43,21 @@ export function Page() {
         </Flex>
 
         <Flex gap={{ base: 4, lg: 6 }} justifyContent="center">
-          <Button rightIcon={<ArrowForwardIcon />} colorScheme="blue">
-            Get Started
-          </Button>
+          <Link href="/docs/getting-started">
+            <Button rightIcon={<ArrowForwardIcon />} colorScheme="blue">
+              Get Started
+            </Button>
+          </Link>
           <Link
-            display="flex"
-            justifySelf="end"
-            _hover={{
-              textDecoration: 'none',
-            }}
             href="https://github.com/web3-wallet/web3-wallet"
-            target="_blank"
+            chakraLinkProps={{
+              display: 'flex',
+              justifySelf: 'end',
+              target: '_blank',
+              _hover: {
+                textDecoration: 'none',
+              },
+            }}
           >
             <Button leftIcon={<Icon as={AiOutlineGithub} />} variant="outline">
               Github

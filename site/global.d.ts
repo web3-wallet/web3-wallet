@@ -2,7 +2,7 @@ declare global {
   const __CLIENT__: boolean;
   const __SERVER__: boolean;
   const __DEV__: boolean;
-  const __SITE_PREFIX__: string;
+  const __BASE_PATH__: string;
 
   namespace NodeJS {
     interface ProcessEnv {

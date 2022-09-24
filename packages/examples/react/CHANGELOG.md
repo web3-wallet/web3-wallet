@@ -7,9 +7,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.10
-  - @web3-wallet/plugin-balance-react@0.9.10
-  - @web3-wallet/plugin-connection-status-react@0.9.10
-  - @web3-wallet/plugin-ens-react@0.9.10
+  - @web3-wallet/plugin-balance@0.9.10
+  - @web3-wallet/plugin-connection-status@0.9.10
+  - @web3-wallet/plugin-ens@0.9.10
   - @web3-wallet/react@0.9.10
   - @web3-wallet/coinbase-wallet@0.9.10
   - @web3-wallet/cryptocom-desktop-wallet@0.9.10
@@ -24,9 +24,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.9
-  - @web3-wallet/plugin-balance-react@0.9.9
-  - @web3-wallet/plugin-connection-status-react@0.9.9
-  - @web3-wallet/plugin-ens-react@0.9.9
+  - @web3-wallet/plugin-balance@0.9.9
+  - @web3-wallet/plugin-connection-status@0.9.9
+  - @web3-wallet/plugin-ens@0.9.9
   - @web3-wallet/react@0.9.9
   - @web3-wallet/coinbase-wallet@0.9.9
   - @web3-wallet/cryptocom-desktop-wallet@0.9.9
@@ -41,9 +41,9 @@
 - b1ea7de: package version
 - Updated dependencies [b1ea7de]
   - @web3-wallet/core@0.9.8
-  - @web3-wallet/plugin-balance-react@0.9.8
-  - @web3-wallet/plugin-connection-status-react@0.9.8
-  - @web3-wallet/plugin-ens-react@0.9.8
+  - @web3-wallet/plugin-balance@0.9.8
+  - @web3-wallet/plugin-connection-status@0.9.8
+  - @web3-wallet/plugin-ens@0.9.8
   - @web3-wallet/react@0.9.8
   - @web3-wallet/coinbase-wallet@0.9.8
   - @web3-wallet/cryptocom-desktop-wallet@0.9.8
@@ -58,9 +58,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.7
-  - @web3-wallet/plugin-balance-react@0.9.7
-  - @web3-wallet/plugin-connection-status-react@0.9.7
-  - @web3-wallet/plugin-ens-react@0.9.7
+  - @web3-wallet/plugin-balance@0.9.7
+  - @web3-wallet/plugin-connection-status@0.9.7
+  - @web3-wallet/plugin-ens@0.9.7
   - @web3-wallet/react@0.9.7
   - @web3-wallet/coinbase-wallet@0.9.7
   - @web3-wallet/cryptocom-desktop-wallet@0.9.7
@@ -75,9 +75,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.6
-  - @web3-wallet/plugin-balance-react@0.9.6
-  - @web3-wallet/plugin-connection-status-react@0.9.6
-  - @web3-wallet/plugin-ens-react@0.9.6
+  - @web3-wallet/plugin-balance@0.9.6
+  - @web3-wallet/plugin-connection-status@0.9.6
+  - @web3-wallet/plugin-ens@0.9.6
   - @web3-wallet/react@0.9.6
   - @web3-wallet/coinbase-wallet@0.9.6
   - @web3-wallet/cryptocom-desktop-wallet@0.9.6
@@ -92,9 +92,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.5
-  - @web3-wallet/plugin-balance-react@0.9.5
-  - @web3-wallet/plugin-connection-status-react@0.9.5
-  - @web3-wallet/plugin-ens-react@0.9.5
+  - @web3-wallet/plugin-balance@0.9.5
+  - @web3-wallet/plugin-connection-status@0.9.5
+  - @web3-wallet/plugin-ens@0.9.5
   - @web3-wallet/react@0.9.5
   - @web3-wallet/coinbase-wallet@0.9.5
   - @web3-wallet/cryptocom-desktop-wallet@0.9.5
@@ -109,9 +109,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.4
-  - @web3-wallet/plugin-balance-react@0.9.4
-  - @web3-wallet/plugin-connection-status-react@0.9.4
-  - @web3-wallet/plugin-ens-react@0.9.4
+  - @web3-wallet/plugin-balance@0.9.4
+  - @web3-wallet/plugin-connection-status@0.9.4
+  - @web3-wallet/plugin-ens@0.9.4
   - @web3-wallet/react@0.9.4
   - @web3-wallet/coinbase-wallet@0.9.4
   - @web3-wallet/cryptocom-desktop-wallet@0.9.4
@@ -131,9 +131,9 @@
   - @web3-wallet/defiwallet@0.9.3
   - @web3-wallet/metamask@0.9.3
   - @web3-wallet/walletconnect@0.9.3
-  - @web3-wallet/plugin-balance-react@0.9.3
-  - @web3-wallet/plugin-connection-status-react@0.9.3
-  - @web3-wallet/plugin-ens-react@0.9.3
+  - @web3-wallet/plugin-balance@0.9.3
+  - @web3-wallet/plugin-connection-status@0.9.3
+  - @web3-wallet/plugin-ens@0.9.3
 
 ## 0.9.2
 
@@ -142,9 +142,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.2
-  - @web3-wallet/plugin-balance-react@0.9.2
-  - @web3-wallet/plugin-connection-status-react@0.9.2
-  - @web3-wallet/plugin-ens-react@0.9.2
+  - @web3-wallet/plugin-balance@0.9.2
+  - @web3-wallet/plugin-connection-status@0.9.2
+  - @web3-wallet/plugin-ens@0.9.2
   - @web3-wallet/react@0.9.2
   - @web3-wallet/coinbase-wallet@0.9.2
   - @web3-wallet/cryptocom-desktop-wallet@0.9.2
@@ -159,9 +159,9 @@
 - package version
 - Updated dependencies
   - @web3-wallet/core@0.9.1
-  - @web3-wallet/plugin-balance-react@0.9.1
-  - @web3-wallet/plugin-connection-status-react@0.9.1
-  - @web3-wallet/plugin-ens-react@0.9.1
+  - @web3-wallet/plugin-balance@0.9.1
+  - @web3-wallet/plugin-connection-status@0.9.1
+  - @web3-wallet/plugin-ens@0.9.1
   - @web3-wallet/react@0.9.1
   - @web3-wallet/coinbase-wallet@0.9.1
   - @web3-wallet/cryptocom-desktop-wallet@0.9.1
@@ -179,9 +179,9 @@
 
 - Updated dependencies
   - @web3-wallet/core@0.9.0
-  - @web3-wallet/plugin-balance-react@0.9.0
-  - @web3-wallet/plugin-connection-status-react@0.9.0
-  - @web3-wallet/plugin-ens-react@0.9.0
+  - @web3-wallet/plugin-balance@0.9.0
+  - @web3-wallet/plugin-connection-status@0.9.0
+  - @web3-wallet/plugin-ens@0.9.0
   - @web3-wallet/react@0.9.0
   - @web3-wallet/coinbase-wallet@0.9.0
   - @web3-wallet/cryptocom-desktop-wallet@0.9.0
@@ -200,7 +200,7 @@
 
 - Updated dependencies
   - @web3-wallet/core@0.8.0
-  - @web3-wallet/plugin-connection-status-react@0.8.0
+  - @web3-wallet/plugin-connection-status@0.8.0
   - @web3-wallet/react@0.8.0
   - @web3-wallet/coinbase-wallet@0.8.0
   - @web3-wallet/cryptocom-desktop-wallet@0.8.0
@@ -219,7 +219,7 @@
 
 - Updated dependencies
   - @web3-wallet/core@0.7.0
-  - @web3-wallet/plugin-connection-status-react@0.7.0
+  - @web3-wallet/plugin-connection-status@0.7.0
   - @web3-wallet/react@0.7.0
   - @web3-wallet/coinbase-wallet@0.7.0
   - @web3-wallet/cryptocom-desktop-wallet@0.7.0

@@ -1,4 +1,4 @@
-# @web3-wallet/plugin-balance-react
+# @web3-wallet/plugin-balance
 
 ## 0.9.10
 

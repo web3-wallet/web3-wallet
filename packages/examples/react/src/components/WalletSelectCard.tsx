@@ -1,6 +1,6 @@
 import { allWallets, currentWallet } from '@example-react/wallets';
-import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
-import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
+import { BalancePlugin } from '@web3-wallet/plugin-balance';
+import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';

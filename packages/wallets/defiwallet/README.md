@@ -1,1 +1,9 @@
-# @web3-wallet/injected
+# DeFi Wallet
+
+## Install
+
+```bash
+pnpm add @web3-wallet/defiwallet
+```
+
+## WIP...

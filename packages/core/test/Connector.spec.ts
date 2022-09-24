@@ -7,7 +7,7 @@ import { MockProvider } from './MockProvider.spec';
 const chainId = mockData.hexChainIds[0];
 const accounts = mockData.accounts.slice(0, 1);
 
-class MockConnector extends Connector<MockProvider> {
+class MockConnector extends Connector {
   public override provider?: MockProvider;
   public override async detectProvider(): Promise<MockProvider> {
     if (this.provider) return this.provider;

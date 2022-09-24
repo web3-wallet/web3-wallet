@@ -1,4 +1,4 @@
-# @web3-wallet/plugin-ens-react
+# @web3-wallet/plugin-ens
 
 ## 0.9.10
 

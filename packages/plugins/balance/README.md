@@ -1,3 +1,9 @@
-# @web3-wallet/plugin-balance-react
+# Balance
 
-Fetch the blockchain native coin balance
+## Install
+
+```bash
+pnpm add @web3-wallet/plugin-balance
+```
+
+## WIP...

@@ -14,8 +14,8 @@ import {
 import { DeFiWallet, icon as defiWalletIcon } from '@web3-wallet/defiwallet';
 import { icon as imTokenIcon, ImToken } from '@web3-wallet/imtoken';
 import { icon as metaMaskIcon, MetaMask } from '@web3-wallet/metamask';
-import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
-import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
+import { BalancePlugin } from '@web3-wallet/plugin-balance';
+import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import { WalletProxy } from '@web3-wallet/react';
 import {
   icon as trustWalletIcon,

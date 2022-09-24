@@ -1,6 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react';
-import type { BalancePlugin } from '@web3-wallet/plugin-balance-react';
-import type { EnsPlugin } from '@web3-wallet/plugin-ens-react';
+import type { BalancePlugin } from '@web3-wallet/plugin-balance';
+import type { EnsPlugin } from '@web3-wallet/plugin-ens';
 import type { Wallet } from '@web3-wallet/react';
 import React from 'react';
 

@@ -8,15 +8,22 @@
   </a>
 </p>
 
-## Install
+## Getting Started
 
-```
-# React
-pnpm add @web3-wallet/react @web3-wallet/metamask
+Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get started with web3-wallet.
 
-# Vue
-pnpm add @web3-wallet/vue @web3-wallet/metamask
-```
+## Documentation
+
+Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentation.
+
+## Who is using web3-wallet?
+
+check out https://web3-wallet.github.io/web3-wallet/showcase
+
+## Examples
+
+- [example-react](./packages/examples/react/)
+- [example-vue](./packages/examples/vue/)
 
 ## Packages
 
@@ -40,182 +47,6 @@ pnpm add @web3-wallet/vue @web3-wallet/metamask
 | [`@web3-wallet/plugin-connection-status`](packages/plugins/connection-status)        | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status) | --   |
 | **Utilities**                                                                        |                                                                                                                                                          |      |
 | [`@web3-wallet/detect-provider`](packages/detect-provider)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider.svg)](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider)                   | --   |
-
-## Getting started
-
-- [site](./site)
-- [example-react](./packages/examples/react/)
-- [example-vue](./packages/examples/vue/)
-
-### React
-
-```bash
-pnpm add @web3-wallet/react @web3-wallet/metamask
-```
-
-```typescript
-import { rpcMap } from '@site/chains';
-import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
-import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
-import { getDeFiWallet } from '@web3-wallet/defiwallet';
-import { MetaMask } from '@web3-wallet/metamask';
-import { DefiWallet } from '@web3-wallet/defiwallet';
-import { WalletProxy } from '@web3-wallet/react';
-import { WalletConnect } from '@web3-wallet/walletconnect';
-import { BalancePlugin } from '@web3-wallet/plugin-balance-react';
-import { EnsPlugin } from '@web3-wallet/plugin-ens-react';
-
-// setup wallets and plugins
-// ===========================
-
-const connectors = [
-  new MetaMask(),
-  new DefiWallet(),
-  new CoinbaseWallet({
-    providerOptions: {
-      appName: '@web3-wallet example',
-      reloadOnDisconnect: false,
-      url: rpcMap[1],
-    },
-  }),
-  new CryptocomDesktopWallet(),
-  new WalletConnect({
-    providerOptions: {
-      rpc: rpcMap,
-    },
-  }),
-];
-
-const plugins = [BalancePlugin.create(), EnsPlugin.create()];
-
-export const walletProxy = new WalletProxy(connectors, {
-  plugins,
-});
-
-export const allWallets = walletProxy.getWallets();
-export const currentWallet = walletProxy.getCurrentWallet();
-export const [
-  metamask,
-  defiWallet,
-  coinbaseWallet,
-  desktopWallet,
-  walletconnect,
-] = allWallets;
-
-// use wallets and plugins in UI components
-// ========================================
-
-const {
-  useName,
-  switchCurrentWallet,
-
-  usePlugin,
-
-  connect,
-  autoConnectOnce,
-  disconnect,
-
-  useIsConnecting,
-  useIsConnected,
-
-  useAccounts,
-  useChainId,
-  useProvider,
-} = currentWallet;
-
-export const WalletSelectCard = () => {
-  const walletName = useName();
-  const isConnecting = useIsConnecting();
-  const isConnected = useIsConnected();
-
-  const chainId = useChainId();
-  const accounts = useAccounts();
-  const provider = useProvider();
-
-  const { useBalances } = usePlugin<BalancePlugin.Api>(
-    BalancePlugin.name,
-  ).hooks;
-  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
-
-  const balances = useBalances();
-  const ensNames = useEnsNames();
-
-  useEffect(() => {
-    autoConnectOnce();
-    /**
-     * autoConnectOnce per wallet
-     */
-  }, [walletName]);
-
-  return (
-    <Card>
-      <WalletSelect
-        wallets={allWallets}
-        currentWalletName={walletName}
-        switchCurrentWallet={switchCurrentWallet}
-      />
-      <WalletCard>
-        <Text fontWeight="bold">{walletName}</Text>
-        <WalletStatus isConnecting={isConnecting} isConnected={isConnected} />
-        <Chain chainId={chainId} />
-        <Accounts
-          accounts={accounts}
-          provider={provider}
-          balances={balances}
-          ensNames={ensNames}
-        />
-        <ConnectWithSelect
-          connect={connect}
-          disconnect={disconnect}
-          chainId={chainId}
-          isConnecting={isConnecting}
-          isConnected={isConnected}
-        />
-      </WalletCard>
-    </Card>
-  );
-};
-```
-
-## More wallets
-
-If the wallet you want integrate with is not included in the @web3-wallet packages set, you can create a wallet Connector with few lines of code by extending the abstract Connector.
-
-```typescript
-// Trust Wallet connector
-import type {
-  type Connector,
-  type WalletName,
-  type WalletOptions,
-  createWallet,
-} from '@web3-wallet/react';
-
-import { Provider, Connector } from '@web3-wallet/core';
-
-const _name = 'Trust Wallet';
-export const name = _name as WalletName<typeof _name>;
-
-export type TrustWalletProvider = Provider & {
-  isTrust?: boolean;
-};
-
-export type TrustWalletOptions = WalletOptions;
-
-const providerFilter = (p: TrustWalletProvider) => p.isTrust;
-
-export class TrustWallet extends Connector<
-  TrustWalletProvider,
-  TrustWalletOptions
-> {
-  constructor(options?: TrustWalletOptions) {
-    super(name, options);
-  }
-
-  public override async detectProvider(): Promise<TrustWalletProvider> {
-    return await super.detectProvider(providerFilter);
-  }
-}
-```
 
 ## Development
 

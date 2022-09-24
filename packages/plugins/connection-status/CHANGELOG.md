@@ -1,4 +1,4 @@
-# @web3-wallet/plugin-connection-status-react
+# @web3-wallet/plugin-connection-status
 
 ## 0.9.10
 
