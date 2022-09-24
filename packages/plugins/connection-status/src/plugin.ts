@@ -9,7 +9,7 @@ import type { StoreApi, UseBoundStore } from 'zustand';
 import createStore from 'zustand';
 import { persist } from 'zustand/middleware';
 
-const _name = '@web3-wallet/plugin-connection-status-react';
+const _name = '@web3-wallet/plugin-connection-status';
 export const name = _name as PluginName<typeof _name>;
 
 export enum ConnectionStatus {

@@ -1,6 +1,6 @@
 {
-  "name": "@web3-wallet/plugin-ens-react",
-  "description": "web3-wallet ens plugin",
+  "name": "@web3-wallet/plugin-connection-status",
+  "description": "web3-wallet connection status plugin for tracking connections status",
   "version": "0.9.10",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -16,14 +16,13 @@
   "module": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc;tsc --module commonjs --outDir dist/cjs",
-    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=plugin-ens-react'",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=plugin-connection-status-react'",
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
     "@web3-wallet/react": "workspace:*",
-    "@ethersproject/providers": "^5.7.0",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {

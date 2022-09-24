@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import type { CreatePlugin, Plugin, PluginName } from '../../types';
 
-const _name = '@web3-wallet/plugin-core-hooks-react';
+const _name = '@web3-wallet/plugin-core-hooks';
 export const name = _name as PluginName<typeof _name>;
 
 export type Api = {

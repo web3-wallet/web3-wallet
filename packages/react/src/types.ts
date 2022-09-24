@@ -70,7 +70,7 @@ export enum WalletConnectionStatus {
 
 export type PluginName<T extends string = string> = Brand<
   T,
-  '@web-3wallet/plugin-react'
+  '@web-3wallet/plugin'
 >;
 
 export type PluginApiCache = Map<PluginName, PluginApi>;

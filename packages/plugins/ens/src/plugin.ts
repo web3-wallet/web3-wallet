@@ -6,17 +6,15 @@ import type {
 } from '@web3-wallet/react';
 import { useMemo } from 'react';
 
-import { useBalances } from './useBalances';
+import { useEnsNames } from './useEnsNames';
 
-const _name = '@web3-wallet/plugin-balance-react';
+const _name = '@web3-wallet/plugin-ens';
 export const name = _name as PluginName<typeof _name>;
 
 export type Api = {
   hooks: {
-    useBalances: (
-      precision?: number,
-    ) => AsyncFetchResult<(number | undefined)[]>;
-    useBalance: (precision?: number) => AsyncFetchResult<number | undefined>;
+    useEnsNames: () => AsyncFetchResult<(string | undefined)[]>;
+    useEnsName: () => AsyncFetchResult<string | undefined>;
   };
 };
 
@@ -24,7 +22,7 @@ export const create: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { useProvider, useAccounts, useAccount } = wallet;
 
-    const useBalance: Api['hooks']['useBalance'] = (precision) => {
+    const useEnsName: Api['hooks']['useEnsName'] = () => {
       const provider = useProvider();
       const account = useAccount();
       const accounts = useMemo(
@@ -32,7 +30,7 @@ export const create: CreatePlugin<undefined, Api> = () => {
         [account],
       );
 
-      const { data, ...rest } = useBalances(provider, accounts, precision);
+      const { data, ...rest } = useEnsNames(provider, accounts);
       return {
         ...rest,
         data: data?.[0],
@@ -41,9 +39,8 @@ export const create: CreatePlugin<undefined, Api> = () => {
 
     return {
       hooks: {
-        useBalances: (precision) =>
-          useBalances(useProvider(), useAccounts(), precision),
-        useBalance,
+        useEnsNames: () => useEnsNames(useProvider(), useAccounts()),
+        useEnsName,
       },
     };
   };

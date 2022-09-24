@@ -1,6 +1,6 @@
 {
-  "name": "@web3-wallet/plugin-balance-react",
-  "description": "web3-wallet react",
+  "name": "@web3-wallet/plugin-ens",
+  "description": "web3-wallet ens plugin",
   "version": "0.9.10",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -16,16 +16,14 @@
   "module": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc;tsc --module commonjs --outDir dist/cjs",
-    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=plugin-balance-react'",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=plugin-ens-react'",
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
     "@web3-wallet/react": "workspace:*",
-    "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
-    "@ethersproject/units": "^5.7.0",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {
