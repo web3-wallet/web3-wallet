@@ -1,5 +1,13 @@
 # @web3-wallet/plugin-connection-status
 
+## 0.9.11
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/react@0.9.11
+
 ## 0.9.10
 
 ### Patch Changes

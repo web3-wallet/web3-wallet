@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/defiwallet",
   "description": "DeFiWallet connector",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "keywords": [
     "web3-wallet",
     "crypto.com DeFi Wallet"

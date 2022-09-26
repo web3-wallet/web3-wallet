@@ -1,5 +1,12 @@
 # @web3-wallet/vue
 
+## 0.9.11
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@0.9.11
+
 ## 0.9.10
 
 ### Patch Changes
