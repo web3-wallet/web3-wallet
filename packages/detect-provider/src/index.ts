@@ -41,28 +41,20 @@ export type DetectProviderOptions = {
   silent?: boolean;
 };
 /**
- * Returns a Promise that resolves to the value of window[providerName] if it is
- * set within the given timeout, or undefined.
- *
- * The Promise will not reject, but an error will be thrown if invalid options
- * are provided.
- *
- * We can't ensure that all wallet will fire the `ethereum#initialized` event properly when
- * the provider is injected. To make sure that we can retrieve the provider ASAP, We repeatedly
- * check for the provider  every `options.detectInterval` milliseconds,
+ * Detect and the wallet provider from the host environment.
  *
  * @param options
- * @param options.providerName - the injected provider that name,default to 'ethereum'
+ * @param options.providerName - the injected provider name, default to 'ethereum'
  * @param options.eventName - the event name that is fired when the provider is injected,
  *  default to 'ethereum#initialized'
  * @param options.detectInterval - Milliseconds, the interval to check for the provider
- * in the host environment. Default: 50
+ *  in the host environment. Default: 50
  * @param options.silent - Whether to silence console errors. Does not affect
- * thrown errors. Default: false
+ *  thrown errors. Default: false
  * @param options.timeout - Milliseconds to wait for 'ethereum#initialized' to
- * be dispatched. Default: 3000
- * @returns A Promise that resolves with the Provider if it is detected within
- * given timeout, otherwise undefined.
+ *  be dispatched. Default: 3000
+ * @returns A Promise that resolves with the Provider if it is detected within the given timeout,
+ *  otherwise undefined.
  */
 export const detectProvider = <T extends Provider = Provider>(
   options: DetectProviderOptions = {},
