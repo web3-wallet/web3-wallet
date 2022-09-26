@@ -1,5 +1,5 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import type { FlexProps } from '@chakra-ui/react';
+import type { FlexProps, IconProps } from '@chakra-ui/react';
 import {
   Box,
   chakra,
@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { RiMenu3Line } from 'react-icons/ri';
 
@@ -22,7 +22,18 @@ import { Link } from '../Link';
 import { Logo } from '../Logo';
 import { MAX_CONTENT_WIDTH, TOP_NAVBAR_HEIGHT } from './constants';
 
-const MenuLineIcon = chakra(RiMenu3Line);
+const RiMenu3Line_ = chakra(RiMenu3Line);
+
+const MenuLineIcon = forwardRef<HTMLDivElement, IconProps>(function Icon(
+  props,
+  ref,
+) {
+  return (
+    <Box display="inline" ref={ref}>
+      <RiMenu3Line_ {...props} />
+    </Box>
+  );
+});
 
 const links = [
   { href: '/docs/getting-started', label: 'Docs' },
