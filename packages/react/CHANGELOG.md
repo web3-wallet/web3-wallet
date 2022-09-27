@@ -1,5 +1,11 @@
 # @web3-wallet/react
 
+## 0.9.12
+
+### Patch Changes
+
+- packge version
+
 ## 0.9.11
 
 ### Patch Changes
