@@ -16,9 +16,9 @@ export interface Wallet {
 
   $getStore: () => WalletStore;
   $getProvider: () => Provider | undefined;
-  detectProvider: () => ReturnType<Connector['detectProvider']>;
 
   // core methods
+  detectProvider: () => ReturnType<Connector['detectProvider']>;
   connect: Connector['connect'];
   autoConnect: Connector['autoConnect'];
   autoConnectOnce: Connector['autoConnectOnce'];

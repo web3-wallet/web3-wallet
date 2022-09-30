@@ -1,6 +1,6 @@
 # Web3 Wallet
 
-[![CI](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml)
+[![CI](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml/badge.svg)](https://github.com/web3-wallet/web3-wallet/actions/workflows/ci.yml) [![Deploy](https://github.com/web3-wallet/web3-wallet/actions/workflows/deploy.yml/badge.svg)](https://github.com/web3-wallet/web3-wallet/actions/workflows/deploy.yml)
 
 <p align="center">
   <a href="https://web3-wallet.github.io/web3-wallet" target="_blank">
@@ -54,22 +54,8 @@ check out https://web3-wallet.github.io/web3-wallet/showcase
 - pnpm@7.x
 
 ```bash
-# clone the repository
-git clone git@github.com:web3-wallet/web3-wallet.git
-
-# install dependencies
-cd web3-wallet && pnpm install
-
-# react
-# the web3-wallet site is built with react
-pnpm example-react
-# optional
-pnpm watch # watch for packages change
-
-# vue
-pnpm example-vue
-# optional
-pnpm watch # watch for packages change
+# start the dev server
+pnpm dev
 
 # test
 pnpm test

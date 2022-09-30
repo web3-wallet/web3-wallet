@@ -12,23 +12,27 @@
     "dApp",
     "ethereum"
   ],
+  "engines": {
+    "node": ">= 16.14.0",
+    "pnpm": ">= 7.5.0"
+  },
   "packageManager": "pnpm@7.5.0",
   "scripts": {
+    "dev": "run-p --silent site watch",
     "build": "turbo run build --filter=!./packages/examples/* --filter=!./site",
     "watch": "turbo run watch --parallel",
     "test": "jest --silent",
-    "ts-check": "turbo run ts-check",
     "lint": "turbo run lint",
-    "dev": "turbo run dev --filter=site",
+    "fix": "turbo run fix",
+    "ts-check": "turbo run ts-check",
     "site": "pnpm -F site dev",
     "export": "pnpm -F site export",
     "example-react": "pnpm -F example-react dev",
     "example-vue": "pnpm -F example-vue dev",
     "release": "changeset publish && git push --follow-tags",
-    "fix": "pnpm -p -r -c exec eslint --fix src",
     "clean": "pnpm -p -r -c exec rm -rf dist tsconfig.tsbuildinfo .turbo",
     "purge": "pnpm -p -r -c exec rm -rf node_modules",
-    "prepare": "husky install"
+    "prepare": "husky install && pnpm build"
   },
   "lint-staged": {
     "*.{ts,tsx,vue}": "eslint --fix"
@@ -68,9 +72,5 @@
     "turbo": "^1.4.6",
     "typescript": "^4.7.4",
     "vue": "^3.2.37"
-  },
-  "engines": {
-    "node": ">= 16.14.0",
-    "pnpm": ">= 7.5.0"
   }
 }
