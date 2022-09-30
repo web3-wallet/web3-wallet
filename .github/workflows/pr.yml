@@ -1,9 +1,8 @@
-name: ci
+name: pr
 on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
@@ -35,11 +34,8 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install
-      # build all the packages
       - run: pnpm build
       - run: pnpm ts-check
       - run: pnpm lint
       - run: pnpm run test
-      # build examples, make sure the we don't break the examples
       - run: pnpm -F example-react build
-      # - run: pnpm -F example-vue build
