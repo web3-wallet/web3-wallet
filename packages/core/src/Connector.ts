@@ -171,7 +171,6 @@ export abstract class Connector<
    * `lazyInitialize` is internally called by the following public methods
    *   - {@link Connector#connect}
    *   - {@link Connector#autoConnect}
-   *   - {@link Connector#autoConnectOnce}
    *
    * @returns Promise<void>
    */
@@ -192,7 +191,6 @@ export abstract class Connector<
    *  1. resolve with `true` if the connection succeeded.
    *  2. resolve with `false` if the connection failed.
    *
-   * See also autoConnectOnce {@link Connector#autoConnectOnce}
    */
   public async autoConnect(): Promise<boolean> {
     const endConnection = this.actions.startConnection();
@@ -216,29 +214,6 @@ export abstract class Connector<
     }
 
     return true;
-  }
-
-  private autoConnectOncePromise?: Promise<boolean>;
-
-  /**
-   * Same as autoConnect with the exception - autoConnectOnce only try to auto connect once.
-   *
-   * `autoConnectOnce` in turn calls autoConnect and memorize the return promise.
-   * `autoConnectOnce` returns the memorized promise directly for further calls.
-   *
-   * Calling autoConnectOnce multiple times is no-ops.
-   *
-   * @return Promise<boolean> -
-   *  1. resolve with `true` if the connection succeeded.
-   *  2. resolve with `false` if the connection failed.
-   *
-   * See also autoConnect {@link Connector#autoConnect}
-   */
-  public async autoConnectOnce(): Promise<boolean> {
-    if (!this.autoConnectOncePromise) {
-      this.autoConnectOncePromise = this.autoConnect();
-    }
-    return await this.autoConnectOncePromise;
   }
 
   /**

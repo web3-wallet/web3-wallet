@@ -19,17 +19,11 @@ import { defineComponent, onMounted } from 'vue';
 import { metaMask } from '../../wallets';
 import WalletCard from './WalletCard.vue';
 
-const {
-  connect,
-  autoConnectOnce,
-  account,
-  chainId,
-  isConnecting,
-  isConnected,
-} = metaMask;
+const { connect, autoConnect, account, chainId, isConnecting, isConnected } =
+  metaMask;
 
 onMounted(() => {
-  autoConnectOnce();
+  autoConnect();
 });
 
 defineComponent({

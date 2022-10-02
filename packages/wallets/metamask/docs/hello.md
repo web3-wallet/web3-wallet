@@ -67,7 +67,7 @@ const {
   usePlugin,
 
   connect,
-  autoConnectOnce,
+  autoConnect,
   disconnect,
 
   useIsConnecting,
@@ -96,9 +96,9 @@ export const WalletSelectCard = () => {
   const ensNames = useEnsNames();
 
   useEffect(() => {
-    autoConnectOnce();
+    autoConnect();
     /**
-     * autoConnectOnce per wallet
+     * autoConnect when wallet changed
      */
   }, [walletName]);
 

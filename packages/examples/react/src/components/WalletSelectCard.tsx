@@ -14,12 +14,13 @@ import { WalletSelect } from './WalletSelect';
 export const WalletSelectCard = () => {
   const {
     useName,
-    getPlugin,
 
     switchCurrentWallet,
 
+    usePlugin,
+
     connect,
-    autoConnectOnce,
+    autoConnect,
     disconnect,
 
     useIsConnecting,
@@ -37,8 +38,8 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
 
-  const { useEnsNames } = getPlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
-  const { useBalances } = getPlugin<BalancePlugin.Api>(
+  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
+  const { useBalances } = usePlugin<BalancePlugin.Api>(
     BalancePlugin.name,
   ).hooks;
 
@@ -46,8 +47,8 @@ export const WalletSelectCard = () => {
   const ensNames = useEnsNames();
 
   useEffect(() => {
-    autoConnectOnce();
-  }, [autoConnectOnce, walletName]);
+    autoConnect();
+  }, [autoConnect, walletName]);
 
   return (
     <NoSSR>

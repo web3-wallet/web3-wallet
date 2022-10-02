@@ -19,7 +19,8 @@
     "baseUrl": ".",
     "paths": {
       "@site/*": ["site/src/*"],
-      "@public/*": ["site/public/*"]
+      "@public/*": ["site/public/*"],
+      "@example-react/*": ["packages/examples/react/src/*"]
     }
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx"]

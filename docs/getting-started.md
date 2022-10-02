@@ -21,7 +21,7 @@ const {
   name,
 
   connect,
-  autoConnectOnce,
+  autoConnect,
   disconnect,
 
   useIsConnecting,
@@ -43,7 +43,7 @@ export const App = () => {
   const provider = useProvider();
 
   useEffect(() => {
-    autoConnectOnce();
+    autoConnect();
   }, []);
 
   // ....
@@ -79,7 +79,7 @@ const {
   usePlugin,
 
   connect,
-  autoConnectOnce,
+  autoConnect,
   disconnect,
 
   useIsConnecting,
@@ -100,10 +100,7 @@ export const App = () => {
   const provider = useProvider();
 
   useEffect(() => {
-    autoConnectOnce();
-    /**
-     * autoConnectOnce per wallet
-     */
+    autoConnect();
   }, [walletName]);
 
   return (

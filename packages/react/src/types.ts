@@ -39,10 +39,6 @@ export type CurrentWallet = Omit<Wallet, 'name' | '$pluginApiMap'> & {
     name: WalletName,
     ...args: Parameters<Wallet['autoConnect']>
   ) => ReturnType<Wallet['autoConnect']>;
-  autoConnectOnceWith: (
-    name: WalletName,
-    ...args: Parameters<Wallet['autoConnectOnce']>
-  ) => ReturnType<Wallet['autoConnectOnce']>;
   disconnectWith: (
     name: WalletName,
     ...args: Parameters<Wallet['disconnect']>
@@ -96,7 +92,6 @@ export type PluginApi = {
 export const middlewareNames = [
   'connect',
   'autoConnect',
-  'autoConnectOnce',
   'disconnect',
 ] as const;
 

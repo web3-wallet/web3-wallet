@@ -21,7 +21,6 @@ export interface Wallet {
   detectProvider: () => ReturnType<Connector['detectProvider']>;
   connect: Connector['connect'];
   autoConnect: Connector['autoConnect'];
-  autoConnectOnce: Connector['autoConnectOnce'];
   disconnect: Connector['disconnect'];
   watchAsset: Connector['watchAsset'];
 }
@@ -40,7 +39,6 @@ export const createWallet = (connector: Connector): Wallet => {
 
     connect: (...args) => connector.connect(...args),
     autoConnect: (...args) => connector.autoConnect(...args),
-    autoConnectOnce: (...args) => connector.autoConnectOnce(...args),
     disconnect: (...args) => connector.disconnect(...args),
     watchAsset: (...args) => connector.watchAsset(...args),
   };

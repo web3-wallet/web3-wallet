@@ -84,19 +84,6 @@ export const create: CreatePlugin<Options, Api> = (options) => {
         return result;
       };
 
-    const autoConnectOnce: Middlewares['autoConnectOnce'] =
-      (_: MiddlewareContext) =>
-      (next) =>
-      async (...args) => {
-        const result = await next(...args);
-
-        store.setState({
-          connectionStatus: ConnectionStatus.Connected,
-        });
-
-        return result;
-      };
-
     const disconnect: Middlewares['disconnect'] =
       (_: MiddlewareContext) =>
       (next) =>
@@ -118,7 +105,6 @@ export const create: CreatePlugin<Options, Api> = (options) => {
       middlewares: {
         connect,
         autoConnect,
-        autoConnectOnce,
         disconnect,
       },
       hooks: {

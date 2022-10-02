@@ -136,30 +136,6 @@ export const createCurrentWallet = (
       return result;
     };
 
-  const getAutoConnectOnce: (
-    walletName?: WalletName,
-  ) => Wallet['autoConnectOnce'] =
-    (walletName) =>
-    async (...args) => {
-      const wallet = walletName ? getWallet(walletName) : getCurrentWallet();
-      if (
-        store.getState().connectionStatus ===
-        WalletConnectionStatus.Disconnected
-      ) {
-        console.debug(`connectionId don't exists, auto connect is suppressed`);
-        return false;
-      }
-
-      const result = await wallet.autoConnectOnce(...args);
-
-      store.setState({
-        name: wallet.name,
-        connectionStatus: WalletConnectionStatus.Connected,
-      });
-
-      return result;
-    };
-
   const getDisconnect: (walletName?: WalletName) => Wallet['disconnect'] =
     (walletName) =>
     async (...args) => {
@@ -292,9 +268,6 @@ export const createCurrentWallet = (
 
     autoConnect: getAutoConnect(),
     autoConnectWith: (name, ...args) => getAutoConnect(name)(...args),
-
-    autoConnectOnce: getAutoConnectOnce(),
-    autoConnectOnceWith: (name, ...args) => getAutoConnectOnce(name)(...args),
 
     disconnectWith: (name, ...args) => getDisconnect(name)(...args),
     disconnect: getDisconnect(),
