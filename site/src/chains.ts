@@ -1,3 +1,4 @@
+import type { Network } from '@ethersproject/providers';
 import type { AddEthereumChainParameter } from '@web3-wallet/core';
 
 const INFURA_KEY = process.env.infuraKey;
@@ -125,6 +126,23 @@ export const CHAINS: AddEthereumChainParameter[] = [
       rpcUrls: v.rpcUrls.filter((url) => !!url),
     } as AddEthereumChainParameter),
 );
+
+const networks: Network[] = [
+  {
+    name: 'Cronos Test',
+    chainId: 338,
+    ensAddress: '0x16a23bFBcE9c53998c90201629E4cDB40B81B127',
+  },
+  {
+    name: 'Cronos',
+    chainId: 25,
+    ensAddress: '0x7F4C61116729d5b27E5f180062Fdfbf32E9283E5',
+  },
+];
+
+export const getNetwork = (chainId?: number): Network | undefined => {
+  return chainId ? networks.find((v) => (v.chainId = chainId)) : undefined;
+};
 
 export const rpcMap: { [chainId: number]: string } = CHAINS.reduce<{
   [chainId: number]: string;

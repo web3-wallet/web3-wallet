@@ -1,4 +1,5 @@
 import { HStack, Image, Text } from '@chakra-ui/react';
+import { getNetwork } from '@site/chains';
 import { allWallets, currentWallet, walletIconMap } from '@site/wallets';
 import { BalancePlugin } from '@web3-wallet/plugin-balance';
 import { EnsPlugin } from '@web3-wallet/plugin-ens';
@@ -43,7 +44,7 @@ export const WalletSelectCard = () => {
   const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
 
   const balances = useBalances();
-  const ensNames = useEnsNames();
+  const ensNames = useEnsNames(getNetwork(chainId));
 
   useEffect(() => {
     autoConnectOnce();

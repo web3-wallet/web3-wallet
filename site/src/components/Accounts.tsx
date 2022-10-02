@@ -27,28 +27,30 @@ export const Accounts = ({
 
   return (
     <>
-      {accounts.map((account, i) =>
-        ensNames.data?.[i] ? (
-          ensNames.data?.[i]
-        ) : (
-          <React.Fragment key={account}>
+      {accounts.map((account, i) => (
+        <React.Fragment key={account}>
+          {ensNames.data?.[i] && (
             <Flex gap={2}>
-              <Text as="span">Account:</Text>
-              <Account account={account} fontWeight="bold" />
+              <Text as="span">Name: </Text>
+              <Text fontWeight="bold">{ensNames.data?.[i]}</Text>
             </Flex>
-            <Flex gap={2}>
-              <Text>Balance:</Text>
-              <Text fontWeight="bold">
-                {balances.data?.[i]
-                  ? `${balances.data[i]}`
-                  : balances.data?.[i] === 0
-                  ? 0
-                  : '--'}
-              </Text>
-            </Flex>
-          </React.Fragment>
-        ),
-      )}
+          )}
+          <Flex gap={2}>
+            <Text as="span">Account:</Text>
+            <Account account={account} fontWeight="bold" />
+          </Flex>
+          <Flex gap={2}>
+            <Text>Balance:</Text>
+            <Text fontWeight="bold">
+              {balances.data?.[i]
+                ? `${balances.data[i]}`
+                : balances.data?.[i] === 0
+                ? 0
+                : '--'}
+            </Text>
+          </Flex>
+        </React.Fragment>
+      ))}
     </>
   );
 };

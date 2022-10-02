@@ -3,6 +3,7 @@ import type {
   CreatePlugin,
   Plugin,
   PluginName,
+  Wallet,
 } from '@web3-wallet/react';
 import { useMemo } from 'react';
 
@@ -13,17 +14,21 @@ export const name = _name as PluginName<typeof _name>;
 
 export type Api = {
   hooks: {
-    useEnsNames: () => AsyncFetchResult<(string | undefined)[]>;
-    useEnsName: () => AsyncFetchResult<string | undefined>;
+    useEnsNames: (
+      network?: Parameters<Wallet['useProvider']>[0],
+    ) => AsyncFetchResult<(string | undefined)[]>;
+    useEnsName: (
+      network?: Parameters<Wallet['useProvider']>[0],
+    ) => AsyncFetchResult<string | undefined>;
   };
 };
 
-export const create: CreatePlugin<undefined, Api> = () => {
+export const create: CreatePlugin<undefined, Api> = (network) => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { useProvider, useAccounts, useAccount } = wallet;
 
     const useEnsName: Api['hooks']['useEnsName'] = () => {
-      const provider = useProvider();
+      const provider = useProvider(network);
       const account = useAccount();
       const accounts = useMemo(
         () => (account === undefined ? [] : [account]),
@@ -39,7 +44,11 @@ export const create: CreatePlugin<undefined, Api> = () => {
 
     return {
       hooks: {
-        useEnsNames: () => useEnsNames(useProvider(), useAccounts()),
+        useEnsNames: (network) => {
+          const provider = useProvider(network);
+          const accounts = useAccounts();
+          return useEnsNames(provider, accounts);
+        },
         useEnsName,
       },
     };
