@@ -72,14 +72,14 @@ export type PluginName<T extends string = string> = Brand<
 export type PluginApiMap = Map<PluginName, PluginApi>;
 
 export type CreatePlugin<
-  O extends object | undefined = undefined,
-  P extends PluginApi = PluginApi,
-> = (options?: O) => Plugin<P>;
+  Options extends object | undefined = undefined,
+  TPluginApi extends PluginApi = PluginApi,
+> = (options?: Options) => Plugin<TPluginApi>;
 
-export interface Plugin<P extends PluginApi = PluginApi> {
+export interface Plugin<TPluginApi extends PluginApi = PluginApi> {
   name: PluginName;
   dependencies?: PluginName[];
-  createApi: (context: PluginContext) => P & {
+  createApi: (context: PluginContext) => TPluginApi & {
     middlewares?: Middlewares;
   };
 }
@@ -110,8 +110,8 @@ export type Middlewares = Partial<{
   ) => (next: Wallet[K]) => Wallet[K];
 }>;
 
-export type AsyncFetchResult<T = unknown> = {
-  data?: T;
+export type AsyncFetchResult<TData = unknown> = {
+  data?: TData;
   error?: Error;
   isLoading: boolean;
 };

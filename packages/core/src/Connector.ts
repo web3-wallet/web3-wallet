@@ -43,15 +43,16 @@ export type BaseConnectorOptions = {
 /**
  * The wallet options object
  */
-export type ConnectorOptions<T extends ProviderOptions = undefined> =
-  T extends undefined
-    ? BaseConnectorOptions
-    : BaseConnectorOptions & {
-        providerOptions: T;
-      };
+export type ConnectorOptions<
+  TProviderOptions extends ProviderOptions = undefined,
+> = TProviderOptions extends undefined
+  ? BaseConnectorOptions
+  : BaseConnectorOptions & {
+      providerOptions: TProviderOptions;
+    };
 
 export abstract class Connector<
-  Options extends ConnectorOptions = ConnectorOptions,
+  TConnectorOptions extends ConnectorOptions = ConnectorOptions,
 > {
   /**
    * {@link WalletName}
@@ -68,7 +69,7 @@ export abstract class Connector<
   /**
    * The wallet options object, specific to each wallet
    */
-  public options?: Options;
+  public options?: TConnectorOptions;
 
   /**
    * {@link WalletStore}
@@ -94,7 +95,7 @@ export abstract class Connector<
    * @param actions - {@link WalletStoreActions}
    * @param onError - {@link Connector#onError}
    */
-  constructor(name: WalletName, options?: Options) {
+  constructor(name: WalletName, options?: TConnectorOptions) {
     const { store, actions } = createWalletStoreAndActions();
     this.name = name;
     this.store = store;
