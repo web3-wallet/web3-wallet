@@ -2,6 +2,7 @@ import type {
   AsyncFetchResult,
   CreatePlugin,
   Plugin,
+  PluginApi,
   PluginName,
   Wallet,
 } from '@web3-wallet/react';
@@ -12,7 +13,7 @@ import { useEnsNames } from './useEnsNames';
 const _name = '@web3-wallet/plugin-ens';
 export const name = _name as PluginName<typeof _name>;
 
-export type Api = {
+export interface Api extends PluginApi {
   hooks: {
     useEnsNames: (
       network?: Parameters<Wallet['useProvider']>[0],
@@ -21,7 +22,7 @@ export type Api = {
       network?: Parameters<Wallet['useProvider']>[0],
     ) => AsyncFetchResult<string | undefined>;
   };
-};
+}
 
 export const create: CreatePlugin<undefined, Api> = (network) => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {

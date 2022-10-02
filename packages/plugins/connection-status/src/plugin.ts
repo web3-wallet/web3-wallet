@@ -2,6 +2,7 @@ import type {
   CreatePlugin,
   MiddlewareContext,
   Middlewares,
+  PluginApi,
   PluginContext,
   PluginName,
 } from '@web3-wallet/react';
@@ -29,11 +30,11 @@ const DEFAULT_STATE: State = {
 /**
  * Public plugin api
  */
-export type Api = {
+export interface Api extends PluginApi {
   hooks: {
     useConnectionStatus: () => ConnectionStatus;
   };
-};
+}
 
 export type Options = {
   isPersist?: boolean;

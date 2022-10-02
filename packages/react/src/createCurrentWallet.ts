@@ -6,10 +6,15 @@ import { persist } from 'zustand/middleware';
 import type {
   CurrentWallet,
   CurrentWalletState,
+  PluginApi,
+  PluginApiMap,
+  PluginName,
   Wallet,
   WalletBuiltinHooks,
 } from './types';
 import { WalletConnectionStatus } from './types';
+
+type UnknownFn = (...args: unknown[]) => unknown;
 
 export type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
@@ -74,13 +79,13 @@ export const createCurrentWallet = (
   };
 
   const getCurrentWallet = (): Wallet => {
-    const currentWalletName = store.getState().name;
-    const currentWallet = getWallet(currentWalletName);
+    const name = store.getState().name;
+    const currentWallet = getWallet(name);
 
     if (currentWallet) return currentWallet;
 
     console.debug(
-      `Wallet ${currentWalletName}, don't exist, reset current wallet to ${wallets[0].name}`,
+      `Wallet ${name}, don't exist, reset current wallet to ${wallets[0].name}`,
     );
 
     store.setState({
@@ -91,76 +96,8 @@ export const createCurrentWallet = (
     return wallets[0];
   };
 
-  const useCurrentWallet = (): Wallet => {
-    const name = useName();
-    return useMemo(() => {
-      // refresh useCurrentWallet when wallet name changed
-      void name;
-      return getCurrentWallet();
-    }, [name]);
-  };
-
   const useConnectionStatus: CurrentWallet['useConnectionStatus'] = () => {
     return store((s) => s.connectionStatus);
-  };
-
-  /**
-   * combine hooks
-   *
-   * If we don't combine the hooks, the hooks will be called base on
-   * currentWalletName, which violates the react hook rules.
-   *
-   * Combine hooks to always call all the hooks in consistent order
-   *  so that we don't violates the react hook rules:
-   *
-   * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
-   */
-  const getCombinedHooks = (): WalletBuiltinHooks => {
-    const combinedHooks: Record<string, unknown> = {};
-
-    const {
-      useChainId,
-      useAccount,
-      useAccounts,
-      useIsConnected,
-      useIsConnecting,
-      useProvider,
-    } = wallets[0];
-
-    const hooks: WalletBuiltinHooks = {
-      useChainId,
-      useAccount,
-      useAccounts,
-      useIsConnected,
-      useIsConnecting,
-      useProvider,
-    };
-
-    for (const hookName of Object.keys(hooks)) {
-      const useCombinedHook = (...args: unknown[]) => {
-        let hookOutput: unknown;
-        const currentWalletName = useName();
-
-        for (const wallet of wallets) {
-          const useHook = wallet[hookName as keyof WalletBuiltinHooks] as (
-            ...args: unknown[]
-          ) => unknown;
-
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const value = useHook(...args);
-
-          if (wallet.name === currentWalletName) {
-            hookOutput = value;
-          }
-        }
-
-        return hookOutput;
-      };
-
-      combinedHooks[hookName] = useCombinedHook;
-    }
-
-    return combinedHooks as WalletBuiltinHooks;
   };
 
   const getConnect: (walletName?: WalletName) => Wallet['connect'] =
@@ -234,6 +171,117 @@ export const createCurrentWallet = (
       return result;
     };
 
+  /**
+   * combine hooks
+   *
+   * If we don't combine the hooks, the hooks will be called base on
+   * currentWalletName, which violates the react hook rules.
+   *
+   * Combine hooks to always call all the hooks in consistent order
+   *  so that we don't violates the react hook rules:
+   *
+   * https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level
+   */
+  const getCombinedHooks = (): WalletBuiltinHooks => {
+    const combinedHooks: Record<string, unknown> = {};
+
+    const {
+      useChainId,
+      useAccount,
+      useAccounts,
+      useIsConnected,
+      useIsConnecting,
+      useProvider,
+    } = wallets[0];
+
+    const hooks: WalletBuiltinHooks = {
+      useChainId,
+      useAccount,
+      useAccounts,
+      useIsConnected,
+      useIsConnecting,
+      useProvider,
+    };
+
+    for (const [hookName, useHook] of Object.entries(hooks)) {
+      const useCombinedHook = (...args: unknown[]) => {
+        let hookOutput: unknown;
+        const name = useName();
+
+        for (const wallet of wallets) {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const value = (useHook as UnknownFn)(...args);
+
+          if (wallet.name === name) hookOutput = value;
+        }
+
+        return hookOutput;
+      };
+
+      combinedHooks[hookName] = useCombinedHook;
+    }
+
+    return combinedHooks as WalletBuiltinHooks;
+  };
+
+  /**
+   * combine plugin hooks
+   */
+  let pluginApiMap: PluginApiMap;
+
+  const getCombinePluginApiMap: () => Wallet['$pluginApiMap'] = () => {
+    if (pluginApiMap) return pluginApiMap;
+
+    pluginApiMap = new Map();
+
+    const currentWallet = getCurrentWallet();
+
+    const pluginEntires = currentWallet.$pluginApiMap.entries();
+
+    for (const [pluginName, pluginApi] of pluginEntires) {
+      const hooks = Object.entries(pluginApi.hooks ?? {});
+
+      if (!hooks.length) continue;
+
+      const combinedPluginHooks: Record<string, unknown> = {};
+
+      for (const [hookName, useHook] of hooks) {
+        const useCombinedHook = (...args: unknown[]) => {
+          let hookOutput: unknown;
+          const name = useName();
+
+          for (const wallet of wallets) {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const value = useHook(...args);
+            if (wallet.name === name) hookOutput = value;
+          }
+
+          return hookOutput;
+        };
+
+        combinedPluginHooks[hookName] = useCombinedHook;
+      }
+
+      pluginApiMap.set(pluginName, {
+        ...pluginApi,
+        hooks: combinedPluginHooks,
+      });
+    }
+
+    return pluginApiMap;
+  };
+
+  const usePlugin = <T extends PluginApi = PluginApi>(
+    pluginName: PluginName,
+  ) => {
+    const name = useName();
+
+    return useMemo(() => {
+      void name;
+      return getCombinePluginApiMap().get(pluginName) as T;
+    }, [name, pluginName]);
+  };
+
   return {
     useName,
     switchCurrentWallet,
@@ -258,8 +306,7 @@ export const createCurrentWallet = (
     $getProvider: (...args) => getCurrentWallet().$getProvider(...args),
     detectProvider: () => getCurrentWallet().detectProvider(),
 
-    getPlugin: (...args) => getCurrentWallet().getPlugin(...args),
-    usePlugin: (...args) => useCurrentWallet().getPlugin(...args),
+    usePlugin,
 
     ...getCombinedHooks(),
   };

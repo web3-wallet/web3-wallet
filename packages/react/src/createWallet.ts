@@ -2,13 +2,14 @@ import {
   type Connector,
   createWallet as createCoreWallet,
 } from '@web3-wallet/core';
+import { useMemo } from 'react';
 import createReactStore from 'zustand';
 
 import { applyPlugins } from './applyPlugins';
 import type {
   Plugin,
   PluginApi,
-  PluginApiCache,
+  PluginApiMap,
   PluginName,
   Wallet,
 } from './types';
@@ -26,17 +27,20 @@ export const createWallet = (
 
   const reactStore = createReactStore(coreWallet.$getStore());
 
-  const cache: PluginApiCache = new Map();
+  const pluginApiMap: PluginApiMap = new Map();
 
   let wallet = {
     ...coreWallet,
+    $pluginApiMap: pluginApiMap,
     $getStore: () => reactStore,
-    getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => {
-      if (!cache.has(pluginName)) {
-        throw new Error(`Plugin ${pluginName} don't exists!`);
-      }
+    usePlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => {
+      return useMemo(() => {
+        if (!pluginApiMap.has(pluginName)) {
+          throw new Error(`Plugin ${pluginName} don't exists!`);
+        }
 
-      return cache.get(pluginName) as T;
+        return pluginApiMap.get(pluginName) as T;
+      }, [pluginName]);
     },
   } as Wallet;
 
@@ -51,5 +55,5 @@ export const createWallet = (
 
   if (!plugins || !plugins.length) return wallet;
 
-  return applyPlugins(plugins, wallet, cache);
+  return applyPlugins(plugins, wallet, pluginApiMap);
 };

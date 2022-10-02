@@ -5,18 +5,18 @@ import {
 } from '@ethersproject/providers';
 import { useMemo } from 'react';
 
-import type { CreatePlugin, Plugin, PluginName } from '../../types';
+import type { CreatePlugin, Plugin, PluginApi, PluginName } from '../../types';
 
 const _name = '@web3-wallet/plugin-web3-provider';
 export const name = _name as PluginName<typeof _name>;
 
-export type Api = {
+export interface Api extends PluginApi {
   hooks: {
     useProvider: <T extends BaseProvider = Web3Provider>(
       network?: Networkish,
     ) => T | undefined;
   };
-};
+}
 
 export const create: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {

@@ -2,6 +2,7 @@ import type {
   AsyncFetchResult,
   CreatePlugin,
   Plugin,
+  PluginApi,
   PluginName,
 } from '@web3-wallet/react';
 import { useMemo } from 'react';
@@ -11,14 +12,14 @@ import { useBalances } from './useBalances';
 const _name = '@web3-wallet/plugin-balance';
 export const name = _name as PluginName<typeof _name>;
 
-export type Api = {
+export interface Api extends PluginApi {
   hooks: {
     useBalances: (
       precision?: number,
     ) => AsyncFetchResult<(number | undefined)[]>;
     useBalance: (precision?: number) => AsyncFetchResult<number | undefined>;
   };
-};
+}
 
 export const create: CreatePlugin<undefined, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {

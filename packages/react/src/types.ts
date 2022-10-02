@@ -11,7 +11,8 @@ import { Web3ProviderPlugin } from './plugins/web3-provider';
 
 export interface Wallet extends CoreWallet, WalletBuiltinHooks {
   $getStore: () => UseBoundStore<StoreApi<WalletState>>;
-  getPlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
+  usePlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
+  $pluginApiMap: PluginApiMap;
 }
 
 /**
@@ -25,7 +26,7 @@ export const builtinPlugins = [
 export type WalletBuiltinHooks = CoreHooksPlugin.Api['hooks'] &
   Web3ProviderPlugin.Api['hooks'];
 
-export type CurrentWallet = Omit<Wallet, 'name'> & {
+export type CurrentWallet = Omit<Wallet, 'name' | '$pluginApiMap'> & {
   switchCurrentWallet: (name: WalletName) => void;
   useName: () => Wallet['name'];
   useConnectionStatus: () => WalletConnectionStatus;
@@ -50,11 +51,6 @@ export type CurrentWallet = Omit<Wallet, 'name'> & {
     name: WalletName,
     ...args: Parameters<Wallet['watchAsset']>
   ) => ReturnType<Wallet['watchAsset']>;
-
-  /**
-   * usePlugin has the same signature as getPlugin
-   */
-  usePlugin: Wallet['getPlugin'];
 };
 
 export type CurrentWalletState = {
@@ -73,7 +69,7 @@ export type PluginName<T extends string = string> = Brand<
   '@web-3wallet/plugin'
 >;
 
-export type PluginApiCache = Map<PluginName, PluginApi>;
+export type PluginApiMap = Map<PluginName, PluginApi>;
 
 export type CreatePlugin<
   O extends object | undefined = undefined,

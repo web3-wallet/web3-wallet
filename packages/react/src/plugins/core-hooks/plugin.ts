@@ -1,12 +1,12 @@
 import type { WalletState } from '@web3-wallet/core';
 import { useMemo } from 'react';
 
-import type { CreatePlugin, Plugin, PluginName } from '../../types';
+import type { CreatePlugin, Plugin, PluginApi, PluginName } from '../../types';
 
 const _name = '@web3-wallet/plugin-core-hooks';
 export const name = _name as PluginName<typeof _name>;
 
-export type Api = {
+export interface Api extends PluginApi {
   hooks: {
     useIsConnecting: () => WalletState['isConnecting'];
     useChainId: () => WalletState['chainId'];
@@ -14,7 +14,7 @@ export type Api = {
     useAccount: () => string | undefined;
     useIsConnected: () => boolean;
   };
-};
+}
 
 const computeIsConnected = ({
   chainId,
