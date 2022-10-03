@@ -9,6 +9,9 @@ import type { StoreApi, UseBoundStore } from 'zustand';
 import { CoreHooksPlugin } from './plugins/core-hooks';
 import { Web3ProviderPlugin } from './plugins/web3-provider';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyFn = (...args: any[]) => any;
+
 export interface Wallet extends CoreWallet, WalletBuiltinHooks {
   $getStore: () => UseBoundStore<StoreApi<WalletState>>;
   usePlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
@@ -68,7 +71,7 @@ export type PluginName<T extends string = string> = Brand<
 export type PluginApiMap = Map<PluginName, PluginApi>;
 
 export type CreatePlugin<
-  Options extends object | undefined = undefined,
+  Options extends object | never = never,
   TPluginApi extends PluginApi = PluginApi,
 > = (options?: Options) => Plugin<TPluginApi>;
 
@@ -86,7 +89,7 @@ export type PluginContext = {
 };
 
 export type PluginApi = {
-  hooks?: object;
+  hooks?: Record<string, AnyFn>;
 };
 
 export const middlewareNames = [

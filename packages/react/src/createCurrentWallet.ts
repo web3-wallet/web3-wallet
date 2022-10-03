@@ -4,6 +4,7 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import type {
+  AnyFn,
   CurrentWallet,
   CurrentWalletState,
   PluginApi,
@@ -13,8 +14,6 @@ import type {
   WalletBuiltinHooks,
 } from './types';
 import { WalletConnectionStatus } from './types';
-
-type UnknownFn = (...args: unknown[]) => unknown;
 
 export type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
@@ -179,14 +178,14 @@ export const createCurrentWallet = (
       useProvider,
     };
 
-    for (const [hookName, useHook] of Object.entries(hooks)) {
+    for (const hookName of Object.keys(hooks)) {
       const useCombinedHook = (...args: unknown[]) => {
         let hookOutput: unknown;
         const name = useName();
 
         for (const wallet of wallets) {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const value = (useHook as UnknownFn)(...args);
+          // eslint-disable-next-line react-hooks/rules-of-hooks, @typescript-eslint/no-explicit-any
+          const value = (wallet as any)[hookName](...args);
 
           if (wallet.name === name) hookOutput = value;
         }
@@ -212,21 +211,27 @@ export const createCurrentWallet = (
 
     const currentWallet = getCurrentWallet();
 
-    const pluginEntires = currentWallet.$pluginApiMap.entries();
+    const pluginNames = currentWallet.$pluginApiMap.keys();
 
-    for (const [pluginName, pluginApi] of pluginEntires) {
-      const hooks = Object.entries(pluginApi.hooks ?? {});
+    for (const pluginName of pluginNames) {
+      const pluginHookNames = Object.keys(
+        currentWallet.$pluginApiMap.get(pluginName)?.hooks ?? {},
+      );
 
-      if (!hooks.length) continue;
+      if (!pluginHookNames.length) continue;
 
-      const combinedPluginHooks: Record<string, unknown> = {};
+      const combinedPluginHooks: Record<string, AnyFn> = {};
 
-      for (const [hookName, useHook] of hooks) {
-        const useCombinedHook = (...args: unknown[]) => {
+      for (const pluginHookName of pluginHookNames) {
+        const useCombinedHook: AnyFn = (...args) => {
           let hookOutput: unknown;
           const name = useName();
 
           for (const wallet of wallets) {
+            const useHook =
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              wallet.$pluginApiMap.get(pluginName)!.hooks![pluginHookName];
+
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const value = useHook(...args);
             if (wallet.name === name) hookOutput = value;
@@ -235,11 +240,11 @@ export const createCurrentWallet = (
           return hookOutput;
         };
 
-        combinedPluginHooks[hookName] = useCombinedHook;
+        combinedPluginHooks[pluginHookName] = useCombinedHook;
       }
 
       pluginApiMap.set(pluginName, {
-        ...pluginApi,
+        ...pluginApiMap.get(pluginName),
         hooks: combinedPluginHooks,
       });
     }

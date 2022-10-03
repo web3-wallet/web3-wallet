@@ -18,7 +18,7 @@ export interface Api extends PluginApi {
   };
 }
 
-export const create: CreatePlugin<undefined, Api> = () => {
+export const create: CreatePlugin<never, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
     const { useAccount, useChainId, $getProvider } = wallet;
 
