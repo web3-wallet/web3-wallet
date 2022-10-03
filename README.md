@@ -44,7 +44,6 @@ check out https://web3-wallet.github.io/web3-wallet/showcase
 | **Plugins**                                                                          |                                                                                                                                                          |      |
 | [`@web3-wallet/plugin-balance`](packages/plugins/balance)                            | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-balance.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-balance)                     | --   |
 | [`@web3-wallet/plugin-ens`](packages/plugins/ens)                                    | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-ens.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-ens)                             | --   |
-| [`@web3-wallet/plugin-connection-status`](packages/plugins/connection-status)        | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status.svg)](https://badge.fury.io/js/@web3-wallet%2Fplugin-connection-status) | --   |
 | **Utilities**                                                                        |                                                                                                                                                          |      |
 | [`@web3-wallet/detect-provider`](packages/detect-provider)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider.svg)](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider)                   | --   |
 

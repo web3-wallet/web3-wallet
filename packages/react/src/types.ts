@@ -81,9 +81,7 @@ export type CreatePlugin<
 export interface Plugin<TPluginApi extends PluginApi = PluginApi> {
   name: PluginName;
   dependencies?: PluginName[];
-  createApi: (context: PluginContext) => TPluginApi & {
-    middlewares?: Middlewares;
-  };
+  createApi: (context: PluginContext) => TPluginApi;
 }
 
 export type PluginContext = {
@@ -94,22 +92,6 @@ export type PluginContext = {
 export type PluginApi = {
   hooks?: Record<string, AnyFn>;
 };
-
-export const middlewareNames = [
-  'connect',
-  'autoConnect',
-  'disconnect',
-] as const;
-
-export type MiddlewareName = typeof middlewareNames[number];
-
-export type MiddlewareContext = object;
-
-export type Middlewares = Partial<{
-  [K in MiddlewareName]: (
-    context: MiddlewareContext,
-  ) => (next: Wallet[K]) => Wallet[K];
-}>;
 
 export type AsyncFetchResult<TData = unknown> = {
   data?: TData;

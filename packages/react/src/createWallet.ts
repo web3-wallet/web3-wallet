@@ -53,7 +53,9 @@ export const createWallet = (
     wallet,
   );
 
-  if (!plugins || !plugins.length) return wallet;
+  if (plugins && plugins.length) {
+    applyPlugins(plugins, wallet, pluginApiMap);
+  }
 
-  return applyPlugins(plugins, wallet, pluginApiMap);
+  return wallet;
 };

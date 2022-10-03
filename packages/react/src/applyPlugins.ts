@@ -1,4 +1,3 @@
-import { applyMiddleWares } from './applyMiddlewares';
 import type {
   Plugin,
   PluginApi,
@@ -8,19 +7,18 @@ import type {
 } from './types';
 
 /**
- * Apply plugins and update the wallet pluginApiMap
+ * Apply plugins and populate the wallet pluginApiMap
  *
  * @param plugins - the plugins to apply
  * @param wallet - the wallet on which the plugins will be applied
  * @param pluginApiMap - the applied wallet plugin apis
- * @returns a new wallet with the plugins applied to it
  */
 export const applyPlugins = (
   plugins: Plugin[],
   wallet: Wallet,
   pluginApiMap: PluginApiMap,
-): Wallet => {
-  return plugins.reduce((prevWallet, plugin) => {
+): void => {
+  for (const plugin of plugins) {
     /**
      * check for plugin duplication
      */
@@ -44,13 +42,6 @@ export const applyPlugins = (
 
     const pluginApi = plugin.createApi({ wallet, dependencies });
 
-    /**
-     * Apply plugin middlewares
-     */
-    const nextWallet = applyMiddleWares(pluginApi.middlewares, prevWallet);
-
     pluginApiMap.set(plugin.name, pluginApi);
-
-    return nextWallet;
-  }, wallet);
+  }
 };

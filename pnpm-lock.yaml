@@ -77,12 +77,10 @@ importers:
   packages/core:
     specifiers:
       '@ethersproject/address': ^5.7.0
-      '@ethersproject/providers': ^5.7.0
       '@web3-wallet/detect-provider': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.7.0
-      '@ethersproject/providers': 5.7.0
       '@web3-wallet/detect-provider': link:../detect-provider
       zustand: 4.0.0-rc.3
 
@@ -102,7 +100,6 @@ importers:
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/plugin-balance': workspace:*
-      '@web3-wallet/plugin-connection-status': workspace:*
       '@web3-wallet/plugin-ens': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/walletconnect': workspace:*
@@ -120,7 +117,6 @@ importers:
       '@web3-wallet/defiwallet': link:../../wallets/defiwallet
       '@web3-wallet/metamask': link:../../wallets/metamask
       '@web3-wallet/plugin-balance': link:../../plugins/balance
-      '@web3-wallet/plugin-connection-status': link:../../plugins/connection-status
       '@web3-wallet/plugin-ens': link:../../plugins/ens
       '@web3-wallet/react': link:../../react
       '@web3-wallet/walletconnect': link:../../wallets/walletconnect
@@ -174,14 +170,6 @@ importers:
       '@ethersproject/bignumber': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
-      '@web3-wallet/react': link:../../react
-      zustand: 4.0.0-rc.3
-
-  packages/plugins/connection-status:
-    specifiers:
-      '@web3-wallet/react': workspace:*
-      zustand: ^4.0.0-rc.0
-    dependencies:
       '@web3-wallet/react': link:../../react
       zustand: 4.0.0-rc.3
 
@@ -291,7 +279,6 @@ importers:
       '@web3-wallet/imtoken': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/plugin-balance': workspace:*
-      '@web3-wallet/plugin-connection-status': workspace:*
       '@web3-wallet/plugin-ens': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/trust-wallet': workspace:*
@@ -323,7 +310,6 @@ importers:
       '@web3-wallet/imtoken': link:../packages/wallets/imtoken
       '@web3-wallet/metamask': link:../packages/wallets/metamask
       '@web3-wallet/plugin-balance': link:../packages/plugins/balance
-      '@web3-wallet/plugin-connection-status': link:../packages/plugins/connection-status
       '@web3-wallet/plugin-ens': link:../packages/plugins/ens
       '@web3-wallet/react': link:../packages/react
       '@web3-wallet/trust-wallet': link:../packages/wallets/trust-wallet

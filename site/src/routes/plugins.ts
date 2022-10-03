@@ -22,9 +22,4 @@ export const routes: Route[] = [
     slug: ['ens'],
     path: getPath('ens'),
   },
-  {
-    label: 'Connection Status',
-    slug: ['connection-status'],
-    path: getPath('connection-status'),
-  },
 ];

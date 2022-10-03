@@ -22,7 +22,6 @@
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
     "@web3-wallet/cryptocom-desktop-wallet": "workspace:*",
-    "@web3-wallet/plugin-connection-status": "workspace:*",
     "@web3-wallet/plugin-ens": "workspace:*",
     "@web3-wallet/plugin-balance": "workspace:*",
     "next": "12.2.5",
