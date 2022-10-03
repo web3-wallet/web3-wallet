@@ -1,6 +1,6 @@
 import { Select } from '@chakra-ui/react';
 
-import { CHAINS } from '../chains';
+import { chainConfigs } from '../chains';
 
 export const ChainSelect = ({
   chainId,
@@ -17,7 +17,7 @@ export const ChainSelect = ({
       }}
       disabled={switchChain === undefined}
     >
-      {CHAINS.map((chain) => (
+      {chainConfigs.map((chain) => (
         <option key={chain.chainId} value={chain.chainId}>
           {chain.chainName}
         </option>

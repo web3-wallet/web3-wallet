@@ -4,7 +4,7 @@ import type { AddEthereumChainParameter } from '@web3-wallet/core';
 const INFURA_KEY = process.env.infuraKey;
 const ALCHEMY_KEY = process.env.alchemyKey;
 
-export const CHAINS: AddEthereumChainParameter[] = [
+export const chainConfigs: AddEthereumChainParameter[] = [
   {
     chainId: 1,
     chainName: 'Mainnet',
@@ -144,7 +144,13 @@ export const getNetwork = (chainId?: number): Network | undefined => {
   return chainId ? networks.find((v) => (v.chainId = chainId)) : undefined;
 };
 
-export const rpcMap: { [chainId: number]: string } = CHAINS.reduce<{
+export const getChainConfigs = (chainId: number) => {
+  return chainConfigs.find(
+    (v) => v.chainId === chainId,
+  ) as AddEthereumChainParameter;
+};
+
+export const rpcMap: { [chainId: number]: string } = chainConfigs.reduce<{
   [chainId: number]: string;
 }>((acc, params) => {
   acc[params.chainId] = params.rpcUrls[0];
@@ -154,4 +160,4 @@ export const rpcMap: { [chainId: number]: string } = CHAINS.reduce<{
 export const getAddChainParameters = (
   chainId: number,
 ): AddEthereumChainParameter | undefined =>
-  CHAINS.find((v) => v.chainId === chainId);
+  chainConfigs.find((v) => v.chainId === chainId);

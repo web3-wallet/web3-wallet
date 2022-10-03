@@ -1,11 +1,11 @@
 import { Flex, Text } from '@chakra-ui/react';
 
-import { CHAINS } from '../chains';
+import { getChainConfigs } from '../chains';
 
 export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
 
-  const name = chainId ? CHAINS[chainId]?.chainName : undefined;
+  const name = chainId ? getChainConfigs(chainId).chainName : undefined;
 
   if (name) {
     return (
