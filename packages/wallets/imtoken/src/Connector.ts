@@ -1,22 +1,16 @@
-import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
+import type { Provider, WalletName } from '@web3-wallet/core';
 import { Connector } from '@web3-wallet/core';
 
-export type ImTokenProvider = Provider & {
-  isImToken?: boolean;
-};
-
-const providerFilter = (p: ImTokenProvider) => !!p.isImToken;
-
-export type ImTokenOptions = ConnectorOptions;
+const providerFilter = (p: Provider) => !!p.isImToken;
 
 const _name = 'imToken';
 export const name = _name as WalletName<typeof _name>;
 
-export class ImToken extends Connector<ImTokenOptions> {
+export class ImToken extends Connector {
   public override providerFilter = providerFilter;
 
   /** {@inheritdoc Connector.constructor} */
-  constructor(options?: ImTokenOptions) {
+  constructor(options?: Connector['options']) {
     super(name, options);
   }
 }

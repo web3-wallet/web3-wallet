@@ -1,24 +1,18 @@
-import type { ConnectorOptions, Provider, WalletName } from '@web3-wallet/core';
+import type { Provider, WalletName } from '@web3-wallet/core';
 import { Connector } from '@web3-wallet/core';
-
-export type CryptocomDesktopWalletProvider = Provider & {
-  isDesktopWallet?: boolean;
-};
-
-export type CryptocomDesktopWalletOptions = ConnectorOptions;
 
 const _name = 'Crypto.com DeFi Desktop Wallet';
 export const name = _name as WalletName<typeof _name>;
 
-const providerFilter = (p: CryptocomDesktopWalletProvider) => {
+const providerFilter = (p: Provider) => {
   return !!p.isDesktopWallet;
 };
 
-export class CryptocomDesktopWallet extends Connector<CryptocomDesktopWalletOptions> {
+export class CryptocomDesktopWallet extends Connector {
   public override providerFilter = providerFilter;
 
   /** {@inheritdoc Connector.constructor} */
-  constructor(options?: CryptocomDesktopWalletOptions) {
+  constructor(options?: Connector['options']) {
     super(name, options);
   }
 }

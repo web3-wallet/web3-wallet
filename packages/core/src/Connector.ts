@@ -16,12 +16,6 @@ import { parseChainId, toHexChainId } from './utils';
 
 export type ProviderFilter = (provider: Provider) => boolean;
 
-type InjectedProvider = Provider | InjectedProviders | undefined;
-
-type InjectedProviders = {
-  providers?: Provider[];
-};
-
 /**
  * ProviderOptions is specific to each wallet provider, and it will be used to
  * to create/initialize the wallet provider instance.
@@ -135,7 +129,7 @@ export abstract class Connector<
 
     const injectedProvider = (await m.detectProvider(
       options ?? this.options?.detectProviderOptions,
-    )) as InjectedProvider;
+    )) as Provider;
 
     if (!injectedProvider) throw this.providerNotFoundError;
 
@@ -146,10 +140,8 @@ export abstract class Connector<
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
      * */
-    if ((injectedProvider as InjectedProviders).providers?.length) {
-      provider = (injectedProvider as InjectedProviders).providers?.find(
-        providerFilter,
-      );
+    if (injectedProvider.providers?.length) {
+      provider = injectedProvider.providers?.find(providerFilter);
     } else {
       provider = provider && providerFilter(provider) ? provider : undefined;
     }

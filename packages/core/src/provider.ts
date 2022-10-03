@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { EventEmitter } from 'node:events';
 
 /**
@@ -29,16 +30,6 @@ export interface ProviderRpcError extends Error {
  * See
  *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
  */
-export interface Provider extends EventEmitter {
-  request<T>(args: RequestArguments): Promise<T>;
-}
-
-/**
- * Defined in EIP-1193
- *
- * See
- *  - {@link https://eips.ethereum.org/EIPS/eip-1193 | EIP-1193}
- */
 export interface ProviderConnectInfo {
   isConnecting: boolean;
   chainId: string;
@@ -55,15 +46,6 @@ export class ProviderNoFoundError extends Error {
     this.name = ProviderNoFoundError.name;
     Object.setPrototypeOf(this, ProviderNoFoundError.prototype);
   }
-}
-
-/**
- * See
- *  - {@link https://eips.ethereum.org/EIPS/eip-3326 | EIP-3326}
- *  - {@link https://docs.metamask.io/guide/rpc-api.html#unrestricted-methods | MetaMask wallet_switchEthereumChain}
- */
-export interface SwitchEthereumChainParameter {
-  chainId: number;
 }
 
 /**
@@ -97,6 +79,97 @@ export interface WatchAssetParameters {
   symbol: string;
   decimals: number;
   image: string;
+}
+
+type WalletPermissionCaveat = {
+  type: string;
+  value: any;
+};
+
+type WalletPermission = {
+  caveats: WalletPermissionCaveat[];
+  date: number;
+  id: string;
+  invoker: `http://${string}` | `https://${string}`;
+  parentCapability: 'eth_accounts' | string;
+};
+
+interface InjectedProviderFlags {
+  isBitKeep?: boolean;
+  isMetaMask?: boolean;
+  isBraveWallet?: boolean;
+  isCoinbaseWallet?: boolean;
+  isExodus?: boolean;
+  isFrame?: boolean;
+  isMathWallet?: boolean;
+  isOneInchAndroidWallet?: boolean;
+  isOneInchIOSWallet?: boolean;
+  isOpera?: boolean;
+  isTally?: boolean;
+  isTokenPocket?: boolean;
+  isTokenary?: boolean;
+  isTrust?: boolean;
+  isDesktopWallet?: boolean;
+  isImToken?: boolean;
+}
+
+export interface Provider extends InjectedProviderFlags, EventEmitter {
+  providers?: Provider[];
+
+  /**
+   * EIP-747: Add wallet_watchAsset to Provider
+   * https://eips.ethereum.org/EIPS/eip-747
+   */
+  request(args: {
+    method: 'wallet_watchAsset';
+    params: WatchAssetParameters;
+  }): Promise<boolean>;
+
+  /**
+   * EIP-1193: Ethereum Provider JavaScript API
+   * https://eips.ethereum.org/EIPS/eip-1193
+   */
+  request(args: { method: 'eth_accounts' }): Promise<string[]>;
+  request(args: { method: 'eth_chainId' }): Promise<string>;
+  request(args: { method: 'eth_requestAccounts' }): Promise<string[]>;
+
+  /**
+   * EIP-1474: Remote procedure call specification
+   * https://eips.ethereum.org/EIPS/eip-1474
+   */
+  request(args: { method: 'web3_clientVersion' }): Promise<string>;
+
+  /**
+   * EIP-2255: Wallet Permissions System
+   * https://eips.ethereum.org/EIPS/eip-2255
+   */
+  request(args: {
+    method: 'wallet_requestPermissions';
+    params: [{ eth_accounts: Record<string, any> }];
+  }): Promise<WalletPermission[]>;
+  request(args: {
+    method: 'wallet_getPermissions';
+  }): Promise<WalletPermission[]>;
+
+  /**
+   * EIP-3085: Wallet Add Ethereum Chain RPC Method
+   * https://eips.ethereum.org/EIPS/eip-3085
+   */
+  request(args: {
+    method: 'wallet_addEthereumChain';
+    params: AddEthereumChainParameter[];
+  }): Promise<null>;
+
+  /**
+   * EIP-3326: Wallet Switch Ethereum Chain RPC Method
+   * https://eips.ethereum.org/EIPS/eip-3326
+   */
+  request(args: {
+    method: 'wallet_switchEthereumChain';
+    params: [{ chainId: string }];
+  }): Promise<null>;
+
+  request<T>(args: RequestArguments): Promise<T>;
 }
 
 export const isChainId = (

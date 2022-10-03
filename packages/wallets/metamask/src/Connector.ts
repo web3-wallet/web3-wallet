@@ -1,26 +1,16 @@
-import type {
-  ConnectorOptions,
-  Provider,
-  ProviderRpcError,
-  WalletName,
-} from '@web3-wallet/core';
+import type { Provider, ProviderRpcError, WalletName } from '@web3-wallet/core';
 import { Connector } from '@web3-wallet/core';
 
-export type MetaMaskProvider = Provider & {
-  isMetaMask?: boolean;
-};
-const providerFilter = (p: MetaMaskProvider) => !!p.isMetaMask;
-
-export type MetaMaskOptions = ConnectorOptions;
+const providerFilter = (p: Provider) => !!p.isMetaMask;
 
 const _name = 'MetaMask';
 export const name = _name as WalletName<typeof _name>;
 
-export class MetaMask extends Connector<MetaMaskOptions> {
+export class MetaMask extends Connector {
   public override providerFilter = providerFilter;
 
   /** {@inheritdoc Connector.constructor} */
-  constructor(options?: MetaMaskOptions) {
+  constructor(options?: Connector['options']) {
     super(name, options);
   }
 

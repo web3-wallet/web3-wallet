@@ -77,10 +77,12 @@ importers:
   packages/core:
     specifiers:
       '@ethersproject/address': ^5.7.0
+      '@ethersproject/providers': ^5.7.0
       '@web3-wallet/detect-provider': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/address': 5.7.0
+      '@ethersproject/providers': 5.7.0
       '@web3-wallet/detect-provider': link:../detect-provider
       zustand: 4.0.0-rc.3
 

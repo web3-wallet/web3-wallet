@@ -5,15 +5,14 @@ import type {
 import type { ConnectorOptions } from '@web3-wallet/core';
 import { type WalletName, Connector } from '@web3-wallet/core';
 
-type CoinbaseWalletProviderOptions = ConstructorParameters<
-  typeof CoinbaseWalletSDK
->[0] & { url: string };
+type ProviderOptions = ConstructorParameters<typeof CoinbaseWalletSDK>[0] & {
+  url: string;
+};
 
 export const _name = 'Coinbase Wallet';
 export const name = _name as WalletName<typeof _name>;
 
-export type CoinbaseWalletOptions =
-  ConnectorOptions<CoinbaseWalletProviderOptions>;
+export type CoinbaseWalletOptions = ConnectorOptions<ProviderOptions>;
 
 export class CoinbaseWallet extends Connector<CoinbaseWalletOptions> {
   /** {@inheritdoc Connector.provider} */
