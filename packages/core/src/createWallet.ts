@@ -1,6 +1,5 @@
 import type { Connector } from './Connector';
 import type { WalletStore } from './createWalletStore';
-import type { Provider } from './provider';
 import type { Brand } from './utilTypes';
 
 /**
@@ -14,10 +13,9 @@ export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
 export interface Wallet {
   name: WalletName;
 
-  $getStore: () => WalletStore;
-  $getProvider: () => Provider | undefined;
+  getStore: () => WalletStore;
 
-  // core methods
+  connector: Connector;
   detectProvider: () => ReturnType<Connector['detectProvider']>;
   connect: Connector['connect'];
   autoConnect: Connector['autoConnect'];
@@ -33,8 +31,8 @@ export const createWallet = (connector: Connector): Wallet => {
   const wallet: Wallet = {
     name: connector.name,
 
-    $getProvider: () => connector.provider,
-    $getStore: () => connector.store,
+    connector,
+    getStore: () => connector.store,
     detectProvider: () => connector.detectProvider(),
 
     connect: (...args) => connector.connect(...args),

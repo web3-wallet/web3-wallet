@@ -25,14 +25,14 @@ export const createWallet = (
 ): Wallet => {
   const coreWallet = createCoreWallet(connector);
 
-  const reactStore = createReactStore(coreWallet.$getStore());
+  const reactStore = createReactStore(coreWallet.getStore());
 
   const pluginApiMap: PluginApiMap = new Map();
 
   let wallet = {
     ...coreWallet,
-    $pluginApiMap: pluginApiMap,
-    $getStore: () => reactStore,
+    pluginApiMap: pluginApiMap,
+    getStore: () => reactStore,
     usePlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => {
       return useMemo(() => {
         if (!pluginApiMap.has(pluginName)) {

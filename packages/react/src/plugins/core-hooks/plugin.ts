@@ -40,9 +40,9 @@ const ACCOUNTS_EQUALITY_CHECKER: (
 
 export const create: CreatePlugin<never, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
-    const { $getStore } = wallet;
+    const { getStore } = wallet;
 
-    const useStore = $getStore();
+    const useStore = getStore();
 
     const useIsConnecting: Api['hooks']['useIsConnecting'] = () => {
       return useStore((s) => s.isConnecting);

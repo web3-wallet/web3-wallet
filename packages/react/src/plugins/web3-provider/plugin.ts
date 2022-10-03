@@ -20,7 +20,7 @@ export interface Api extends PluginApi {
 
 export const create: CreatePlugin<never, Api> = () => {
   const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
-    const { useAccount, useChainId, $getProvider } = wallet;
+    const { useAccount, useChainId, connector } = wallet;
 
     const useProvider = <T extends BaseProvider = Web3Provider>(
       network?: Networkish,
@@ -32,7 +32,7 @@ export const create: CreatePlugin<never, Api> = () => {
         // to ensure connectors remain fresh, we condition re-renders
         // when ImportedWeb3Provider account, chainId changed
         void account && chainId;
-        const provider = $getProvider();
+        const provider = connector.provider;
 
         if (provider) {
           return new Web3Provider(provider, network) as unknown as T;

@@ -204,18 +204,18 @@ export const createCurrentWallet = (
    */
   let pluginApiMap: PluginApiMap;
 
-  const getCombinePluginApiMap: () => Wallet['$pluginApiMap'] = () => {
+  const getCombinePluginApiMap: () => Wallet['pluginApiMap'] = () => {
     if (pluginApiMap) return pluginApiMap;
 
     pluginApiMap = new Map();
 
     const currentWallet = getCurrentWallet();
 
-    const pluginNames = currentWallet.$pluginApiMap.keys();
+    const pluginNames = currentWallet.pluginApiMap.keys();
 
     for (const pluginName of pluginNames) {
       const pluginHookNames = Object.keys(
-        currentWallet.$pluginApiMap.get(pluginName)?.hooks ?? {},
+        currentWallet.pluginApiMap.get(pluginName)?.hooks ?? {},
       );
 
       if (!pluginHookNames.length) continue;
@@ -230,7 +230,7 @@ export const createCurrentWallet = (
           for (const wallet of wallets) {
             const useHook =
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              wallet.$pluginApiMap.get(pluginName)!.hooks![pluginHookName];
+              wallet.pluginApiMap.get(pluginName)!.hooks![pluginHookName];
 
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const value = useHook(...args);
@@ -280,8 +280,7 @@ export const createCurrentWallet = (
     watchAsset: (...args) => getCurrentWallet().watchAsset(...args),
     watchAssetWith: (name, ...args) => getWallet(name).watchAsset(...args),
 
-    $getStore: (...args) => getCurrentWallet().$getStore(...args),
-    $getProvider: (...args) => getCurrentWallet().$getProvider(...args),
+    getStore: (...args) => getCurrentWallet().getStore(...args),
     detectProvider: () => getCurrentWallet().detectProvider(),
 
     usePlugin,

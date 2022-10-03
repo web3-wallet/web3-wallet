@@ -26,10 +26,10 @@ export const createWallet = (connector: Connector): Wallet => {
   const coreWallet = createCoreWallet(connector);
 
   const state = reactive<WalletState>({
-    ...coreWallet.$getStore().getState(),
+    ...coreWallet.getStore().getState(),
   });
 
-  coreWallet.$getStore().subscribe((nextState) => {
+  coreWallet.getStore().subscribe((nextState) => {
     Object.assign(state, nextState);
   });
 

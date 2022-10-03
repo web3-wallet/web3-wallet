@@ -13,9 +13,9 @@ import { Web3ProviderPlugin } from './plugins/web3-provider';
 export type AnyFn = (...args: any[]) => any;
 
 export interface Wallet extends CoreWallet, WalletBuiltinHooks {
-  $getStore: () => UseBoundStore<StoreApi<WalletState>>;
+  getStore: () => UseBoundStore<StoreApi<WalletState>>;
   usePlugin: <T extends PluginApi = PluginApi>(pluginName: PluginName) => T;
-  $pluginApiMap: PluginApiMap;
+  pluginApiMap: PluginApiMap;
 }
 
 /**
@@ -29,7 +29,10 @@ export const builtinPlugins = [
 export type WalletBuiltinHooks = CoreHooksPlugin.Api['hooks'] &
   Web3ProviderPlugin.Api['hooks'];
 
-export type CurrentWallet = Omit<Wallet, 'name' | '$pluginApiMap'> & {
+export type CurrentWallet = Omit<
+  Wallet,
+  'name' | 'pluginApiMap' | 'connector'
+> & {
   switchCurrentWallet: (name: WalletName) => void;
   useName: () => Wallet['name'];
   useConnectionStatus: () => WalletConnectionStatus;
