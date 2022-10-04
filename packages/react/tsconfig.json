@@ -3,7 +3,7 @@
   "include": ["./src", "test"],
 
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "rootDir": "src",
     "outDir": "./dist/esm"
   }

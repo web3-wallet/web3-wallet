@@ -17,7 +17,7 @@
   "module": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc;tsc --module commonjs --outDir dist/cjs",
-    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=react'",
+    "watch": "chokidar 'src/**/*.ts(x)?' -c 'pnpm -wc exec turbo run build --filter=react'",
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit"
@@ -36,7 +36,8 @@
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {
-    "react": ">=16.8"
+    "react": ">=16.8",
+    "@tanstack/react-query": "^4.9.0"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"
