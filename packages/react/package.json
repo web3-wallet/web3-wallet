@@ -33,11 +33,11 @@
     "@ethersproject/networks": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
     "@web3-wallet/core": "workspace:*",
+    "@tanstack/react-query": "^4.9.0",
     "zustand": "^4.0.0-rc.0"
   },
   "peerDependencies": {
-    "react": ">=16.8",
-    "@tanstack/react-query": "^4.9.0"
+    "react": ">=16.8"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"

@@ -22,13 +22,10 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/react": "workspace:*",
-    "@ethersproject/providers": "^5.7.0",
-    "zustand": "^4.0.0-rc.0"
+    "@web3-wallet/react": "workspace:*"
   },
   "peerDependencies": {
-    "react": ">=16.8",
-    "vue": ">=3.2.13"
+    "react": ">=16.8"
   },
   "repository": {
     "type": "git",

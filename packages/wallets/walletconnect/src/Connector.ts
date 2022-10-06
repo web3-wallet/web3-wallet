@@ -4,6 +4,8 @@ import type { ConnectorOptions, ProviderRpcError } from '@web3-wallet/core';
 import { type Provider, type WalletName, Connector } from '@web3-wallet/core';
 import EventEmitter3 from 'eventemitter3';
 
+import { icon } from './assets';
+
 export const URI_AVAILABLE = 'URI_AVAILABLE';
 
 type WalletConnectProvider = _WalletConnectProvider & Provider;
@@ -14,12 +16,17 @@ export const name = _name as WalletName<typeof _name>;
 export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
 
 export class WalletConnect extends Connector<WalletConnectOptions> {
+  public static walletName: WalletName<string> = name;
+  public static walletIcon: string = icon;
+  public name: WalletName<string> = name;
+  public icon: string = icon;
+
   /** {@inheritdoc Connector.provider} */
   public override provider?: WalletConnectProvider;
   public readonly events = new EventEmitter3();
 
   constructor(options: WalletConnectOptions) {
-    super(name, options);
+    super(options);
   }
 
   private onDisplayUri = (
@@ -95,8 +102,7 @@ export class WalletConnect extends Connector<WalletConnectOptions> {
   /**
    * {@inheritdoc Connector.onDisconnect}
    */
-  protected override onDisconnect(error: ProviderRpcError): void {
-    this.options?.onError?.(error);
+  protected override onDisconnect(_: ProviderRpcError): void {
     /**
      * force disconnect(reset provider) to avoid some edge walletconnect disconnect issue
      */

@@ -25,12 +25,11 @@
     "@web3-wallet/react": "workspace:*",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
-    "@ethersproject/units": "^5.7.0",
-    "zustand": "^4.0.0-rc.0"
+    "@ethersproject/units": "^5.7.0"
   },
   "peerDependencies": {
     "react": ">=16.8",
-    "vue": ">=3.2.13"
+    "@tanstack/react-query": "^4.9.0"
   },
   "repository": {
     "type": "git",

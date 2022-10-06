@@ -15,8 +15,7 @@ export const Accounts = ({
   ensNames: ReturnType<EnsPlugin.Api['hooks']['useEnsNames']>;
   balances: ReturnType<BalancePlugin.Api['hooks']['useBalances']>;
 }) => {
-  if (accounts === undefined) return null;
-  if (accounts.length === 0) {
+  if (!accounts || accounts.length === 0) {
     return (
       <Flex gap={2}>
         <Text>Account:</Text>

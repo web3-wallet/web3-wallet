@@ -1,6 +1,6 @@
 import { HStack, Image, Text } from '@chakra-ui/react';
 import { getNetwork } from '@site/chains';
-import { allWallets, currentWallet, walletIconMap } from '@site/wallets';
+import { currentWallet, getWalletConfig, walletConfigs } from '@site/wallets';
 import { BalancePlugin } from '@web3-wallet/plugin-balance';
 import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import { useEffect } from 'react';
@@ -15,9 +15,8 @@ import { WalletStatus } from './WalletStatus';
 
 const {
   useName,
-  switchCurrentWallet,
 
-  usePlugin,
+  getPluginApi,
 
   connect,
   autoConnect,
@@ -26,11 +25,13 @@ const {
   useIsConnecting,
   useIsConnected,
 
+  switchCurrentWallet,
+
   useAccounts,
   useChainId,
 } = currentWallet;
 
-export const WalletSelectCard = () => {
+export const CurrentWalletCard = () => {
   const walletName = useName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
@@ -38,13 +39,12 @@ export const WalletSelectCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
 
-  const { useBalances } = usePlugin<BalancePlugin.Api>(
-    BalancePlugin.name,
-  ).hooks;
-  const { useEnsNames } = usePlugin<EnsPlugin.Api>(EnsPlugin.name).hooks;
+  const { useBalances } = getPluginApi<BalancePlugin.Api>(BalancePlugin.name);
+  const { useEnsNames } = getPluginApi<EnsPlugin.Api>(EnsPlugin.name);
+
+  const ensNames = useEnsNames([getNetwork(chainId)]);
 
   const balances = useBalances();
-  const ensNames = useEnsNames(getNetwork(chainId));
 
   useEffect(() => {
     autoConnect();
@@ -54,7 +54,7 @@ export const WalletSelectCard = () => {
     <NoSSR>
       <WalletCard minW="280px" maxW="420px" width="100%">
         <WalletSelect
-          wallets={allWallets}
+          walletConfigs={walletConfigs}
           currentWalletName={walletName}
           switchCurrentWallet={switchCurrentWallet}
         />
@@ -62,8 +62,8 @@ export const WalletSelectCard = () => {
           <HStack>
             <Image
               width="24px"
-              src={walletIconMap[walletName]}
-              alt="MetaMask logo"
+              src={getWalletConfig(walletName).icon}
+              alt="Wallet Logo"
             />
             <Text fontWeight="bold">{walletName}</Text>
           </HStack>

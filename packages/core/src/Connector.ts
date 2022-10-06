@@ -1,17 +1,16 @@
 /* eslint-disable max-lines */
 import type { DetectProviderOptions } from '@web3-wallet/detect-provider';
 
-import type { WalletName } from './createWallet';
-import type { WalletStore, WalletStoreActions } from './createWalletStore';
 import { createWalletStoreAndActions } from './createWalletStore';
+import type { WalletName, WalletStore, WalletStoreActions } from './types';
+import { isAddChainParameter, ProviderNoFoundError } from './types';
 import type {
   AddEthereumChainParameter,
   Provider,
   ProviderConnectInfo,
   ProviderRpcError,
   WatchAssetParameters,
-} from './provider';
-import { isAddChainParameter, ProviderNoFoundError } from './provider';
+} from './types/provider';
 import { parseChainId, toHexChainId } from './utils';
 
 export type ProviderFilter = (provider: Provider) => boolean;
@@ -25,13 +24,6 @@ export type ProviderOptions = object | undefined;
 export type BaseConnectorOptions = {
   detectProviderOptions?: DetectProviderOptions;
   providerFilter?: ProviderFilter;
-  /**
-   * Report Error thrown by provider to the external world
-   *
-   * @param error the error object
-   * @returns void
-   */
-  onError?: (error: ProviderRpcError) => void;
 };
 
 /**
@@ -51,14 +43,13 @@ export abstract class Connector<
   /**
    * {@link WalletName}
    */
-  public name: WalletName;
+  public abstract name: WalletName;
+  public abstract icon: string;
 
   /**
    * {@link Provider}
    **/
   public provider?: Provider;
-
-  public providerFilter: ProviderFilter = () => true;
 
   /**
    * The wallet options object, specific to each wallet
@@ -81,28 +72,21 @@ export abstract class Connector<
    *  1. detectProvider failed to retrieve the provider from a host environment.
    *  2. calling functions that requires a provider, but we have been unable to retrieve the provider
    */
-  protected providerNotFoundError: ProviderNoFoundError;
+  // protected providerNotFoundError: ProviderNoFoundError;
+  protected get providerNotFoundError() {
+    return new ProviderNoFoundError(`${this.name} provider not found`);
+  }
 
   /**
    *
    * @param name - {@link Connector#WalletName}
    * @param actions - {@link WalletStoreActions}
-   * @param onError - {@link Connector#onError}
    */
-  constructor(name: WalletName, options?: TConnectorOptions) {
+  constructor(options?: TConnectorOptions) {
     const { store, actions } = createWalletStoreAndActions();
-    this.name = name;
     this.store = store;
     this.actions = actions;
     this.options = options;
-
-    if (options?.providerFilter) {
-      this.providerFilter = options.providerFilter;
-    }
-
-    this.providerNotFoundError = new ProviderNoFoundError(
-      `${name} provider not found`,
-    );
   }
 
   /**
@@ -135,7 +119,8 @@ export abstract class Connector<
 
     let provider = injectedProvider as Provider | undefined;
 
-    providerFilter = providerFilter ?? this.providerFilter;
+    providerFilter =
+      providerFilter ?? this.options?.providerFilter ?? (() => true);
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed
@@ -211,7 +196,7 @@ export abstract class Connector<
   /**
    * Initiates a connection.
    *
-   * @param chainIdOrChainParameter - If defined, indicates the desired chain to connect to. If the user is
+   * @param chain - If defined, indicates the desired chain to connect to. If the user is
    * already connected to this chain, no additional steps will be taken. Otherwise, the user will be prompted to switch
    * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
@@ -220,7 +205,7 @@ export abstract class Connector<
    * @returns Promise<void>
    */
   public async connect(
-    chainIdOrChainParameter?: number | AddEthereumChainParameter,
+    chain?: number | AddEthereumChainParameter,
   ): Promise<void> {
     const endConnection = this.actions.startConnection();
 
@@ -235,10 +220,7 @@ export abstract class Connector<
       ]);
 
       const receivedChainId = parseChainId(chainId);
-      const desiredChainId =
-        typeof chainIdOrChainParameter === 'number'
-          ? chainIdOrChainParameter
-          : chainIdOrChainParameter?.chainId;
+      const desiredChainId = typeof chain === 'number' ? chain : chain?.chainId;
 
       /**
        * there's no desired chain, or it's equal to the received chain
@@ -264,7 +246,7 @@ export abstract class Connector<
          * switch chain failed, try to add chain
          */
         const shouldTryToAddChain =
-          isAddChainParameter(chainIdOrChainParameter) &&
+          isAddChainParameter(chain) &&
           (error.code === 4902 || error.code === -32603);
 
         /**
@@ -276,12 +258,12 @@ export abstract class Connector<
         /**
          * try to add a new chain to wallet
          */
-        await this.addChain(chainIdOrChainParameter);
+        await this.addChain(chain);
 
         /**
          * chain added, connect to the added chainId again
          */
-        await this.connect(chainIdOrChainParameter.chainId);
+        await this.connect(chain.chainId);
       }
     } finally {
       endConnection();
@@ -308,31 +290,28 @@ export abstract class Connector<
    *  3. reject, if force disconnect failed.
    *
    */
-  public async disconnect(_force = false): Promise<void> {
+  public async disconnect(_force?: boolean): Promise<void> {
     this.actions.resetState();
   }
 
   /**
    * Add a asset to the wallet assets list
    *
-   * @param watchAssetParameters - {@link WatchAssetParameters}
+   * @param asset - {@link WatchAssetParameters}
    * @return Promise<void>
    */
-  public async watchAsset(
-    watchAssetParameters: WatchAssetParameters,
-  ): Promise<void> {
+  public async watchAsset(asset: WatchAssetParameters): Promise<void> {
     if (!this.provider) throw this.providerNotFoundError;
 
     const success = await this.provider.request<boolean>({
       method: 'wallet_watchAsset',
       params: {
         type: 'ERC20',
-        options: watchAssetParameters,
+        options: asset,
       },
     });
 
-    if (!success)
-      throw new Error(`Failed to watch ${watchAssetParameters.symbol}`);
+    if (!success) throw new Error(`Failed to watch ${asset.symbol}`);
   }
 
   /**
@@ -373,9 +352,8 @@ export abstract class Connector<
    * @param error - the disconnect ProviderRpcError
    * @return void
    */
-  protected onDisconnect(error: ProviderRpcError): void {
+  protected onDisconnect(_: ProviderRpcError): void {
     this.actions.resetState();
-    this.options?.onError?.(error);
   }
 
   /**

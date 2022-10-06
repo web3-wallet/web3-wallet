@@ -8,6 +8,8 @@ const chainId = mockData.hexChainIds[0];
 const accounts = mockData.accounts.slice(0, 1);
 
 class MockConnector extends Connector {
+  public name = 'Mock Wallet' as WalletName<'Mock Wallet'>;
+  public icon = '';
   public override provider?: MockProvider;
   public override async detectProvider(): Promise<MockProvider> {
     if (this.provider) return this.provider;
@@ -24,8 +26,7 @@ class MockConnector extends Connector {
 describe('detectProvider', () => {
   let connector: MockConnector;
   beforeEach(() => {
-    const walletName = 'MockConnector' as WalletName<'MockConnector'>;
-    connector = new MockConnector(walletName);
+    connector = new MockConnector();
   });
 
   test('provider available after detectProvider resolve', async () => {
@@ -53,8 +54,7 @@ describe('autoConnect', () => {
   let connector: MockConnector;
 
   beforeEach(() => {
-    const walletName = 'MockConnector' as WalletName<'MockConnector'>;
-    connector = new MockConnector(walletName);
+    connector = new MockConnector();
   });
 
   afterEach(() => {

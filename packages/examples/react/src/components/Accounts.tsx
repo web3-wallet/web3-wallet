@@ -15,8 +15,7 @@ export const Accounts = ({
   balances: ReturnType<BalancePlugin.Api['hooks']['useBalances']>;
   ensNames: ReturnType<EnsPlugin.Api['hooks']['useEnsNames']>;
 }) => {
-  if (accounts === undefined) return null;
-  if (accounts.length === 0) {
+  if (!accounts || accounts.length === 0) {
     return (
       <Box style={{ display: 'flex', marginBottom: 10 }}>
         <span style={{ marginRight: 10 }}>Account:</span>
@@ -27,30 +26,32 @@ export const Accounts = ({
 
   return (
     <>
-      {accounts.map((account, i) =>
-        ensNames.data?.[i] ? (
-          ensNames.data?.[i]
-        ) : (
-          <React.Fragment key={account}>
+      {accounts.map((account, i) => (
+        <React.Fragment key={account}>
+          {ensNames.data?.[i] && (
             <Box>
-              <span style={{ marginRight: 10 }}>Account:</span>
-              <b>
-                <Account account={account} />
-              </b>
+              <span style={{ marginRight: 10 }}>Name: </span>
+              <b>{ensNames.data?.[i]}</b>
             </Box>
-            <Box>
-              <span style={{ marginRight: 10 }}>Balance:</span>
-              <b>
-                {balances.data?.[i]
-                  ? `${balances.data[i]}`
-                  : balances.data?.[i] === 0
-                  ? 0
-                  : '--'}
-              </b>
-            </Box>
-          </React.Fragment>
-        ),
-      )}
+          )}
+          <Box>
+            <span style={{ marginRight: 10 }}>Account:</span>
+            <b>
+              <Account account={account} />
+            </b>
+          </Box>
+          <Box>
+            <span style={{ marginRight: 10 }}>Balance:</span>
+            <b>
+              {balances.data?.[i]
+                ? `${balances.data[i]}`
+                : balances.data?.[i] === 0
+                ? 0
+                : '--'}
+            </b>
+          </Box>
+        </React.Fragment>
+      ))}
     </>
   );
 };

@@ -6,38 +6,37 @@
 pnpm add @web3-wallet/react @web3-wallet/metamask
 ```
 
-## Create a single wallet
+## Create a wallet
 
 If you only need to integrate a single wallet to your dApp.
 
 ```typescript
-// wallet.ts
 import { MetaMask } from '@web3-wallet/metamask';
 import { createWallet } from '@web3-wallet/react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens';
+import { BalancePlugin } from '@web3-wallet/plugin-balance';
 
-const metamask = createWallet(new MetaMask());
+export const plugins = [EnsPlugin.create(), BalancePlugin.create()];
+
+const metamask = createWallet(new MetaMask(), { plugins });
 
 const {
-  name,
-
+  getName,
+  getPlugin,
   connect,
   autoConnect,
   disconnect,
-
   useIsConnecting,
   useIsConnected,
-
   useAccounts,
   useChainId,
   useProvider,
 } = metamask;
 
-// App.tsx
 export const App = () => {
-  const walletName = useName();
+  const walletName = getName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
-
   const chainId = useChainId();
   const accounts = useAccounts();
   const provider = useProvider();
@@ -50,60 +49,51 @@ export const App = () => {
 };
 ```
 
-## Create and manage multiple wallets through a wallet proxy.
+## Create a current wallet
 
-Most of the dApps allow users to connect to several supported wallets. If this is your case, you should use a wallet proxy to help you create and manage multiple wallets. Though most dApps support multiple wallets, but there is usually only one wallet that user is currently using. A wallet proxy expose and maintain a `currentWallet`, which is usually what you want to use in your dApp.
+It's a common pattern that a dApp allows users to connect to several supported wallets, but with only one wallet as the current/active wallet. If this is your case, you should use a current wallet instead.
 
 ```typescript
-
-// wallets.ts
 import { MetaMask } from '@web3-wallet/metamask';
 import { DefiWallet } from '@web3-wallet/defiwallet';
-import { WalletProxy } from '@web3-wallet/react';
+import { WalletManager } from '@web3-wallet/react';
+import { EnsPlugin } from '@web3-wallet/plugin-ens';
+import { BalancePlugin } from '@web3-wallet/plugin-balance';
 
-const connectors = [
-  new MetaMask(),
-  new DefiWallet(),
-];
+const connectors = [new MetaMask(), new DefiWallet()];
+export const plugins = [EnsPlugin.create(), BalancePlugin.create()];
 
-export const walletProxy = new WalletProxy(connectors);
-export const allWallets = walletProxy.getWallets();
-export const currentWallet = walletProxy.getCurrentWallet();
-export const [metamask, defiWallet] = allWallets;
+export const currentWallet = new createCurrentWallet(connectors, { plugins });
 
-// App.tsx
 const {
-  useName,
-  switchCurrentWallet,
-
-  usePlugin,
-
+  getPlugin,
   connect,
   autoConnect,
   disconnect,
-
   useIsConnecting,
   useIsConnected,
-
   useAccounts,
   useChainId,
   useProvider,
+
+  // current wallet only apis
+  useName,
+  switchCurrentWallet,
+  connectAsCurrentWallet,
 } = currentWallet;
 
 export const App = () => {
   const walletName = useName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
-
   const chainId = useChainId();
   const accounts = useAccounts();
   const provider = useProvider();
 
   useEffect(() => {
     autoConnect();
-  }, [walletName]);
+  }, []);
 
-  return (
-  );
+  // ....
 };
 ```

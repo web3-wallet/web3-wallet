@@ -30,8 +30,8 @@
     "example-react": "pnpm -F example-react dev",
     "example-vue": "pnpm -F example-vue dev",
     "release": "changeset publish && git push --follow-tags",
-    "clean": "pnpm -p -r -c exec rm -rf dist tsconfig.tsbuildinfo .turbo",
-    "purge": "pnpm -p -r -c exec rm -rf node_modules",
+    "clean": "pnpm -p -r -c exec rm -rf dist tsconfig.tsbuildinfo .turbo .next",
+    "purge": "pnpm clean && pnpm -p -r -c exec rm -rf node_modules",
     "prepare": "husky install && pnpm build"
   },
   "lint-staged": {
@@ -42,6 +42,7 @@
     "@coinbase/wallet-sdk": "^3.0.4",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@tanstack/react-query": "^4.9.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^28.1.4",
     "@types/node": "^18.0.3",

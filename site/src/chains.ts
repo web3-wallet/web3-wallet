@@ -129,6 +129,16 @@ export const chainConfigs: AddEthereumChainParameter[] = [
 
 const networks: Network[] = [
   {
+    name: 'Mainnet',
+    chainId: 1,
+    ensAddress: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+  },
+  {
+    name: 'Goerli',
+    chainId: 5,
+    ensAddress: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+  },
+  {
     name: 'Cronos Test',
     chainId: 338,
     ensAddress: '0x16a23bFBcE9c53998c90201629E4cDB40B81B127',
@@ -141,7 +151,7 @@ const networks: Network[] = [
 ];
 
 export const getNetwork = (chainId?: number): Network | undefined => {
-  return chainId ? networks.find((v) => (v.chainId = chainId)) : undefined;
+  return chainId ? networks.find((v) => v.chainId === chainId) : undefined;
 };
 
 export const getChainConfigs = (chainId: number) => {

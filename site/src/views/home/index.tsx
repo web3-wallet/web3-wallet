@@ -1,8 +1,8 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Button, Flex, Heading, Icon, Spacer, Text } from '@chakra-ui/react';
+import { CurrentWalletCard } from '@site/components/CurrentWalletCard';
 import { Layout } from '@site/components/Layout';
 import { Link } from '@site/components/Link';
-import { WalletSelectCard } from '@site/components/WalletSelectCard';
 import Head from 'next/head';
 import { AiOutlineGithub } from 'react-icons/ai';
 
@@ -39,7 +39,7 @@ export function Page() {
         </Heading>
 
         <Flex justifyContent="center">
-          <WalletSelectCard />
+          <CurrentWalletCard />
         </Flex>
 
         <Flex gap={{ base: 4, lg: 6 }} justifyContent="center">

@@ -1,62 +1,87 @@
 import type {
-  AsyncFetchResult,
-  CreatePlugin,
   Plugin,
-  PluginApi,
   PluginName,
   Wallet,
+  WrappedUseQuery,
 } from '@web3-wallet/react';
-import { useMemo } from 'react';
-
-import { useEnsNames } from './useEnsNames';
+import { useQuery } from '@web3-wallet/react';
 
 const _name = '@web3-wallet/plugin-ens';
 export const name = _name as PluginName<typeof _name>;
 
-export interface Api extends PluginApi {
-  hooks: {
-    useEnsNames: (
-      network?: Parameters<Wallet['useProvider']>[0],
-    ) => AsyncFetchResult<(string | undefined)[]>;
-    useEnsName: (
-      network?: Parameters<Wallet['useProvider']>[0],
-    ) => AsyncFetchResult<string | undefined>;
-  };
+type EnsName = string | null;
+type EnsNames = EnsName[];
+
+export interface Api {
+  useEnsNames: WrappedUseQuery<
+    EnsNames,
+    unknown,
+    EnsNames,
+    [network?: Parameters<Wallet['useProvider']>[0], ...rest: unknown[]]
+  >;
+  useEnsName: WrappedUseQuery<
+    EnsName,
+    unknown,
+    EnsName,
+    [network?: Parameters<Wallet['useProvider']>[0], ...rest: unknown[]]
+  >;
 }
 
-export const create: CreatePlugin<never, Api> = (network) => {
-  const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
-    const { useProvider, useAccounts, useAccount } = wallet;
+const plugin: Plugin<Api> = ({ wallet }) => {
+  const { useProvider, useAccounts, useAccount, useChainId } = wallet;
 
-    const useEnsName: Api['hooks']['useEnsName'] = () => {
-      const provider = useProvider(network);
-      const account = useAccount();
-      const accounts = useMemo(
-        () => (account === undefined ? [] : [account]),
-        [account],
-      );
+  const useEnsNames: Api['useEnsNames'] = (queryKey = [], options) => {
+    const chainId = useChainId();
+    const accounts = useAccounts();
+    const provider = useProvider(queryKey[0]);
 
-      const { data, ...rest } = useEnsNames(provider, accounts);
-      return {
-        ...rest,
-        data: data?.[0],
-      };
-    };
+    return useQuery(
+      [
+        ...queryKey,
+        `${name}/useEnsNames`,
+        accounts,
+        chainId,
+      ] as typeof queryKey,
+      async () => {
+        if (!provider) throw new Error(`provider don't exists`);
+        if (!accounts || !accounts.length)
+          throw new Error(`accounts don't exist`);
 
-    return {
-      hooks: {
-        useEnsNames: (network) => {
-          const provider = useProvider(network);
-          const accounts = useAccounts();
-          return useEnsNames(provider, accounts);
-        },
-        useEnsName,
+        const ensNames = await Promise.all(
+          accounts.map((account) => provider.lookupAddress(account)),
+        );
+
+        console.log('ens', ensNames, queryKey);
+        return ensNames;
       },
-    };
+      { enabled: !!provider && !!accounts && !!accounts.length, ...options },
+    );
   };
 
+  const useEnsName: Api['useEnsName'] = (queryKey = [], options) => {
+    const chainId = useChainId();
+    const account = useAccount();
+    const provider = useProvider(queryKey[0]);
+
+    return useQuery(
+      [...queryKey, `${name}/useEnsNames`, account, chainId] as typeof queryKey,
+      async () => {
+        if (!provider) throw new Error(`provider don't exists`);
+        if (!account) throw new Error(`accounts don't exist`);
+
+        return await provider.lookupAddress(account);
+      },
+      {
+        enabled: provider && !!account,
+        ...options,
+      },
+    );
+  };
   return {
-    name,
-    createApi,
+    useEnsNames,
+    useEnsName,
   };
 };
+
+plugin.pluginName = name;
+export const create = () => plugin;

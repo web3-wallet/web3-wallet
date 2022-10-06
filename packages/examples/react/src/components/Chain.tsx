@@ -1,10 +1,10 @@
-import { CHAINS } from '../chains';
+import { getChainConfigs } from '../chains';
 import { Box } from './Box';
 
 export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
 
-  const name = chainId ? CHAINS[chainId]?.name : undefined;
+  const name = chainId ? getChainConfigs(chainId)?.chainName : undefined;
 
   if (name) {
     return (
@@ -19,7 +19,7 @@ export const Chain = ({ chainId }: { chainId?: number }) => {
 
   return (
     <Box>
-      <span style={{ marginRight: 10 }}>Chain Id:</span>
+      <span style={{ marginRight: 10 }}>Chain:</span>
       <b>{chainId}</b>
     </Box>
   );

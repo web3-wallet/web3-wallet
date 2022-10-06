@@ -5,17 +5,19 @@ import { chainConfigs } from '../chains';
 export const ChainSelect = ({
   chainId,
   switchChain,
+  disabled,
 }: {
   chainId: number;
-  switchChain: ((chainId: number) => void) | undefined;
+  switchChain: (chainId: number) => void;
+  disabled: boolean;
 }) => {
   return (
     <Select
       value={chainId}
       onChange={(event) => {
-        switchChain?.(Number(event.target.value));
+        switchChain(Number(event.target.value));
       }}
-      disabled={switchChain === undefined}
+      disabled={disabled}
     >
       {chainConfigs.map((chain) => (
         <option key={chain.chainId} value={chain.chainId}>

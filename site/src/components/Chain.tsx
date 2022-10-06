@@ -5,7 +5,7 @@ import { getChainConfigs } from '../chains';
 export const Chain = ({ chainId }: { chainId?: number }) => {
   if (chainId === undefined) return null;
 
-  const name = chainId ? getChainConfigs(chainId).chainName : undefined;
+  const name = chainId ? getChainConfigs(chainId)?.chainName : undefined;
 
   if (name) {
     return (
@@ -20,7 +20,7 @@ export const Chain = ({ chainId }: { chainId?: number }) => {
 
   return (
     <Flex gap={2}>
-      <Text>Chain Id:</Text>
+      <Text>Chain:</Text>
       <Text fontWeight="bold">{chainId}</Text>
     </Flex>
   );

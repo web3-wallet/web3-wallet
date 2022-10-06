@@ -32,7 +32,11 @@ export const ConnectWithSelect = ({
   if (isConnected) {
     return (
       <Flex flexDirection="column" gap={4}>
-        <ChainSelect chainId={chainId as number} switchChain={switchChain} />
+        <ChainSelect
+          chainId={chainId as number}
+          switchChain={switchChain}
+          disabled={isConnecting}
+        />
         <Button
           colorScheme="red"
           onClick={async () => {
@@ -53,7 +57,8 @@ export const ConnectWithSelect = ({
     <Flex flexDirection="column" gap={4}>
       <ChainSelect
         chainId={chainId || 1}
-        switchChain={isConnecting ? undefined : switchChain}
+        switchChain={switchChain}
+        disabled={isConnecting}
       />
       <Button
         colorScheme="blue"

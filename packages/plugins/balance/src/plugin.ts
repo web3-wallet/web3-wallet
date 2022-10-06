@@ -1,56 +1,79 @@
-import type {
-  AsyncFetchResult,
-  CreatePlugin,
-  Plugin,
-  PluginApi,
-  PluginName,
-} from '@web3-wallet/react';
-import { useMemo } from 'react';
-
-import { useBalances } from './useBalances';
+import { formatEther } from '@ethersproject/units';
+import type { Plugin, PluginName, WrappedUseQuery } from '@web3-wallet/react';
+import { useQuery } from '@web3-wallet/react';
 
 const _name = '@web3-wallet/plugin-balance';
 export const name = _name as PluginName<typeof _name>;
 
-export interface Api extends PluginApi {
-  hooks: {
-    useBalances: (
-      precision?: number,
-    ) => AsyncFetchResult<(number | undefined)[]>;
-    useBalance: (precision?: number) => AsyncFetchResult<number | undefined>;
-  };
+type Balance = number;
+type Balances = Balance[];
+
+export interface Api {
+  useBalances: WrappedUseQuery<
+    Balances,
+    unknown,
+    Balances,
+    [precision?: number, ...rest: unknown[]]
+  >;
+  useBalance: WrappedUseQuery<
+    Balance,
+    unknown,
+    Balance,
+    [precision?: number, ...rest: unknown[]]
+  >;
 }
 
-export const create: CreatePlugin<never, Api> = () => {
-  const createApi: Plugin<Api>['createApi'] = ({ wallet }) => {
-    const { useProvider, useAccounts, useAccount } = wallet;
+const plugin: Plugin<Api> = ({ wallet }) => {
+  const { useProvider, useAccounts, useAccount } = wallet;
 
-    const useBalance: Api['hooks']['useBalance'] = (precision) => {
-      const provider = useProvider();
-      const account = useAccount();
-      const accounts = useMemo(
-        () => (account === undefined ? [] : [account]),
-        [account],
-      );
+  const useBalances: Api['useBalances'] = (queryKey = [], options) => {
+    const provider = useProvider();
+    const accounts = useAccounts();
 
-      const { data, ...rest } = useBalances(provider, accounts, precision);
-      return {
-        ...rest,
-        data: data?.[0],
-      };
-    };
+    return useQuery(
+      [...queryKey, `${name}/useBalances`, accounts] as typeof queryKey,
+      async () => {
+        if (!provider) throw new Error(`provider don't exists`);
+        if (!accounts || !accounts.length)
+          throw new Error(`accounts don't exist`);
 
-    return {
-      hooks: {
-        useBalances: (precision) =>
-          useBalances(useProvider(), useAccounts(), precision),
-        useBalance,
+        const balances = await Promise.all(
+          accounts.map((account) => provider.getBalance(account)),
+        );
+
+        return balances.map((v) =>
+          Number(Number(formatEther(v)).toFixed(queryKey[0] ?? 4)),
+        );
       },
-    };
+      { enabled: !!provider && !!accounts && !!accounts.length, ...options },
+    );
+  };
+
+  const useBalance: Api['useBalance'] = (queryKey = [], options) => {
+    const provider = useProvider();
+    const account = useAccount();
+    return useQuery(
+      [...queryKey, `${name}/useBalance`, account] as typeof queryKey,
+      async () => {
+        if (!provider) throw new Error(`provider don't exists`);
+        if (!account) throw new Error(`accounts don't exist`);
+
+        const balance = await provider.getBalance(account);
+
+        return Number(Number(formatEther(balance)).toFixed(queryKey[0] ?? 4));
+      },
+      {
+        enabled: provider && !!account,
+        ...options,
+      },
+    );
   };
 
   return {
-    name,
-    createApi,
+    useBalances,
+    useBalance,
   };
 };
+
+plugin.pluginName = name;
+export const create = () => plugin;

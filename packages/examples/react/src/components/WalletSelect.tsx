@@ -1,19 +1,20 @@
-import type { Wallet } from '@web3-wallet/react';
+import type { WalletConfig } from '@example-react/wallets';
+import type { WalletName } from '@web3-wallet/core';
 
 export const WalletSelect = ({
-  wallets,
+  walletConfigs,
   currentWalletName,
   switchCurrentWallet,
 }: {
-  wallets: Wallet[];
-  currentWalletName: Wallet['name'];
-  switchCurrentWallet: (walletName: Wallet['name']) => void;
+  walletConfigs: WalletConfig[];
+  currentWalletName: WalletName;
+  switchCurrentWallet: (walletName: WalletName) => void;
 }) => {
   return (
     <select
       value={currentWalletName}
       onChange={(event) => {
-        switchCurrentWallet(event.target.value as Wallet['name']);
+        switchCurrentWallet(event.target.value as WalletName);
       }}
       style={{
         height: '32px',
@@ -21,9 +22,9 @@ export const WalletSelect = ({
         cursor: 'pointer',
       }}
     >
-      {wallets.map((wallet) => (
-        <option key={wallet.name} value={wallet.name}>
-          {wallet.name}
+      {walletConfigs.map(({ name }) => (
+        <option key={name} value={name}>
+          {name}
         </option>
       ))}
     </select>

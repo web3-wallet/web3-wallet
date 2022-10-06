@@ -11,8 +11,8 @@ export const routes: Route[] = [
     path: path.join(BLOG_DIR, 'README.md'),
   },
   {
-    label: 'Web3 Async State Management',
-    slug: ['web3-async-state-management'],
-    path: path.join(BLOG_DIR, 'web3-async-state-management.md'),
+    label: 'Async Web3 State Management',
+    slug: ['async-web3-state-management'],
+    path: path.join(BLOG_DIR, 'async-web3-state-management.md'),
   },
 ];

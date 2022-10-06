@@ -8,6 +8,7 @@ importers:
       '@coinbase/wallet-sdk': ^3.0.4
       '@commitlint/cli': ^17.0.3
       '@commitlint/config-conventional': ^17.0.3
+      '@tanstack/react-query': ^4.9.0
       '@testing-library/react-hooks': ^8.0.1
       '@types/jest': ^28.1.4
       '@types/node': ^18.0.3
@@ -43,6 +44,7 @@ importers:
       '@coinbase/wallet-sdk': 3.4.0
       '@commitlint/cli': 17.0.3
       '@commitlint/config-conventional': 17.0.3
+      '@tanstack/react-query': 4.9.0_react@18.2.0
       '@testing-library/react-hooks': 8.0.1_3hx2ussxxho4jajbwrd6gq34qe
       '@types/jest': 28.1.6
       '@types/node': 18.0.6
@@ -94,14 +96,17 @@ importers:
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
       '@types/react-dom': 18.0.6
+      '@web3-wallet/brave-wallet': workspace:*
       '@web3-wallet/coinbase-wallet': workspace:*
       '@web3-wallet/core': workspace:*
       '@web3-wallet/cryptocom-desktop-wallet': workspace:*
       '@web3-wallet/defiwallet': workspace:*
+      '@web3-wallet/imtoken': workspace:*
       '@web3-wallet/metamask': workspace:*
       '@web3-wallet/plugin-balance': workspace:*
       '@web3-wallet/plugin-ens': workspace:*
       '@web3-wallet/react': workspace:*
+      '@web3-wallet/trust-wallet': workspace:*
       '@web3-wallet/walletconnect': workspace:*
       eslint-config-next: 12.2.5
       next: 12.2.5
@@ -111,14 +116,17 @@ importers:
       '@ethersproject/experimental': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
+      '@web3-wallet/brave-wallet': link:../../wallets/brave-wallet
       '@web3-wallet/coinbase-wallet': link:../../wallets/coinbase-wallet
       '@web3-wallet/core': link:../../core
       '@web3-wallet/cryptocom-desktop-wallet': link:../../wallets/cryptocom-desktop-wallet
       '@web3-wallet/defiwallet': link:../../wallets/defiwallet
+      '@web3-wallet/imtoken': link:../../wallets/imtoken
       '@web3-wallet/metamask': link:../../wallets/metamask
       '@web3-wallet/plugin-balance': link:../../plugins/balance
       '@web3-wallet/plugin-ens': link:../../plugins/ens
       '@web3-wallet/react': link:../../react
+      '@web3-wallet/trust-wallet': link:../../wallets/trust-wallet
       '@web3-wallet/walletconnect': link:../../wallets/walletconnect
       next: 12.2.5_react-dom@18.2.0
       react-dom: 18.2.0
@@ -164,34 +172,32 @@ importers:
       '@ethersproject/bignumber': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
+      '@web3-wallet/core': workspace:*
       '@web3-wallet/react': workspace:*
-      zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/bignumber': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
+      '@web3-wallet/core': link:../../core
       '@web3-wallet/react': link:../../react
-      zustand: 4.0.0-rc.3
 
   packages/plugins/ens:
     specifiers:
-      '@ethersproject/providers': ^5.7.0
       '@web3-wallet/react': workspace:*
-      zustand: ^4.0.0-rc.0
     dependencies:
-      '@ethersproject/providers': 5.7.0
       '@web3-wallet/react': link:../../react
-      zustand: 4.0.0-rc.3
 
   packages/react:
     specifiers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
+      '@tanstack/react-query': ^4.9.0
       '@web3-wallet/core': workspace:*
       zustand: ^4.0.0-rc.0
     dependencies:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
+      '@tanstack/react-query': 4.9.0
       '@web3-wallet/core': link:../core
       zustand: 4.0.0-rc.3
 
@@ -269,6 +275,7 @@ importers:
       '@ethersproject/experimental': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
+      '@tanstack/react-query-devtools': ^4.9.0
       '@types/react-dom': 18.0.6
       '@types/react-syntax-highlighter': ^15.5.5
       '@web3-wallet/brave-wallet': workspace:*
@@ -322,6 +329,7 @@ importers:
       react-markdown: 8.0.3
       react-syntax-highlighter: 15.5.0
     devDependencies:
+      '@tanstack/react-query-devtools': 4.9.0_react-dom@18.2.0
       '@types/react-dom': 18.0.6
       eslint-config-next: 12.2.5
 
@@ -4325,6 +4333,61 @@ packages:
     dependencies:
       tslib: 2.4.0
     dev: false
+
+  /@tanstack/match-sorter-utils/8.5.14:
+    resolution: {integrity: sha512-lVNhzTcOJ2bZ4IU+PeCPQ36vowBHvviJb2ZfdRFX5uhy7G0jM8N34zAMbmS5ZmVH8D2B7oU82OWo0e/5ZFzQrw==}
+    engines: {node: '>=12'}
+    dependencies:
+      remove-accents: 0.4.2
+    dev: true
+
+  /@tanstack/query-core/4.9.0:
+    resolution: {integrity: sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==}
+
+  /@tanstack/react-query-devtools/4.9.0_react-dom@18.2.0:
+    resolution: {integrity: sha512-VO8d23Hrjp4tub20OIGszsmYwSyal/7PhYP1Miv7GAVrdPQN38lqP9afhkhkXDW025x7oAXYUUl4LzUCxVwKBw==}
+    peerDependencies:
+      '@tanstack/react-query': 4.9.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/match-sorter-utils': 8.5.14
+      react-dom: 18.2.0
+      use-sync-external-store: 1.2.0
+    dev: true
+
+  /@tanstack/react-query/4.9.0:
+    resolution: {integrity: sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.9.0
+      use-sync-external-store: 1.2.0
+    dev: false
+
+  /@tanstack/react-query/4.9.0_react@18.2.0:
+    resolution: {integrity: sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.9.0
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: true
 
   /@testing-library/react-hooks/8.0.1_3hx2ussxxho4jajbwrd6gq34qe:
     resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
@@ -13631,7 +13694,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       scheduler: 0.23.0
-    dev: false
 
   /react-error-boundary/3.1.4_react@18.2.0:
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
@@ -13937,6 +13999,10 @@ packages:
       autolinker: 0.28.1
     dev: false
 
+  /remove-accents/0.4.2:
+    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: true
+
   /renderkid/3.0.0:
     resolution: {integrity: sha512-q/7VIQA8lmM1hF+jn+sFSPWGlMkSAeNYcPLmDQx2zzuiDfaLrOmumR8iaUKlenFgh0XRPIUeSPlH3A+AW3Z5pg==}
     dependencies:
@@ -14138,7 +14204,6 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /schema-utils/2.7.0:
     resolution: {integrity: sha512-0ilKFI6QQF5nxDZLFn2dMjvc4hjg/Wkg7rHd3jK6/A4a1Hl9VFdQWvgB1UMGoU94pad1P/8N7fMcEnLnSiju8A==}
@@ -15565,7 +15630,14 @@ packages:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dev: false
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: true
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

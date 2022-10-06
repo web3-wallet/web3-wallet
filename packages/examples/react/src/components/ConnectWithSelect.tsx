@@ -1,7 +1,7 @@
 import type { Wallet } from '@web3-wallet/react';
 import { useCallback, useState } from 'react';
 
-import { getAddChainParameters, rpcMap } from '../chains';
+import { getAddChainParameters } from '../chains';
 import { Box } from './Box';
 import { ChainSelect } from './ChainSelect';
 
@@ -18,8 +18,7 @@ export const ConnectWithSelect = ({
   isConnecting: boolean;
   isConnected: boolean;
 }) => {
-  const chainIds = Object.keys(rpcMap).map((chainId) => Number(chainId));
-  const [desiredChainId, setDesiredChainId] = useState<number>(chainId || 1);
+  const [desiredChainId, setDesiredChainId] = useState<number>(chainId ?? 1);
 
   const switchChain = useCallback(
     (desiredChainId: number) => {
@@ -33,9 +32,9 @@ export const ConnectWithSelect = ({
     return (
       <Box style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <ChainSelect
-          chainId={desiredChainId}
+          chainId={chainId as number}
           switchChain={switchChain}
-          chainIds={chainIds}
+          disabled={isConnecting}
         />
         <button
           style={{
@@ -59,9 +58,9 @@ export const ConnectWithSelect = ({
   return (
     <Box style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <ChainSelect
-        chainId={desiredChainId}
-        switchChain={isConnecting ? undefined : switchChain}
-        chainIds={chainIds}
+        chainId={chainId || 1}
+        switchChain={switchChain}
+        disabled={isConnecting}
       />
       <button
         style={{

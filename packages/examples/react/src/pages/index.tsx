@@ -1,5 +1,5 @@
 import { Box } from '@example-react/components/Box';
-import { WalletSelectCard } from '@example-react/components/WalletSelectCard';
+import { CurrentWalletCard } from '@example-react/components/CurrentWalletCard';
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
         justifyContent: 'center',
       }}
     >
-      <WalletSelectCard />
+      <CurrentWalletCard />
     </Box>
   );
 }

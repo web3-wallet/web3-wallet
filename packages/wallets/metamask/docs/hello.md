@@ -15,7 +15,7 @@ import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
 import { getDeFiWallet } from '@web3-wallet/defiwallet';
 import { MetaMask } from '@web3-wallet/metamask';
 import { DefiWallet } from '@web3-wallet/defiwallet';
-import { WalletProxy } from '@web3-wallet/react';
+import { WalletManager } from '@web3-wallet/react';
 import { WalletConnect } from '@web3-wallet/walletconnect';
 import { BalancePlugin } from '@web3-wallet/plugin-balance';
 import { EnsPlugin } from '@web3-wallet/plugin-ens';
@@ -43,7 +43,7 @@ const connectors = [
 
 const plugins = [BalancePlugin.create(), EnsPlugin.create()];
 
-export const walletProxy = new WalletProxy(connectors, {
+export const walletProxy = new WalletManager(connectors, {
   plugins,
 });
 

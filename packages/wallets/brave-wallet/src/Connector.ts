@@ -1,16 +1,24 @@
 import type { Provider, WalletName } from '@web3-wallet/core';
 import { Connector } from '@web3-wallet/core';
 
+import { icon } from './assets';
+
 const providerFilter = (p: Provider) => !!p.isBraveWallet;
 
 const _name = 'Brave Wallet';
 export const name = _name as WalletName<typeof _name>;
 
 export class BraveWallet extends Connector {
-  public override providerFilter = providerFilter;
+  public static walletName: WalletName<string> = name;
+  public static walletIcon: string = icon;
+  public name: WalletName<string> = name;
+  public icon: string = icon;
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {
-    super(name, options);
+    super({
+      providerFilter,
+      ...options,
+    });
   }
 }

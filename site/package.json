@@ -43,6 +43,7 @@
     "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^4.9.0",
     "@types/react-dom": "18.0.6",
     "eslint-config-next": "12.2.5"
   }

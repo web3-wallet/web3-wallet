@@ -1,20 +1,11 @@
 /* eslint-disable jest/no-export */
 import { EventEmitter } from 'node:events';
 
-import type {
-  Provider,
-  ProviderRpcError,
-  RequestArguments,
-  SwitchEthereumChainParameter,
-} from '../src';
+import type { Provider, ProviderRpcError, RequestArguments } from '../src';
 
 // Get around: "Your test suite must contain at least one test" error.
 // eslint-disable-next-line jest/no-disabled-tests, jest/expect-expect
 test.skip('skip', () => {});
-
-type SwitchChainParam = Omit<SwitchEthereumChainParameter, 'chainId'> & {
-  chainId: string;
-};
 
 export class MockProviderRpcError extends Error {
   public code: number;
@@ -45,7 +36,7 @@ export class MockProvider extends EventEmitter implements Provider {
   public wallet_switchEthereumChain = jest.fn(
     (params: RequestArguments['params']) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const param = (params as unknown as SwitchChainParam[])[0]!;
+      const param = (params as unknown as { chainId: string }[])[0]!;
       this.emitChainChanged(param.chainId);
     },
   );

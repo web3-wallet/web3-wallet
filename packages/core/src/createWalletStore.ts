@@ -1,31 +1,8 @@
 import { getAddress, isAddress } from '@ethersproject/address';
-import type { StoreApi } from 'zustand/vanilla';
 import create from 'zustand/vanilla';
 
+import type { WalletState, WalletStore, WalletStoreActions } from './types';
 import { isValidChainId } from './utils';
-
-/**
- * The minimal WalletState to keep track with
- */
-export interface WalletState {
-  isConnecting: boolean;
-  chainId?: number;
-  accounts?: string[];
-}
-
-/**
- * WalletStore is for managing the state of WalletState
- */
-export type WalletStore = StoreApi<WalletState>;
-
-/**
- * WalletStoreActions is used to update the WalletStore
- */
-export interface WalletStoreActions {
-  startConnection: () => () => void;
-  update: (stateUpdate: Partial<Omit<WalletState, 'isConnecting'>>) => void;
-  resetState: () => void;
-}
 
 export const DEFAULT_WALLET_STATE: WalletState = {
   isConnecting: false,
