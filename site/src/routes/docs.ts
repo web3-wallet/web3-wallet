@@ -11,9 +11,9 @@ export const routes: Route[] = [
     path: path.join(DOCS_DIR, `/getting-started.md`),
   },
   {
-    label: 'Introduction',
-    slug: ['introduction'],
-    path: path.join(DOCS_DIR, 'introduction.md'),
+    label: 'Overview',
+    slug: ['overview'],
+    path: path.join(DOCS_DIR, 'overview.md'),
   },
   {
     label: 'Provider Detection',

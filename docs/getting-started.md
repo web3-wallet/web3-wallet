@@ -93,7 +93,7 @@ export const App = () => {
 
 ## Use with @tanstack/query
 
-@tanstack/query is a fantastic and very popular library for async state(server side state) management. Web3 wallet uses @tanstack/query under the hood for managing async state. But the core wallet functionalities of does not depends on @tanstack/query. If all you need is the core wallet functionalities, you don't need to setup @tanstack/query.
+[@tanstack/query](https://tanstack.com/query/v4) is a fantastic and very popular library for async state(server side state) management. Web3 wallet uses @tanstack/query under the hood for managing async state. But the core wallet functionalities of does not depends on @tanstack/query. If all you need is the core wallet functionalities, you don't need to setup @tanstack/query.
 
 In order use web3-wallet with @tanstack/query, all you need to do is Wrap your App component with `Web3WalletQueryClientProvider`.
 
