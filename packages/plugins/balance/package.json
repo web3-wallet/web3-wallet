@@ -28,8 +28,7 @@
     "@ethersproject/units": "^5.7.0"
   },
   "peerDependencies": {
-    "react": ">=16.8",
-    "@tanstack/react-query": "^4.9.0"
+    "react": ">=16.8"
   },
   "repository": {
     "type": "git",

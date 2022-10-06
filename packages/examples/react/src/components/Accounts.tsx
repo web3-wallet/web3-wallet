@@ -12,8 +12,8 @@ export const Accounts = ({
   ensNames,
 }: {
   accounts: ReturnType<Wallet['useAccounts']>;
-  balances: ReturnType<BalancePlugin.Api['hooks']['useBalances']>;
-  ensNames: ReturnType<EnsPlugin.Api['hooks']['useEnsNames']>;
+  balances: ReturnType<BalancePlugin.Api['useBalances']>;
+  ensNames: ReturnType<EnsPlugin.Api['useEnsNames']>;
 }) => {
   if (!accounts || accounts.length === 0) {
     return (

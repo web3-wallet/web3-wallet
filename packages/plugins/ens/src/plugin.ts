@@ -51,7 +51,6 @@ const plugin: Plugin<Api> = ({ wallet }) => {
           accounts.map((account) => provider.lookupAddress(account)),
         );
 
-        console.log('ens', ensNames, queryKey);
         return ensNames;
       },
       { enabled: !!provider && !!accounts && !!accounts.length, ...options },

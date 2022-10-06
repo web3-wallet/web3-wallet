@@ -172,13 +172,11 @@ importers:
       '@ethersproject/bignumber': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
-      '@web3-wallet/core': workspace:*
       '@web3-wallet/react': workspace:*
     dependencies:
       '@ethersproject/bignumber': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
-      '@web3-wallet/core': link:../../core
       '@web3-wallet/react': link:../../react
 
   packages/plugins/ens:
