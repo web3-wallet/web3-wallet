@@ -23,6 +23,7 @@ export const ShowcaseCard = ({ showcaseItem }: ShowcaseCardProps) => {
       }}
       display="block"
       target="_blank"
+      alignSelf="stretch"
       href={url}
       maxWidth="400px"
       minWidth="300px"
@@ -32,6 +33,7 @@ export const ShowcaseCard = ({ showcaseItem }: ShowcaseCardProps) => {
       <Flex
         py={4}
         borderWidth="1px"
+        height="100%"
         textAlign="center"
         flexDirection="column"
         boxShadow={useColorModeValue('2px 2px 4px #eee', '2px 2px 4px #111')}
@@ -43,7 +45,7 @@ export const ShowcaseCard = ({ showcaseItem }: ShowcaseCardProps) => {
         <Box my={2}>
           <Image src={image} alt={name} />
         </Box>
-        <Text px={4}>{description}</Text>
+        <Text>{description}</Text>
       </Flex>
     </Link>
   );
