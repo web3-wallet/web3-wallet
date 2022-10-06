@@ -5,8 +5,8 @@
   "author": "logan <logan.luo@crypto.com>",
   "version": "0.9.13",
   "scripts": {
-    "dev": "next dev -p 8888",
-    "start": "next start -p 8888",
+    "dev": "next dev -p 3003",
+    "start": "next start -p 3003",
     "build": "next build",
     "export": "next build && next export",
     "lint": "eslint src"
