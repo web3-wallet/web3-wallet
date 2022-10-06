@@ -239,15 +239,17 @@ export abstract class Connector<
        */
       try {
         await this.switchChain(desiredChainId);
-        return this.actions.update({ chainId: desiredChainId, accounts });
       } catch (err: unknown) {
         const error = err as ProviderRpcError;
         /**
          * switch chain failed, try to add chain
          */
-        const shouldTryToAddChain =
-          isAddChainParameter(chain) &&
-          (error.code === 4902 || error.code === -32603);
+        const shouldTryToAddChain = isAddChainParameter(chain);
+        // const shouldTryToAddChain =
+        //   isAddChainParameter(chain) &&
+        //   (error.code === 4902 ||
+        //     error.message.code === 4902 ||
+        //     error.code === -32603);
 
         /**
          * don't know how to handle the error, throw the error again
@@ -261,9 +263,9 @@ export abstract class Connector<
         await this.addChain(chain);
 
         /**
-         * chain added, connect to the added chainId again
+         * switch to the added chainId again
          */
-        await this.connect(chain.chainId);
+        await this.switchChain(chain.chainId);
       }
     } finally {
       endConnection();
