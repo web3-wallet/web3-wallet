@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/react",
   "description": "web3-wallet react",
-  "version": "0.9.12",
+  "version": "1.0.0",
   "keywords": [
     "web3-wallet",
     "react"

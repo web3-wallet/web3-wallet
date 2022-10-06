@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-balance",
   "description": "web3-wallet balance",
-  "version": "0.9.12",
+  "version": "1.0.0",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [

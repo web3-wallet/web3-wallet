@@ -1,5 +1,16 @@
 # @web3-wallet/plugin-ens
 
+## 1.0.0
+
+### Major Changes
+
+- release v1
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/react@1.0.0
+
 ## 0.9.12
 
 ### Patch Changes

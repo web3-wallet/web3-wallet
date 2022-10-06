@@ -1,5 +1,16 @@
 # @web3-wallet/imtoken
 
+## 1.0.0
+
+### Major Changes
+
+- release v1
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@1.0.0
+
 ## 0.9.12
 
 ### Patch Changes
