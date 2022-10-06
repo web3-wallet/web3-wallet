@@ -46,6 +46,11 @@ export const createCurrentWallet = (
     persist<CurrentWalletState>(() => DEFAULT_STATE, {
       name: persistKey,
       version: 0,
+      partialize: ({ name, connectionStatus }) =>
+        ({
+          name,
+          connectionStatus,
+        } as unknown as CurrentWalletState),
     }),
   );
 

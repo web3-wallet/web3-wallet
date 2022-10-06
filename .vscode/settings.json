@@ -24,6 +24,7 @@
     "middlewares",
     "Networkish",
     "nextjs",
+    "partialize",
     "pnpm",
     "tanstack",
     "tsbuildinfo",
