@@ -1,5 +1,5 @@
 import type { Network } from '@ethersproject/providers';
-import type { AddEthereumChainParameter } from '@web3-wallet/core';
+import type { AddEthereumChainParameter } from '@web3-wallet/react';
 
 const INFURA_KEY = process.env.infuraKey;
 const ALCHEMY_KEY = process.env.alchemyKey;

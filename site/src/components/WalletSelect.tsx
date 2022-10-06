@@ -1,6 +1,6 @@
 import { Select } from '@chakra-ui/react';
 import type { WalletConfig } from '@site/wallets';
-import type { WalletName } from '@web3-wallet/core';
+import type { WalletName } from '@web3-wallet/react';
 
 export const WalletSelect = ({
   walletConfigs,

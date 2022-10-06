@@ -8,7 +8,7 @@ pnpm add @web3-wallet/react @web3-wallet/metamask
 
 ## Create a wallet
 
-If you only need to integrate a single wallet to your dApp.
+If you only need to integrate a single wallet to your dApp:
 
 ```typescript
 import { MetaMask } from '@web3-wallet/metamask';

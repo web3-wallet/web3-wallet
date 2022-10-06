@@ -13,7 +13,15 @@ import type { StoreApi, UseBoundStore } from 'zustand';
 import type { BuiltinHooks } from './hooks';
 import type { WrappedUseMutation } from './query';
 
-export { PluginName, WalletName } from '@web3-wallet/core';
+export {
+  AddEthereumChainParameter,
+  Connector,
+  CurrentWalletState,
+  PluginName,
+  Provider,
+  WalletName,
+  WalletState,
+} from '@web3-wallet/core';
 
 export interface Wallet extends CoreWallet, BuiltinHooks {
   getReactStore: () => UseBoundStore<StoreApi<WalletState>>;
