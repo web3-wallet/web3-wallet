@@ -93,12 +93,12 @@ export const App = () => {
 
 ## A wallet modal example
 
-In this minimal wallet modal example, we will
+In this minimal wallet modal example, we will:
 
-1. Setup MetaMask and DeFi Wallet
-2. create a wallet modal in which user can choose either MetaMask or DeFi Wallet to connect to our dApp.
+1. Setup MetaMask and DeFi Wallet.
+2. Create a wallet modal in which user can choose either MetaMask or DeFi Wallet to connect to our dApp.
 3. Display the connected wallet account/address.
-4. Check out [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) to see the complete example code.
+4. Check out [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) to see the complete example.
 
 ```tsx
 // src/wallet.ts

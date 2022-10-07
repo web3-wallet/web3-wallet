@@ -72,6 +72,7 @@ export const styles = {
       },
       ol: {
         listStyle: 'decimal inside none',
+        ml: '1.25rem',
       },
       hr: {
         my: '4rem',
