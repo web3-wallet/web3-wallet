@@ -1,13 +1,21 @@
+import type { Connector, CreateCurrentWalletOptions } from '@web3-wallet/core';
 import { createCurrentWallet as coreCreateCurrentWallet } from '@web3-wallet/core';
 
 import { createReactWallet } from './createReactWallet';
 import { useMutation } from './query';
-import type { CurrentWallet } from './types';
+import type { CurrentWallet, Wallet } from './types';
+
+export { CreateCurrentWalletOptions } from '@web3-wallet/core';
 
 export const createCurrentWallet = (
-  ...args: Parameters<typeof coreCreateCurrentWallet>
+  connectorsOrWallets: (Connector | Wallet)[],
+  options: CreateCurrentWalletOptions,
 ): CurrentWallet => {
-  const coreCurrentWallet = coreCreateCurrentWallet(...args);
+  const coreCurrentWallet = coreCreateCurrentWallet(
+    connectorsOrWallets,
+    options,
+  );
+
   const currentReactWallet = createReactWallet(
     coreCurrentWallet,
   ) as unknown as CurrentWallet;

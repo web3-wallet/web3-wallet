@@ -9,25 +9,35 @@ import type {
   Plugin,
   PluginApiMap,
   PluginName,
+  Wallet,
   WalletName,
 } from './types';
 import { WalletConnectionStatus } from './types';
 
-type Options = {
+const isWallet = <TWallet extends Pick<Wallet, 'getConnector'>>(
+  connectorOrWallet: Connector | TWallet,
+): connectorOrWallet is TWallet =>
+  typeof (connectorOrWallet as TWallet).getConnector === 'function';
+
+export type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
   persistKey?: string;
   plugins?: Plugin[];
 };
 
 export const createCurrentWallet = (
-  connectors: Connector[],
-  options?: Options,
+  connectorsOrWallets: (Connector | Wallet)[],
+  options?: CreateCurrentWalletOptions,
 ): CurrentWallet => {
   const {
     plugins,
     defaultCurrentWallet,
     persistKey = '@web3-wallet/current-wallet',
   } = options ?? {};
+
+  const connectors: Connector[] = connectorsOrWallets.map((v) =>
+    isWallet(v) ? v.getConnector() : v,
+  );
 
   const getConnector = (name: WalletName): Connector => {
     return connectors.find((v) => v.name === name) as Connector;
