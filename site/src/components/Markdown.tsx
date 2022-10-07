@@ -7,6 +7,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
 import { xonokai as syntaxTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import remarkGfm from 'remark-gfm';
 
 SyntaxHighlighter.registerLanguage('tsx', tsx);
 SyntaxHighlighter.registerLanguage('typescript', typescript);
@@ -58,7 +59,12 @@ export const Markdown = ({ markdown, ...props }: MarkdownProps) => {
 
   return (
     <Flex {...props} ref={ref} className="site-markdown" flexDirection="column">
-      <ReactMarkdown components={MarkdownComponents}>{markdown}</ReactMarkdown>
+      <ReactMarkdown
+        rehypePlugins={[remarkGfm]}
+        components={MarkdownComponents}
+      >
+        {markdown}
+      </ReactMarkdown>
     </Flex>
   );
 };

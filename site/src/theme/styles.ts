@@ -16,6 +16,8 @@ export const styles = {
       fontFamily: `${fontFamily}!important`,
     },
     '.site-markdown': {
+      fontFamily:
+        '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
       h1: {
         mt: '4rem',
         mb: '2rem',
@@ -33,6 +35,14 @@ export const styles = {
         letterSpacing: '-.025em',
         '& + h3': {
           mt: '1.5rem',
+        },
+      },
+      table: {
+        bg: 'gray.50',
+        'td,th': {
+          px: 2,
+          borderWidth: '1px',
+          borderColor: 'gray.200',
         },
       },
       h3: {
