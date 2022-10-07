@@ -91,6 +91,106 @@ export const App = () => {
 };
 ```
 
+## A wallet modal example
+
+In this minimal wallet modal example, we will
+
+1. Setup MetaMask and DeFi Wallet
+2. create a wallet modal in which user can choose either MetaMask or DeFi Wallet to connect to our dApp.
+3. Display the connected wallet account/address.
+4. Check out [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) to see the complete example code.
+
+```tsx
+// src/wallet.ts
+// ===========================
+import { MetaMask } from '@web3-wallet/metamask';
+import { DefiWallet } from '@web3-wallet/defiwallet';
+import { type WalletName, createCurrentWallet } from '@web3-wallet/react';
+import { useEffect } from 'react';
+
+const connectors = [new MetaMask(), new DefiWallet()];
+
+export const currentWallet = new createCurrentWallet(connectors);
+
+export type WalletConfig = {
+  label: string;
+  // wallet name is the unique id of the wallet
+  name: WalletName;
+  icon: MetaMask.walletIcon;
+};
+
+export const walletConfigs: WalletConfig[] = [
+  {
+    label: 'MetaMask',
+    name: MetaMask.walletName,
+    icon: MetaMask.walletIcon,
+  },
+  {
+    label: 'DeFi Wallet',
+    name: DefiWallet.walletName,
+    icon: DefiWallet.walletIcon,
+  },
+];
+
+const getWalletConfig = (name: WalletName): WalletConfig => {
+  return walletConfigs.find((v) => v.name === name)!;
+};
+
+// src/app.tsx
+// ===========================
+import { currentWallet, getWalletConfig } from './wallet';
+
+const { autoConnect, useAccount, useName } = currentWallet;
+export const App = () => {
+  useEffect(() => {
+    // auto connect on app mount
+    autoConnect();
+  }, []);
+
+  const account = useAccount();
+  const walletConfig = getWalletConfig(uesName());
+
+  return (
+    <main id="app">
+      <Button onClick={openWalletModal}>Connect</Button>
+      <WalletModal />
+
+      <p>Your connected to: `${walletConfig.label}`</p>
+      <p>Your wallet account is: `${account}`</p>
+    </main>
+  );
+};
+
+// src/components/WalletModal.ts
+// ==============================
+import { currentWallet, walletConfigs } from '../wallet';
+
+export const WalletModal = () => {
+  return (
+    <div class="wallet-modal">
+      {walletConfigs.map(({ label, name, icon }) => (
+        <div
+          key={name}
+          role="button"
+          onClick={() => {
+            currentWallet.connectAsCurrentWallet(name, 1);
+          }}
+          style={{
+            display: 'flex',
+            alignItem: 'center',
+            gap: 10,
+            cursor: 'point',
+          }}
+        >
+          <img width="24px" height="24px" src={icon} alt={`$label} icon`} />
+          <span>{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
 ## Use with @tanstack/query
 
 [@tanstack/query](https://tanstack.com/query/v4) is a fantastic and very popular library for async state(server side state) management. Web3 wallet uses @tanstack/query under the hood for managing async state. But the core wallet functionalities of does not depends on @tanstack/query. If all you need is the core wallet functionalities, you don't need to setup @tanstack/query.

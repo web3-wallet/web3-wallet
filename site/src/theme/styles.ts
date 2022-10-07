@@ -70,6 +70,9 @@ export const styles = {
           mt: '0.25rem',
         },
       },
+      ol: {
+        listStyle: 'decimal inside none',
+      },
       hr: {
         my: '4rem',
       },
