@@ -3,6 +3,7 @@ import { mode } from '@chakra-ui/theme-tools';
 import {
   LEFT_SIDEBAR_WIDTH,
   RIGHT_SIDEBAR_WIDTH,
+  TOP_NAVBAR_HEIGHT,
 } from '@site/components/Layout/constants';
 
 const fontFamily = `"Space Mono", monospace, sans-serif`;
@@ -14,6 +15,7 @@ export const styles = {
     },
     'h1,h2,h3,h4,h5,h6': {
       fontFamily: `${fontFamily}!important`,
+      scrollMarginTop: `${TOP_NAVBAR_HEIGHT + 20}px`,
     },
     '.site-markdown': {
       fontFamily:
@@ -96,15 +98,14 @@ export const styles = {
           xl: `calc(100vw - 96px - ${LEFT_SIDEBAR_WIDTH}px - ${RIGHT_SIDEBAR_WIDTH}px - 48px)`,
         },
       },
-      [`p:not(.syntax-highlighter) > code`]: {
-        bgColor: mode('gray.400', 'gray.600')(props),
-        color: mode('white', 'gray.200')(props),
-        borderRadius: '4px',
-        fontWeight: 'semibold',
-        transform: 'scale(0.9)',
-        fontStyle: 'italic',
-        px: 1,
-      },
+      // [`p:not(.syntax-highlighter) > code`]: {
+      //   bgColor: mode('gray.100', 'gray.700')(props),
+      //   color: mode('red.500', 'red.500')(props),
+      //   borderRadius: '4px',
+      //   fontSize: '0.8em',
+      //   fontStyle: 'italic',
+      //   px: 1,
+      // },
       blockquote: {
         bg: mode('gray.50', 'gray.700')(props),
         borderLeftWidth: '6px',

@@ -19,6 +19,7 @@ export {
   CurrentWalletState,
   PluginName,
   Provider,
+  WalletConnectionStatus,
   WalletName,
   WalletState,
 } from '@web3-wallet/core';

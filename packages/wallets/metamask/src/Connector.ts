@@ -12,7 +12,6 @@ export class MetaMask extends Connector {
   public static walletName: WalletName<string> = name;
   public static walletIcon: string = icon;
   public name: WalletName<string> = name;
-  public icon: string = icon;
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {

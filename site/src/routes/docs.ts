@@ -11,9 +11,24 @@ export const routes: Route[] = [
     path: path.join(DOCS_DIR, `/getting-started.md`),
   },
   {
-    label: 'Overview',
-    slug: ['overview'],
-    path: path.join(DOCS_DIR, 'overview.md'),
+    label: 'Wallet',
+    slug: ['wallet'],
+    path: path.join(DOCS_DIR, 'wallet.md'),
+  },
+  {
+    label: 'CurrentWallet',
+    slug: ['current-wallet'],
+    path: path.join(DOCS_DIR, 'current-wallet.md'),
+  },
+  {
+    label: 'Plugin',
+    slug: ['plugin'],
+    path: path.join(DOCS_DIR, 'plugin.md'),
+  },
+  {
+    label: 'Connector',
+    slug: ['connector'],
+    path: path.join(DOCS_DIR, 'connector.md'),
   },
   {
     label: 'Provider Detection',

@@ -8,11 +8,6 @@ const getPath = (slug: string) => path.join(WALLETS_DIR, `${slug}/README.md`);
 
 export const routes: Route[] = [
   {
-    label: 'Introduction',
-    slug: [],
-    path: path.join(WALLETS_DIR, `/README.md`),
-  },
-  {
     label: 'MetaMask',
     slug: ['metamask'],
     path: getPath('metamask'),

@@ -1,5 +1,6 @@
 import type { FlexProps } from '@chakra-ui/react';
 import { Code, Flex } from '@chakra-ui/react';
+import type { Docs } from '@site/types/Docs';
 import { useEffect, useRef } from 'react';
 import type { Components } from 'react-markdown';
 import ReactMarkdown from 'react-markdown';
@@ -13,10 +14,13 @@ SyntaxHighlighter.registerLanguage('tsx', tsx);
 SyntaxHighlighter.registerLanguage('typescript', typescript);
 
 type MarkdownProps = {
-  markdown: string;
+  docs: Docs;
 } & Omit<FlexProps, 'children'>;
 
-export const Markdown = ({ markdown, ...props }: MarkdownProps) => {
+export const Markdown = ({
+  docs: { content, toc },
+  ...props
+}: MarkdownProps) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const MarkdownComponents: Components = {
@@ -55,7 +59,7 @@ export const Markdown = ({ markdown, ...props }: MarkdownProps) => {
       const id = elem.innerHTML.toLowerCase().split(' ').join('-');
       elem.id = id;
     });
-  }, []);
+  }, [toc]);
 
   return (
     <Flex {...props} ref={ref} className="site-markdown" flexDirection="column">
@@ -63,7 +67,7 @@ export const Markdown = ({ markdown, ...props }: MarkdownProps) => {
         rehypePlugins={[remarkGfm]}
         components={MarkdownComponents}
       >
-        {markdown}
+        {content}
       </ReactMarkdown>
     </Flex>
   );

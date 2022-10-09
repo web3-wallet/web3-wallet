@@ -44,7 +44,6 @@ export abstract class Connector<
    * {@link WalletName}
    */
   public abstract name: WalletName;
-  public abstract icon: string;
 
   /**
    * {@link Provider}
@@ -280,16 +279,11 @@ export abstract class Connector<
    *
    * What is force disconnect?
    *   - force disconnect will actually disconnect the wallet.
-   *   - non-disconnect only sets the connectionId in wallet store to `undefined`.
+   *   - non-disconnect only reset the wallet store to it's initial state.
    *
    * For some wallets, MetaMask for example, there're not ways to force disconnect MetaMask.
    * For some wallets, Walletconnect for example, we are able to force disconnect Walletconnect.
    * @param _force - wether to force disconnect to wallet, default is false.
-   *
-   * @return Promise<void> -
-   *  1. always resolve for non-force disconnect.
-   *  2. resolve, if force disconnect succeeded.
-   *  3. reject, if force disconnect failed.
    *
    */
   public async disconnect(_force?: boolean): Promise<void> {
@@ -297,7 +291,7 @@ export abstract class Connector<
   }
 
   /**
-   * Add a asset to the wallet assets list
+   * Add an asset to the wallet assets list
    *
    * @param asset - {@link WatchAssetParameters}
    * @return Promise<void>

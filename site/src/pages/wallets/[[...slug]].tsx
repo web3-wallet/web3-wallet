@@ -58,7 +58,7 @@ const Page: NextPage<PageProps> = ({ route, docs }) => {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <Markdown markdown={docs.content} />
+      <Markdown docs={docs} />
     </Layout>
   );
 };

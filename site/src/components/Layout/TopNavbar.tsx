@@ -37,10 +37,8 @@ const MenuLineIcon = forwardRef<HTMLDivElement, IconProps>(function Icon(
 
 const links = [
   { href: '/docs/getting-started', label: 'Docs' },
-  { href: '/wallets', label: 'Wallets' },
-  { href: '/plugins', label: 'Plugins' },
-  { href: '/showcase', label: 'Showcase' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/wallets/metamask', label: 'Wallets' },
+  { href: '/plugins/balance', label: 'Plugins' },
 ];
 
 export const TopNavbar = ({ ...props }: FlexProps) => {

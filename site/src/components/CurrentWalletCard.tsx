@@ -29,6 +29,7 @@ const {
 
   useAccounts,
   useChainId,
+  useProvider,
 } = currentWallet;
 
 export const CurrentWalletCard = () => {

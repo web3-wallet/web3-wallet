@@ -6,7 +6,7 @@ export const prefix = '/blog';
 
 export const routes: Route[] = [
   {
-    label: 'Blog Home',
+    label: 'Blog',
     slug: [],
     path: path.join(BLOG_DIR, 'README.md'),
   },

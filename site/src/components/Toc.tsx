@@ -13,9 +13,10 @@ export const Toc = ({ toc, ...props }: TocProps) => {
   const activeId = useScrollSpy(
     toc.map(({ id }) => `[id="${id}"]`),
     {
-      rootMargin: '0% 0% -24% 0%',
+      rootMargin: '0% 0% -50% 0%',
     },
   );
+
   const inActiveBorderColor = useColorModeValue('gray.100', 'gray.600');
 
   return (

@@ -16,27 +16,9 @@ import { createWallet } from '@web3-wallet/react';
 
 const metamask = createWallet(new MetaMask());
 
-const {
-  getName,
-  getPlugin,
-  connect,
-  autoConnect,
-  disconnect,
-  useIsConnecting,
-  useIsConnected,
-  useAccounts,
-  useChainId,
-  useProvider,
-} = metamask;
+const { autoConnect } = metamask;
 
 export const App = () => {
-  const walletName = getName();
-  const isConnecting = useIsConnecting();
-  const isConnected = useIsConnected();
-  const chainId = useChainId();
-  const accounts = useAccounts();
-  const provider = useProvider();
-
   useEffect(() => {
     autoConnect();
   }, []);
@@ -54,41 +36,18 @@ import { MetaMask } from '@web3-wallet/metamask';
 import { DefiWallet } from '@web3-wallet/defiwallet';
 import { createCurrentWallet } from '@web3-wallet/react';
 
-const connectors = [new MetaMask(), new DefiWallet()];
-
-export const currentWallet = new createCurrentWallet(connectors);
+export const currentWallet = new createCurrentWallet([
+  new MetaMask(),
+  new DefiWallet(),
+]);
 
 const {
-  getPlugin,
-  connect,
-  autoConnect,
-  disconnect,
-  useIsConnecting,
-  useIsConnected,
-  useAccounts,
-  useChainId,
-  useProvider,
-
   // current wallet only apis
   useName,
   switchCurrentWallet,
   connectAsCurrentWallet,
+  useConnectAsCurrentWallet,
 } = currentWallet;
-
-export const App = () => {
-  const walletName = useName();
-  const isConnecting = useIsConnecting();
-  const isConnected = useIsConnected();
-  const chainId = useChainId();
-  const accounts = useAccounts();
-  const provider = useProvider();
-
-  useEffect(() => {
-    autoConnect();
-  }, []);
-
-  // ....
-};
 ```
 
 ## A wallet modal example
@@ -108,9 +67,10 @@ import { DefiWallet } from '@web3-wallet/defiwallet';
 import { type WalletName, createCurrentWallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
-const connectors = [new MetaMask(), new DefiWallet()];
-
-export const currentWallet = new createCurrentWallet(connectors);
+export const currentWallet = new createCurrentWallet([
+  new MetaMask(),
+  new DefiWallet(),
+]);
 
 export type WalletConfig = {
   label: string;
@@ -220,26 +180,13 @@ import { createCurrentWallet } from '@web3-wallet/react';
 import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import { BalancePlugin } from '@web3-wallet/plugin-balance';
 
-const connectors = [new MetaMask(), new DefiWallet()];
-const plugins = [EnsPlugin.create(), BalancePlugin.create()];
-
-export const currentWallet = new createCurrentWallet(connectors, { plugins });
+export const currentWallet = new createCurrentWallet(
+  [new MetaMask(), new DefiWallet()],
+  { plugins: [EnsPlugin.create(), BalancePlugin.create()] },
+);
 
 const {
   getPlugin,
-  connect,
-  autoConnect,
-  disconnect,
-  useIsConnecting,
-  useIsConnected,
-  useAccounts,
-  useChainId,
-  useProvider,
-
-  // current wallet only apis
-  useName,
-  switchCurrentWallet,
-  connectAsCurrentWallet,
 
   // wallet apis that depends on @tanstack/query
   useConnect,
@@ -249,13 +196,6 @@ const {
 } = currentWallet;
 
 export const App = () => {
-  const walletName = useName();
-  const isConnecting = useIsConnecting();
-  const isConnected = useIsConnected();
-  const chainId = useChainId();
-  const accounts = useAccounts();
-  const provider = useProvider();
-
   // EnsPlugin and BalancePlugin are also depends on @tanstack/query
   const { useBalances } = getPluginApi<BalancePlugin.Api>(BalancePlugin.name);
   const { useEnsNames } = getPluginApi<EnsPlugin.Api>(EnsPlugin.name);
@@ -280,10 +220,6 @@ export const App = () => {
       },
     },
   );
-
-  useEffect(() => {
-    autoConnect();
-  }, []);
 
   // ....
 };

@@ -1,7 +1,7 @@
 import type { Connector } from './Connector';
 import type { Plugin, PluginApiMap, PluginName, Wallet } from './types';
 
-type Options = {
+export type CreateWalletOptions = {
   plugins?: Plugin[];
 };
 
@@ -11,7 +11,7 @@ type Options = {
  */
 export const createWallet = (
   connector: Connector | (() => Connector),
-  options?: Options,
+  options?: CreateWalletOptions,
 ): Wallet => {
   const getConnector = (): Connector => {
     return typeof connector === 'function' ? connector() : connector;

@@ -2,13 +2,19 @@ import type {
   CoinbaseWalletProvider,
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
+import type { CoinbaseWalletSDKOptions } from '@coinbase/wallet-sdk/dist/CoinbaseWalletSDK';
 import type { ConnectorOptions } from '@web3-wallet/core';
 import { type WalletName, Connector } from '@web3-wallet/core';
 
 import { icon } from './assets';
 
-type ProviderOptions = ConstructorParameters<typeof CoinbaseWalletSDK>[0] & {
-  url: string;
+type ScanToConnectOptions = {
+  rpcUrl: string;
+  chainId: number;
+};
+
+type ProviderOptions = CoinbaseWalletSDKOptions & {
+  scanToConnectOptions?: ScanToConnectOptions;
 };
 
 export const _name = 'Coinbase Wallet';
@@ -20,7 +26,6 @@ export class CoinbaseWallet extends Connector<CoinbaseWalletOptions> {
   public static walletName: WalletName<string> = name;
   public static walletIcon: string = icon;
   public name: WalletName<string> = name;
-  public icon: string = icon;
 
   /** {@inheritdoc Connector.provider} */
   public override provider?: CoinbaseWalletProvider;
@@ -43,11 +48,16 @@ export class CoinbaseWallet extends Connector<CoinbaseWalletOptions> {
     if (this.provider) return this.provider;
 
     const m = await import('@coinbase/wallet-sdk');
-    const { url, ...options } = (this.options as CoinbaseWalletOptions)
-      .providerOptions;
+    const { scanToConnectOptions, ...options } = (
+      this.options as CoinbaseWalletOptions
+    ).providerOptions;
 
     this.coinbaseWallet = new m.default(options);
-    this.provider = this.coinbaseWallet.makeWeb3Provider(url);
+
+    this.provider = this.coinbaseWallet.makeWeb3Provider(
+      scanToConnectOptions?.rpcUrl,
+      scanToConnectOptions?.chainId,
+    );
 
     return this.provider;
   }
