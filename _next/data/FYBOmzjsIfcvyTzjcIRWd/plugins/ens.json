@@ -1,1 +1,0 @@
-{"pageProps":{"docs":{"content":"# ENS\n\n## Install\n\n```bash\npnpm add @web3-wallet/plugin-ens\n```\n\n## WIP...\n","toc":[{"id":"install","indent":1,"content":"Install"},{"id":"wip","indent":1,"content":"WIP..."}]},"route":{"label":"ENS","slug":["ens"],"path":"/home/runner/work/web3-wallet/web3-wallet/packages/plugins/ens/README.md"}},"__N_SSG":true}
