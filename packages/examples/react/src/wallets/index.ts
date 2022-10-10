@@ -37,8 +37,11 @@ export const walletConfigs: WalletConfig[] = [
     connector: new CoinbaseWallet({
       providerOptions: {
         appName: '@web3-wallet example',
-        reloadOnDisconnect: false,
-        url: rpcMap[1],
+        scanToConnectOptions: {
+          reloadOnDisconnect: false,
+          rpcUrl: rpcMap[1],
+          chainId: 1,
+        },
       },
     }),
   },

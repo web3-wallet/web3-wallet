@@ -9,7 +9,7 @@ export type PluginContext = {
   wallet: Wallet;
 };
 
-export type Plugin<TPluginApi = any, TPluginContext = any> = {
+export type Plugin<TPluginApi = any, TPluginContext = PluginContext> = {
   (context: TPluginContext): TPluginApi;
   pluginName: PluginName;
 };
