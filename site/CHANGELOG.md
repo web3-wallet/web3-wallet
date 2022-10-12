@@ -1,5 +1,62 @@
 # @web3-wallet/nextjs
 
+## 1.1.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/plugin-balance@1.1.1
+  - @web3-wallet/plugin-ens@1.1.1
+  - @web3-wallet/react@1.1.1
+  - @web3-wallet/brave-wallet@1.1.1
+  - @web3-wallet/coinbase-wallet@1.1.1
+  - @web3-wallet/cryptocom-desktop-wallet@1.1.1
+  - @web3-wallet/defiwallet@1.1.1
+  - @web3-wallet/imtoken@1.1.1
+  - @web3-wallet/metamask@1.1.1
+  - @web3-wallet/trust-wallet@1.1.1
+  - @web3-wallet/walletconnect@1.1.1
+
+## 1.1.0
+
+### Minor Changes
+
+- package version
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/plugin-balance@1.1.0
+  - @web3-wallet/plugin-ens@1.1.0
+  - @web3-wallet/react@1.1.0
+  - @web3-wallet/brave-wallet@1.1.0
+  - @web3-wallet/coinbase-wallet@1.1.0
+  - @web3-wallet/cryptocom-desktop-wallet@1.1.0
+  - @web3-wallet/defiwallet@1.1.0
+  - @web3-wallet/imtoken@1.1.0
+  - @web3-wallet/metamask@1.1.0
+  - @web3-wallet/trust-wallet@1.1.0
+  - @web3-wallet/walletconnect@1.1.0
+
+## 1.0.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/plugin-balance@1.0.1
+  - @web3-wallet/plugin-ens@1.0.1
+  - @web3-wallet/react@1.0.1
+  - @web3-wallet/brave-wallet@1.0.1
+  - @web3-wallet/coinbase-wallet@1.0.1
+  - @web3-wallet/cryptocom-desktop-wallet@1.0.1
+  - @web3-wallet/defiwallet@1.0.1
+  - @web3-wallet/imtoken@1.0.1
+  - @web3-wallet/metamask@1.0.1
+  - @web3-wallet/trust-wallet@1.0.1
+  - @web3-wallet/walletconnect@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

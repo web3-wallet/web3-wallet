@@ -1,5 +1,32 @@
 # @web3-wallet/walletconnect
 
+## 1.1.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@1.1.1
+
+## 1.1.0
+
+### Minor Changes
+
+- package version
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@1.1.0
+
+## 1.0.1
+
+### Patch Changes
+
+- package version
+- Updated dependencies
+  - @web3-wallet/core@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

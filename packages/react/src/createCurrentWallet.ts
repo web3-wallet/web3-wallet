@@ -9,7 +9,7 @@ export { CreateCurrentWalletOptions } from '@web3-wallet/core';
 
 export const createCurrentWallet = (
   connectorsOrWallets: (Connector | Wallet)[],
-  options: CreateCurrentWalletOptions,
+  options?: CreateCurrentWalletOptions,
 ): CurrentWallet => {
   const coreCurrentWallet = coreCreateCurrentWallet(
     connectorsOrWallets,

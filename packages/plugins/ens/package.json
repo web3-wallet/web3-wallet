@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-ens",
   "description": "web3-wallet ens plugin",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [

@@ -1,5 +1,23 @@
 # @web3-wallet/detect-provider
 
+## 1.1.1
+
+### Patch Changes
+
+- package version
+
+## 1.1.0
+
+### Minor Changes
+
+- package version
+
+## 1.0.1
+
+### Patch Changes
+
+- package version
+
 ## 1.0.0
 
 ### Major Changes
