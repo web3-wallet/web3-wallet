@@ -7,7 +7,6 @@ It's a common pattern that a dApp allows users to connect to several supported w
 ```ts
 type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
-  isPersist?: boolean;
   persistKey?: string;
   plugins?: Plugin[];
 };
@@ -37,10 +36,6 @@ export const currentWallet = new createCurrentWallet(
 
 The default currentWallet, default to the first wallet if not provided.
 
-### isPersist
-
-Whether to persist the current wallet state. default true.
-
 ### persistKey
 
 The currentWallet state will be persist to local storage, you can specify the local storage key through the persistKey option, default to `@web3-wallet/currentWallet`.
@@ -56,7 +51,6 @@ Most of the wallet APIs are also available on currentWallet. below only list the
 ```ts
 export interface CurrentWallet {
   useName: () => WalletName;
-  useConnectionStatus: () => WalletConnectionStatus;
   switchCurrentWallet: (name: WalletName) => void;
   connectAsCurrentWallet: (
     name: WalletName,
@@ -79,38 +73,6 @@ interface CurrentWallet {
 ```
 
 Returns the currentWallet name.
-
-### useConnectionStatus
-
-```ts
-export enum WalletConnectionStatus {
-  Untouched = 'Untouched',
-  Connected = 'Connected',
-  Disconnected = 'Disconnected',
-}
-
-export interface CurrentWallet extends Wallet {
-  useName: () => WalletName;
-  useConnectionStatus: () => WalletConnectionStatus;
-  useConnectAsCurrentWallet: WrappedUseMutation<
-    void,
-    unknown,
-    { walletName: WalletName; chain?: number | AddEthereumChainParameter }
-  >;
-}
-```
-
-Returns the currentWallet connection status.
-
-**WalletConnectionStatus**
-
-The currentWallet connection status are persisted to localStorage. The connection status can only be update by calling connect, autoConnect and disconnect.
-
-- `Untouched`: connect or autoConnect have never been called or all the calls to connect or autoConnect are rejected.
-- `Connected`: calls to either connect or autoConnect resolved.
-- `Disconnected`: calls to disconnect resolved.
-
-If currentWallet is in the `Disconnected` status, autoConnect will be skipped.
 
 ### switchCurrentWallet
 
