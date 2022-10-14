@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/walletconnect
+pnpm add @web3-wallet/walletconnect @walletconnect/ethereum-provider
 ```
 
 ## Usage

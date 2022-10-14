@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/defiwallet",
   "description": "DeFiWallet connector",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "keywords": [
     "web3-wallet",
     "crypto.com DeFi Wallet"
@@ -24,9 +24,6 @@
   },
   "dependencies": {
     "@web3-wallet/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "@coinbase/wallet-sdk": "^3.0.4"
   },
   "repository": {
     "type": "git",

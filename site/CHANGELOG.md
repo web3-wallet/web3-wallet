@@ -1,5 +1,12 @@
 # @web3-wallet/nextjs
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/defiwallet@1.1.2
+
 ## 1.1.1
 
 ### Patch Changes

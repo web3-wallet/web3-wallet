@@ -3,7 +3,7 @@
   "name": "@web3-wallet/site",
   "description": "web3-wallet website",
   "author": "logan <logan.luo@crypto.com>",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "dev": "next dev -p 3003",
     "start": "next start -p 3003",

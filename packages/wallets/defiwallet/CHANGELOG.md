@@ -1,5 +1,11 @@
 # @web3-wallet/defiwallet
 
+## 1.1.2
+
+### Patch Changes
+
+- package version
+
 ## 1.1.1
 
 ### Patch Changes
