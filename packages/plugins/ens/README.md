@@ -16,7 +16,7 @@ const wallet = createWallet(new MetaMask(), {
   plugins: [EnsPlugin.create()],
 });
 
-const { useEnsName } = wallet.getPlugin<EnsPlugin.Api>(EnsPlugin.pluginName);
+const { useEnsName } = wallet.getPlugin<EnsPlugin.Api>(EnsPlugin.name);
 
 const { data: ensName, ...rest } = useEnsName();
 ```

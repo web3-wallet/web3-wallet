@@ -16,9 +16,7 @@ const wallet = createWallet(new MetaMask(), {
   plugins: [BalancePlugin.create()],
 });
 
-const { useBalance } = wallet.getPlugin<BalancePlugin.Api>(
-  BalancePlugin.pluginName,
-);
+const { useBalance } = wallet.getPlugin<BalancePlugin.Api>(BalancePlugin.name);
 
 const { data: balance, ...rest } = useBalance();
 ```

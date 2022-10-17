@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/coinbase-wallet
+pnpm add @web3-wallet/coinbase-wallet @coinbase/wallet-sdk
 ```
 
 ## Usage
