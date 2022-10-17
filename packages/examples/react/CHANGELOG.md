@@ -1,5 +1,13 @@
 # @web3-wallet/nextjs
 
+## 0.10.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/plugin-balance@1.2.1
+  - @web3-wallet/plugin-ens@1.2.1
+
 ## 0.10.5
 
 ### Patch Changes

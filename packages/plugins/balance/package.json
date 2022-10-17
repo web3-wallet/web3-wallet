@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-balance",
   "description": "web3-wallet balance",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [
@@ -22,12 +22,12 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@web3-wallet/react": "workspace:^",
     "@ethersproject/bignumber": "^5.7.0",
     "@ethersproject/providers": "^5.7.0",
     "@ethersproject/units": "^5.7.0"
   },
   "peerDependencies": {
-    "@web3-wallet/react": "^1.1",
     "react": ">=16.8"
   },
   "repository": {

@@ -1,5 +1,11 @@
 # @web3-wallet/plugin-ens
 
+## 1.2.1
+
+### Patch Changes
+
+- package version
+
 ## 1.2.0
 
 ### Minor Changes
