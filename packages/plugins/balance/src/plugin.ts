@@ -64,6 +64,7 @@ const plugin: Plugin<Api> = ({ wallet }) => {
       },
       {
         enabled: provider && !!account,
+        context: wallet.queryContext,
         ...options,
       },
     );

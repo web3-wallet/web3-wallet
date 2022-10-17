@@ -1,3 +1,4 @@
+import type { QueryClient } from '@tanstack/react-query';
 import type {
   Connector,
   CurrentWallet as CoreCurrentWallet,
@@ -8,6 +9,7 @@ import type {
   WalletName,
   WalletState,
 } from '@web3-wallet/core';
+import type { Context } from 'react';
 import type { StoreApi, UseBoundStore } from 'zustand';
 
 import type { BuiltinHooks } from './hooks';
@@ -25,6 +27,7 @@ export {
 } from '@web3-wallet/core';
 
 export interface Wallet extends CoreWallet, BuiltinHooks {
+  queryContext: Context<QueryClient | undefined>;
   getReactStore: () => UseBoundStore<StoreApi<WalletState>>;
 }
 export interface CurrentWallet extends CoreCurrentWallet, BuiltinHooks {

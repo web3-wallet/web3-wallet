@@ -2,6 +2,7 @@ import type { Wallet as CoreWallet } from '@web3-wallet/core';
 import createReactStore from 'zustand';
 
 import { createCoreHooks, createProviderHooks } from './hooks';
+import { queryContext } from './query';
 import type { Wallet } from './types';
 
 export const createReactWallet = (coreWallet: CoreWallet): Wallet => {
@@ -10,6 +11,7 @@ export const createReactWallet = (coreWallet: CoreWallet): Wallet => {
   let wallet = {
     ...coreWallet,
     getReactStore: () => reactStore,
+    queryContext,
   } as Wallet;
 
   // create and merge builtin hooks to wallet

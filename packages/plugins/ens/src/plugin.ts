@@ -53,7 +53,11 @@ const plugin: Plugin<Api> = ({ wallet }) => {
 
         return ensNames;
       },
-      { enabled: !!provider && !!accounts && !!accounts.length, ...options },
+      {
+        enabled: !!provider && !!accounts && !!accounts.length,
+        context: wallet.queryContext,
+        ...options,
+      },
     );
   };
 
@@ -72,6 +76,7 @@ const plugin: Plugin<Api> = ({ wallet }) => {
       },
       {
         enabled: provider && !!account,
+        context: wallet.queryContext,
         ...options,
       },
     );
