@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/plugin-ens",
   "description": "web3-wallet ens plugin",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
   "keywords": [
@@ -21,10 +21,8 @@
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit"
   },
-  "dependencies": {
-    "@web3-wallet/react": "workspace:*"
-  },
   "peerDependencies": {
+    "@web3-wallet/react": "^1.1",
     "react": ">=16.8"
   },
   "repository": {

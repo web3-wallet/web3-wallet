@@ -16,6 +16,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.30.5
       '@typescript-eslint/parser': ^5.30.5
       '@walletconnect/ethereum-provider': ^1.8.0
+      '@web3-wallet/react': workspace:*
       chokidar-cli: ^3.0.0
       esbuild: ^0.14.48
       eslint: ^8.19.0
@@ -52,6 +53,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
       '@typescript-eslint/parser': 5.30.7_he2ccbldppg44uulnyq4rwocfa
       '@walletconnect/ethereum-provider': 1.8.0
+      '@web3-wallet/react': link:packages/react
       chokidar-cli: 3.0.0
       esbuild: 0.14.49
       eslint: 8.20.0
@@ -172,18 +174,13 @@ importers:
       '@ethersproject/bignumber': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
-      '@web3-wallet/react': workspace:*
     dependencies:
       '@ethersproject/bignumber': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@ethersproject/units': 5.7.0
-      '@web3-wallet/react': link:../../react
 
   packages/plugins/ens:
-    specifiers:
-      '@web3-wallet/react': workspace:*
-    dependencies:
-      '@web3-wallet/react': link:../../react
+    specifiers: {}
 
   packages/react:
     specifiers:
