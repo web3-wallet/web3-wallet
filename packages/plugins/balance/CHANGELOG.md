@@ -1,5 +1,12 @@
 # @web3-wallet/plugin-balance
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/react@1.3.0
+
 ## 1.3.0
 
 ### Minor Changes
