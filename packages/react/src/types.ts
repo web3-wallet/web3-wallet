@@ -24,6 +24,7 @@ export {
   WalletConnectionStatus,
   WalletName,
   WalletState,
+  WatchAssetParameters,
 } from '@web3-wallet/core';
 
 export interface Wallet extends CoreWallet, BuiltinHooks {
