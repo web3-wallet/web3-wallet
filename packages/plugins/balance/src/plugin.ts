@@ -63,7 +63,7 @@ const plugin: Plugin<Api> = ({ wallet }) => {
         return Number(Number(formatEther(balance)).toFixed(queryKey[0] ?? 4));
       },
       {
-        enabled: provider && !!account,
+        enabled: !!provider && !!account,
         context: wallet.queryContext,
         ...options,
       },
