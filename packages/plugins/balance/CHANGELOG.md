@@ -1,5 +1,11 @@
 # @web3-wallet/plugin-balance
 
+## 1.3.2
+
+### Patch Changes
+
+- package version
+
 ## 1.3.1
 
 ### Patch Changes
