@@ -75,7 +75,7 @@ const plugin: Plugin<Api> = ({ wallet }) => {
         return await provider.lookupAddress(account);
       },
       {
-        enabled: provider && !!account,
+        enabled: !!provider && !!account,
         context: wallet.queryContext,
         ...options,
       },
