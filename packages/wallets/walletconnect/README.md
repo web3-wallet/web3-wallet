@@ -17,6 +17,8 @@ const wallet = createWallet(
     providerOptions: {
       // Record<chainId, rpcUrl>
       rpc: {},
+      // the default chainId
+      chainId: 1,
     },
   }),
 );

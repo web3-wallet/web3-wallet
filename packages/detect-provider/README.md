@@ -63,7 +63,7 @@ export const detectProvider = <T extends Provider = Provider>(
 
 ## Context
 
-Wallet providers are usually injected to the host environment(the web browser window object) wallets(wallet browser extensions or wallet mobile APPs). In order to connect to wallets, dApps need to retrieve the wallet providers from the host environment. This library is here to help detect and retrieve the wallet providers from the host environment. @web3-wallet/detect-provider is designed to be able to detect all kinds of wallet providers from the host environment.
+Wallet providers are usually injected to the host environment. In order to connect to a wallet, dApps need to retrieve the wallet provider from the host environment. This library is here to help detect and retrieve the wallet provider from the host environment. @web3-wallet/detect-provider is designed to be able to detect all kinds of wallet providers from the host environment.
 
 ## Synchronous and Asynchronous Injection
 
