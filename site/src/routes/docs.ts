@@ -35,9 +35,4 @@ export const routes: Route[] = [
     slug: ['provider-detection'],
     path: path.join(PACKAGES_DIR, 'detect-provider/README.md'),
   },
-  {
-    label: 'Roadmap',
-    slug: ['roadmap'],
-    path: path.join(DOCS_DIR, 'roadmap.md'),
-  },
 ];
