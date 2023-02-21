@@ -1,5 +1,5 @@
 import { persist } from 'zustand/middleware';
-import create from 'zustand/vanilla';
+import { createStore } from 'zustand/vanilla';
 
 import type { Connector } from './Connector';
 import type {
@@ -52,7 +52,7 @@ export const createCurrentWallet = (
     ...getConnector(currentWalletName).store.getState(),
   };
 
-  const store: CurrentWalletStore = create<CurrentWalletState>()(
+  const store: CurrentWalletStore = createStore<CurrentWalletState>()(
     persist<CurrentWalletState>(() => DEFAULT_STATE, {
       name: persistKey,
       version: 0,

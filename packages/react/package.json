@@ -34,7 +34,7 @@
     "@ethersproject/providers": "^5.7.0",
     "@web3-wallet/core": "workspace:*",
     "@tanstack/react-query": "^4.9.0",
-    "zustand": "^4.0.0-rc.0"
+    "zustand": "^4.1.1"
   },
   "peerDependencies": {
     "react": ">=16.8"

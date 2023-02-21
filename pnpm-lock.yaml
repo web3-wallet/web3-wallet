@@ -80,11 +80,11 @@ importers:
     specifiers:
       '@ethersproject/address': ^5.7.0
       '@web3-wallet/detect-provider': workspace:*
-      zustand: ^4.0.0-rc.0
+      zustand: ^4.1.1
     dependencies:
       '@ethersproject/address': 5.7.0
       '@web3-wallet/detect-provider': link:../detect-provider
-      zustand: 4.0.0-rc.3
+      zustand: 4.3.3
 
   packages/detect-provider:
     specifiers: {}
@@ -191,13 +191,13 @@ importers:
       '@ethersproject/providers': ^5.7.0
       '@tanstack/react-query': ^4.9.0
       '@web3-wallet/core': workspace:*
-      zustand: ^4.0.0-rc.0
+      zustand: ^4.1.1
     dependencies:
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@tanstack/react-query': 4.9.0
       '@web3-wallet/core': link:../core
-      zustand: 4.0.0-rc.3
+      zustand: 4.3.3
 
   packages/vue:
     specifiers:
@@ -16624,8 +16624,8 @@ packages:
       strip-indent: 2.0.0
     dev: true
 
-  /zustand/4.0.0-rc.3:
-    resolution: {integrity: sha512-vc7TKQJC6T8lx5EupnuUTWXahuRLYjrK9oWLvY+u65ZkLDjocgxDGMrl5VBuxyjXCXyJ3kquN3l/Y2yUj5ZDEg==}
+  /zustand/4.3.3:
+    resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'
