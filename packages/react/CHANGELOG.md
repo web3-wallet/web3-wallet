@@ -1,5 +1,13 @@
 # @web3-wallet/react
 
+## 1.3.1
+
+### Patch Changes
+
+- upgrade zustand to v4.1.1
+- Updated dependencies
+  - @web3-wallet/core@1.1.2
+
 ## 1.3.0
 
 ### Minor Changes
