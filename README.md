@@ -16,14 +16,9 @@ Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get star
 
 Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentation.
 
-## Who is using web3-wallet?
-
-check out https://web3-wallet.github.io/web3-wallet/showcase
-
 ## Examples
 
 - [example-react](./packages/examples/react/)
-- [example-vue](./packages/examples/vue/)
 
 ## Packages
 
@@ -31,7 +26,6 @@ check out https://web3-wallet.github.io/web3-wallet/showcase
 | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`@web3-wallet/core`](packages/core)                                                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)                                         |
 | [`@web3-wallet/react`](packages/react)                                               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                                       |
-| [`@web3-wallet/vue`](packages/vue)                                                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fvue.svg)](https://badge.fury.io/js/@web3-wallet%2Fvue)                                           |
 | **Wallets**                                                                          |                                                                                                                                                          |
 | [`@web3-wallet/metamask`](packages/wallets/metamask)                                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)                                 |
 | [`@web3-wallet/defiwallet`](packages/wallets/defiwallet)                             | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)                             |
