@@ -1,6 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import type { BalancePlugin } from '@web3-wallet/plugin-balance';
-import type { EnsPlugin } from '@web3-wallet/plugin-ens';
+import { formatEther } from '@ethersproject/units';
 import type { Wallet } from '@web3-wallet/react';
 import React from 'react';
 
@@ -12,8 +11,8 @@ export const Accounts = ({
   balances,
 }: {
   accounts: ReturnType<Wallet['useAccounts']>;
-  ensNames: ReturnType<EnsPlugin.Api['useEnsNames']>;
-  balances: ReturnType<BalancePlugin.Api['useBalances']>;
+  ensNames: ReturnType<Wallet['useEnsNames']>;
+  balances: ReturnType<Wallet['useBalances']>;
 }) => {
   if (!accounts || accounts.length === 0) {
     return (
@@ -28,10 +27,10 @@ export const Accounts = ({
     <>
       {accounts.map((account, i) => (
         <React.Fragment key={account}>
-          {ensNames.data?.[i] && (
+          {ensNames[i] && (
             <Flex gap={2}>
               <Text as="span">Name: </Text>
-              <Text fontWeight="bold">{ensNames.data?.[i]}</Text>
+              <Text fontWeight="bold">{ensNames[i]}</Text>
             </Flex>
           )}
           <Flex gap={2}>
@@ -41,11 +40,7 @@ export const Accounts = ({
           <Flex gap={2}>
             <Text>Balance:</Text>
             <Text fontWeight="bold">
-              {balances.data?.[i]
-                ? `${balances.data[i]}`
-                : balances.data?.[i] === 0
-                ? 0
-                : '--'}
+              {balances[i] ? Number(formatEther(balances[i])).toFixed(4) : '--'}
             </Text>
           </Flex>
         </React.Fragment>

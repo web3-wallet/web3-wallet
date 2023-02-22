@@ -1,13 +1,28 @@
-import { createWallet as createCoreWallet } from '@web3-wallet/core';
+import type { Wallet as CoreWallet } from '@web3-wallet/core';
 
-import { createReactWallet } from './createReactWallet';
+import {
+  createBalanceHooks,
+  createCoreHooks,
+  createEnsHooks,
+  createProviderHooks,
+} from './hooks';
 import type { Wallet } from './types';
 
-export { CreateWalletOptions } from '@web3-wallet/core';
+export const createWallet = (coreWallet: CoreWallet): Wallet => {
+  let wallet = coreWallet as unknown as Wallet;
 
-export const createWallet = (
-  ...args: Parameters<typeof createCoreWallet>
-): Wallet => {
-  const coreWallet = createCoreWallet(...args);
-  return createReactWallet(coreWallet);
+  wallet = [
+    createCoreHooks,
+    createProviderHooks,
+    createBalanceHooks,
+    createEnsHooks,
+  ].reduce<Wallet>(
+    (w, createHooks) => ({
+      ...w,
+      ...createHooks(w),
+    }),
+    wallet,
+  );
+
+  return wallet;
 };

@@ -1,8 +1,9 @@
 import type { Connector, CreateCurrentWalletOptions } from '@web3-wallet/core';
 import { createCurrentWallet as coreCreateCurrentWallet } from '@web3-wallet/core';
+import { useEffect, useState } from 'react';
 
-import { createReactWallet } from './createReactWallet';
-import { useMutation } from './query';
+import { createWallet } from './createWallet';
+import type { ProviderHooks } from './hooks';
 import type { CurrentWallet, Wallet } from './types';
 
 export { CreateCurrentWalletOptions } from '@web3-wallet/core';
@@ -16,28 +17,47 @@ export const createCurrentWallet = (
     options,
   );
 
-  const currentReactWallet = createReactWallet(
+  const { useHasProvider: _, ...currentWallet } = createWallet(
     coreCurrentWallet,
   ) as unknown as CurrentWallet;
 
   const useName: CurrentWallet['useName'] = () =>
-    currentReactWallet.getReactStore()((s) => s.name);
+    currentWallet.getStore()((s) => s.name);
 
   const useConnectionStatus: CurrentWallet['useConnectionStatus'] = () =>
-    currentReactWallet.getReactStore()((s) => s.connectionStatus);
+    currentWallet.getStore()((s) => s.connectionStatus);
+
+  const useHasProvider: ProviderHooks['useHasProvider'] = (...args) => {
+    const [hasProvider, setHasProvider] = useState(false);
+    const name = useName();
+
+    useEffect(() => {
+      let canceled = false;
+
+      currentWallet
+        .getConnector()
+        .detectProvider(...args)
+        .then(() => {
+          if (!canceled) setHasProvider(true);
+        })
+        .catch(() => {
+          if (!canceled) setHasProvider(false);
+        });
+
+      return () => {
+        canceled = true;
+      };
+      // don't track the args updates
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [name]);
+
+    return hasProvider;
+  };
 
   return {
-    ...currentReactWallet,
+    ...currentWallet,
+    useHasProvider,
     useName,
     useConnectionStatus,
-    useConnectAsCurrentWallet: (options) =>
-      useMutation(
-        (variables) =>
-          currentReactWallet.connectAsCurrentWallet(
-            variables.walletName,
-            variables.chain,
-          ),
-        options,
-      ),
   };
 };

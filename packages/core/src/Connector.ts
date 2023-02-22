@@ -106,7 +106,7 @@ export abstract class Connector<
     providerFilter?: ProviderFilter,
     options?: DetectProviderOptions,
   ): Promise<Provider> {
-    if (this.provider) this.provider;
+    if (this.provider) return this.provider;
 
     const m = await import('@web3-wallet/detect-provider');
 
@@ -173,6 +173,7 @@ export abstract class Connector<
 
     try {
       await this.lazyInitialize();
+
       const [chainId, accounts] = await Promise.all([
         this.requestChainId(),
         this.requestAccounts(),
@@ -210,8 +211,6 @@ export abstract class Connector<
 
     try {
       await this.lazyInitialize();
-
-      if (!this.provider) throw this.providerNotFoundError;
 
       const [chainId, accounts] = await Promise.all([
         this.requestChainId(),
@@ -387,6 +386,8 @@ export abstract class Connector<
    */
   protected addEventListeners(): Connector['removeEventListeners'] {
     if (!this.provider) return;
+    // return if event listeners are already added
+    if (this.removeEventListeners) return;
 
     const onConnect = this.onConnect.bind(this);
     const onDisconnect = this.onDisconnect.bind(this);

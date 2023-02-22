@@ -1,14 +1,11 @@
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { createStore } from 'zustand/vanilla';
 
 import type { Connector } from './Connector';
 import type {
   CurrentWallet,
   CurrentWalletState,
   CurrentWalletStore,
-  Plugin,
-  PluginApiMap,
-  PluginName,
   Wallet,
   WalletName,
 } from './types';
@@ -22,18 +19,14 @@ const isWallet = <TWallet extends Pick<Wallet, 'getConnector'>>(
 export type CreateCurrentWalletOptions = {
   defaultCurrentWallet?: WalletName;
   persistKey?: string;
-  plugins?: Plugin[];
 };
 
 export const createCurrentWallet = (
   connectorsOrWallets: (Connector | Wallet)[],
   options?: CreateCurrentWalletOptions,
 ): CurrentWallet => {
-  const {
-    plugins,
-    defaultCurrentWallet,
-    persistKey = '@web3-wallet/current-wallet',
-  } = options ?? {};
+  const { defaultCurrentWallet, persistKey = '@web3-wallet/current-wallet' } =
+    options ?? {};
 
   const connectors: Connector[] = connectorsOrWallets.map((v) =>
     isWallet(v) ? v.getConnector() : v,
@@ -52,15 +45,17 @@ export const createCurrentWallet = (
     ...getConnector(currentWalletName).store.getState(),
   };
 
-  const store: CurrentWalletStore = createStore<CurrentWalletState>()(
+  const store: CurrentWalletStore = create<CurrentWalletState>()(
     persist<CurrentWalletState>(() => DEFAULT_STATE, {
       name: persistKey,
       version: 0,
-      partialize: ({ name, connectionStatus }) =>
-        ({
-          name,
-          connectionStatus,
-        } as unknown as CurrentWalletState),
+      partialize: ({ name, connectionStatus }) => ({
+        isConnecting: false,
+        chainId: undefined,
+        accounts: [],
+        name,
+        connectionStatus,
+      }),
     }),
   );
 
@@ -93,6 +88,7 @@ export const createCurrentWallet = (
       unsubscribe?.();
 
       unsubscribe = getConnector(name).store.subscribe((state) => {
+        // copy the wallet store state to current wallet store
         store.setState({
           ...state,
         });
@@ -102,6 +98,7 @@ export const createCurrentWallet = (
     }
   };
 
+  // update current wallet store
   switchCurrentWallet(store.getState().name);
 
   const getConnect: (walletName?: WalletName) => Connector['connect'] =
@@ -149,8 +146,6 @@ export const createCurrentWallet = (
     return result;
   };
 
-  const pluginApiMap: PluginApiMap = new Map();
-
   return {
     getName: () => getCurrentConnector().name,
     getStore: () => store,
@@ -160,17 +155,6 @@ export const createCurrentWallet = (
     disconnect,
     watchAsset: (...args) => getCurrentConnector().watchAsset(...args),
     detectProvider: () => getCurrentConnector().detectProvider(),
-    getPlugins: () => plugins ?? [],
-    pluginApiMap,
-    getPluginApi: <TPluginApi = unknown>(
-      pluginName: PluginName,
-    ): TPluginApi => {
-      if (!pluginApiMap.has(pluginName)) {
-        throw new Error(`Plugin ${pluginName} don't exists!`);
-      }
-      return pluginApiMap.get(pluginName) as TPluginApi;
-    },
-
     // current wallet only apis
     switchCurrentWallet,
     connectAsCurrentWallet: (name, ...args) => {

@@ -25,8 +25,6 @@
     "@web3-wallet/brave-wallet": "workspace:*",
     "@web3-wallet/trust-wallet": "workspace:*",
     "@web3-wallet/cryptocom-desktop-wallet": "workspace:*",
-    "@web3-wallet/plugin-ens": "workspace:*",
-    "@web3-wallet/plugin-balance": "workspace:*",
     "next": "12.2.5",
     "react-dom": "18.2.0"
   },

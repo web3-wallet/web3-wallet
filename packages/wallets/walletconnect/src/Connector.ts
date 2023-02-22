@@ -91,10 +91,12 @@ export class WalletConnect extends Connector<WalletConnectOptions> {
   /** {@inheritdoc Connector.autoConnect} */
   public override async autoConnect(): Promise<boolean> {
     await this.lazyInitialize();
+
     if (!this.provider?.connected) {
       console.debug('No existing connection');
       return false;
     }
+
     return await super.autoConnect();
   }
 

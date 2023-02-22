@@ -1,7 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { VConsole } from '@site/components/VConsole';
 import { theme } from '@site/theme';
-import { Web3WalletQueryClientProvider } from '@web3-wallet/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -16,11 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <VConsole />
-      <Web3WalletQueryClientProvider>
-        <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </Web3WalletQueryClientProvider>
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   );
 }

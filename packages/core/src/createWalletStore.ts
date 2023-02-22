@@ -1,5 +1,5 @@
 import { getAddress, isAddress } from '@ethersproject/address';
-import { createStore } from 'zustand/vanilla';
+import { create } from 'zustand';
 
 import type { WalletState, WalletStore, WalletStoreActions } from './types';
 import { isValidChainId } from './utils';
@@ -25,7 +25,7 @@ export const createWalletStoreAndActions = (): {
    */
   actions: WalletStoreActions;
 } => {
-  const store = createStore<WalletState>()(() => DEFAULT_WALLET_STATE);
+  const store = create<WalletState>()(() => DEFAULT_WALLET_STATE);
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0;

@@ -42,17 +42,6 @@ export const chainConfigs: AddEthereumChainParameter[] = [
     rpcUrls: [INFURA_KEY ? `https://goerli.infura.io/v3/${INFURA_KEY}` : ''],
   },
   {
-    chainId: 3,
-    chainName: 'Ropsten',
-    nativeCurrency: {
-      name: 'Ropsten Ether',
-      symbol: 'ETH',
-      decimals: 18,
-    },
-    rpcUrls: [INFURA_KEY ? `https://ropsten.infura.io/v3/${INFURA_KEY}` : ''],
-    blockExplorerUrls: ['https://ropsten.etherscan.io'],
-  },
-  {
     chainId: 338,
     chainName: 'Cronos Testnet',
     nativeCurrency: {
@@ -93,7 +82,7 @@ export const chainConfigs: AddEthereumChainParameter[] = [
   },
   {
     chainId: 42161,
-    chainName: 'Arbitrum One',
+    chainName: 'Arbitrum',
     rpcUrls: [
       INFURA_KEY ? `https://arbitrum-mainnet.infura.io/v3/${INFURA_KEY}` : '',
       'https://arb1.arbitrum.io/rpc',

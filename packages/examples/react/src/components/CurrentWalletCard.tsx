@@ -4,8 +4,6 @@ import {
   getWalletConfig,
   walletConfigs,
 } from '@example-react/wallets';
-import { BalancePlugin } from '@web3-wallet/plugin-balance';
-import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
@@ -21,8 +19,6 @@ import { WalletSelect } from './WalletSelect';
 const {
   useName,
 
-  getPluginApi,
-
   connect,
   autoConnect,
   disconnect,
@@ -32,6 +28,9 @@ const {
 
   useAccounts,
   useChainId,
+
+  useBalances,
+  useEnsNames,
 
   switchCurrentWallet,
 } = currentWallet;
@@ -44,11 +43,7 @@ export const CurrentWalletCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
 
-  const { useBalances } = getPluginApi<BalancePlugin.Api>(BalancePlugin.name);
-  const { useEnsNames } = getPluginApi<EnsPlugin.Api>(EnsPlugin.name);
-
-  const ensNames = useEnsNames([getNetwork(chainId)]);
-
+  const ensNames = useEnsNames(getNetwork(chainId));
   const balances = useBalances();
 
   useEffect(() => {
