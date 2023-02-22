@@ -1,8 +1,7 @@
 import type { Connector, CreateCurrentWalletOptions } from '@web3-wallet/core';
 import { createCurrentWallet as coreCreateCurrentWallet } from '@web3-wallet/core';
 
-import { createReactWallet } from './createReactWallet';
-import { useMutation } from './query';
+import { createWallet } from './createWallet';
 import type { CurrentWallet, Wallet } from './types';
 
 export { CreateCurrentWalletOptions } from '@web3-wallet/core';
@@ -16,28 +15,19 @@ export const createCurrentWallet = (
     options,
   );
 
-  const currentReactWallet = createReactWallet(
+  const currentWallet = createWallet(
     coreCurrentWallet,
   ) as unknown as CurrentWallet;
 
   const useName: CurrentWallet['useName'] = () =>
-    currentReactWallet.getReactStore()((s) => s.name);
+    currentWallet.getStore()((s) => s.name);
 
   const useConnectionStatus: CurrentWallet['useConnectionStatus'] = () =>
-    currentReactWallet.getReactStore()((s) => s.connectionStatus);
+    currentWallet.getStore()((s) => s.connectionStatus);
 
   return {
-    ...currentReactWallet,
+    ...currentWallet,
     useName,
     useConnectionStatus,
-    useConnectAsCurrentWallet: (options) =>
-      useMutation(
-        (variables) =>
-          currentReactWallet.connectAsCurrentWallet(
-            variables.walletName,
-            variables.chain,
-          ),
-        options,
-      ),
   };
 };

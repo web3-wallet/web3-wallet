@@ -1,7 +1,6 @@
-import type { StoreApi } from 'zustand/vanilla';
+import type { StoreApi, UseBoundStore } from 'zustand';
 
 import type { Connector } from '../Connector';
-import type { Plugin, PluginApiMap, PluginName } from './plugin';
 import type { Brand } from './utils';
 
 /**
@@ -16,7 +15,7 @@ export interface WalletState {
 /**
  * WalletStore is for managing the state of WalletState
  */
-export type WalletStore = StoreApi<WalletState>;
+export type WalletStore = UseBoundStore<StoreApi<WalletState>>;
 
 /**
  * WalletStoreActions is used to update the WalletStore
@@ -44,9 +43,19 @@ export interface Wallet {
   autoConnect: Connector['autoConnect'];
   disconnect: Connector['disconnect'];
   watchAsset: Connector['watchAsset'];
-  getPlugins: () => Plugin[];
-  pluginApiMap: PluginApiMap;
-  getPluginApi: <PluginApi>(pluginName: PluginName) => PluginApi;
+}
+
+export type CurrentWalletState = WalletState & {
+  name: WalletName;
+  connectionStatus: WalletConnectionStatus;
+};
+
+export type CurrentWalletStore = UseBoundStore<StoreApi<CurrentWalletState>>;
+
+export enum WalletConnectionStatus {
+  Untouched = 'Untouched',
+  Connected = 'Connected',
+  Disconnected = 'Disconnected',
 }
 
 export interface CurrentWallet extends Wallet {
@@ -56,17 +65,4 @@ export interface CurrentWallet extends Wallet {
     name: WalletName,
     ...args: Parameters<Connector['connect']>
   ) => ReturnType<Connector['connect']>;
-}
-
-export type CurrentWalletState = WalletState & {
-  name: WalletName;
-  connectionStatus: WalletConnectionStatus;
-};
-
-export type CurrentWalletStore = StoreApi<CurrentWalletState>;
-
-export enum WalletConnectionStatus {
-  Untouched = 'Untouched',
-  Connected = 'Connected',
-  Disconnected = 'Disconnected',
 }

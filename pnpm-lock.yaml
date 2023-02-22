@@ -152,15 +152,15 @@ importers:
 
   packages/react:
     specifiers:
+      '@ethersproject/bignumber': ^5.7.0
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
-      '@tanstack/react-query': ^4.9.0
       '@web3-wallet/core': workspace:*
       zustand: ^4.1.1
     dependencies:
+      '@ethersproject/bignumber': 5.7.0
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
-      '@tanstack/react-query': 4.9.0
       '@web3-wallet/core': link:../core
       zustand: 4.3.3
 
@@ -3057,6 +3057,7 @@ packages:
 
   /@tanstack/query-core/4.9.0:
     resolution: {integrity: sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==}
+    dev: true
 
   /@tanstack/react-query-devtools/4.9.0_react-dom@18.2.0:
     resolution: {integrity: sha512-VO8d23Hrjp4tub20OIGszsmYwSyal/7PhYP1Miv7GAVrdPQN38lqP9afhkhkXDW025x7oAXYUUl4LzUCxVwKBw==}
@@ -3069,22 +3070,6 @@ packages:
       react-dom: 18.2.0
       use-sync-external-store: 1.2.0
     dev: true
-
-  /@tanstack/react-query/4.9.0:
-    resolution: {integrity: sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.9.0
-      use-sync-external-store: 1.2.0
-    dev: false
 
   /@tanstack/react-query/4.9.0_react@18.2.0:
     resolution: {integrity: sha512-M4utYjk9BRDUYbbprSsa0eExdC9NjqQ0deuHXYxQkT8l8BIVyw6yv02LQUGBdOnn/6w5xXFyQRG2slo+JhqeBg==}
