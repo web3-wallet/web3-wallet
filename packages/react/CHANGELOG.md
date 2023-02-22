@@ -1,5 +1,16 @@
 # @web3-wallet/react
 
+## 2.0.0
+
+### Major Changes
+
+- web3-wallet version 2
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@2.0.0
+
 ## 1.3.1
 
 ### Patch Changes
