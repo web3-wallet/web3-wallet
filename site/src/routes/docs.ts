@@ -21,11 +21,6 @@ export const routes: Route[] = [
     path: path.join(DOCS_DIR, 'current-wallet.md'),
   },
   {
-    label: 'Plugin',
-    slug: ['plugin'],
-    path: path.join(DOCS_DIR, 'plugin.md'),
-  },
-  {
     label: 'Connector',
     slug: ['connector'],
     path: path.join(DOCS_DIR, 'connector.md'),

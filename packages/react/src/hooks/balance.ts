@@ -5,13 +5,13 @@ import type { Wallet } from '../types';
 
 export type BalanceHooks = {
   useBalances: () => BigNumber[];
-  useBalance: () => BigNumber;
+  useBalance: () => BigNumber | undefined;
 };
 
 export const createBalanceHooks = (wallet: Wallet): BalanceHooks => {
   const { useProvider, useAccounts } = wallet;
 
-  const useBalances = () => {
+  const useBalances: BalanceHooks['useBalances'] = () => {
     const provider = useProvider();
     const accounts = useAccounts();
     const [balances, setBalances] = useState<BigNumber[]>([]);
@@ -25,11 +25,13 @@ export const createBalanceHooks = (wallet: Wallet): BalanceHooks => {
         return;
       }
 
-      Promise.all(accounts.map((account) => provider.getBalance(account))).then(
-        (balances) => {
+      Promise.all(accounts.map((account) => provider.getBalance(account)))
+        .then((balances) => {
           if (!canceled) setBalances(balances);
-        },
-      );
+        })
+        .catch(() => {
+          if (!canceled) setBalances([]);
+        });
 
       return () => {
         canceled = true;
@@ -39,7 +41,7 @@ export const createBalanceHooks = (wallet: Wallet): BalanceHooks => {
     return balances;
   };
 
-  const useBalance = () => {
+  const useBalance: BalanceHooks['useBalance'] = () => {
     const balances = useBalances();
 
     return balances[0];

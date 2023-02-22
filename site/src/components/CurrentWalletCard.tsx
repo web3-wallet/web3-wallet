@@ -1,8 +1,6 @@
 import { HStack, Image, Text } from '@chakra-ui/react';
 import { getNetwork } from '@site/chains';
 import { currentWallet, getWalletConfig, walletConfigs } from '@site/wallets';
-import { BalancePlugin } from '@web3-wallet/plugin-balance';
-import { EnsPlugin } from '@web3-wallet/plugin-ens';
 import { useEffect } from 'react';
 
 import { Accounts } from './Accounts';
@@ -16,8 +14,6 @@ import { WalletStatus } from './WalletStatus';
 const {
   useName,
 
-  getPluginApi,
-
   connect,
   autoConnect,
   disconnect,
@@ -29,7 +25,9 @@ const {
 
   useAccounts,
   useChainId,
-  useProvider,
+
+  useBalances,
+  useEnsNames,
 } = currentWallet;
 
 export const CurrentWalletCard = () => {
@@ -40,10 +38,7 @@ export const CurrentWalletCard = () => {
   const chainId = useChainId();
   const accounts = useAccounts();
 
-  const { useBalances } = getPluginApi<BalancePlugin.Api>(BalancePlugin.name);
-  const { useEnsNames } = getPluginApi<EnsPlugin.Api>(EnsPlugin.name);
-
-  const ensNames = useEnsNames([getNetwork(chainId)]);
+  const ensNames = useEnsNames(getNetwork(chainId));
 
   const balances = useBalances();
 

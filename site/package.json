@@ -28,8 +28,6 @@
     "@web3-wallet/defiwallet": "workspace:*",
     "@web3-wallet/imtoken": "workspace:*",
     "@web3-wallet/metamask": "workspace:*",
-    "@web3-wallet/plugin-balance": "workspace:*",
-    "@web3-wallet/plugin-ens": "workspace:*",
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/trust-wallet": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
@@ -43,7 +41,6 @@
     "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
-    "@tanstack/react-query-devtools": "^4.9.0",
     "@types/react-dom": "18.0.6",
     "eslint-config-next": "12.2.5"
   }

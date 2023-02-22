@@ -101,8 +101,6 @@ importers:
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/imtoken': workspace:*
       '@web3-wallet/metamask': workspace:*
-      '@web3-wallet/plugin-balance': workspace:*
-      '@web3-wallet/plugin-ens': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/trust-wallet': workspace:*
       '@web3-wallet/walletconnect': workspace:*
@@ -121,8 +119,6 @@ importers:
       '@web3-wallet/defiwallet': link:../../wallets/defiwallet
       '@web3-wallet/imtoken': link:../../wallets/imtoken
       '@web3-wallet/metamask': link:../../wallets/metamask
-      '@web3-wallet/plugin-balance': link:../../plugins/balance
-      '@web3-wallet/plugin-ens': link:../../plugins/ens
       '@web3-wallet/react': link:../../react
       '@web3-wallet/trust-wallet': link:../../wallets/trust-wallet
       '@web3-wallet/walletconnect': link:../../wallets/walletconnect
@@ -131,24 +127,6 @@ importers:
     devDependencies:
       '@types/react-dom': 18.0.6
       eslint-config-next: 12.2.5
-
-  packages/plugins/balance:
-    specifiers:
-      '@ethersproject/bignumber': ^5.7.0
-      '@ethersproject/providers': ^5.7.0
-      '@ethersproject/units': ^5.7.0
-      '@web3-wallet/react': workspace:^
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/providers': 5.7.0
-      '@ethersproject/units': 5.7.0
-      '@web3-wallet/react': link:../../react
-
-  packages/plugins/ens:
-    specifiers:
-      '@web3-wallet/react': workspace:^
-    dependencies:
-      '@web3-wallet/react': link:../../react
 
   packages/react:
     specifiers:
@@ -227,7 +205,6 @@ importers:
       '@ethersproject/experimental': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@ethersproject/units': ^5.7.0
-      '@tanstack/react-query-devtools': ^4.9.0
       '@types/react-dom': 18.0.6
       '@types/react-syntax-highlighter': ^15.5.5
       '@web3-wallet/brave-wallet': workspace:*
@@ -236,8 +213,6 @@ importers:
       '@web3-wallet/defiwallet': workspace:*
       '@web3-wallet/imtoken': workspace:*
       '@web3-wallet/metamask': workspace:*
-      '@web3-wallet/plugin-balance': workspace:*
-      '@web3-wallet/plugin-ens': workspace:*
       '@web3-wallet/react': workspace:*
       '@web3-wallet/trust-wallet': workspace:*
       '@web3-wallet/walletconnect': workspace:*
@@ -267,8 +242,6 @@ importers:
       '@web3-wallet/defiwallet': link:../packages/wallets/defiwallet
       '@web3-wallet/imtoken': link:../packages/wallets/imtoken
       '@web3-wallet/metamask': link:../packages/wallets/metamask
-      '@web3-wallet/plugin-balance': link:../packages/plugins/balance
-      '@web3-wallet/plugin-ens': link:../packages/plugins/ens
       '@web3-wallet/react': link:../packages/react
       '@web3-wallet/trust-wallet': link:../packages/wallets/trust-wallet
       '@web3-wallet/walletconnect': link:../packages/wallets/walletconnect
@@ -281,7 +254,6 @@ importers:
       react-syntax-highlighter: 15.5.0
       remark-gfm: 3.0.1
     devDependencies:
-      '@tanstack/react-query-devtools': 4.9.0_react-dom@18.2.0
       '@types/react-dom': 18.0.6
       eslint-config-next: 12.2.5
 
@@ -3048,27 +3020,8 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@tanstack/match-sorter-utils/8.5.14:
-    resolution: {integrity: sha512-lVNhzTcOJ2bZ4IU+PeCPQ36vowBHvviJb2ZfdRFX5uhy7G0jM8N34zAMbmS5ZmVH8D2B7oU82OWo0e/5ZFzQrw==}
-    engines: {node: '>=12'}
-    dependencies:
-      remove-accents: 0.4.2
-    dev: true
-
   /@tanstack/query-core/4.9.0:
     resolution: {integrity: sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==}
-    dev: true
-
-  /@tanstack/react-query-devtools/4.9.0_react-dom@18.2.0:
-    resolution: {integrity: sha512-VO8d23Hrjp4tub20OIGszsmYwSyal/7PhYP1Miv7GAVrdPQN38lqP9afhkhkXDW025x7oAXYUUl4LzUCxVwKBw==}
-    peerDependencies:
-      '@tanstack/react-query': 4.9.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@tanstack/match-sorter-utils': 8.5.14
-      react-dom: 18.2.0
-      use-sync-external-store: 1.2.0
     dev: true
 
   /@tanstack/react-query/4.9.0_react@18.2.0:
@@ -9117,6 +9070,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       scheduler: 0.23.0
+    dev: false
 
   /react-error-boundary/3.1.4_react@18.2.0:
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
@@ -9389,10 +9343,6 @@ packages:
       autolinker: 0.28.1
     dev: false
 
-  /remove-accents/0.4.2:
-    resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
-    dev: true
-
   /repeat-element/1.1.4:
     resolution: {integrity: sha512-LFiNfRcSu7KK3evMyYOuCzv3L10TW7yC1G2/+StMjK8Y6Vqd2MG7r/Qjw4ghtuCOjFvlnms/iMmLqpvW/ES/WQ==}
     engines: {node: '>=0.10.0'}
@@ -9559,6 +9509,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /scrypt-js/3.0.1:
     resolution: {integrity: sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==}
@@ -10579,6 +10530,7 @@ packages:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dev: false
 
   /use-sync-external-store/1.2.0_react@18.2.0:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}

@@ -3,12 +3,7 @@
 ## createWallet
 
 ```ts
-type CreateWallet = (
-  connector: Connector,
-  options: {
-    plugins?: [];
-  },
-) => Wallet;
+type CreateWallet = (connector: Connector) => Wallet;
 ```
 
 The wallet object is returned from createWallet.
@@ -34,27 +29,6 @@ interface Wallet {
   useAccount: () => string | undefined;
   useIsConnected: () => boolean;
   useProvider: (network?: Networkish) => Web3Provider | undefined;
-  getPluginApi: <PluginApi>(pluginName: PluginName) => PluginApi;
-  useConnect: WrappedUseMutation<
-    void,
-    unknown,
-    { chain?: number | AddEthereumChainParameter } | void
-  >;
-  useAutoConnect: WrappedUseMutation<boolean, unknown, void>;
-  useDisconnect: WrappedUseMutation<
-    void,
-    unknown,
-    {
-      force?: boolean;
-    } | void
-  >;
-  useWatchAsset: WrappedUseMutation<
-    void,
-    unknown,
-    {
-      asset: WatchAssetParameter;
-    }
-  >;
 }
 ```
 
@@ -204,49 +178,3 @@ interface Wallet {
 ```
 
 Returns a [Web3Provider](https://docs.ethers.io/v5/api/providers/other/#Web3Provider) instance that wraps the underling wallet provider.
-
-### getPluginApi
-
-```ts
-interface Wallet {
-  getPluginApi: <PluginApi>(pluginName: PluginName) => PluginApi;
-}
-```
-
-Get the api of the plugin specified by `pluginName`. See [Plugin](https://web3-wallet.github.io/web3-wallet/docs/plugin).
-
-example:
-
-```ts
-import { ensPlugin } from '@web3-wallet/plugin-ens';
-
-const pluginApi = getPluginApi<ensPlugin.API>(ensPlugin.pluginName);
-
-const ensName = pluginApi.useEnsName();
-```
-
-### useConnect
-
-```ts
-interface Wallet {
-  useConnect: WrappedUseMutation<
-    void,
-    unknown,
-    { chain?: number | AddEthereumChainParameter } | void
-  >;
-}
-```
-
-connect wrapped with [useMutation](https://tanstack.com/query/v4/docs/reference/useMutation).
-
-### useAutoConnect
-
-autoConnect wrapped with [useMutation](https://tanstack.com/query/v4/docs/reference/useMutation).
-
-### useDisConnect
-
-disConnect wrapped with [useMutation](https://tanstack.com/query/v4/docs/reference/useMutation).
-
-### useWatchAsset
-
-useWatchAsset wrapped with [useMutation](https://tanstack.com/query/v4/docs/reference/useMutation).

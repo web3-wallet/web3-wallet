@@ -3,6 +3,7 @@ import type { Wallet as CoreWallet } from '@web3-wallet/core';
 import {
   createBalanceHooks,
   createCoreHooks,
+  createEnsHooks,
   createProviderHooks,
 } from './hooks';
 import type { Wallet } from './types';
@@ -14,6 +15,7 @@ export const createWallet = (coreWallet: CoreWallet): Wallet => {
     createCoreHooks,
     createProviderHooks,
     createBalanceHooks,
+    createEnsHooks,
   ].reduce<Wallet>(
     (w, createHooks) => ({
       ...w,
