@@ -74,6 +74,7 @@ export class CoinbaseWallet extends Connector<CoinbaseWalletOptions> {
       console.debug(`No existing connection`);
       return false;
     }
+
     return await super.autoConnect();
   }
 
