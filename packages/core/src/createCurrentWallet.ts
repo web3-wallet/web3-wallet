@@ -11,7 +11,7 @@ import type {
 } from './types';
 import { WalletConnectionStatus } from './types';
 
-const isWallet = <TWallet extends Pick<Wallet, 'getConnector'>>(
+export const isWallet = <TWallet extends Pick<Wallet, 'getConnector'>>(
   connectorOrWallet: Connector | TWallet,
 ): connectorOrWallet is TWallet =>
   typeof (connectorOrWallet as TWallet).getConnector === 'function';

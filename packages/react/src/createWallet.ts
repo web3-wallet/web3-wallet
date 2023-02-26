@@ -1,4 +1,5 @@
-import type { Wallet as CoreWallet } from '@web3-wallet/core';
+import type { Connector, Wallet as CoreWallet } from '@web3-wallet/core';
+import { createWallet as createCoreWallet, isWallet } from '@web3-wallet/core';
 
 import {
   createBalanceHooks,
@@ -8,7 +9,13 @@ import {
 } from './hooks';
 import type { Wallet } from './types';
 
-export const createWallet = (coreWallet: CoreWallet): Wallet => {
+export const createWallet = (
+  walletOrConnector: CoreWallet | Connector,
+): Wallet => {
+  const coreWallet = isWallet(walletOrConnector)
+    ? walletOrConnector
+    : createCoreWallet(walletOrConnector);
+
   let wallet = coreWallet as unknown as Wallet;
 
   wallet = [
