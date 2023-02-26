@@ -1,5 +1,21 @@
 # @web3-wallet/nextjs
 
+## 2.0.1
+
+### Patch Changes
+
+- update package versoin
+- Updated dependencies
+  - @web3-wallet/react@2.0.1
+  - @web3-wallet/brave-wallet@2.0.1
+  - @web3-wallet/coinbase-wallet@2.0.1
+  - @web3-wallet/cryptocom-desktop-wallet@2.0.1
+  - @web3-wallet/defiwallet@2.0.1
+  - @web3-wallet/imtoken@2.0.1
+  - @web3-wallet/metamask@2.0.1
+  - @web3-wallet/trust-wallet@2.0.1
+  - @web3-wallet/walletconnect@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

@@ -1,5 +1,13 @@
 # @web3-wallet/metamask
 
+## 2.0.1
+
+### Patch Changes
+
+- update package versoin
+- Updated dependencies
+  - @web3-wallet/core@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

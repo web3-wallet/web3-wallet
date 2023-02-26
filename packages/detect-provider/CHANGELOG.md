@@ -1,5 +1,11 @@
 # @web3-wallet/detect-provider
 
+## 2.0.1
+
+### Patch Changes
+
+- update package versoin
+
 ## 2.0.0
 
 ### Major Changes
