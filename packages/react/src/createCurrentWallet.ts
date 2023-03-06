@@ -1,6 +1,6 @@
 import type { Connector, CreateCurrentWalletOptions } from '@web3-wallet/core';
 import { createCurrentWallet as coreCreateCurrentWallet } from '@web3-wallet/core';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { createWallet } from './createWallet';
 import type { ProviderHooks } from './hooks';
@@ -30,13 +30,15 @@ export const createCurrentWallet = (
   const useHasProvider: ProviderHooks['useHasProvider'] = (...args) => {
     const [hasProvider, setHasProvider] = useState(false);
     const name = useName();
+    const argsRef = useRef(args);
+    argsRef.current = args;
 
     useEffect(() => {
       let canceled = false;
 
       currentWallet
         .getConnector()
-        .detectProvider(...args)
+        .detectProvider(...argsRef.current)
         .then(() => {
           if (!canceled) setHasProvider(true);
         })
@@ -47,8 +49,6 @@ export const createCurrentWallet = (
       return () => {
         canceled = true;
       };
-      // don't track the args updates
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [name]);
 
     return hasProvider;
