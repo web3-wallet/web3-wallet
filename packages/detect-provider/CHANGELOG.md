@@ -1,5 +1,17 @@
 # @web3-wallet/detect-provider
 
+## 2.1.0
+
+### Minor Changes
+
+- bump package version
+
+## 2.0.2
+
+### Patch Changes
+
+- bump package version
+
 ## 2.0.1
 
 ### Patch Changes
