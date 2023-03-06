@@ -30,6 +30,7 @@
     "release": "changeset publish && git push --follow-tags",
     "clean": "pnpm -p -r -c exec rm -rf dist tsconfig.tsbuildinfo .turbo .next",
     "purge": "pnpm clean && pnpm -p -r -c exec rm -rf node_modules",
+    "refresh": "pnpm clean && pnpm build",
     "prepare": "husky install && pnpm build"
   },
   "lint-staged": {

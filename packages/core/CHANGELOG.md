@@ -1,5 +1,11 @@
 # @web3-wallet/core
 
+## 2.0.2
+
+### Patch Changes
+
+- upgrade zustand version
+
 ## 2.0.1
 
 ### Patch Changes

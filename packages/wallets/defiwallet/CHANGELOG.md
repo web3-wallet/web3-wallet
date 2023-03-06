@@ -1,5 +1,12 @@
 # @web3-wallet/defiwallet
 
+## 2.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes
