@@ -78,11 +78,11 @@ importers:
     specifiers:
       '@ethersproject/address': ^5.7.0
       '@web3-wallet/detect-provider': workspace:*
-      zustand: ^4.1.1
+      zustand: ^4.3.5
     dependencies:
       '@ethersproject/address': 5.7.0
       '@web3-wallet/detect-provider': link:../detect-provider
-      zustand: 4.3.3
+      zustand: 4.3.5
 
   packages/detect-provider:
     specifiers: {}
@@ -134,13 +134,13 @@ importers:
       '@ethersproject/networks': ^5.7.0
       '@ethersproject/providers': ^5.7.0
       '@web3-wallet/core': workspace:*
-      zustand: ^4.1.1
+      zustand: ^4.3.5
     dependencies:
       '@ethersproject/bignumber': 5.7.0
       '@ethersproject/networks': 5.7.0
       '@ethersproject/providers': 5.7.0
       '@web3-wallet/core': link:../core
-      zustand: 4.3.3
+      zustand: 4.3.5
 
   packages/wallets/brave-wallet:
     specifiers:
@@ -10866,8 +10866,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zustand/4.3.3:
-    resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
+  /zustand/4.3.5:
+    resolution: {integrity: sha512-2iPUzfwx+g3f0PagOMz2vDO9mZzEp2puFpNe7vrAymVPOEIEUjCPkC4/zy84eAscxIWmTU4j9g6upXYkJdzEFQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'
