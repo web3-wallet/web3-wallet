@@ -1,5 +1,11 @@
 # @web3-wallet/react
 
+## 2.0.2
+
+### Patch Changes
+
+- update useHasProvider
+
 ## 2.0.1
 
 ### Patch Changes
