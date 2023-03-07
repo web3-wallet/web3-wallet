@@ -12,6 +12,13 @@
 
 Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get started with web3-wallet.
 
+## Projects that use @web3-wallet
+
+- [minted.network](https://minted.network/)
+- [cronosid.xyz](https://cronosid.xyz/)
+- [veno.finance](https://veno.finance/)
+- [fulcrom.finance](https://fulcrom.finance/)
+
 ## Documentation
 
 Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentation.
