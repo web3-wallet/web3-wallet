@@ -25,10 +25,14 @@ interface Wallet {
   disconnect: (force?: boolean) => Promise<void>;
   watchAsset: (asset: WatchAssetParameter) => Promise<void>;
   useIsConnecting: () => boolean;
+  useIsConnected: () => boolean;
   useChainId: () => number | undefined;
   useAccount: () => string | undefined;
-  useIsConnected: () => boolean;
   useProvider: (network?: Networkish) => Web3Provider | undefined;
+  useHasProvider: (
+    providerFilter?: (provider: Provider) => boolean,
+    detectProviderOptions?: DetectProviderOptions,
+  ) => boolean;
 }
 ```
 
@@ -178,3 +182,15 @@ interface Wallet {
 ```
 
 Returns a [Web3Provider](https://docs.ethers.io/v5/api/providers/other/#Web3Provider) instance that wraps the underling wallet provider.
+
+### useHasProvider
+
+`useHasProvider` can be used to detect whether a wallet is available(installed) on user's device(browser).
+
+```ts
+const hasMetaMask = metaMask.useHasProvider();
+
+if (!hasMetaMask) {
+  // redirect user to the wallet install page
+}
+```
