@@ -29,17 +29,17 @@ export const currentWallet = new createCurrentWallet([
 ]);
 ```
 
-### defaultCurrentWallet
+### CreateCurrentWalletOptions.defaultCurrentWallet
 
 The default currentWallet, default to the first wallet if not provided.
 
-### persistKey
+### CreateCurrentWalletOptions.persistKey
 
 The currentWallet state will be persist to local storage, you can specify the local storage key through the persistKey option, default to `@web3-wallet/currentWallet`.
 
 ## CurrentWallet API
 
-Most of the wallet APIs are also available on currentWallet. below only list the currentWallet only APIs. See [Wallet](https://web3-wallet.github.io/web3-wallet/docs/wallet).
+Most of the wallet APIs are also available on currentWallet. below list the currentWallet only APIs. See also [Wallet](https://web3-wallet.github.io/web3-wallet/docs/wallet).
 
 ```ts
 export interface CurrentWallet extends Wallet {
@@ -83,8 +83,4 @@ export interface CurrentWallet {
 }
 ```
 
-Connect with the specified wallet and set it as the currentWallet if the connection succeed/resolved.
-
-### useConnectAsCurrentWallet
-
-connectAsCurrentWallet wrapped with [useMutation](https://tanstack.com/query/v4/docs/reference/useMutation).
+Connect with the specified wallet and set it as the currentWallet if the connected successfully.
