@@ -20,6 +20,6 @@ export {
 
 export type Wallet = BuiltinHooks & CoreWallet;
 export interface CurrentWallet extends CoreCurrentWallet, BuiltinHooks {
-  useName: () => WalletName;
+  useWalletName: () => WalletName;
   useConnectionStatus: () => WalletConnectionStatus;
 }

@@ -43,7 +43,7 @@ export const currentWallet = new createCurrentWallet([
 
 const {
   // current wallet only apis
-  useName,
+  useWalletName,
   switchCurrentWallet,
   connectAsCurrentWallet,
   useConnectAsCurrentWallet,
@@ -100,7 +100,7 @@ const getWalletConfig = (name: WalletName): WalletConfig => {
 // ===========================
 import { currentWallet, getWalletConfig } from './wallet';
 
-const { autoConnect, useAccount, useName } = currentWallet;
+const { autoConnect, useAccount, useWalletName } = currentWallet;
 export const App = () => {
   useEffect(() => {
     // auto connect on app mount

@@ -18,9 +18,9 @@ export const WalletSelect = ({
         switchCurrentWallet(event.target.value as WalletName);
       }}
     >
-      {walletConfigs.map(({ name }) => (
-        <option key={name} value={name}>
-          {name}
+      {walletConfigs.map(({ walletName }) => (
+        <option key={walletName} value={walletName}>
+          {walletName}
         </option>
       ))}
     </Select>

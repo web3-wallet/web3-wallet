@@ -19,7 +19,7 @@ const metaMask = createWallet(new MetaMask());
 
 ```ts
 interface Wallet {
-  getName: () => WalletName;
+  getWalletName: () => WalletName;
   connect: (chain?: number | AddEthereumChainParameter) => Promise<void>;
   autoConnect: () => Promise<boolean>;
   disconnect: (force?: boolean) => Promise<void>;
@@ -36,11 +36,11 @@ interface Wallet {
 }
 ```
 
-### getName
+### getWalletName
 
 ```ts
 interface Wallet {
-  getName: () => WalletName;
+  getWalletName: () => WalletName;
 }
 ```
 

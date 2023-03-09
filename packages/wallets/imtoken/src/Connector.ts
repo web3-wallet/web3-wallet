@@ -5,13 +5,13 @@ import { icon } from './assets';
 
 const providerFilter = (p: Provider) => !!p.isImToken;
 
-const _name = 'imToken';
-export const name = _name as WalletName<typeof _name>;
+const _walletName = 'imToken';
+const walletName = _walletName as WalletName<typeof _walletName>;
 
 export class ImToken extends Connector {
-  public static walletName: WalletName<string> = name;
+  public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = walletName;
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {

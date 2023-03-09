@@ -21,15 +21,15 @@ export const createCurrentWallet = (
     coreCurrentWallet,
   ) as unknown as CurrentWallet;
 
-  const useName: CurrentWallet['useName'] = () =>
-    currentWallet.getStore()((s) => s.name);
+  const useWalletName: CurrentWallet['useWalletName'] = () =>
+    currentWallet.getStore()((s) => s.walletName);
 
   const useConnectionStatus: CurrentWallet['useConnectionStatus'] = () =>
     currentWallet.getStore()((s) => s.connectionStatus);
 
   const useHasProvider: ProviderHooks['useHasProvider'] = (...args) => {
     const [hasProvider, setHasProvider] = useState(false);
-    const name = useName();
+    const walletName = useWalletName();
     const argsRef = useRef(args);
     argsRef.current = args;
 
@@ -49,7 +49,7 @@ export const createCurrentWallet = (
       return () => {
         canceled = true;
       };
-    }, [name]);
+    }, [walletName]);
 
     return hasProvider;
   };
@@ -57,7 +57,7 @@ export const createCurrentWallet = (
   return {
     ...currentWallet,
     useHasProvider,
-    useName,
+    useWalletName,
     useConnectionStatus,
   };
 };
