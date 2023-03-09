@@ -8,7 +8,7 @@ const chainId = mockData.hexChainIds[0];
 const accounts = mockData.accounts.slice(0, 1);
 
 class MockConnector extends Connector {
-  public name = 'Mock Wallet' as WalletName<'Mock Wallet'>;
+  public walletName = 'Mock Wallet' as WalletName<'Mock Wallet'>;
   public icon = '';
   public override provider?: MockProvider;
   public override async detectProvider(): Promise<MockProvider> {
