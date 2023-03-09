@@ -10,15 +10,15 @@ export const URI_AVAILABLE = 'URI_AVAILABLE';
 
 type WalletConnectProvider = _WalletConnectProvider & Provider;
 
-const _name = 'WalletConnect';
-export const name = _name as WalletName<typeof _name>;
+const _walletName = 'WalletConnect';
+const walletName = _walletName as WalletName<typeof _walletName>;
 
 export type WalletConnectOptions = ConnectorOptions<IWCEthRpcConnectionOptions>;
 
 export class WalletConnect extends Connector<WalletConnectOptions> {
-  public static walletName: WalletName<string> = name;
+  public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = walletName;
 
   /** {@inheritdoc Connector.provider} */
   public override provider?: WalletConnectProvider;

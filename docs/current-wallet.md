@@ -43,7 +43,7 @@ Most of the wallet APIs are also available on currentWallet. below list the curr
 
 ```ts
 export interface CurrentWallet extends Wallet {
-  useName: () => WalletName;
+  useWalletName: () => WalletName;
   switchCurrentWallet: (name: WalletName) => void;
   connectAsCurrentWallet: (
     name: WalletName,
@@ -52,11 +52,11 @@ export interface CurrentWallet extends Wallet {
 }
 ```
 
-### useName
+### useWalletName
 
 ```ts
 interface CurrentWallet {
-  useName: () => WalletName;
+  useWalletName: () => WalletName;
 }
 ```
 

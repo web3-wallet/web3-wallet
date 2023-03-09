@@ -32,16 +32,16 @@ export const createCurrentWallet = (
     isWallet(v) ? v.getConnector() : v,
   );
 
-  const getConnector = (name: WalletName): Connector => {
-    return connectors.find((v) => v.name === name) as Connector;
+  const getConnector = (walletName: WalletName): Connector => {
+    return connectors.find((v) => v.walletName === walletName) as Connector;
   };
 
   const currentWalletName: WalletName =
-    defaultCurrentWallet || connectors[0].name;
+    defaultCurrentWallet || connectors[0].walletName;
 
   const DEFAULT_STATE: CurrentWalletState = {
     connectionStatus: WalletConnectionStatus.Untouched,
-    name: currentWalletName,
+    walletName: currentWalletName,
     ...getConnector(currentWalletName).store.getState(),
   };
 
@@ -49,28 +49,28 @@ export const createCurrentWallet = (
     persist<CurrentWalletState>(() => DEFAULT_STATE, {
       name: persistKey,
       version: 0,
-      partialize: ({ name, connectionStatus }) => ({
+      partialize: ({ walletName, connectionStatus }) => ({
         isConnecting: false,
         chainId: undefined,
         accounts: [],
-        name,
+        walletName,
         connectionStatus,
       }),
     }),
   );
 
   const getCurrentConnector = (): Connector => {
-    const name = store.getState().name;
-    const connector = getConnector(name);
+    const walletName = store.getState().walletName;
+    const connector = getConnector(walletName);
 
     if (connector) return connector;
 
     console.debug(
-      `Wallet ${name}, don't exist, reset current wallet to ${connectors[0].name}`,
+      `Wallet ${walletName}, don't exist, reset current wallet to ${connectors[0].walletName}`,
     );
 
     store.setState({
-      name: connectors[0].name,
+      walletName: connectors[0].walletName,
       connectionStatus: WalletConnectionStatus.Untouched,
     });
 
@@ -78,28 +78,28 @@ export const createCurrentWallet = (
   };
 
   let unsubscribe: () => void;
-  const switchCurrentWallet = (name: WalletName) => {
-    if (getConnector(name)) {
+  const switchCurrentWallet = (walletName: WalletName) => {
+    if (getConnector(walletName)) {
       store.setState({
-        name,
-        ...getConnector(name).store.getState(),
+        walletName,
+        ...getConnector(walletName).store.getState(),
       });
 
       unsubscribe?.();
 
-      unsubscribe = getConnector(name).store.subscribe((state) => {
+      unsubscribe = getConnector(walletName).store.subscribe((state) => {
         // copy the wallet store state to current wallet store
         store.setState({
           ...state,
         });
       });
     } else {
-      console.debug(`Wallet '${name}' don't exists`);
+      console.debug(`Wallet '${walletName}' don't exists`);
     }
   };
 
   // update current wallet store
-  switchCurrentWallet(store.getState().name);
+  switchCurrentWallet(store.getState().walletName);
 
   const getConnect: (walletName?: WalletName) => Connector['connect'] =
     (walletName) =>
@@ -111,7 +111,7 @@ export const createCurrentWallet = (
       const result = await connector.connect(...args);
 
       store.setState({
-        name: connector.name,
+        walletName: connector.walletName,
         connectionStatus: WalletConnectionStatus.Connected,
       });
 
@@ -130,7 +130,7 @@ export const createCurrentWallet = (
     const result = await connector.autoConnect(...args);
 
     store.setState({
-      name: connector.name,
+      walletName: connector.walletName,
       connectionStatus: WalletConnectionStatus.Connected,
     });
 
@@ -147,7 +147,7 @@ export const createCurrentWallet = (
   };
 
   return {
-    getName: () => getCurrentConnector().name,
+    getWalletName: () => getCurrentConnector().walletName,
     getStore: () => store,
     getConnector: getCurrentConnector,
     connect: getConnect(),
@@ -157,9 +157,9 @@ export const createCurrentWallet = (
     detectProvider: () => getCurrentConnector().detectProvider(),
     // current wallet only apis
     switchCurrentWallet,
-    connectAsCurrentWallet: (name, ...args) => {
-      switchCurrentWallet(name);
-      return getConnect(name)(...args);
+    connectAsCurrentWallet: (walletName, ...args) => {
+      switchCurrentWallet(walletName);
+      return getConnect(walletName)(...args);
     },
   };
 };

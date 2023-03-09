@@ -35,7 +35,7 @@ export type WalletName<T extends string = string> = Brand<T, 'WalletName'>;
  * The public wallet api
  */
 export interface Wallet {
-  getName: () => WalletName;
+  getWalletName: () => WalletName;
   getStore: () => WalletStore;
   getConnector: () => Connector;
   detectProvider: () => ReturnType<Connector['detectProvider']>;
@@ -46,7 +46,7 @@ export interface Wallet {
 }
 
 export type CurrentWalletState = WalletState & {
-  name: WalletName;
+  walletName: WalletName;
   connectionStatus: WalletConnectionStatus;
 };
 
@@ -60,9 +60,9 @@ export enum WalletConnectionStatus {
 
 export interface CurrentWallet extends Wallet {
   getStore: () => CurrentWalletStore;
-  switchCurrentWallet: (name: WalletName) => void;
+  switchCurrentWallet: (walletName: WalletName) => void;
   connectAsCurrentWallet: (
-    name: WalletName,
+    walletName: WalletName,
     ...args: Parameters<Connector['connect']>
   ) => ReturnType<Connector['connect']>;
 }

@@ -22,9 +22,9 @@ export const WalletSelect = ({
         cursor: 'pointer',
       }}
     >
-      {walletConfigs.map(({ name }) => (
-        <option key={name} value={name}>
-          {name}
+      {walletConfigs.map(({ walletName }) => (
+        <option key={walletName} value={walletName}>
+          {walletName}
         </option>
       ))}
     </select>

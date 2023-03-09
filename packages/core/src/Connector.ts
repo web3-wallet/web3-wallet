@@ -43,7 +43,7 @@ export abstract class Connector<
   /**
    * {@link WalletName}
    */
-  public abstract name: WalletName;
+  public abstract walletName: WalletName;
 
   /**
    * {@link Provider}
@@ -73,12 +73,12 @@ export abstract class Connector<
    */
   // protected providerNotFoundError: ProviderNoFoundError;
   protected get providerNotFoundError() {
-    return new ProviderNoFoundError(`${this.name} provider not found`);
+    return new ProviderNoFoundError(`${this.walletName} provider not found`);
   }
 
   /**
    *
-   * @param name - {@link Connector#WalletName}
+   * @param walletName - {@link Connector#WalletName}
    * @param actions - {@link WalletStoreActions}
    */
   constructor(options?: TConnectorOptions) {

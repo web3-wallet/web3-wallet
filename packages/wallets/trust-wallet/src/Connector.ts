@@ -8,13 +8,13 @@ export type TrustWalletProvider = Provider & {
 };
 const providerFilter = (p: Provider) => !!p.isTrust;
 
-const _name = 'Trust Wallet';
-export const name = _name as WalletName<typeof _name>;
+const _walletName = 'Trust Wallet';
+const walletName = _walletName as WalletName<typeof _walletName>;
 
 export class TrustWallet extends Connector {
-  public static walletName: WalletName<string> = name;
+  public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = walletName;
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {

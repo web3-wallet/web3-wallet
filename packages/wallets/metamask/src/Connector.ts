@@ -5,13 +5,13 @@ import { icon } from './assets';
 
 const providerFilter = (p: Provider) => !!p.isMetaMask;
 
-const _name = 'MetaMask';
-export const name = _name as WalletName<typeof _name>;
+const _walletName = 'MetaMask';
+const walletName = _walletName as WalletName<typeof _walletName>;
 
 export class MetaMask extends Connector {
-  public static walletName: WalletName<string> = name;
+  public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = walletName;
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {

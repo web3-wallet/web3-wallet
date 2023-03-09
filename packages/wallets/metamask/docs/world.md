@@ -61,7 +61,7 @@ export const [
 // ========================================
 
 const {
-  useName,
+  useWalletName,
   switchCurrentWallet,
 
   usePlugin,
@@ -79,7 +79,7 @@ const {
 } = currentWallet;
 
 export const WalletSelectCard = () => {
-  const walletName = useName();
+  const walletName = useWalletName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
 

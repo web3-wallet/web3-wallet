@@ -11,24 +11,24 @@ import { TrustWallet } from '@web3-wallet/trust-wallet';
 import { WalletConnect } from '@web3-wallet/walletconnect';
 
 export type WalletConfig = {
-  name: WalletName;
+  walletName: WalletName;
   icon: string;
   connector: Connector;
 };
 
 export const walletConfigs: WalletConfig[] = [
   {
-    name: MetaMask.walletName,
+    walletName: MetaMask.walletName,
     icon: MetaMask.walletIcon,
     connector: new MetaMask(),
   },
   {
-    name: DeFiWallet.walletName,
+    walletName: DeFiWallet.walletName,
     icon: DeFiWallet.walletIcon,
     connector: new DeFiWallet(),
   },
   {
-    name: CoinbaseWallet.walletName,
+    walletName: CoinbaseWallet.walletName,
     icon: CoinbaseWallet.walletIcon,
     connector: new CoinbaseWallet({
       providerOptions: {
@@ -41,7 +41,7 @@ export const walletConfigs: WalletConfig[] = [
     }),
   },
   {
-    name: WalletConnect.walletName,
+    walletName: WalletConnect.walletName,
     icon: WalletConnect.walletIcon,
     connector: new WalletConnect({
       providerOptions: {
@@ -50,29 +50,29 @@ export const walletConfigs: WalletConfig[] = [
     }),
   },
   {
-    name: TrustWallet.walletName,
+    walletName: TrustWallet.walletName,
     icon: TrustWallet.walletIcon,
     connector: new TrustWallet(),
   },
   {
-    name: CryptocomDesktopWallet.walletName,
+    walletName: CryptocomDesktopWallet.walletName,
     icon: CryptocomDesktopWallet.walletIcon,
     connector: new CryptocomDesktopWallet(),
   },
   {
-    name: BraveWallet.walletName,
+    walletName: BraveWallet.walletName,
     icon: BraveWallet.walletIcon,
     connector: new BraveWallet(),
   },
   {
-    name: ImToken.walletName,
+    walletName: ImToken.walletName,
     icon: ImToken.walletIcon,
     connector: new ImToken(),
   },
 ];
 
-export const getWalletConfig = (name: WalletName): WalletConfig => {
-  return walletConfigs.find((v) => v.name === name) as WalletConfig;
+export const getWalletConfig = (walletName: WalletName): WalletConfig => {
+  return walletConfigs.find((v) => v.walletName === walletName) as WalletConfig;
 };
 
 export const currentWallet = createCurrentWallet(

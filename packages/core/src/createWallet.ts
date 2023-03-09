@@ -13,7 +13,7 @@ export const createWallet = (
   };
 
   const wallet: Wallet = {
-    getName: () => getConnector().name,
+    getWalletName: () => getConnector().walletName,
     getConnector,
     getStore: () => getConnector().store,
     detectProvider: () => getConnector().detectProvider(),

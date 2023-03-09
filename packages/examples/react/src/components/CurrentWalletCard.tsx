@@ -17,7 +17,7 @@ import { Status } from './Status';
 import { WalletSelect } from './WalletSelect';
 
 const {
-  useName,
+  useWalletName,
 
   connect,
   autoConnect,
@@ -36,7 +36,7 @@ const {
 } = currentWallet;
 
 export const CurrentWalletCard = () => {
-  const walletName = useName();
+  const walletName = useWalletName();
   const isConnecting = useIsConnecting();
   const isConnected = useIsConnected();
 

@@ -3,11 +3,11 @@ import { Connector } from '@web3-wallet/core';
 
 import { icon } from './assets';
 
-const _name = 'Brave Wallet';
-export const name = _name as WalletName<typeof _name>;
+const _walletName = 'Brave Wallet';
+const walletName = _walletName as WalletName<typeof _walletName>;
 
 export class BraveWallet extends Connector {
-  public static walletName: WalletName<string> = name;
+  public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = walletName;
 }
