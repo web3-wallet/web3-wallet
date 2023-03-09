@@ -1,5 +1,16 @@
 # @web3-wallet/trust-wallet
 
+## 2.2.0
+
+### Minor Changes
+
+- bump minor package version
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes
