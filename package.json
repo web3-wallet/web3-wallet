@@ -13,9 +13,9 @@
   ],
   "engines": {
     "node": ">= 16.14.0",
-    "pnpm": ">= 7.5.0"
+    "pnpm": ">= 8.2.0"
   },
-  "packageManager": "pnpm@7.5.0",
+  "packageManager": "pnpm@8.2.0",
   "scripts": {
     "dev": "run-p --silent site watch",
     "build": "turbo run build --filter=!./packages/examples/* --filter=!./site",

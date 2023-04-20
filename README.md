@@ -48,7 +48,7 @@ Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentat
 ## Development
 
 - node@18.x
-- pnpm@7.x
+- pnpm@8.x
 
 ```bash
 # start the dev server
