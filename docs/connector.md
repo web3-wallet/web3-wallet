@@ -1,8 +1,8 @@
 # Connector
 
-A connector knowns the detail of how to connect to a specific wallet application such as MetaMask and DeFi Wallet, providing a consistent abstract interface to the upper layer.
+A connector is responsible for the details of connecting to a specific wallet application, such as MetaMask or DeFi Wallet. It provides a consistent and standardized interface to the upper layers of your dApp.
 
-Connector is a low level entity, except feeding a connector to `createWallet` and `createCurrentWallet`, you normally don't need to use connector directly in your dApp.
+Typically, a connector is considered a low-level entity and is not directly used by the dApp's higher-level code. Instead, you would typically feed a connector to createWallet and createCurrentWallet to establish a connection to the user's chosen wallet.
 
 ```ts
 const metaMaskConnector = new MetaMask();
@@ -16,7 +16,7 @@ const currentWallet = createCurrentWallet([
 
 ## Implement a Connector for a wallet
 
-If you want to implement a connector for a wallet, you should extends the abstract connector class from the @web3-wallet/core package. Most of the time, a wallet connector can be implemented with few lines of code. Below is how the MetaMask connector is implemented:
+If you need to implement a connector for a specific wallet, you can easily do so by extending the abstract connector class provided by the @web3-wallet/core package. In most cases, implementing a wallet connector can be accomplished with just a few lines of code.
 
 ```ts
 import type { Provider, ProviderRpcError, WalletName } from '@web3-wallet/core';
