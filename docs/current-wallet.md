@@ -1,6 +1,6 @@
 # CurrentWallet
 
-It's a common pattern that a dApp allows users to connect to several supported wallets, but with only one wallet as the current/active wallet. This pattern is so common that we made the currentWallet builtin, so that you don't need maintain the current wallet appearance in your application code.
+It's a common practice for dApps to support multiple wallets, but typically only one wallet can be active at a time. This pattern is so widespread that we've made it easy to implement in your dApp by including a built-in currentWallet feature. With this feature, you no longer need to maintain the appearance of the current wallet in your application code.
 
 ## createCurrentWallet
 

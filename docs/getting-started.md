@@ -29,7 +29,7 @@ export const App = () => {
 
 ## Create a current wallet
 
-It's a common pattern that a dApp allows users to connect to several supported wallets, but with only one wallet as the current/active wallet. If this is your case, you should use a current wallet instead.
+It's a common pattern for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, current wallet is what you need.
 
 ```ts
 import { MetaMask } from '@web3-wallet/metamask';
