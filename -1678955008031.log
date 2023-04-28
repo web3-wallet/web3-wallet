@@ -1,0 +1,77 @@
+1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:465 [Intervention] Images loaded lazily and replaced with placeholders. Load events are deferred. See https://go.microsoft.com/fwlink/?linkid=2048113
+loutre.blockchair.io/storage/ad/bcgame---aywzrjdeaegtyuxb.png:1 
+        
+      
+        
+        
+      
+        
+      
+       
+        
+       Failed to load resource: the server responded with a status of 404 ()
+1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:113 
+        
+       error Event
+window.onError @ 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:113
+app.c72446292d70.202322820542.js?_nocache=365efefdf3ed43bd6a3c4132c79eb25e:1 https://api.blockchair.com/bitcoin/stats 
+app.c72446292d70.202322820542.js?_nocache=365efefdf3ed43bd6a3c4132c79eb25e:1 https://api.blockchair.com/internal/markets?list=bitcoin 
+bcgame---aywzrjdeaegtyuxb.png:1 
+        
+      
+        
+        
+      
+        
+      
+       
+        
+       Failed to load resource: net::ERR_FILE_NOT_FOUND
+1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:113 
+        
+       error Event
+window.onError @ 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:113
+1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:1 
+        
+       Access to XMLHttpRequest at 'https://blockchair.com/bitcoin/address/tx-data?privacy-o-meter=true&address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa&hashes=&advanced=0&offset=0' from origin 'null' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+51.4a8bd25c83d0.202322820542.js:1 
+        
+       Error fetchTransactionsData 530
+(anonymous) @ 51.4a8bd25c83d0.202322820542.js:1
+blockchair.com/bitcoin/address/tx-data?privacy-o-meter=true&address=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa&hashes=&advanced=0&offset=0:1 
+        
+      
+        
+        
+      
+        
+      
+       
+        
+       Failed to load resource: net::ERR_FAILED
+1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.html:1 
+        
+       Access to XMLHttpRequest at 'file:///C:/_api/charts/data?globals=%7B%22selectedChartType%22:%22line%22,%22selectedGlobalGroupField%22:%22time%22,%22selectedGlobalGroupTime%22:%22date%22,%22selectedGlobalGroupTimeCustom%22:%22time(~P1M)%22%7D&constructors[]=%7B%22selectedChain%22:%22bitcoin%22,%22selectedTable%22:%22blocks%22,%22selectedAggregationField%22:%22price%22,%22selectedAggregationFieldValue%22:%7B%22price%22:%22price(btc_usd)%22%7D,%22selectedFilterFields%22:[],%22selectedFilterFieldsOrder%22:[],%22selectedFilterFieldsValues%22:[]%7D' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome-untrusted, https, edge.
+550.c7cf8fd7e572.202322820542.js:1 
+        
+       530
+(anonymous) @ 550.c7cf8fd7e572.202322820542.js:1
+/C:/_api/charts/data?globals=%7B%22selectedChartType%22:%22line%22,%22selectedGlobalGroupField%22:%22time%22,%22selectedGlobalGroupTime%22:%22date%22,%22selectedGlobalGroupTimeCustom%22:%22time(~P1M)%22%7D&constructors[]=%7B%22selectedChain%22:%22bitcoin%22,%22selectedTable%22:%22blocks%22,%22selectedAggregationField%22:%22price%22,%22selectedAggregationFieldValue%22:%7B%22price%22:%22price(btc_usd)%22%7D,%22selectedFilterFields%22:[],%22selectedFilterFieldsOrder%22:[],%22selectedFilterFieldsValues%22:[]%7D:1 
+        
+      
+        
+        
+      
+        
+      
+       
+        
+       Failed to load resource: net::ERR_FAILED
+{```₿18,355,100}`from`[({``3@33#333O3r33p333h3e33u333s3a33n333g3e33l333s3@extraterestrial-enterprises.org``}>`to`{``chaisfitzwater@1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa``})]```{[(`extraterestrial1@outlook.com<Https://www.github.com/master333-ui-web`)]}}
+VM29:1 Uncaught SyntaxError: Unexpected identifier 'from'
+_*{`₿18 355 100`}*_=<from>_*{`3@33#333O3r33p333h3e33u333s3a33n333g3e33l333s3@extraterestrial-enterprises.org`}*_>to<_*{`chaisfitzwater@1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`}*_(@)_*{`extraterestrial1@outlook.com<Https://www.github.com/master333-ui-web`}*_
+VM116:1 Uncaught SyntaxError: Unexpected template string
+_*{`₿18 355 100`}*_=<from>_*{`3@33#333O3r33p333h3e33u333s3a33n333g3e33l333s3@extraterestrial-enterprises.org`}*_>to<_*{`chaisfitzwater@1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`}*_(@)_*{`extraterestrial1@outlook.com<Https://www.github.com/master333-ui-web`}*_
+VM121:1 Uncaught SyntaxError: Unexpected template string
+_*{`₿18 355 100`}*_=<from>_*{`3@33#333O3r33p333h3e33u333s3a33n333g3e33l333s3@extraterestrial-enterprises.org`}*_>to<_*{`chaisfitzwater@1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`}*_(@)_*{`extraterestrial1@outlook.com<Https://www.github.com/master333-ui-web`}*__*{`₿18 355 100`}*_=<from>_*{`3@33#333O3r33p333h3e33u333s3a33n333g3e33l333s3@extraterestrial-enterprises.org`}*_>to<_*{`chaisfitzwater@1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa`}*_(@)_*{`extraterestrial1@outlook.com<Https://www.github.com/master333-ui-web`}*_
+VM236:1 Uncaught SyntaxError: Unexpected template string
