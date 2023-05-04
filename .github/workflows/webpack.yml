@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    runs-on: mac-osx
 
     strategy:
       matrix:
@@ -26,3 +27,4 @@ jobs:
       run: |
         npm install
         npx webpack
+etcbi.create.ete.token
