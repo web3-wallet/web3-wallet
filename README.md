@@ -42,6 +42,7 @@ Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentat
 | [`@web3-wallet/imtoken`](packages/wallets/imtoken)                                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fimtoken.svg)](https://badge.fury.io/js/@web3-wallet%2Fimtoken)                                   |
 | [`@web3-wallet/cryptocom-desktop-wallet`](packages/wallets/cryptocom-desktop-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcryptocom-desktop-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcryptocom-desktop-wallet) |
 | [`@web3-wallet/brave-wallet`](packages/wallets/brave-wallet)                         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fbrave-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fbrave-wallet)                         |
+| [`@web3-wallet/xdefi`](packages/wallets/xdefi)                                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fxdefi.svg)](https://badge.fury.io/js/@web3-wallet%2Fxdefi)                                       |
 | **Utilities**                                                                        |                                                                                                                                                          |
 | [`@web3-wallet/detect-provider`](packages/detect-provider)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider.svg)](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider)                   |
 

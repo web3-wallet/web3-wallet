@@ -47,4 +47,9 @@ export const routes: Route[] = [
     slug: ['imtoken'],
     path: getPath('imtoken'),
   },
+  {
+    label: 'XDEFI',
+    slug: ['xdefi'],
+    path: getPath('xdefi'),
+  },
 ];

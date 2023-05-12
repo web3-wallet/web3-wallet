@@ -1,10 +1,11 @@
 {
-  "name": "@web3-wallet/coinbase-wallet",
-  "description": "Coinbase wallet connector",
-  "version": "2.2.0",
+  "name": "@web3-wallet/xdefi",
+  "description": "xdefi connector",
+  "version": "1.0.0",
   "keywords": [
     "web3-wallet",
-    "Coinbase wallet"
+    "web3",
+    "xdefi"
   ],
   "author": "logan <logan.luo@crypto.com>",
   "license": "MIT",
@@ -17,16 +18,13 @@
   "module": "./dist/esm/index.js",
   "scripts": {
     "build": "tsc;tsc --module commonjs --outDir dist/cjs",
-    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=coinbase-wallet'",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=xdefi'",
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
     "@web3-wallet/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "@coinbase/wallet-sdk": "^3.6.6"
   },
   "repository": {
     "type": "git",
