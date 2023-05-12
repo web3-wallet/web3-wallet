@@ -1,0 +1,40 @@
+{
+  "name": "@web3-wallet/xdefi",
+  "description": "xdefi connector",
+  "version": "1.0.0",
+  "keywords": [
+    "web3-wallet",
+    "web3",
+    "xdefi"
+  ],
+  "author": "logan <logan.luo@crypto.com>",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "scripts": {
+    "build": "tsc;tsc --module commonjs --outDir dist/cjs",
+    "watch": "chokidar 'src/**/*.ts' -c 'pnpm -wc exec turbo run build --filter=xdefi'",
+    "lint": "eslint src",
+    "fix": "eslint src --fix",
+    "ts-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@web3-wallet/core": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web3-wallet/web3-wallet.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/web3-wallet/web3-wallet/issues"
+  },
+  "homepage": "https://github.com/web3-wallet/web3-wallet#readme"
+}

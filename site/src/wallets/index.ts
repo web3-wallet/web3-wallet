@@ -9,6 +9,7 @@ import type { Connector, WalletName } from '@web3-wallet/react';
 import { createCurrentWallet } from '@web3-wallet/react';
 import { TrustWallet } from '@web3-wallet/trust-wallet';
 import { WalletConnect } from '@web3-wallet/walletconnect';
+import { XDEFI } from '@web3-wallet/xdefi';
 
 export type WalletConfig = {
   walletName: WalletName;
@@ -68,6 +69,11 @@ export const walletConfigs: WalletConfig[] = [
     walletName: ImToken.walletName,
     icon: ImToken.walletIcon,
     connector: new ImToken(),
+  },
+  {
+    walletName: XDEFI.walletName,
+    icon: '/web3-wallet/images/xdefi.jpg',
+    connector: new XDEFI(),
   },
 ];
 
