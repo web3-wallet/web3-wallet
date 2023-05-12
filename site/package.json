@@ -31,6 +31,7 @@
     "@web3-wallet/react": "workspace:*",
     "@web3-wallet/trust-wallet": "workspace:*",
     "@web3-wallet/walletconnect": "workspace:*",
+    "@web3-wallet/xdefi": "workspace:*",
     "framer-motion": "^7.2.1",
     "markdown-toc": "^1.2.0",
     "next": "12.2.5",

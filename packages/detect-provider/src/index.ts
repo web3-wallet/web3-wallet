@@ -35,6 +35,7 @@ export interface Provider extends EventEmitter {
 
 export type DetectProviderOptions = {
   providerName?: string;
+  providerGetter?: (window: unknown) => Provider | undefined;
   eventName?: string;
   detectInterval?: Milliseconds;
   timeout?: Milliseconds;
@@ -60,7 +61,8 @@ export const detectProvider = <T extends Provider = Provider>(
   options: DetectProviderOptions = {},
 ): Promise<T | undefined> => {
   const {
-    providerName: providerName = 'ethereum',
+    providerName = 'ethereum',
+    providerGetter,
     eventName = 'ethereum#initialized',
     detectInterval = 50,
     timeout = 2000,
@@ -71,6 +73,11 @@ export const detectProvider = <T extends Provider = Provider>(
     if (typeof providerName !== 'string') {
       throw new Error(
         `@web3-wallet/detect-provider: Expected option 'providerName' to be a string.`,
+      );
+    }
+    if (providerGetter && typeof providerGetter !== 'function') {
+      throw new Error(
+        `@web3-wallet/detect-provider: Expected option 'providerGetter' to be a function.`,
       );
     }
     if (typeof eventName !== 'string') {
@@ -103,8 +110,14 @@ export const detectProvider = <T extends Provider = Provider>(
   validateInputs();
 
   function checkForProvider(): T | undefined {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const provider: T | undefined = (window as any)[providerName];
+    let provider: T | undefined;
+
+    if (providerGetter) {
+      provider = providerGetter(window) as T | undefined;
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      provider = (window as any)[providerName];
+    }
 
     return typeof provider?.request === 'function' ? provider : undefined;
   }
