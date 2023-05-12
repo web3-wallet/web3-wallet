@@ -15,4 +15,4 @@ import { createWallet } from '@web3-wallet/react';
 const wallet = createWallet(new XDEFI());
 ```
 
-See also: https://docs.metamask.io/guide/#why-metamask
+See also: [XDEFI integration](https://xdefi-wallet.gitbook.io/xdefi-wallet-documentation/technical-documentation/integration)
