@@ -18,10 +18,12 @@ Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get star
 - [cronosid.xyz](https://cronosid.xyz/)
 - [veno.finance](https://veno.finance/)
 - [fulcrom.finance](https://fulcrom.finance/)
+- [corgiai.xyz](https://corgiai.xyz/)
+
 
 ## Documentation
 
-Visit https://web3-wallet.github.io/web3-wallet/docs to view the full documentation.
+Visit https://web3-wallet.github.io/web3-wallet to view the full documentation.
 
 ## Examples
 
