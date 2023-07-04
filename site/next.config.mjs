@@ -23,12 +23,6 @@ const nextConfig = {
       webpack,
     },
   ) {
-    // https://webpack.js.org/configuration/resolve/#resolvefallback
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      'utf-8-validate': false,
-      bufferutil: false,
-    };
     config.plugins.push(
       new webpack.DefinePlugin({
         __SERVER__: isServer,
@@ -39,6 +33,10 @@ const nextConfig = {
         ),
       }),
     );
+
+    // can't resolve modules with Next js
+    // see: https://github.com/WalletConnect/walletconnect-monorepo/issues/1908#issuecomment-1487801131
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
   /**
