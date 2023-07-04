@@ -24,12 +24,10 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@walletconnect/types": "^1.8.0",
     "@web3-wallet/core": "workspace:*",
+    "@walletconnect/ethereum-provider": "^2.8.6",
+    "@walletconnect/modal": "^2.5.9",
     "eventemitter3": "^4.0.7"
-  },
-  "peerDependencies": {
-    "@walletconnect/ethereum-provider": "^1.8.0"
   },
   "repository": {
     "type": "git",
