@@ -332,13 +332,13 @@ export abstract class Connector<
   }
 
   /**
-   * wallet connect listener
+   * Wallet connect listener
    *
-   * @param chainId - the connected chain id
+   * @param info - the connect info
    * @return void
    */
-  protected onConnect({ chainId }: ProviderConnectInfo): void {
-    this.updateChainId(chainId);
+  protected onConnect(info: ProviderConnectInfo): void {
+    this.updateChainId(info.chainId);
   }
 
   /**
@@ -414,7 +414,9 @@ export abstract class Connector<
         this.provider.off('disconnect', onDisconnect);
         this.provider.off('chainChanged', onChainChanged);
         this.provider.off('accountsChanged', onAccountsChanged);
-      } else if (typeof this.provider.removeListener === 'function') {
+      }
+
+      if (typeof this.provider.removeListener === 'function') {
         this.provider.removeListener('connect', onConnect);
         this.provider.removeListener('disconnect', onDisconnect);
         this.provider.removeListener('chainChanged', onChainChanged);

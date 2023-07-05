@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/walletconnect",
   "description": "WalletConnect connector",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "web3",
@@ -24,12 +24,10 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@walletconnect/types": "^1.8.0",
     "@web3-wallet/core": "workspace:*",
+    "@walletconnect/ethereum-provider": "^2.8.6",
+    "@walletconnect/modal": "^2.5.9",
     "eventemitter3": "^4.0.7"
-  },
-  "peerDependencies": {
-    "@walletconnect/ethereum-provider": "^1.8.0"
   },
   "repository": {
     "type": "git",
