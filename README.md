@@ -62,11 +62,11 @@ pnpm test
 
 ## Package versioning and changelogs
 
-@web3-wallet utilizes a changeset to manage the versioning and changelogs of its packages.
+@web3-wallet utilizes [changeset](https://github.com/changesets/changesets) to manage the versioning and changelogs of its packages.
 
 1. To update the version of specific packages, run `pnpm changeset`.
 2. Then, `run pnpm changeset version` to apply the version and changelog updates.
-3. After making the necessary changes, commit the local modifications.
+3. Commit the local modifications.
 4. Finally, run `pnpm release` to publish the updated packages to the npm registry.
 
 ## License
