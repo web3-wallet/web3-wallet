@@ -35,6 +35,11 @@ const wallet = new WalletConnect({
      */
     optionalChains: [25],
     showQrModal: true,
+    optionalMethods: ['eth_signTypedData', 'eth_signTypedData_v4', 'eth_sign'],
+    qrModalOptions: {
+      // 'dark' | 'light'
+      themeMode: 'dark',
+    },
   },
 });
 ```

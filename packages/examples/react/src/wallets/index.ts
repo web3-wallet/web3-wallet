@@ -45,6 +45,7 @@ export const walletConfigs: WalletConfig[] = [
     icon: WalletConnect.walletIcon,
     connector: new WalletConnect({
       providerOptions: {
+        projectId: 'f30b7f87c783bab76df3a66876f2a67f',
         rpcMap,
         /**
          * @note Chains that your app intents to use and the peer MUST support.
@@ -61,7 +62,11 @@ export const walletConfigs: WalletConfig[] = [
          */
         optionalChains: [25],
         showQrModal: true,
-        projectId: 'f30b7f87c783bab76df3a66876f2a67f',
+        optionalMethods: [
+          'eth_signTypedData',
+          'eth_signTypedData_v4',
+          'eth_sign',
+        ],
       },
     }),
   },
