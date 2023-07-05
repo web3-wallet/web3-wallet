@@ -53,7 +53,10 @@ Visit https://web3-wallet.github.io/web3-wallet to view the full documentation.
 - pnpm@8.x
 
 ```bash
-# start the dev server
+# install dependencies
+pnpm install
+
+# start the dev server at: http://localhost:3003/web3-wallet
 pnpm dev
 
 # test
@@ -62,11 +65,11 @@ pnpm test
 
 ## Package versioning and changelogs
 
-@web3-wallet utilizes a changeset to manage the versioning and changelogs of its packages.
+@web3-wallet utilizes [changeset](https://github.com/changesets/changesets) to manage the versioning and changelogs of its packages.
 
 1. To update the version of specific packages, run `pnpm changeset`.
-2. Then, `run pnpm changeset version` to apply the version and changelog updates.
-3. After making the necessary changes, commit the local modifications.
+2. Then, run `pnpm changeset version` to apply updates of the versioning and changelogs .
+3. Commit the local modifications.
 4. Finally, run `pnpm release` to publish the updated packages to the npm registry.
 
 ## License
