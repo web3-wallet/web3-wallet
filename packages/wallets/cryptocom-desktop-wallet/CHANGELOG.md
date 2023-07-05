@@ -1,5 +1,16 @@
 # @web3-wallet/cryptocom-desktop-wallet
 
+## 2.3.0
+
+### Minor Changes
+
+- bump package version
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/core@2.3.0
+
 ## 2.2.0
 
 ### Minor Changes
