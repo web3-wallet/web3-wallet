@@ -6,7 +6,7 @@
 type CreateWallet = (connector: Connector) => Wallet;
 ```
 
-The wallet object is returned from createWallet.
+The Wallet interface is returned from createWallet.
 
 ```ts
 import { MetaMask } from '@web3-wallet/MetaMask';

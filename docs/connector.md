@@ -2,7 +2,7 @@
 
 A connector is responsible for the details of connecting to a specific wallet application, such as MetaMask or DeFi Wallet. It provides a consistent and standardized interface to the upper layers of your dApp.
 
-Typically, a connector is considered a low-level entity and is not directly used by the dApp's higher-level code. Instead, you would typically feed a connector to createWallet and createCurrentWallet to establish a connection to the user's chosen wallet.
+Connector is considered low-level entity that usually should not be used directly. Instead, you would typically feed a connector to createWallet or createCurrentWallet to to crate an high-level "Wallet" or "CurrentWallet" interface.
 
 ```ts
 const metaMaskConnector = new MetaMask();

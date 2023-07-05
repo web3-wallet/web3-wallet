@@ -25,7 +25,7 @@ import { createCurrentWallet } from '@web3-wallet/react';
 
 export const currentWallet = new createCurrentWallet([
   new MetaMask(),
-  new DefiWallet(),
+  new DeFiWallet(),
 ]);
 ```
 
@@ -39,7 +39,7 @@ The currentWallet state will be persist to local storage, you can specify the lo
 
 ## CurrentWallet API
 
-Most of the wallet APIs are also available on currentWallet. below list the currentWallet only APIs. See also [Wallet](https://web3-wallet.github.io/web3-wallet/docs/wallet).
+Most of the wallet APIs are also available on currentWallet. Below list the currentWallet only APIs. See also [Wallet](https://web3-wallet.github.io/web3-wallet/docs/wallet).
 
 ```ts
 export interface CurrentWallet extends Wallet {

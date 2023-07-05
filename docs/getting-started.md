@@ -33,12 +33,12 @@ It's a common pattern for dApps to support multiple wallets, but typically only 
 
 ```ts
 import { MetaMask } from '@web3-wallet/metamask';
-import { DefiWallet } from '@web3-wallet/defiwallet';
+import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { createCurrentWallet } from '@web3-wallet/react';
 
 export const currentWallet = new createCurrentWallet([
   new MetaMask(),
-  new DefiWallet(),
+  new DeFiWallet(),
 ]);
 
 const {
@@ -63,13 +63,13 @@ In this minimal wallet modal example, we will:
 // src/wallet.ts
 // ===========================
 import { MetaMask } from '@web3-wallet/metamask';
-import { DefiWallet } from '@web3-wallet/defiwallet';
+import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { type WalletName, createCurrentWallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
 export const currentWallet = new createCurrentWallet([
   new MetaMask(),
-  new DefiWallet(),
+  new DeFiWallet(),
 ]);
 
 export type WalletConfig = {
@@ -87,8 +87,8 @@ export const walletConfigs: WalletConfig[] = [
   },
   {
     label: 'DeFi Wallet',
-    name: DefiWallet.walletName,
-    icon: DefiWallet.walletIcon,
+    name: DeFiWallet.walletName,
+    icon: DeFiWallet.walletIcon,
   },
 ];
 
@@ -108,7 +108,7 @@ export const App = () => {
   }, []);
 
   const account = useAccount();
-  const walletConfig = getWalletConfig(uesName());
+  const walletConfig = getWalletConfig(useWalletName());
 
   return (
     <main id="app">
