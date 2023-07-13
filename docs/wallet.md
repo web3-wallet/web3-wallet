@@ -104,11 +104,12 @@ Wallet connector implementors should override this method if the wallet supports
 
 What is force disconnect?
 
-- force disconnect will actually disconnect the wallet.
-- non-disconnect only reset the wallet store to it's initial state.
+- force disconnect will actually disconnect the wallet from the dApp.
+- non-force disconnect only reset the wallet store to it's initial state. But behind the scene, the wallet is still connecting to the dApp.
 
-For some wallets, MetaMask for example, there're not way to force disconnect MetaMask.
-For some wallets, Walletconnect for example, we are able to force disconnect Walletconnect.
+For some wallets, MetaMask for example, there're not way to force disconnect MetaMask from dApps.
+
+For some wallets, Walletconnect for example, users are able to force disconnect Walletconnect from dApps.
 
 ### watchAsset
 
