@@ -1,5 +1,13 @@
 # @web3-wallet/defiwallet
 
+## 2.4.1
+
+### Patch Changes
+
+- bump version
+- Updated dependencies
+  - @web3-wallet/core@2.4.1
+
 ## 2.4.0
 
 ### Minor Changes

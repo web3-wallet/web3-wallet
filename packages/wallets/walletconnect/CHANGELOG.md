@@ -1,5 +1,13 @@
 # @web3-wallet/walletconnect
 
+## 3.0.1
+
+### Patch Changes
+
+- bump version
+- Updated dependencies
+  - @web3-wallet/core@2.4.1
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/xdefi",
   "description": "xdefi connector",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "keywords": [
     "web3-wallet",
     "web3",

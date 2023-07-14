@@ -1,7 +1,7 @@
 {
   "name": "@web3-wallet/metamask",
   "description": "metamask connector",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "keywords": [
     "web3-wallet",
     "web3",
