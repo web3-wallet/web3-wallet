@@ -237,6 +237,8 @@ export abstract class Connector<
        */
       try {
         await this.switchChain(desiredChainId);
+        this.updateChainId(desiredChainId);
+        this.updateAccounts(accounts);
       } catch (err: unknown) {
         const error = err as ProviderRpcError;
         /**
