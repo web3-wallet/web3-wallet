@@ -14,9 +14,8 @@ export type CoreHooks = {
 const computeIsConnected = ({
   chainId,
   accounts,
-  isConnecting,
-}: Pick<WalletState, 'chainId' | 'accounts' | 'isConnecting'>) => {
-  return Boolean(chainId && accounts?.length && !isConnecting);
+}: Pick<WalletState, 'chainId' | 'accounts'>) => {
+  return Boolean(chainId && accounts?.length);
 };
 
 const ACCOUNTS_EQUALITY_CHECKER: (
@@ -47,18 +46,16 @@ export const createCoreHooks = (wallet: Wallet): CoreHooks => {
     useStore((s) => s.accounts, ACCOUNTS_EQUALITY_CHECKER);
 
   const useIsConnected: CoreHooks['useIsConnected'] = () => {
-    const isConnecting = useIsConnecting();
     const chainId = useChainId();
     const accounts = useAccounts();
 
     return useMemo(
       () =>
         computeIsConnected({
-          isConnecting,
           chainId,
           accounts,
         }),
-      [isConnecting, chainId, accounts],
+      [chainId, accounts],
     );
   };
 
