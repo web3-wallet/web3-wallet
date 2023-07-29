@@ -1,5 +1,12 @@
 # @web3-wallet/nextjs
 
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/react@2.5.0
+
 ## 1.4.1
 
 ### Patch Changes

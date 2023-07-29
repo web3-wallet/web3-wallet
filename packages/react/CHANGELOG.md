@@ -1,5 +1,11 @@
 # @web3-wallet/react
 
+## 2.5.0
+
+### Minor Changes
+
+- bump package version
+
 ## 2.4.1
 
 ### Patch Changes
