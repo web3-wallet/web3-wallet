@@ -24,10 +24,6 @@ Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get star
 
 Visit https://web3-wallet.github.io/web3-wallet to view the full documentation.
 
-## Examples
-
-- [example-react](./packages/examples/react/)
-
 ## Packages
 
 | Package                                                                              | Version                                                                                                                                                  |
@@ -49,10 +45,12 @@ Visit https://web3-wallet.github.io/web3-wallet to view the full documentation.
 
 ## Development
 
-- node@18.x
-- pnpm@8.x
+- [node@18.x](https://nodejs.org/en)
+- [pnpm@8.x](https://pnpm.io/installation)
 
 ```bash
+# install pnpm: https://pnpm.io/installation
+
 # install dependencies
 pnpm install
 
@@ -61,6 +59,40 @@ pnpm dev
 
 # test
 pnpm test
+```
+
+## Examples
+
+### [site](./site)
+
+The @web3-wallet documentation site itself provides an illustration of how to use web3-wallet. You can refer to the site as an example of web3-wallet usage.
+
+Run the site in your local:
+
+```
+# clone this repo
+git clone git@github.com:web3-wallet/web3-wallet.git
+
+# install dependencies
+pnpm install
+
+# start the site in dev mode
+pnpm dev
+```
+
+[example-react](./packages/examples/react/)
+
+Run the site in your local:
+
+```
+# clone this repo
+git clone git@github.com:web3-wallet/web3-wallet.git
+
+# install dependencies
+pnpm install
+
+# start example-react
+pnpm example-react
 ```
 
 ## Package versioning and changelogs
