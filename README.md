@@ -8,9 +8,9 @@
   </a>
 </p>
 
-## Getting Started
+## Documentation
 
-Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get started with web3-wallet.
+https://web3-wallet.github.io/web3-wallet
 
 ## Projects that use @web3-wallet
 
@@ -19,10 +19,8 @@ Visit https://web3-wallet.github.io/web3-wallet/docs/getting-started to get star
 - [veno.finance](https://veno.finance/)
 - [fulcrom.finance](https://fulcrom.finance/)
 - [corgiai.xyz](https://corgiai.xyz/)
-
-## Documentation
-
-Visit https://web3-wallet.github.io/web3-wallet to view the full documentation.
+- [tectonic](https://tectonic.finance/)
+- [kaching](https://kaching.win/)
 
 ## Packages
 
@@ -63,6 +61,10 @@ pnpm test
 
 ## Examples
 
+### [cronos-wallet-connections](https://github.com/kentimsit/cronos-wallet-connections)
+
+cronos-wallet-connections is a boilerplate for Cronos dapp.
+
 ### [site](./site)
 
 The @web3-wallet documentation site itself provides an illustration of how to use web3-wallet. You can refer to the site as an example of web3-wallet usage.
@@ -80,7 +82,7 @@ pnpm install
 pnpm dev
 ```
 
-[example-react](./packages/examples/react/)
+### [example-react](./packages/examples/react/)
 
 Run the site in your local:
 
