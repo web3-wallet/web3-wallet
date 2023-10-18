@@ -19,8 +19,9 @@ https://web3-wallet.github.io/web3-wallet
 - [veno.finance](https://veno.finance/)
 - [fulcrom.finance](https://fulcrom.finance/)
 - [corgiai.xyz](https://corgiai.xyz/)
-- [tectonic](https://tectonic.finance/)
-- [kaching](https://kaching.win/)
+- [tectonic.finance](https://tectonic.finance/)
+- [kaching.win](https://kaching.win/)
+- [vvs.finance](https://vvs.finance/)
 
 ## Packages
 
