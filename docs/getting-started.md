@@ -36,7 +36,7 @@ import { MetaMask } from '@web3-wallet/metamask';
 import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { createCurrentWallet } from '@web3-wallet/react';
 
-export const currentWallet = new createCurrentWallet([
+export const currentWallet = createCurrentWallet([
   new MetaMask(),
   new DeFiWallet(),
 ]);
@@ -67,7 +67,7 @@ import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { type WalletName, createCurrentWallet } from '@web3-wallet/react';
 import { useEffect } from 'react';
 
-export const currentWallet = new createCurrentWallet([
+export const currentWallet = createCurrentWallet([
   new MetaMask(),
   new DeFiWallet(),
 ]);
@@ -76,7 +76,7 @@ export type WalletConfig = {
   label: string;
   // wallet name is the unique id of the wallet
   name: WalletName;
-  icon: MetaMask.walletIcon;
+  icon: string;
 };
 
 export const walletConfigs: WalletConfig[] = [
@@ -92,7 +92,7 @@ export const walletConfigs: WalletConfig[] = [
   },
 ];
 
-const getWalletConfig = (name: WalletName): WalletConfig => {
+export const getWalletConfig = (name: WalletName): WalletConfig => {
   return walletConfigs.find((v) => v.name === name)!;
 };
 
