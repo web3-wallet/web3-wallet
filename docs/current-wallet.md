@@ -23,7 +23,7 @@ import { MetaMask } from '@web3-wallet/metamask';
 import { DeFiWallet } from '@web3-wallet/defiwallet';
 import { createCurrentWallet } from '@web3-wallet/react';
 
-export const currentWallet = new createCurrentWallet([
+export const currentWallet = createCurrentWallet([
   new MetaMask(),
   new DeFiWallet(),
 ]);
