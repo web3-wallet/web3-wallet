@@ -1,4 +1,5 @@
 import { rpcMap } from '@site/chains';
+import { BitgetWallet } from '@web3-wallet/bitget-wallet'
 import { BraveWallet } from '@web3-wallet/brave-wallet';
 import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
 import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
@@ -108,6 +109,11 @@ export const walletConfigs: WalletConfig[] = [
     walletName: XDEFI.walletName,
     icon: '/web3-wallet/images/xdefi.jpg',
     connector: new XDEFI(),
+  },
+  {
+    walletName: BitgetWallet.walletName,
+    icon: BitgetWallet.walletIcon,
+    connector: new BitgetWallet(),
   },
 ];
 

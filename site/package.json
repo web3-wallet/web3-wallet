@@ -22,6 +22,7 @@
     "@ethersproject/providers": "^5.7.0",
     "@ethersproject/units": "^5.7.0",
     "@types/react-syntax-highlighter": "^15.5.5",
+    "@web3-wallet/bitget-wallet": "workspace:^",
     "@web3-wallet/brave-wallet": "workspace:*",
     "@web3-wallet/coinbase-wallet": "workspace:*",
     "@web3-wallet/cryptocom-desktop-wallet": "workspace:*",
