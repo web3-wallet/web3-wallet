@@ -201,6 +201,12 @@ importers:
         specifier: ^4.3.5
         version: 4.3.5(react@18.2.0)
 
+  packages/wallets/bitget-wallet:
+    dependencies:
+      '@web3-wallet/core':
+        specifier: workspace:*
+        version: link:../../core
+
   packages/wallets/brave-wallet:
     dependencies:
       '@web3-wallet/core':
@@ -299,6 +305,9 @@ importers:
       '@types/react-syntax-highlighter':
         specifier: ^15.5.5
         version: 15.5.5
+      '@web3-wallet/bitget-wallet':
+        specifier: workspace:^
+        version: link:../packages/wallets/bitget-wallet
       '@web3-wallet/brave-wallet':
         specifier: workspace:*
         version: link:../packages/wallets/brave-wallet
@@ -2135,6 +2144,7 @@ packages:
 
   /@emotion/memoize@0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
     dev: false
     optional: true
 
