@@ -1,5 +1,12 @@
 # @web3-wallet/nextjs
 
+## 2.4.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @web3-wallet/bitget-wallet@0.0.2
+
 ## 2.4.2
 
 ### Patch Changes
