@@ -32,7 +32,7 @@ export const name = _name as WalletName<typeof _name>;
 export class MetaMask extends Connector {
   public static walletName: WalletName<string> = name;
   public static walletIcon: string = icon;
-  public name: WalletName<string> = name;
+  public walletName: WalletName<string> = name;
 
   constructor(options?: Connector['options']) {
     super({
