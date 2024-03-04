@@ -31,8 +31,7 @@
   },
   "dependencies": {
     "ethers": "6.11.1",
-    "@react-web3-wallet/core": "workspace:*",
-    "zustand": "^4.3.5"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=16.8"
