@@ -1,5 +1,5 @@
-import { formatEther } from '@ethersproject/units';
 import type { Wallet } from '@web3-wallet/react';
+import { formatEther } from 'ethers';
 import React from 'react';
 
 import { Account } from './Account';

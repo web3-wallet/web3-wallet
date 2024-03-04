@@ -12,15 +12,12 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "ethers": "6.11.1",
     "@chakra-ui/icons": "^2.0.9",
     "@chakra-ui/react": "^2.3.1",
     "@chakra-ui/theme-tools": "^2.0.11",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/experimental": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
-    "@ethersproject/units": "^5.7.0",
     "@types/react-syntax-highlighter": "^15.5.5",
     "@web3-wallet/bitget-wallet": "workspace:^",
     "@web3-wallet/brave-wallet": "workspace:*",

@@ -31,8 +31,8 @@
     "build": "tsc;tsc --module commonjs --outDir dist/cjs"
   },
   "dependencies": {
-    "@ethersproject/address": "^5.7.0",
     "@web3-wallet/detect-provider": "workspace:*",
+    "ethers": "6.11.1",
     "zustand": "^4.3.5"
   },
   "bugs": {

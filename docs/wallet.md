@@ -28,7 +28,8 @@ interface Wallet {
   useIsConnected: () => boolean;
   useChainId: () => number | undefined;
   useAccount: () => string | undefined;
-  useProvider: (network?: Networkish) => Web3Provider | undefined;
+  useBalance: () => bigint | undefined;
+  useProvider: (network?: Networkish) => BrowserProvider | undefined;
   useHasProvider: (
     providerFilter?: (provider: Provider) => boolean,
     detectProviderOptions?: DetectProviderOptions,
@@ -147,11 +148,27 @@ interface Wallet {
 }
 ```
 
-Returns the active user wallet account -- the account that the user current selected in the wallet extension/app.
+Returns the active user wallet account(the account that the user current selected in the wallet extension/app).
+
+### useBalance
+
+```ts
+interface Wallet {
+  useBalance: () => bigint | undefined;
+}
+```
+
+Returns the active user wallet account balance.
 
 ### useChainId
 
-Returns the active user wallet chainId -- the chain that the user current connected in the wallet extension/app.
+Returns the active user wallet chainId.
+
+```ts
+interface Wallet {
+  useChainId: () =>  number| undefined;
+}
+```
 
 ### useIsConnected
 
@@ -178,7 +195,7 @@ const useIsConnected = (): boolean => {
 
 ```ts
 interface Wallet {
-  useProvider: (network?: Networkish) => Web3Provider | undefined;
+  useProvider: (network?: Networkish) => BrowserProvider | undefined;
 }
 ```
 

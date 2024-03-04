@@ -30,9 +30,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/networks": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
+    "ethers": "6.11.1",
     "@web3-wallet/core": "workspace:*",
     "zustand": "^4.3.5"
   },
