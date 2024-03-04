@@ -110,7 +110,7 @@ importers:
 
   packages/core:
     dependencies:
-      '@web3-wallet/detect-provider':
+      '@react-web3-wallet/detect-provider':
         specifier: workspace:*
         version: link:../detect-provider
       ethers:
@@ -124,34 +124,34 @@ importers:
 
   packages/examples/react:
     dependencies:
-      '@web3-wallet/brave-wallet':
+      '@react-web3-wallet/brave-wallet':
         specifier: workspace:*
         version: link:../../wallets/brave-wallet
-      '@web3-wallet/coinbase-wallet':
+      '@react-web3-wallet/coinbase-wallet':
         specifier: workspace:*
         version: link:../../wallets/coinbase-wallet
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
-      '@web3-wallet/cryptocom-desktop-wallet':
+      '@react-web3-wallet/cryptocom-desktop-wallet':
         specifier: workspace:*
         version: link:../../wallets/cryptocom-desktop-wallet
-      '@web3-wallet/defiwallet':
+      '@react-web3-wallet/defiwallet':
         specifier: workspace:*
         version: link:../../wallets/defiwallet
-      '@web3-wallet/imtoken':
+      '@react-web3-wallet/imtoken':
         specifier: workspace:*
         version: link:../../wallets/imtoken
-      '@web3-wallet/metamask':
+      '@react-web3-wallet/metamask':
         specifier: workspace:*
         version: link:../../wallets/metamask
-      '@web3-wallet/react':
+      '@react-web3-wallet/react':
         specifier: workspace:*
         version: link:../../react
-      '@web3-wallet/trust-wallet':
+      '@react-web3-wallet/trust-wallet':
         specifier: workspace:*
         version: link:../../wallets/trust-wallet
-      '@web3-wallet/walletconnect':
+      '@react-web3-wallet/walletconnect':
         specifier: workspace:*
         version: link:../../wallets/walletconnect
       ethers:
@@ -173,7 +173,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../core
       ethers:
@@ -188,13 +188,13 @@ importers:
 
   packages/wallets/bitget-wallet:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/brave-wallet:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
@@ -203,37 +203,37 @@ importers:
       '@coinbase/wallet-sdk':
         specifier: ^3.6.6
         version: 3.6.6
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/cryptocom-desktop-wallet:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/defiwallet:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/imtoken:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/metamask:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
   packages/wallets/trust-wallet:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
@@ -245,7 +245,7 @@ importers:
       '@walletconnect/modal':
         specifier: ^2.5.9
         version: 2.5.9(react@18.2.0)
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
       eventemitter3:
@@ -254,7 +254,7 @@ importers:
 
   packages/wallets/xdefi:
     dependencies:
-      '@web3-wallet/core':
+      '@react-web3-wallet/core':
         specifier: workspace:*
         version: link:../../core
 
@@ -278,37 +278,37 @@ importers:
       '@types/react-syntax-highlighter':
         specifier: ^15.5.5
         version: 15.5.5
-      '@web3-wallet/bitget-wallet':
+      '@react-web3-wallet/bitget-wallet':
         specifier: workspace:^
         version: link:../packages/wallets/bitget-wallet
-      '@web3-wallet/brave-wallet':
+      '@react-web3-wallet/brave-wallet':
         specifier: workspace:*
         version: link:../packages/wallets/brave-wallet
-      '@web3-wallet/coinbase-wallet':
+      '@react-web3-wallet/coinbase-wallet':
         specifier: workspace:*
         version: link:../packages/wallets/coinbase-wallet
-      '@web3-wallet/cryptocom-desktop-wallet':
+      '@react-web3-wallet/cryptocom-desktop-wallet':
         specifier: workspace:*
         version: link:../packages/wallets/cryptocom-desktop-wallet
-      '@web3-wallet/defiwallet':
+      '@react-web3-wallet/defiwallet':
         specifier: workspace:*
         version: link:../packages/wallets/defiwallet
-      '@web3-wallet/imtoken':
+      '@react-web3-wallet/imtoken':
         specifier: workspace:*
         version: link:../packages/wallets/imtoken
-      '@web3-wallet/metamask':
+      '@react-web3-wallet/metamask':
         specifier: workspace:*
         version: link:../packages/wallets/metamask
-      '@web3-wallet/react':
+      '@react-web3-wallet/react':
         specifier: workspace:*
         version: link:../packages/react
-      '@web3-wallet/trust-wallet':
+      '@react-web3-wallet/trust-wallet':
         specifier: workspace:*
         version: link:../packages/wallets/trust-wallet
-      '@web3-wallet/walletconnect':
+      '@react-web3-wallet/walletconnect':
         specifier: workspace:*
         version: link:../packages/wallets/walletconnect
-      '@web3-wallet/xdefi':
+      '@react-web3-wallet/xdefi':
         specifier: workspace:*
         version: link:../packages/wallets/xdefi
       ethers:

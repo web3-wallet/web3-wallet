@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/bitget-wallet",
+  "name": "@react-web3-wallet/bitget-wallet",
   "description": "Bitget Wallet connector",
   "version": "0.0.2",
   "keywords": [
@@ -24,7 +24,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "repository": {
     "type": "git",

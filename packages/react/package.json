@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/react",
+  "name": "@react-web3-wallet/react",
   "description": "web3-wallet react",
   "version": "2.5.0",
   "keywords": [
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "ethers": "6.11.1",
-    "@web3-wallet/core": "workspace:*",
+    "@react-web3-wallet/core": "workspace:*",
     "zustand": "^4.3.5"
   },
   "peerDependencies": {

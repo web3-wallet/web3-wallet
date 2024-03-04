@@ -3,7 +3,7 @@ import type {
   Wallet as CoreWallet,
   WalletConnectionStatus,
   WalletName,
-} from '@web3-wallet/core';
+} from '@react-web3-wallet/core';
 
 import type { BuiltinHooks } from './hooks';
 
@@ -16,7 +16,7 @@ export {
   WalletName,
   WalletState,
   WatchAssetParameters,
-} from '@web3-wallet/core';
+} from '@react-web3-wallet/core';
 
 export type Wallet = BuiltinHooks & CoreWallet;
 export interface CurrentWallet extends CoreCurrentWallet, BuiltinHooks {

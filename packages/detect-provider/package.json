@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/detect-provider",
+  "name": "@react-web3-wallet/detect-provider",
   "description": "detect provider in host environments",
   "version": "2.4.1",
   "keywords": [

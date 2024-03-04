@@ -25,7 +25,7 @@ export const createCurrentWallet = (
   connectorsOrWallets: (Connector | Wallet)[],
   options?: CreateCurrentWalletOptions,
 ): CurrentWallet => {
-  const { defaultCurrentWallet, persistKey = '@web3-wallet/current-wallet' } =
+  const { defaultCurrentWallet, persistKey = '@react-web3-wallet/current-wallet' } =
     options ?? {};
 
   const connectors: Connector[] = connectorsOrWallets.map((v) =>

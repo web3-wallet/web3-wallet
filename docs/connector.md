@@ -16,11 +16,11 @@ const currentWallet = createCurrentWallet([
 
 ## Implement a Connector for a wallet
 
-If you need to implement a connector for a specific wallet, you can easily do so by extending the abstract connector class provided by the @web3-wallet/core package. In most cases, implementing a wallet connector can be accomplished with few lines of code.
+If you need to implement a connector for a specific wallet, you can easily do so by extending the abstract connector class provided by the @react-web3-wallet/core package. In most cases, implementing a wallet connector can be accomplished with few lines of code.
 
 ```ts
-import type { Provider, ProviderRpcError, WalletName } from '@web3-wallet/core';
-import { Connector } from '@web3-wallet/core';
+import type { Provider, ProviderRpcError, WalletName } from '@react-web3-wallet/core';
+import { Connector } from '@react-web3-wallet/core';
 
 import { icon } from './assets';
 

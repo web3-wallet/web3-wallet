@@ -1,4 +1,4 @@
-import type { Connector } from '@web3-wallet/core';
+import type { Connector } from '@react-web3-wallet/core';
 import { type Networkish , BrowserProvider} from 'ethers';
 import { useEffect, useMemo, useRef, useState } from 'react';
 

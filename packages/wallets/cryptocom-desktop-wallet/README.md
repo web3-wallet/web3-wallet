@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/cryptocom-desktop-wallet
+pnpm add @react-web3-wallet/cryptocom-desktop-wallet
 ```
 
 ## Usage
 
 ```ts
-import DesktopWallet from '@web3-wallet/cryptocom-desktop-wallet';
-import { createWallet } from '@web3-wallet/react';
+import DesktopWallet from '@react-web3-wallet/cryptocom-desktop-wallet';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(new DesktopWallet());
 ```

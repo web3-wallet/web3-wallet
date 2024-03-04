@@ -3,16 +3,16 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/walletconnect
+pnpm add @react-web3-wallet/walletconnect
 ```
 
 ## Usage
 
-@web3-wallet/walletconnect is a wrap on top of [WalletConnect v2.0](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0). Walletconnect v2.0 is NOT backwards-compatible with v1.0. WalletConnect v1.0 and v2.0 offer essentially the same end-user experience, however they work very differently internally.
+@react-web3-wallet/walletconnect is a wrap on top of [WalletConnect v2.0](https://docs.walletconnect.com/2.0/advanced/migration-from-v1.x/what-changed-from-v1.0). Walletconnect v2.0 is NOT backwards-compatible with v1.0. WalletConnect v1.0 and v2.0 offer essentially the same end-user experience, however they work very differently internally.
 
 ```ts
-import { Walletconnect } from '@web3-wallet/walletconnect';
-import { createWallet } from '@web3-wallet/react';
+import { Walletconnect } from '@react-web3-wallet/walletconnect';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = new WalletConnect({
   providerOptions: {

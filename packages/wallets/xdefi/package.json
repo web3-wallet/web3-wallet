@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/xdefi",
+  "name": "@react-web3-wallet/xdefi",
   "description": "xdefi connector",
   "version": "1.2.1",
   "keywords": [
@@ -24,7 +24,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "repository": {
     "type": "git",

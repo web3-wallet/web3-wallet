@@ -1,4 +1,4 @@
-import type { AddEthereumChainParameter } from '@web3-wallet/react';
+import type { AddEthereumChainParameter } from '@react-web3-wallet/react';
 import type { Networkish } from 'ethers';
 
 const INFURA_KEY = process.env.infuraKey;

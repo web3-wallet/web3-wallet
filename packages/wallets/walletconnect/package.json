@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/walletconnect",
+  "name": "@react-web3-wallet/walletconnect",
   "description": "WalletConnect connector",
   "version": "3.0.1",
   "keywords": [
@@ -24,7 +24,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*",
+    "@react-web3-wallet/core": "workspace:*",
     "@walletconnect/ethereum-provider": "^2.8.6",
     "@walletconnect/modal": "^2.5.9",
     "eventemitter3": "^4.0.7"

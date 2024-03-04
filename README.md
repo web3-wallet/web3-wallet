@@ -12,7 +12,7 @@
 
 https://web3-wallet.github.io/web3-wallet
 
-## Projects that use @web3-wallet
+## Projects that use @react-web3-wallet
 
 - [minted.network](https://minted.network/)
 - [cronosid.xyz](https://cronosid.xyz/)
@@ -27,21 +27,21 @@ https://web3-wallet.github.io/web3-wallet
 
 | Package                                                                              | Version                                                                                                                                                  |
 | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`@web3-wallet/core`](packages/core)                                                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@web3-wallet%2Fcore)                                         |
-| [`@web3-wallet/react`](packages/react)                                               | [![npm version](https://badge.fury.io/js/@web3-wallet%2Freact.svg)](https://badge.fury.io/js/@web3-wallet%2Freact)                                       |
+| [`@react-web3-wallet/core`](packages/core)                                                 | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fcore.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fcore)                                         |
+| [`@react-web3-wallet/react`](packages/react)                                               | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Freact.svg)](https://badge.fury.io/js/@react-web3-wallet%2Freact)                                       |
 | **Wallets**                                                                          |                                                                                                                                                          |
-| [`@web3-wallet/metamask`](packages/wallets/metamask)                                 | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@web3-wallet%2Fmetamask)                                 |
-| [`@web3-wallet/defiwallet`](packages/wallets/defiwallet)                             | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fdefiwallet)                             |
-| [`@web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet)                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcoinbase-wallet)                   |
-| [`@web3-wallet/walletconnect`](packages/wallets/walletconnect)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@web3-wallet%2Fwalletconnect)                       |
-| [`@web3-wallet/trust-wallet`](packages/wallets/trust-wallet)                         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Ftrust-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Ftrust-wallet)                         |
-| [`@web3-wallet/imtoken`](packages/wallets/imtoken)                                   | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fimtoken.svg)](https://badge.fury.io/js/@web3-wallet%2Fimtoken)                                   |
-| [`@web3-wallet/cryptocom-desktop-wallet`](packages/wallets/cryptocom-desktop-wallet) | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fcryptocom-desktop-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fcryptocom-desktop-wallet) |
-| [`@web3-wallet/brave-wallet`](packages/wallets/brave-wallet)                         | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fbrave-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fbrave-wallet)                         |
-| [`@web3-wallet/xdefi`](packages/wallets/xdefi)                                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fxdefi.svg)](https://badge.fury.io/js/@web3-wallet%2Fxdefi)                                       |
-| [`@web3-wallet/bitget-wallet`](packages/wallets/bitget-wallet)                       | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fbitget-wallet.svg)](https://badge.fury.io/js/@web3-wallet%2Fbitget-wallet)                       |
+| [`@react-web3-wallet/metamask`](packages/wallets/metamask)                                 | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fmetamask.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fmetamask)                                 |
+| [`@react-web3-wallet/defiwallet`](packages/wallets/defiwallet)                             | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fdefiwallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fdefiwallet)                             |
+| [`@react-web3-wallet/coinbase-wallet`](packages/wallets/coinbase-wallet)                   | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fcoinbase-wallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fcoinbase-wallet)                   |
+| [`@react-web3-wallet/walletconnect`](packages/wallets/walletconnect)                       | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fwalletconnect.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fwalletconnect)                       |
+| [`@react-web3-wallet/trust-wallet`](packages/wallets/trust-wallet)                         | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Ftrust-wallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Ftrust-wallet)                         |
+| [`@react-web3-wallet/imtoken`](packages/wallets/imtoken)                                   | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fimtoken.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fimtoken)                                   |
+| [`@react-web3-wallet/cryptocom-desktop-wallet`](packages/wallets/cryptocom-desktop-wallet) | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fcryptocom-desktop-wallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fcryptocom-desktop-wallet) |
+| [`@react-web3-wallet/brave-wallet`](packages/wallets/brave-wallet)                         | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fbrave-wallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fbrave-wallet)                         |
+| [`@react-web3-wallet/xdefi`](packages/wallets/xdefi)                                       | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fxdefi.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fxdefi)                                       |
+| [`@react-web3-wallet/bitget-wallet`](packages/wallets/bitget-wallet)                       | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fbitget-wallet.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fbitget-wallet)                       |
 | **Utilities**                                                                        |                                                                                                                                                          |
-| [`@web3-wallet/detect-provider`](packages/detect-provider)                           | [![npm version](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider.svg)](https://badge.fury.io/js/@web3-wallet%2Fdetect-provider)                   |
+| [`@react-web3-wallet/detect-provider`](packages/detect-provider)                           | [![npm version](https://badge.fury.io/js/@react-web3-wallet%2Fdetect-provider.svg)](https://badge.fury.io/js/@react-web3-wallet%2Fdetect-provider)                   |
 
 ## Development
 
@@ -69,7 +69,7 @@ cronos-wallet-connections is a boilerplate for Cronos dapp.
 
 ### [site](./site)
 
-The @web3-wallet documentation site itself provides an illustration of how to use web3-wallet. You can refer to the site as an example of web3-wallet usage.
+The @react-web3-wallet documentation site itself provides an illustration of how to use web3-wallet. You can refer to the site as an example of web3-wallet usage.
 
 Run the site in your local:
 
@@ -101,7 +101,7 @@ pnpm example-react
 
 ## Package versioning and changelogs
 
-@web3-wallet utilizes [changeset](https://github.com/changesets/changesets) to manage the versioning and changelogs of its packages.
+@react-web3-wallet utilizes [changeset](https://github.com/changesets/changesets) to manage the versioning and changelogs of its packages.
 
 1. To update the version of specific packages, run `pnpm changeset`.
 2. Then, run `pnpm changeset version` to apply updates of the versioning and changelogs .

@@ -1,5 +1,5 @@
-import type { Connector, Wallet as CoreWallet } from '@web3-wallet/core';
-import { createWallet as createCoreWallet, isWallet } from '@web3-wallet/core';
+import type { Connector, Wallet as CoreWallet } from '@react-web3-wallet/core';
+import { createWallet as createCoreWallet, isWallet } from '@react-web3-wallet/core';
 
 import {
   createBalanceHooks,

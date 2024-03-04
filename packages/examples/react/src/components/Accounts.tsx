@@ -1,4 +1,4 @@
-import type { Wallet } from '@web3-wallet/react';
+import type { Wallet } from '@react-web3-wallet/react';
 import { formatEther } from 'ethers';
 import React from 'react';
 

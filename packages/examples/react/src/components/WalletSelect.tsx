@@ -1,5 +1,5 @@
 import type { WalletConfig } from '@example-react/wallets';
-import type { WalletName } from '@web3-wallet/react';
+import type { WalletName } from '@react-web3-wallet/react';
 
 export const WalletSelect = ({
   walletConfigs,

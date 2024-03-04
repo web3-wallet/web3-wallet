@@ -1,4 +1,4 @@
-import type { WalletState } from '@web3-wallet/core';
+import type { WalletState } from '@react-web3-wallet/core';
 import { useMemo } from 'react';
 
 import type { Wallet } from '../types';

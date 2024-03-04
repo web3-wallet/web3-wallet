@@ -1,15 +1,15 @@
-# @web3-wallet/detect-provider
+# @react-web3-wallet/detect-provider
 
 ## Install
 
 ```base
-pnpm add @web3-wallet/detect-provider
+pnpm add @react-web3-wallet/detect-provider
 ```
 
 ## Usage
 
 ```typescript
-import { detectProvider } from '@web3-wallet/detect-provider';
+import { detectProvider } from '@react-web3-wallet/detect-provider';
 
 const provider = await detectProvider(options);
 
@@ -63,9 +63,9 @@ export const detectProvider = <T extends Provider = Provider>(
 
 ## Context
 
-Most wallet providers are injected into the host environment, which means that in order for a dApp to connect to a wallet, it needs to retrieve the wallet provider from the host environment. To simplify this process, the @web3-wallet/detect-provider library is available.
+Most wallet providers are injected into the host environment, which means that in order for a dApp to connect to a wallet, it needs to retrieve the wallet provider from the host environment. To simplify this process, the @react-web3-wallet/detect-provider library is available.
 
-This library is designed to detect and retrieve wallet providers from the host environment, regardless of the type of wallet being used. By using @web3-wallet/detect-provider, you can ensure that your dApp is able to seamlessly connect to the user's chosen wallet provider.
+This library is designed to detect and retrieve wallet providers from the host environment, regardless of the type of wallet being used. By using @react-web3-wallet/detect-provider, you can ensure that your dApp is able to seamlessly connect to the user's chosen wallet provider.
 
 ## Synchronous and Asynchronous Injection
 

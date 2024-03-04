@@ -1,5 +1,5 @@
 {
-  "name": "@web3-wallet/metamask",
+  "name": "@react-web3-wallet/metamask",
   "description": "metamask connector",
   "version": "2.4.1",
   "keywords": [
@@ -24,7 +24,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "repository": {
     "type": "git",
