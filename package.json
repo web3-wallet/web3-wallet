@@ -1,5 +1,5 @@
 {
-  "name": "web3-wallet",
+  "name": "react-web3-wallet",
   "private": true,
   "description": "A Modular, Extensible and Flexible web3 wallet framework for building dApps.",
   "author": "logan.luo",

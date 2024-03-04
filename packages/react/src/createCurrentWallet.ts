@@ -1,12 +1,12 @@
-import type { Connector, CreateCurrentWalletOptions } from '@web3-wallet/core';
-import { createCurrentWallet as coreCreateCurrentWallet } from '@web3-wallet/core';
+import type { Connector, CreateCurrentWalletOptions } from '@react-web3-wallet/core';
+import { createCurrentWallet as coreCreateCurrentWallet } from '@react-web3-wallet/core';
 import { useEffect, useRef, useState } from 'react';
 
 import { createWallet } from './createWallet';
 import type { ProviderHooks } from './hooks';
 import type { CurrentWallet, Wallet } from './types';
 
-export { CreateCurrentWalletOptions } from '@web3-wallet/core';
+export { CreateCurrentWalletOptions } from '@react-web3-wallet/core';
 
 export const createCurrentWallet = (
   connectorsOrWallets: (Connector | Wallet)[],

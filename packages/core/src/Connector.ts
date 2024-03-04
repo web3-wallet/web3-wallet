@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import type { DetectProviderOptions } from '@web3-wallet/detect-provider';
+import type { DetectProviderOptions } from '@react-web3-wallet/detect-provider';
 
 import { createWalletStoreAndActions } from './createWalletStore';
 import type { WalletName, WalletStore, WalletStoreActions } from './types';
@@ -108,7 +108,7 @@ export abstract class Connector<
   ): Promise<Provider> {
     if (this.provider) return this.provider;
 
-    const m = await import('@web3-wallet/detect-provider');
+    const m = await import('@react-web3-wallet/detect-provider');
 
     const injectedProvider = (await m.detectProvider(
       options ?? this.options?.detectProviderOptions,

@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/trust-wallet
+pnpm add @react-web3-wallet/trust-wallet
 ```
 
 ## Usage
 
 ```ts
-import { TrustWallet } from '@web3-wallet/trust-wallet';
-import { createWallet } from '@web3-wallet/react';
+import { TrustWallet } from '@react-web3-wallet/trust-wallet';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(new TrustWallet({}));
 ```

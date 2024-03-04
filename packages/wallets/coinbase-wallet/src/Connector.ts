@@ -3,8 +3,8 @@ import type {
   CoinbaseWalletSDK,
 } from '@coinbase/wallet-sdk';
 import type { CoinbaseWalletSDKOptions } from '@coinbase/wallet-sdk/dist/CoinbaseWalletSDK';
-import type { ConnectorOptions } from '@web3-wallet/core';
-import { type WalletName, Connector } from '@web3-wallet/core';
+import type { ConnectorOptions } from '@react-web3-wallet/core';
+import { type WalletName, Connector } from '@react-web3-wallet/core';
 
 import { icon } from './assets';
 

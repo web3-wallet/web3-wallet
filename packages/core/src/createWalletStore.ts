@@ -1,4 +1,4 @@
-import { getAddress, isAddress } from '@ethersproject/address';
+import { getAddress, isAddress } from 'ethers';
 import { create } from 'zustand';
 
 import type { WalletState, WalletStore, WalletStoreActions } from './types';

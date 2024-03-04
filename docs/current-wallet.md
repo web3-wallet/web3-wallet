@@ -19,9 +19,9 @@ type CreateCurrentWallet = (
 The currentWallet object is returned from createCurrentWallet.
 
 ```ts
-import { MetaMask } from '@web3-wallet/metamask';
-import { DeFiWallet } from '@web3-wallet/defiwallet';
-import { createCurrentWallet } from '@web3-wallet/react';
+import { MetaMask } from '@react-web3-wallet/metamask';
+import { DeFiWallet } from '@react-web3-wallet/defiwallet';
+import { createCurrentWallet } from '@react-web3-wallet/react';
 
 export const currentWallet = createCurrentWallet([
   new MetaMask(),
@@ -35,7 +35,7 @@ The default currentWallet, default to the first wallet if not provided.
 
 ### CreateCurrentWalletOptions.persistKey
 
-The currentWallet state will be persist to local storage, you can specify the local storage key through the persistKey option, default to `@web3-wallet/currentWallet`.
+The currentWallet state will be persist to local storage, you can specify the local storage key through the persistKey option, default to `@react-web3-wallet/currentWallet`.
 
 ## CurrentWallet API
 

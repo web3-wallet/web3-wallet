@@ -1,5 +1,11 @@
 # @web3-wallet/detect-provider
 
+## 3.0.0
+
+### Major Changes
+
+- @react-web3-wallet@v3
+
 ## 2.4.1
 
 ### Patch Changes

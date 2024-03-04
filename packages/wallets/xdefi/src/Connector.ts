@@ -1,5 +1,5 @@
-import type { WalletName } from '@web3-wallet/core';
-import { Connector } from '@web3-wallet/core';
+import type { WalletName } from '@react-web3-wallet/core';
+import { Connector } from '@react-web3-wallet/core';
 
 const _walletName = 'XDEFI';
 const walletName = _walletName as WalletName<typeof _walletName>;

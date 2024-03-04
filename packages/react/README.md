@@ -1,1 +1,1 @@
-# @web3-wallet/react
+# @react-web3-wallet/react

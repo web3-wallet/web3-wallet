@@ -1,5 +1,5 @@
 import { Button, Flex, useToast } from '@chakra-ui/react';
-import type { Wallet } from '@web3-wallet/react';
+import type { Wallet } from '@react-web3-wallet/react';
 import { useCallback, useState } from 'react';
 
 import { getAddChainParameters } from '../chains';

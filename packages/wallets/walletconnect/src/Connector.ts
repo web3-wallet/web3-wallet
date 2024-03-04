@@ -1,11 +1,11 @@
-import type IWalletConnectProvider from '@walletconnect/ethereum-provider';
 import type {
   AddEthereumChainParameter,
   ConnectorOptions,
   Provider,
   ProviderRpcError,
-} from '@web3-wallet/core';
-import { type WalletName, Connector } from '@web3-wallet/core';
+} from '@react-web3-wallet/core';
+import { type WalletName, Connector } from '@react-web3-wallet/core';
+import type IWalletConnectProvider from '@walletconnect/ethereum-provider';
 import EventEmitter3 from 'eventemitter3';
 
 import { icon } from './assets';

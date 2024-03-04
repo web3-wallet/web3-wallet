@@ -1,4 +1,4 @@
-import type { Networkish } from '@ethersproject/networks';
+import type { Networkish } from 'ethers';
 import { useEffect, useState } from 'react';
 
 import type { Wallet } from '../types';

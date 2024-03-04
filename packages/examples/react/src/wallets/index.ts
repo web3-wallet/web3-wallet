@@ -1,14 +1,14 @@
 import { rpcMap } from '@example-react/chains';
-import { BraveWallet } from '@web3-wallet/brave-wallet';
-import { CoinbaseWallet } from '@web3-wallet/coinbase-wallet';
-import { CryptocomDesktopWallet } from '@web3-wallet/cryptocom-desktop-wallet';
-import { DeFiWallet } from '@web3-wallet/defiwallet';
-import { ImToken } from '@web3-wallet/imtoken';
-import { MetaMask } from '@web3-wallet/metamask';
-import type { Connector, WalletName } from '@web3-wallet/react';
-import { createCurrentWallet } from '@web3-wallet/react';
-import { TrustWallet } from '@web3-wallet/trust-wallet';
-import { WalletConnect } from '@web3-wallet/walletconnect';
+import { BraveWallet } from '@react-web3-wallet/brave-wallet';
+import { CoinbaseWallet } from '@react-web3-wallet/coinbase-wallet';
+import { CryptocomDesktopWallet } from '@react-web3-wallet/cryptocom-desktop-wallet';
+import { DeFiWallet } from '@react-web3-wallet/defiwallet';
+import { ImToken } from '@react-web3-wallet/imtoken';
+import { MetaMask } from '@react-web3-wallet/metamask';
+import type { Connector, WalletName } from '@react-web3-wallet/react';
+import { createCurrentWallet } from '@react-web3-wallet/react';
+import { TrustWallet } from '@react-web3-wallet/trust-wallet';
+import { WalletConnect } from '@react-web3-wallet/walletconnect';
 
 export type WalletConfig = {
   walletName: WalletName;
@@ -32,7 +32,7 @@ export const walletConfigs: WalletConfig[] = [
     icon: CoinbaseWallet.walletIcon,
     connector: new CoinbaseWallet({
       providerOptions: {
-        appName: '@web3-wallet example',
+        appName: '@react-web3-wallet example',
         scanToConnectOptions: {
           rpcUrl: rpcMap[1],
           chainId: 1,

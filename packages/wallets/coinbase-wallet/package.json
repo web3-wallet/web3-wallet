@@ -1,7 +1,7 @@
 {
-  "name": "@web3-wallet/coinbase-wallet",
+  "name": "@react-web3-wallet/coinbase-wallet",
   "description": "Coinbase wallet connector",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "Coinbase wallet"
@@ -23,7 +23,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "@coinbase/wallet-sdk": "^3.6.6"

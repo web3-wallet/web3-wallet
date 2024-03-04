@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/coinbase-wallet @coinbase/wallet-sdk
+pnpm add @react-web3-wallet/coinbase-wallet @coinbase/wallet-sdk
 ```
 
 ## Usage
 
 ```ts
-import CoinbaseWallet from '@web3-wallet/coinbase-wallet';
-import { createWallet } from '@web3-wallet/react';
+import CoinbaseWallet from '@react-web3-wallet/coinbase-wallet';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(
   new CoinbaseWallet({
