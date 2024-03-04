@@ -1,7 +1,7 @@
 {
   "name": "@react-web3-wallet/bitget-wallet",
   "description": "Bitget Wallet connector",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "keywords": [
     "web3-wallet",
     "web3",

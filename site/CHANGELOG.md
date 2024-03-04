@@ -1,5 +1,26 @@
 # @web3-wallet/nextjs
 
+## 3.0.0
+
+### Major Changes
+
+- @react-web3-wallet@v3
+
+### Patch Changes
+
+- Updated dependencies
+  - @react-web3-wallet/react@3.0.0
+  - @react-web3-wallet/bitget-wallet@1.0.0
+  - @react-web3-wallet/brave-wallet@3.0.0
+  - @react-web3-wallet/coinbase-wallet@3.0.0
+  - @react-web3-wallet/cryptocom-desktop-wallet@3.0.0
+  - @react-web3-wallet/defiwallet@3.0.0
+  - @react-web3-wallet/imtoken@3.0.0
+  - @react-web3-wallet/metamask@3.0.0
+  - @react-web3-wallet/trust-wallet@3.0.0
+  - @react-web3-wallet/walletconnect@4.0.0
+  - @react-web3-wallet/xdefi@2.0.0
+
 ## 2.4.3
 
 ### Patch Changes

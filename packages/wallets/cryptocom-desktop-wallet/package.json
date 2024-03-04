@@ -1,7 +1,7 @@
 {
   "name": "@react-web3-wallet/cryptocom-desktop-wallet",
   "description": "Cryptocom Desktop Wallet connector",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "web3",
