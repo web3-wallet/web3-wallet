@@ -63,17 +63,17 @@ export const detectProvider = <T extends Provider = Provider>(
 
 ## Context
 
-Most wallet providers are injected into the host environment, which means that in order for a dApp to connect to a wallet, it needs to retrieve the wallet provider from the host environment. To simplify this process, the @react-web3-wallet/detect-provider library is available.
+In most cases, wallet providers are injected into the host environment. This means that to connect a dApp to a wallet, the dApp needs to retrieve the wallet provider from the host environment. The @react-web3-wallet/detect-provider library is designed to simplify this process.
 
-This library is designed to detect and retrieve wallet providers from the host environment, regardless of the type of wallet being used. By using @react-web3-wallet/detect-provider, you can ensure that your dApp is able to seamlessly connect to the user's chosen wallet provider.
+By using @react-web3-wallet/detect-provider, you can detect and retrieve wallet providers from the host environment, regardless of the specific type of wallet being used. This ensures that your dApp can seamlessly connect to the user's chosen wallet provider.
 
 ## Synchronous and Asynchronous Injection
 
 Wallet providers can be injected into the host environment either synchronously or asynchronously. Synchronously injected providers are available immediately when the dApp starts executing, while asynchronously injected providers may not become available until a later point in the page lifecycle.
 
-For example, the MetaMask extension provider is injected synchronously, while the MetaMask mobile provider is injected asynchronously. To notify dApps of asynchronous injection, MetaMask dispatches the ethereum#initialized event on window immediately after the provider has been set as window.ethereum.
+For example, the MetaMask extension provider is injected synchronously, while the MetaMask mobile provider is injected asynchronously. To notify dApps of asynchronous injection, MetaMask dispatches the ethereum#initialized event on the window object immediately after the provider has been set as window.ethereum.
 
-However, it's important to note that not all wallets follow the same injection pattern as MetaMask. Some wallets may not fire the ethereum#initialized event properly when the provider is injected asynchronously. To ensure that you are able to retrieve the provider correctly, you may need to periodically check or poll for the existence of the provider from the host environment.
+However, it's important to note that not all wallets follow the same injection pattern as MetaMask. Some wallets may not fire the ethereum#initialized event properly when the provider is injected asynchronously. In such cases, you may need to periodically check or poll for the existence of the provider from the host environment to ensure that you can retrieve it correctly.
 
 ## References
 

@@ -12,7 +12,7 @@
 
 https://web3-wallet.github.io/web3-wallet
 
-## Projects that use @react-web3-wallet
+## Projects that use web3-wallet
 
 - [minted.network](https://minted.network/)
 - [cronosid.xyz](https://cronosid.xyz/)
@@ -22,6 +22,8 @@ https://web3-wallet.github.io/web3-wallet
 - [tectonic.finance](https://tectonic.finance/)
 - [kaching.win](https://kaching.win/)
 - [vvs.finance](https://vvs.finance/)
+- [orby.network](https://orby.network/)
+- [wingalaxy.game](https://wingalaxy.game/)
 
 ## Packages
 

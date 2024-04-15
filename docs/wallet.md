@@ -2,11 +2,13 @@
 
 ## createWallet
 
+The createWallet function is used to create a wallet interface with a specified connector.
+
 ```ts
 type CreateWallet = (connector: Connector) => Wallet;
 ```
 
-The Wallet interface is returned from createWallet.
+Example usage:
 
 ```ts
 import { MetaMask } from '@react-web3-wallet/MetaMask';
@@ -45,7 +47,7 @@ interface Wallet {
 }
 ```
 
-Returns the wallet name. A dApp usually support create multiple wallets. The wallet name is mean to be used as the wallet id.
+Returns the name of the wallet. A dApp can support multiple wallets, and the wallet name serves as a unique identifier for each wallet.
 
 ### connect
 
@@ -86,7 +88,7 @@ interface Wallet {
 }
 ```
 
-Try to connect to wallet. autoConnect never reject, it will always resolve. autoConnect only try to connect to wallet, if it don't need any further user interaction with the wallet in the connecting process.
+Attempts to connect to the wallet automatically. The autoConnect function never rejects and always resolves. It only attempts to establish a connection without requiring further user interaction during the connecting process.
 
 the returned promise will:
 
@@ -101,16 +103,16 @@ interface Wallet {
 }
 ```
 
-Wallet connector implementors should override this method if the wallet supports force disconnect.
+Disconnects the wallet. Wallet connector implementations should override this method if the wallet supports forceful disconnection.
 
-What is force disconnect?
+What is force disconnection?
 
-- force disconnect will actually disconnect the wallet from the dApp.
-- non-force disconnect only reset the wallet store to it's initial state. But behind the scene, the wallet is still connecting to the dApp.
+- Forceful disconnection completely disconnects the wallet from the dApp.
+- Non-forceful disconnection only resets the wallet store to its initial state. Behind the scenes, the wallet is still connected to the dApp.
 
-For some wallets, MetaMask for example, there're not way to force disconnect MetaMask from dApps.
+For certain wallets like MetaMask, there is no way to forcefully disconnect from dApps.
 
-For some wallets, Walletconnect for example, users are able to force disconnect Walletconnect from dApps.
+For other wallets like WalletConnect, users have the option to forcefully disconnect from dApps.
 
 ### watchAsset
 
@@ -128,7 +130,7 @@ interface Wallet {
 }
 ```
 
-Add an asset to the wallet assets list.
+Adds an asset to the wallet's list of tracked assets.
 
 ### useIsConnecting
 
@@ -199,7 +201,7 @@ interface Wallet {
 }
 ```
 
-Returns a [Web3Provider](https://docs.ethers.io/v5/api/providers/other/#Web3Provider) instance that wraps the underling wallet provider.
+Returns a `BrowserProvider` instance that wraps the underling wallet provider.
 
 ### useHasProvider
 

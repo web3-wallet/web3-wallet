@@ -30,4 +30,9 @@ export const routes: Route[] = [
     slug: ['provider-detection'],
     path: path.join(PACKAGES_DIR, 'detect-provider/README.md'),
   },
+  {
+    label: 'Migrations v2 -> v3',
+    slug: ['Migrations'],
+    path: path.join(DOCS_DIR, 'migrations.md'),
+  },
 ];
