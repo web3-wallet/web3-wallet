@@ -2,7 +2,7 @@
 
 A connector is responsible for the details of connecting to a specific wallet application, such as MetaMask or DeFi Wallet. It provides a consistent and standardized interface to the upper layers of your dApp.
 
-Connector is considered low-level entity that usually should not be used directly. Instead, you would typically feed a connector to createWallet or createCurrentWallet to crate an high-level "Wallet" or "CurrentWallet" interface.
+Connectors are considered low-level entities that are usually not used directly. Instead, you would typically pass a connector to the createWallet or createCurrentWallet functions to create a higher-level "Wallet" or "CurrentWallet" interface.
 
 ```ts
 const metaMaskConnector = new MetaMask();
@@ -16,11 +16,13 @@ const currentWallet = createCurrentWallet([
 
 ## Implement a Connector for a wallet
 
-If you need to implement a connector for a specific wallet, you can easily do so by extending the abstract connector class provided by the @web3-wallet/core package. In most cases, implementing a wallet connector can be accomplished with few lines of code.
+If you need to implement a connector for a specific wallet, you can easily do so by extending the abstract connector class provided by the @react-web3-wallet/core package. In most cases, implementing a wallet connector can be accomplished with just a few lines of code.
+
+Here's an example of implementing a connector for MetaMask:
 
 ```ts
-import type { Provider, ProviderRpcError, WalletName } from '@web3-wallet/core';
-import { Connector } from '@web3-wallet/core';
+import type { Provider, ProviderRpcError, WalletName } from '@react-web3-wallet/core';
+import { Connector } from '@react-web3-wallet/core';
 
 import { icon } from './assets';
 
@@ -43,4 +45,4 @@ export class MetaMask extends Connector {
 }
 ```
 
-Check out more wallet connector Implementation examples [here](https://github.com/web3-wallet/web3-wallet/tree/main/packages/wallets).
+You can find more examples of wallet connector implementations [here](https://github.com/web3-wallet/web3-wallet/tree/main/packages/wallets).

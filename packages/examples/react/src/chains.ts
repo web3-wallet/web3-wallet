@@ -1,5 +1,5 @@
-import type { Network } from '@ethersproject/providers';
-import type { AddEthereumChainParameter } from '@web3-wallet/react';
+import type { AddEthereumChainParameter } from '@react-web3-wallet/react';
+import type { Networkish } from 'ethers';
 
 const INFURA_KEY = process.env.infuraKey;
 const ALCHEMY_KEY = process.env.alchemyKey;
@@ -127,7 +127,7 @@ export const chainConfigs: AddEthereumChainParameter[] = [
     } as AddEthereumChainParameter),
 );
 
-const networks: Network[] = [
+const networks: Networkish[] = [
   {
     name: 'Mainnet',
     chainId: 1,
@@ -150,8 +150,8 @@ const networks: Network[] = [
   },
 ];
 
-export const getNetwork = (chainId?: number): Network | undefined => {
-  return chainId ? networks.find((v) => v.chainId === chainId) : undefined;
+export const getNetwork = (chainId?: number): Networkish | undefined => {
+  return chainId ? networks.find((v) => (v as {chainId: number}).chainId === chainId) : undefined;
 };
 
 export const getChainConfigs = (chainId: number) => {

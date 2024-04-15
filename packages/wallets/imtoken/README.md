@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/imtoken
+pnpm add @react-web3-wallet/imtoken
 ```
 
 ## Usage
 
 ```ts
-import Imtoken from '@web3-wallet/imtoken';
-import { createWallet } from '@web3-wallet/react';
+import Imtoken from '@react-web3-wallet/imtoken';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(new Imtoken());
 ```

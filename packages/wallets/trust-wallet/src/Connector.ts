@@ -1,5 +1,5 @@
-import type { Provider, WalletName } from '@web3-wallet/core';
-import { Connector } from '@web3-wallet/core';
+import type { Provider, WalletName } from '@react-web3-wallet/core';
+import { Connector } from '@react-web3-wallet/core';
 
 import { icon } from './assets';
 

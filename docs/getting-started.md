@@ -3,16 +3,16 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/react @web3-wallet/metamask
+pnpm add @react-web3-wallet/react @react-web3-wallet/metamask
 ```
 
 ## Create a wallet
 
-If you only need to integrate a single wallet to your dApp:
+If you only need to integrate a single wallet into your dApp:
 
 ```ts
-import { MetaMask } from '@web3-wallet/metamask';
-import { createWallet } from '@web3-wallet/react';
+import { MetaMask } from '@react-web3-wallet/metamask';
+import { createWallet } from '@react-web3-wallet/react';
 
 const metamask = createWallet(new MetaMask());
 
@@ -29,12 +29,14 @@ export const App = () => {
 
 ## Create a current wallet
 
-It's a common pattern for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, current wallet is what you need.
+It's a common pattern for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, 
+
+It is common for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, current wallet is what you need.
 
 ```ts
-import { MetaMask } from '@web3-wallet/metamask';
-import { DeFiWallet } from '@web3-wallet/defiwallet';
-import { createCurrentWallet } from '@web3-wallet/react';
+import { MetaMask } from '@react-web3-wallet/metamask';
+import { DeFiWallet } from '@react-web3-wallet/defiwallet';
+import { createCurrentWallet } from '@react-web3-wallet/react';
 
 export const currentWallet = createCurrentWallet([
   new MetaMask(),
@@ -52,19 +54,19 @@ const {
 
 ## A wallet modal example
 
-In this minimal wallet modal example, we will:
+In this example, we will create a minimal wallet modal that performs the following tasks:
 
-1. Setup MetaMask and DeFi Wallet.
-2. Create a wallet modal in which user can choose either MetaMask or DeFi Wallet to connect to our dApp.
+1. Set up MetaMask and DeFi Wallet.
+2. Create a wallet modal where users can choose either MetaMask or DeFi Wallet to connect to our dApp.
 3. Display the connected wallet account/address.
-4. Check out [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) to see the complete example.
+4. For a complete example, refer to the [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) directory.
 
 ```tsx
 // src/wallet.ts
 // ===========================
-import { MetaMask } from '@web3-wallet/metamask';
-import { DeFiWallet } from '@web3-wallet/defiwallet';
-import { type WalletName, createCurrentWallet } from '@web3-wallet/react';
+import { MetaMask } from '@react-web3-wallet/metamask';
+import { DeFiWallet } from '@react-web3-wallet/defiwallet';
+import { type WalletName, createCurrentWallet } from '@react-web3-wallet/react';
 import { useEffect } from 'react';
 
 export const currentWallet = createCurrentWallet([

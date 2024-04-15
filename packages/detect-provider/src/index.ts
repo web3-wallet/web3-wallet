@@ -72,37 +72,37 @@ export const detectProvider = <T extends Provider = Provider>(
   const validateInputs = () => {
     if (typeof providerName !== 'string') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'providerName' to be a string.`,
+        `@react-web3-wallet/detect-provider: Expected option 'providerName' to be a string.`,
       );
     }
     if (providerGetter && typeof providerGetter !== 'function') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'providerGetter' to be a function.`,
+        `@react-web3-wallet/detect-provider: Expected option 'providerGetter' to be a function.`,
       );
     }
     if (typeof eventName !== 'string') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'eventName' to be a string.`,
+        `@react-web3-wallet/detect-provider: Expected option 'eventName' to be a string.`,
       );
     }
     if (typeof detectInterval !== 'number') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'detectInterval' to be a number.`,
+        `@react-web3-wallet/detect-provider: Expected option 'detectInterval' to be a number.`,
       );
     }
     if (detectInterval < 20 || detectInterval > 1000) {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'detectInterval' to be '20 < detectInterval < 1000', got ${detectInterval}`,
+        `@react-web3-wallet/detect-provider: Expected option 'detectInterval' to be '20 < detectInterval < 1000', got ${detectInterval}`,
       );
     }
     if (typeof silent !== 'boolean') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'silent' to be a boolean.`,
+        `@react-web3-wallet/detect-provider: Expected option 'silent' to be a boolean.`,
       );
     }
     if (typeof timeout !== 'number') {
       throw new Error(
-        `@web3-wallet/detect-provider: Expected option 'timeout' to be a number.`,
+        `@react-web3-wallet/detect-provider: Expected option 'timeout' to be a number.`,
       );
     }
   };
@@ -152,7 +152,7 @@ export const detectProvider = <T extends Provider = Provider>(
 
       const message = `Unable to detect window.${providerName}.`;
 
-      !silent && console.error('@web3-wallet/detect-provider:', message);
+      !silent && console.error('@react-web3-wallet/detect-provider:', message);
       resolve(undefined);
     };
 

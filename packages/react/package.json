@@ -1,7 +1,7 @@
 {
-  "name": "@web3-wallet/react",
+  "name": "@react-web3-wallet/react",
   "description": "web3-wallet react",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "react"
@@ -30,11 +30,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@ethersproject/bignumber": "^5.7.0",
-    "@ethersproject/networks": "^5.7.0",
-    "@ethersproject/providers": "^5.7.0",
-    "@web3-wallet/core": "workspace:*",
-    "zustand": "^4.3.5"
+    "ethers": "6.11.1",
+    "@react-web3-wallet/core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=16.8"

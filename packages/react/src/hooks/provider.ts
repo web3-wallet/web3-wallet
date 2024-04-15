@@ -1,17 +1,13 @@
-import {
-  type BaseProvider,
-  type Networkish,
-  Web3Provider,
-} from '@ethersproject/providers';
-import type { Connector } from '@web3-wallet/core';
+import type { Connector } from '@react-web3-wallet/core';
+import { type Networkish , BrowserProvider} from 'ethers';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import type { Wallet } from '../types';
 
 export type ProviderHooks = {
-  useProvider: <T extends BaseProvider = Web3Provider>(
+  useProvider: (
     network?: Networkish,
-  ) => T | undefined;
+  ) => BrowserProvider | undefined;
   useHasProvider: (
     providerFilter?: Parameters<Connector['detectProvider']>[0],
     options?: Parameters<Connector['detectProvider']>[1],
@@ -21,7 +17,7 @@ export type ProviderHooks = {
 export const createProviderHooks = (wallet: Wallet): ProviderHooks => {
   const { useAccount, useChainId, getConnector } = wallet;
 
-  const useProvider = <T extends BaseProvider = Web3Provider>(
+  const useProvider = (
     network?: Networkish,
   ) => {
     const account = useAccount();
@@ -34,7 +30,7 @@ export const createProviderHooks = (wallet: Wallet): ProviderHooks => {
       const provider = getConnector().provider;
 
       if (provider) {
-        return new Web3Provider(provider, network) as unknown as T;
+        return new BrowserProvider(provider, network);
       }
 
       return undefined;

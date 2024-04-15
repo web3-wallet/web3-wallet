@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/brave-wallet
+pnpm add @react-web3-wallet/brave-wallet
 ```
 
 ## Usage
 
 ```ts
-import { BraveWallet } from '@web3-wallet/brave-wallet';
-import { createWallet } from '@web3-wallet/react';
+import { BraveWallet } from '@react-web3-wallet/brave-wallet';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(new BraveWallet());
 ```

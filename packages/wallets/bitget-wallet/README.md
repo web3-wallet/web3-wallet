@@ -3,14 +3,14 @@
 ## Install
 
 ```bash
-pnpm add @web3-wallet/bitget-wallet
+pnpm add @react-web3-wallet/bitget-wallet
 ```
 
 ## Usage
 
 ```ts
-import { BitgetWallet } from '@web3-wallet/bitget-wallet';
-import { createWallet } from '@web3-wallet/react';
+import { BitgetWallet } from '@react-web3-wallet/bitget-wallet';
+import { createWallet } from '@react-web3-wallet/react';
 
 const wallet = createWallet(new BitgetWallet());
 ```

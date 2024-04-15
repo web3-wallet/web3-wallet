@@ -1,7 +1,7 @@
 {
-  "name": "@web3-wallet/brave-wallet",
+  "name": "@react-web3-wallet/brave-wallet",
   "description": "metamask connector",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "metamask"
@@ -23,7 +23,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "bugs": {
     "url": "https://github.com/web3-wallet/web3-wallet/issues"

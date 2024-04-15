@@ -1,7 +1,7 @@
 {
-  "name": "@web3-wallet/defiwallet",
+  "name": "@react-web3-wallet/defiwallet",
   "description": "DeFiWallet connector",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "keywords": [
     "web3-wallet",
     "crypto.com DeFi Wallet"
@@ -23,7 +23,7 @@
     "ts-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@web3-wallet/core": "workspace:*"
+    "@react-web3-wallet/core": "workspace:*"
   },
   "repository": {
     "type": "git",
