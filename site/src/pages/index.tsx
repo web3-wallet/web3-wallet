@@ -35,7 +35,7 @@ function Page() {
           <Text as="span" color="red.500">
             Flexible
           </Text>{' '}
-          web3 wallet framework for building dApps
+          web3 wallet library for building dApps
         </Heading>
 
         <Flex justifyContent="center">

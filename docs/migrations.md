@@ -4,8 +4,8 @@
 
 ### Noticeable breaking changes
 
-1. The @web3-wallet@v2 npm packages were published under the @web3-wallet namespace, while the @react-web3-wallet@v3.x.x packages are now published under the @react-web3-wallet namespace.
-2. [ethers.js@v6](https://github.com/ethers-io/ethers.js) removed its own BigNumber type and now uses the native JavaScript `bigint` type.
+1. The @web3-wallet@v2 npm packages were published under the @web3-wallet namespace, while the @react-web3-wallet@v3 packages are now published under the @react-web3-wallet namespace.
+2. [ethers.js@v6](https://github.com/ethers-io/ethers.js) removed its own `BigNumber` type and now uses the native JavaScript `bigint` type.
 
 ### Migration path
 

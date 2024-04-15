@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://web3-wallet.github.io/web3-wallet" target="_blank">
-    <img width="560px" src="site/public/images/site-home-screenshot.png?v3" alt="web3 wallet website" />
+    <img width="560px" src="site/public/images/site-home-screenshot-v2.png" alt="web3 wallet website" />
   </a>
 </p>
 
