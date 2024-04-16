@@ -11,11 +11,11 @@
 
 All most all the @react-web3-wallet@v3 APIs remain the same as the v2 APIs, making the migration process straightforward.
 
-#### Migrated from ethers@v5 to ethers@v6. 
+#### Migrating from ethers@v5 to ethers@v6. 
 
-Since @react-web3-wallet@v3 depends on ethers@v6, it is necessary to migrate from ethers@v5 to ethers@v6 first. Please refer to the ethers@v6 migration documentation for guidance on this migration.
+Since @react-web3-wallet@v3 depends on ethers@v6, it is necessary to migrate from ethers@v5 to ethers@v6 first. Please refer to the official migration documentation for guidance on this migration.
 
-[ethers@v6 Migration docs:](https://docs.gelato.network/web3-services/relay/migration-guide-ethers.js-v5-to-v6)
+[ethers@v6 Migration docs:](https://docs.ethers.org/v6/migrating/)
  
 #### Update imports
 
