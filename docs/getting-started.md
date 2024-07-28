@@ -29,8 +29,6 @@ export const App = () => {
 
 ## Create a current wallet
 
-It's a common pattern for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, 
-
 It is common for dApps to support multiple wallets, but typically only one wallet can be active at a time. If your dApp follows this pattern, current wallet is what you need.
 
 ```ts
@@ -57,7 +55,7 @@ const {
 In this example, we will create a minimal wallet modal that performs the following tasks:
 
 1. Set up MetaMask and DeFi Wallet.
-2. Create a wallet modal where users can choose either MetaMask or DeFi Wallet to connect to our dApp.
+2. Create a wallet modal where users can choose either MetaMask or DeFi Wallet to connect to.
 3. Display the connected wallet account/address.
 4. For a complete example, refer to the [examples/react](https://github.com/web3-wallet/web3-wallet/tree/main/packages/examples/react) directory.
 
