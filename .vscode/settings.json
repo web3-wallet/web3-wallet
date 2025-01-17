@@ -34,6 +34,8 @@
     "walletconnect",
     "web3-wallet",
     "xdefi",
-    "zustand"
+    "zustand",
+    "rabby",
+    "rdns"
   ]
 }

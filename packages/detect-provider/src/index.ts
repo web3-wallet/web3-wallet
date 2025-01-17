@@ -1,5 +1,11 @@
 import type { EventEmitter } from 'node:events';
 
+export type {
+  EIP6963ProviderDetail,
+  EIP6963ProviderInfo,
+} from './detectEip6963ProviderDetails';
+export { detectEip6963ProviderDetails } from './detectEip6963ProviderDetails';
+
 type Milliseconds = number;
 
 const delay = (milliseconds: Milliseconds): Promise<void> => {

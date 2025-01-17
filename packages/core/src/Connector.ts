@@ -1,5 +1,9 @@
 /* eslint-disable max-lines */
 import type { DetectProviderOptions } from '@react-web3-wallet/detect-provider';
+import {
+  detectEip6963ProviderDetails,
+  detectProvider,
+} from '@react-web3-wallet/detect-provider';
 
 import { createWalletStoreAndActions } from './createWalletStore';
 import type { WalletName, WalletStore, WalletStoreActions } from './types';
@@ -40,6 +44,11 @@ export type ConnectorOptions<
 export abstract class Connector<
   TConnectorOptions extends ConnectorOptions = ConnectorOptions,
 > {
+  /**
+   * Unique identifier for the wallet e.g io.metamask, io.metamask.flask, io.rabby
+   */
+  public rdns?: string;
+
   /**
    * {@link WalletName}
    */
@@ -103,23 +112,48 @@ export abstract class Connector<
    *  2. reject with an ProviderNotFoundError if it failed to retrieve the provider from the host environment.
    */
   public async detectProvider(
-    providerFilter?: ProviderFilter,
-    options?: DetectProviderOptions,
+    _providerFilter?: ProviderFilter,
+    options?: DetectProviderOptions & {
+      eip6963Timeout?: number;
+    },
   ): Promise<Provider> {
     if (this.provider) return this.provider;
 
-    const m = await import('@react-web3-wallet/detect-provider');
+    const [eip6963ProviderDetailsRet, injectedProviderRet] =
+      await Promise.allSettled([
+        this.rdns
+          ? detectEip6963ProviderDetails(options?.eip6963Timeout)
+          : Promise.reject('no rdns'),
+        detectProvider<Provider>(
+          options ?? this.options?.detectProviderOptions,
+        ),
+      ]);
 
-    const injectedProvider = (await m.detectProvider(
-      options ?? this.options?.detectProviderOptions,
-    )) as Provider;
+    // respect EIP-6963
+    if (this.rdns && eip6963ProviderDetailsRet.status === 'fulfilled') {
+      const eip6963ProviderDetail = eip6963ProviderDetailsRet.value.find(
+        (detail) => {
+          return detail.info.rdns === this.rdns;
+        },
+      );
 
+      if (eip6963ProviderDetail) {
+        this.provider = eip6963ProviderDetail.provider;
+        return eip6963ProviderDetail.provider;
+      }
+    }
+
+    // fallback to EIP-1193
+    if (injectedProviderRet.status === 'rejected')
+      throw injectedProviderRet.reason;
+
+    const injectedProvider = injectedProviderRet.value;
     if (!injectedProvider) throw this.providerNotFoundError;
 
     let provider = injectedProvider as Provider | undefined;
 
-    providerFilter =
-      providerFilter ?? this.options?.providerFilter ?? (() => true);
+    const providerFilter =
+      _providerFilter ?? this.options?.providerFilter ?? (() => true);
 
     /**
      * handle the case when e.g. metamask and coinbase wallet are both installed

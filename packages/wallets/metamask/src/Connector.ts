@@ -1,4 +1,8 @@
-import type { Provider, ProviderRpcError, WalletName } from '@react-web3-wallet/core';
+import type {
+  Provider,
+  ProviderRpcError,
+  WalletName,
+} from '@react-web3-wallet/core';
 import { Connector } from '@react-web3-wallet/core';
 
 import { icon } from './assets';
@@ -12,6 +16,7 @@ export class MetaMask extends Connector {
   public static walletName: WalletName<string> = walletName;
   public static walletIcon: string = icon;
   public walletName: WalletName<string> = walletName;
+  public override rdns = 'io.metamask';
 
   /** {@inheritdoc Connector.constructor} */
   constructor(options?: Connector['options']) {
