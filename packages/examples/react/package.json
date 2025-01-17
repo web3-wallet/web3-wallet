@@ -22,6 +22,7 @@
     "@react-web3-wallet/brave-wallet": "workspace:*",
     "@react-web3-wallet/trust-wallet": "workspace:*",
     "@react-web3-wallet/cryptocom-desktop-wallet": "workspace:*",
+    "@react-web3-wallet/rabby": "workspace:*",
     "next": "12.2.5",
     "react-dom": "18.2.0"
   },

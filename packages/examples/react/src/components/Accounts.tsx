@@ -42,7 +42,9 @@ export const Accounts = ({
           <Box>
             <span style={{ marginRight: 10 }}>Balance:</span>
             <b>
-              {balances[i] ? Number(formatEther(balances[i])).toFixed(4) : '--'}
+              {typeof balances[i] !== 'undefined'
+                ? Number(formatEther(balances[i])).toFixed(4)
+                : '--'}
             </b>
           </Box>
         </React.Fragment>

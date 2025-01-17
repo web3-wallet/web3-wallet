@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -145,6 +145,9 @@ importers:
       '@react-web3-wallet/metamask':
         specifier: workspace:*
         version: link:../../wallets/metamask
+      '@react-web3-wallet/rabby':
+        specifier: workspace:*
+        version: link:../../wallets/rabby
       '@react-web3-wallet/react':
         specifier: workspace:*
         version: link:../../react
@@ -223,6 +226,12 @@ importers:
         version: link:../../core
 
   packages/wallets/metamask:
+    dependencies:
+      '@react-web3-wallet/core':
+        specifier: workspace:*
+        version: link:../../core
+
+  packages/wallets/rabby:
     dependencies:
       '@react-web3-wallet/core':
         specifier: workspace:*

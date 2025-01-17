@@ -5,6 +5,7 @@ import { CryptocomDesktopWallet } from '@react-web3-wallet/cryptocom-desktop-wal
 import { DeFiWallet } from '@react-web3-wallet/defiwallet';
 import { ImToken } from '@react-web3-wallet/imtoken';
 import { MetaMask } from '@react-web3-wallet/metamask';
+import { Rabby } from '@react-web3-wallet/rabby';
 import type { Connector, WalletName } from '@react-web3-wallet/react';
 import { createCurrentWallet } from '@react-web3-wallet/react';
 import { TrustWallet } from '@react-web3-wallet/trust-wallet';
@@ -89,6 +90,11 @@ export const walletConfigs: WalletConfig[] = [
     walletName: ImToken.walletName,
     icon: ImToken.walletIcon,
     connector: new ImToken(),
+  },
+  {
+    walletName: Rabby.walletName,
+    icon: Rabby.walletIcon,
+    connector: new Rabby(),
   },
 ];
 
